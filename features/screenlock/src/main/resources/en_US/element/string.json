@@ -1,0 +1,68 @@
+{
+  "string": [
+    {
+      "name": "lock_prompt",
+      "value": "Screen locked"
+    },
+    {
+      "name": "unlock_prompt",
+      "value": "Please slide to unlock"
+    },
+    {
+      "name": "yyyy_mm_dd",
+      "value": "%d/%d/%d"
+    },
+    {
+      "name": "nonotification_text",
+      "value": "No Notification"
+    },
+    {
+      "name": "input",
+      "value": "Input password"
+    },
+    {
+      "name": "incorrect",
+      "value": "Password incorrect"
+    },
+    {
+      "name": "incorrect_promp_times",
+      "value": "Password incorrect.You can try it again for %d times."
+    },
+    {
+      "name": "incorrect_promp_freezing",
+      "value": "Password incorrect.You can try it again for %d times.If it fails, it will be locked for %s."
+    },
+    {
+      "name": "input_promp",
+      "value": "Please try again in %s."
+    },
+    {
+      "name": "emergency_call",
+      "value": "Emergency call"
+    },
+    {
+      "name": "back",
+      "value": "Back"
+    },
+    {
+      "name": "delete",
+      "value": "Delete"
+    },
+    {
+      "name": "done",
+      "value": "Done"
+    },
+    {
+      "name": "charge_full",
+      "value": "Already full"
+    },
+    {
+      "name": "shutdown",
+      "value": "shutdown"
+    },
+    {
+      "name": "reboot",
+      "value": "reboot"
+    }
+  ]
+}

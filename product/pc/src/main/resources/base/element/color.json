@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name":"transparent",
+      "value":"#00000000"
+    },
+    {
+      "name": "operation_ic_backgroundColor",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "page_background",
+      "value": "#19181B"
+    }
+  ]
+}

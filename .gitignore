@@ -1,0 +1,11 @@
+/product/phone/build
+/product/pc/build
+/common/build
+/build/
+/features/batterycomponent/build/
+/features/noticeitem/build/
+/features/notificationservice/build/
+/features/screenlock/build/
+/.idea
+/.gradle
+local.properties

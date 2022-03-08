@@ -1,0 +1,25 @@
+{
+  "float": [
+
+    {
+      "name": "lockicon_area_height",
+      "value": "44"
+    },
+    {
+      "name": "datetime_area_height",
+      "value": "192"
+    },
+    {
+      "name": "datetime_margin_top",
+      "value": "66"
+    },
+    {
+      "name": "batterysoc_area_height",
+      "value": "48"
+    },
+    {
+      "name": "shortcut_area_height",
+      "value": "120"
+    }
+  ]
+}
