@@ -1,0 +1,134 @@
+/*
+ * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
+import Constants from '../../common/constants.ets'
+
+const TAG = 'ScreenLock-NumkeyBoard'
+
+@Component
+export default struct NumkeyBoard {
+  private onKeypress: (params, callback) => void;
+  @StorageLink('numKeyboard') numKeyboard: any[]  = Constants.NUMKEY_BOARD;
+
+  aboutToAppear() {
+    Log.showInfo(TAG, `aboutToAppear`)
+  }
+
+  aboutToDisappear() {
+    Log.showInfo(TAG, `aboutToDisappear`)
+  }
+
+  build() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+      Grid() {
+        ForEach(this.numKeyboard, (item: any) => {
+          GridItem() {
+            Stack({ alignContent: Alignment.Center }) {
+              Column({ space: 0 }) {
+                Flex({
+                  direction: FlexDirection.Column,
+                  alignItems: ItemAlign.Center,
+                  justifyContent: FlexAlign.Center
+                }) {
+                  if (item.value == Constants.CALL_PHONE ||
+                  item.value == Constants.GO_BACK ||
+                  item.value == Constants.DEL_PWD) {
+                    Text(item.row1)
+                      .fontSize($r('app.float.digitalpsd_prompt_fontsize'))
+                      .fontWeight(FontWeight.Bold)
+                      .fontColor(Color.White)
+                      .textAlign(TextAlign.Center)
+                      .width(Constants.FULL_CONTAINER_WIDTH)
+                      .padding(0)
+                      .margin(0)
+                  } else {
+                    Text(item.row1)
+                      .fontSize($r('app.float.digitalpsd_row1_fontsize'))
+                      .fontWeight(FontWeight.Bold)
+                      .fontColor(Color.White)
+                      .textAlign(TextAlign.Center)
+                      .width(Constants.FULL_CONTAINER_WIDTH)
+                      .padding(0)
+                      .margin(0)
+                  }
+                  if (!!item.row2) {
+                    Text(item.row2)
+                      .fontSize($r('app.float.digitalpsd_row2_fontsize'))
+                      .fontWeight(FontWeight.Bold)
+                      .fontColor(Color.White)
+                      .textAlign(TextAlign.Center)
+                      .width(Constants.FULL_CONTAINER_WIDTH)
+                      .padding(0)
+                      .margin(0)
+                  }
+                }
+                .height($r('app.float.digitalpsd_row_height'))
+              }
+
+              if (item.bkg) {
+                if (item.value == Constants.CALL_PHONE ||
+                item.value == Constants.GO_BACK ||
+                item.value == Constants.DEL_PWD) {
+                  Column()
+                    .backgroundColor(Color.Gray)
+                    .opacity(0.5)
+                    .clip(new Rect({
+                      width: Constants.DIGITALPSD_BUTTON_RECT_WH,
+                      height: Constants.DIGITALPSD_BUTTON_RECT_HH
+                    }))
+                    .width(Constants.DIGITALPSD_BUTTON_RECT_WH)
+                    .height(Constants.DIGITALPSD_BUTTON_RECT_HH)
+                } else {
+                  Column()
+                    .backgroundColor(Color.Gray)
+                    .opacity(0.5)
+                    .clip(new Circle({
+                      width: Constants.DIGITALPSD_BUTTON_DIAMETER,
+                      height: Constants.DIGITALPSD_BUTTON_DIAMETER
+                    }))
+                    .width(Constants.DIGITALPSD_BUTTON_DIAMETER)
+                    .height(Constants.DIGITALPSD_BUTTON_DIAMETER)
+                }
+              }
+            }
+            .onTouch((event: TouchEvent) => {
+              Log.showInfo(TAG, `onTouch`)
+              if (event.type == TouchType.Down) {
+                Log.showInfo(TAG, `TouchType.Down`)
+                item.bkg = true;
+              } else if (event.type == TouchType.Up) {
+                Log.showInfo(TAG, `TouchType.Up`)
+                item.bkg = false
+              }
+            })
+            .onClick(() => {
+              Log.showInfo(TAG, `onClick:${item.index}`)
+              setTimeout(this.onKeypress.bind(this), 0, item.index, (data) => {
+                Log.showInfo(TAG, `onClick callback is called`)
+              });
+            })
+          }
+        })
+      }
+      .columnsTemplate('1fr 1fr 1fr')
+      .rowsTemplate('1fr 1fr 1fr 1fr')
+      .width(Constants.FULL_CONTAINER_WIDTH)
+      .height(Constants.FULL_CONTAINER_HEIGHT)
+    }
+    .width(Constants.FULL_CONTAINER_WIDTH)
+    .height(Constants.FULL_CONTAINER_HEIGHT)
+  }
+}
