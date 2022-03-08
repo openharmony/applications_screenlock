@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name":"transparent",
+      "value":"#00000000"
+    },
+    {
+      "name": "page_background",
+      "value": "#19181B"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "color": [
+    {
+      "name": "lock_prompt_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "date_time_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "nonotification_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "circle_background",
+      "value": "#ffffff"
+    },
+    {
+      "name": "circle_background_transparent",
+      "value": "#00ffffff"
+    },
+    {
+      "name": "page_background",
+      "value": "#0173C7"
+    },
+    {
+      "name": "batterysoc_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "accounts_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "lock_ic_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "shortcut_icon_color",
+      "value": "rgba(255, 255, 255, 0.5)"
+    },
+    {
+      "name": "shortcut_text_color",
+      "value": "#ffffff"
+    }
+  ]
+}
