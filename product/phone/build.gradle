@@ -20,5 +20,8 @@ dependencies {
     entryImplementation project(':entry')
     implementation project(':common')
     implementation project(':features:screenlock')
+    implementation project(':features:datetimecomponent')
+    implementation project(':features:shortcutcomponent')
+    implementation project(':features:wallpapercomponent')
     implementation project(':features:noticeitem')
 }

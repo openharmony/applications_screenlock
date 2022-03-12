@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "shortcut_icon_color",
+      "value": "rgba(255, 255, 255, 0.5)"
+    },
+    {
+      "name": "shortcut_text_color",
+      "value": "#ffffff"
+    }
+  ]
+}

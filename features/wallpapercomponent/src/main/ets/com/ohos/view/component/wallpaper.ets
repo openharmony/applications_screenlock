@@ -14,8 +14,8 @@
  */
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import ViewModel from '../../vm/wallpaperViewModel.ets'
-import Constants from '../../common/constants.ets'
+import ViewModel from '../../vm/wallpaperViewModel'
+import Constants from '../../common/constants'
 
 const TAG = 'ScreenLock-Wallpaper'
 

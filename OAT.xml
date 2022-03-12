@@ -56,21 +56,27 @@
 		<filefilterlist>
 			<filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
 				<filteritem type="filepath" name="entry/src/main/resources/base/media/.*.png" desc="self developed image"/>
-				
+
 				<filteritem type="filepath" name="features/batterycomponent/src/main/resources/base/media/.*.png" desc="self developed image"/>
-				
+
+				<filteritem type="filepath" name="features/datetimecomponent/src/main/resources/base/media/.*.png" desc="self developed image"/>
+
+				<filteritem type="filepath" name="features/shortcutcomponent/src/main/resources/base/media/.*.png" desc="self developed image"/>
+
+				<filteritem type="filepath" name="features/wallpapercomponent/src/main/resources/base/media/.*.png" desc="self developed image"/>
+
 				<filteritem type="filepath" name="features/noticeitem/src/main/resources/base/media/.*.png" desc="self developed image"/>
-				
+
 				<filteritem type="filepath" name="features/notificationservice/src/main/resources/base/media/.*.png" desc="self developed image"/>
-				
+
 				<filteritem type="filepath" name="features/screenlock/src/main/resources/base/media/.*.png" desc="self developed image"/>
-				
+
 				<filteritem type="filepath" name="product/pc/src/main/resources/base/media/.*.png" desc="self developed image"/>
-				
+
 				<filteritem type="filepath" name="product/phone/src/main/resources/base/media/.*.png" desc="self developed image"/>
-				
+
 				<filteritem type="filepath" name="figures/.*.png" desc="self developed image"/>
-				
+
 				<filteritem type="filepath" name="figures/.*.jpg" desc="self developed image"/>
 			</filefilter>
 		</filefilterlist>
