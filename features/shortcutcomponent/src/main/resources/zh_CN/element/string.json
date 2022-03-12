@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "shutdown",
+      "value": "关机"
+    },
+    {
+      "name": "reboot",
+      "value": "重启"
+    }
+  ]
+}

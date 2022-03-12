@@ -15,9 +15,9 @@
 
 import Log from '../../../../../../../common/src/main/ets/default/Log.ets'
 import Accounts from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/accounts.ets'
-import DateTime from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/dateTime.ets'
+import DateTime from '../../../../../../../features/datetimecomponent/src/main/ets/com/ohos/view/component/dateTime.ets'
 import LockIcon from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/lockIcon.ets'
-import Wallpaper from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/wallpaper.ets'
+import Wallpaper from '../../../../../../../features/wallpapercomponent/src/main/ets/com/ohos/view/component/wallpaper.ets'
 import NotificationListComponent from '../../../../../../../features/noticeitem/src/main/ets/com/ohos/noticeItem/view/NotificationListComponent.ets'
 import StatusBar from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/statusBar.ets'
 import Constants from '../common/constants.ets'

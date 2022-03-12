@@ -15,13 +15,13 @@
 
 import Log from '../../../../../../../common/src/main/ets/default/Log.ets'
 import Accounts from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/accounts.ets'
-import DateTime from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/dateTime.ets'
+import DateTime from '../../../../../../../features/datetimecomponent/src/main/ets/com/ohos/view/component/dateTime.ets'
 import BatterySoc from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/batterySoc.ets'
 import LockIcon from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/lockIcon.ets'
-import Wallpaper from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/wallpaper.ets'
+import Wallpaper from '../../../../../../../features/wallpapercomponent/src/main/ets/com/ohos/view/component/wallpaper.ets'
 import NotificationListComponent from '../../../../../../../features/noticeitem/src/main/ets/com/ohos/noticeItem/view/NotificationListComponent.ets'
 import StatusBar from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/statusBar.ets'
-import Shortcut from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/shortcut.ets'
+import Shortcut from '../../../../../../../features/shortcutcomponent/src/main/ets/com/ohos/view/component/shortcut.ets'
 import Constants from '../common/constants.ets'
 import ViewModel from '../vm/slideScreenLockViewModel.ets'
 
@@ -49,6 +49,7 @@ export default struct SlideScreenlock {
         Column() {
           StatusBar()
         }
+
         Column() {
           Row() {
             Shortcut()
@@ -58,6 +59,7 @@ export default struct SlideScreenlock {
           .width(Constants.NOTIFICATION_AREA_WIDTH)
           .height($r('app.float.shortcut_area_height'))
         }
+
         Column() {
           LockIcon()
         }.height($r('app.float.lockicon_area_height'))
@@ -65,7 +67,7 @@ export default struct SlideScreenlock {
         Column() {
           DateTime({ isShowData: false })
         }.height($r('app.float.datetime_area_height'))
-        .margin({ top: $r('app.float.datetime_margin_top')})
+        .margin({ top: $r('app.float.datetime_margin_top') })
 
         Column() {
           BatterySoc()
