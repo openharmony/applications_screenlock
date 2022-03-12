@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "shutdown",
+      "value": "shutdown"
+    },
+    {
+      "name": "reboot",
+      "value": "reboot"
+    }
+  ]
+}

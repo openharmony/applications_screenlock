@@ -14,15 +14,15 @@
  */
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import Constants from '../../common/constants.ets'
+import Constants from '../../common/constants'
+import ViewModel from '../../vm/shortcutViewModel'
 import power from '@ohos.power'
 
 const TAG = 'ScreenLock-Shortcut'
-const TAG_Shutdown = 'ScreenLock-Shutdown'
-const TAG_Reboot = 'ScreenLock-Reboot'
 
 @Component
 export default struct Shortcut {
+  private viewModel: ViewModel = new ViewModel()
   private shutdownIcon: Resource = $r("app.media.shutdown")
   private shutdownLabel: Resource = $r("app.string.shutdown")
   private rebootIcon: Resource = $r("app.media.reboot")
@@ -33,47 +33,38 @@ export default struct Shortcut {
   }
 
   build() {
-    Row({ space:'30px' }) {
+    Row({ space: '30px' }) {
       ShortcutComponent({
+        mTag: 'ScreenLock-Shutdown',
         mIcon: this.shutdownIcon,
         mLabel: this.shutdownLabel,
-        mClickEvent: () => this.onShutdownClick()
+        mClickEvent: () => this.viewModel.onShortcutClick(Constants.CLICK_TYPE_SHUTDOWN)
       })
 
       ShortcutComponent({
+        mTag: 'ScreenLock-Reboot',
         mIcon: this.rebootIcon,
         mLabel: this.rebootLabel,
-        mClickEvent: () => this.onRebootClick()
+        mClickEvent: () => this.viewModel.onShortcutClick(Constants.CLICK_TYPE_REBOOT)
       })
     }
-    .margin({left: '50px'})
-  }
-
-  onShutdownClick() {
-    Log.showInfo(TAG, `onShutdownClick`)
-    power.shutdownDevice("shutdown_device")
-    Log.showInfo(TAG, `power shutdown success`)
-  }
-
-  onRebootClick() {
-    Log.showInfo(TAG, `onRebootClick`)
-    power.rebootDevice("reboot_device")
-    Log.showInfo(TAG, `power reboot success`)
+    .margin({ left: '50px' })
   }
 }
 
 @Component
 struct ShortcutComponent {
+  private mTag: string
   private mIcon: Resource
   private mLabel: Resource
   private mClickEvent: Function
 
   aboutToAppear() {
-    Log.showInfo(TAG_Shutdown, `aboutToAppear Start`)
+    Log.showInfo(this.mTag, `aboutToAppear Start`)
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG_Shutdown, `aboutToDisAppear`)
+    Log.showInfo(this.mTag, `aboutToDisAppear`)
   }
 
   build() {
@@ -85,7 +76,7 @@ struct ShortcutComponent {
           .width(Constants.SHORTCUT_CIRCLE_WIDTH)
           .height(Constants.SHORTCUT_CIRCLE_HEIGHT)
         Image(this.mIcon)
-          .size({ width: Constants.SHORTCUT_CIRCLE_WIDTH, height: Constants.SHORTCUT_CIRCLE_HEIGHT})
+          .size({ width: Constants.SHORTCUT_CIRCLE_WIDTH, height: Constants.SHORTCUT_CIRCLE_HEIGHT })
           .objectFit(ImageFit.Contain)
       }
 

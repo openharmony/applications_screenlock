@@ -12,7 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-include ':entry',':phone', ':pc', ':common', ':features:screenlock',
-        ':features:noticeitem', ':features:notificationservice',':features:batterycomponent'
+include ':entry', ':phone', ':pc', ':common', ':features:screenlock',
+        ':features:noticeitem', ':features:notificationservice', ':features:batterycomponent',
+        ':features:datetimecomponent', ':features:wallpapercomponent', ':features:shortcutcomponent'
 project(':phone').projectDir = new File('./product/phone')
 project(':pc').projectDir = new File('./product/pc')

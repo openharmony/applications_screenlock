@@ -9,10 +9,6 @@
       "value": "Please slide to unlock"
     },
     {
-      "name": "yyyy_mm_dd",
-      "value": "%d/%d/%d"
-    },
-    {
       "name": "nonotification_text",
       "value": "No Notification"
     },
@@ -55,14 +51,6 @@
     {
       "name": "charge_full",
       "value": "Already full"
-    },
-    {
-      "name": "shutdown",
-      "value": "shutdown"
-    },
-    {
-      "name": "reboot",
-      "value": "reboot"
     }
   ]
 }
