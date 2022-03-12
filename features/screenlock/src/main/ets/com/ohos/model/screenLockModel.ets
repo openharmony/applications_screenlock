@@ -14,15 +14,12 @@
  */
 import Log from '../../../../../../../../common/src/main/ets/default/Log.ets'
 import ScreenLockMar from '@ohos.screenlock';
-import featureAbility from '@ohos.ability.featureAbility'
-import settings from '@ohos.settingsnapi';
 import windowManager  from '@ohos.window'
 import Constants from '../common/constants.ets'
 import UserIDM  from '@ohos.useridm'
 import UserAuth from '@ohos.userauth'
 import PinAuth from '@ohos.pinauth'
 import util from '@ohos.util';
-import WallpaperMar from '@ohos.app.wallpaperability'
 
 const TAG = 'ScreenLock-ScreenLockModel';
 
@@ -78,11 +75,6 @@ export default class ScreenLockModel {
   static UserAuthManager = new UserAuth.UserAuth();
   static PINAuthManager = new PinAuth.PINAuth();
 
-  static getScreenLockWallpaper(callback) {
-    Log.showInfo(TAG, 'getScreenLockWallpaper');
-    WallpaperMar.getPixelMap(WallpaperMar.WALLPAPER_LOCKSCREEN, callback)
-  }
-
   static eventListener(typeName: string, callback) {
     Log.showInfo(TAG, `eventListener:typeName ${typeName}`);
     ScreenLockMar.on(typeName, (err, data) => {
@@ -119,34 +111,6 @@ export default class ScreenLockModel {
         callback();
       })
     })
-  }
-
-  static timeFormatMonitor(callback): void {
-    Log.showInfo(TAG, 'timeFormatMonitor');
-    let urivar = settings.getUri('settings.time.format')
-    let helper = featureAbility.acquireDataAbilityHelper(urivar);
-    callback(ScreenLockModel.isUsing24hFormat(helper));
-    helper.on("dataChange", urivar, (err) => {
-      if (err.code !== 0) {
-        Log.showError(TAG, `failed to getAbilityWant because ${err.message}`);
-        return;
-      } else {
-        callback(ScreenLockModel.isUsing24hFormat(helper));
-      }
-      Log.showInfo(TAG, 'observer reveive notifychange on success data : ' + JSON.stringify(err))
-    })
-  }
-
-  static isUsing24hFormat(helper): boolean {
-    Log.showInfo(TAG, 'isUsing24hFormat');
-    let isUsing24hFormat: boolean = false;
-    let getRetValue = settings.getValue(helper, 'settings.time.format', '24')
-    if (getRetValue === '12') {
-      isUsing24hFormat = false;
-    } else if (getRetValue === '24') {
-      isUsing24hFormat = true;
-    }
-    return isUsing24hFormat;
   }
 
   static openIDMSession(callback) {

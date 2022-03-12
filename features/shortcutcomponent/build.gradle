@@ -1,10 +1,10 @@
-apply plugin: 'com.huawei.ohos.hap'
+apply plugin: 'com.huawei.ohos.library'
+//For instructions on signature configuration, see https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ide_debug_device-0000001053822404#section1112183053510
 ohos {
     compileSdkVersion rootProject.ext.version.compileSdk
     defaultConfig {
         compatibleSdkVersion rootProject.ext.version.compatibleSdk
     }
-
     buildTypes {
         release {
             proguardOpt {
@@ -13,15 +13,9 @@ ohos {
             }
         }
     }
-    entryModules "entry"
 }
 
 dependencies {
-    entryImplementation project(':entry')
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
     implementation project(':common')
-    implementation project(':features:screenlock')
-    implementation project(':features:datetimecomponent')
-    implementation project(':features:shortcutcomponent')
-    implementation project(':features:wallpapercomponent')
-    implementation project(':features:noticeitem')
 }
