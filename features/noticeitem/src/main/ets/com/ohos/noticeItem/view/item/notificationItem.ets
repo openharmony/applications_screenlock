@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,215 +13,117 @@
  * limitations under the License.
  */
 
-import Constants,{NotificationItemData} from '../../common/constants.ets';
-import basicItem from './basicItem.ets';
-import longItem from './longItem.ets';
-import multiItem from './multiItem.ets';
-import titleItem from './titleItem.ets';
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log.ets';
-import CheckEmptyUtils from '../../../../../../../../../../common/src/main/ets/default/CheckEmptyUtils.ets';
+import Constants, {NotificationLayout as Layout} from '../../common/constants';
+import GeneralItem from './generalItem';
+import CustomItem from './customItem';
+import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
+import ViewModel from '../../viewmodel/ViewModel';
+import DevicesDialog from './devicesDialog';
 import WantAgent from '@ohos.wantAgent';
-import ViewModel from '../../viewmodel/ViewModel.ets';
-import SettingDialog from './settingDialog.ets';
-import ConfirmDialog from './confirmDialog.ets'
+import IconListComponent, {getIconListSize} from './iconListComponent';
+import ScrollbarManager from '../../common/ScrollbarManager';
 
 const TAG = 'NoticeItem-NotificationItem';
 
 @Component
 export default struct NotificationItem {
-  private itemData: any = {}
-  @State hasPicture: boolean = false
-  @State isExpand: boolean = false
-  @State needExpand: boolean = true
-  @State deleteIconDisplay : boolean = false;
+  @State mIconAlpha: number = 0;
+  @State @Watch('scrollEdge') mEdgeEnd: boolean = false;
   @State itemWidth: string = '100%'
-  startX: number = 0
-  startY: number = 0
-  @State moveX: number = 0
-  @State moveY: number = 0
+  private itemData: any = {}
+  private isSubItem: boolean= false;
+  private mScroller: Scroller = new Scroller();
 
-  settingDialogController: CustomDialogController = new CustomDialogController({
-    builder: SettingDialog({
-      itemData: this.itemData,
-      action: this.showConfirmDialog.bind(this)
+  build() {
+    Stack() {
+      IconListComponent({ iconAlpha: this.mIconAlpha, itemData: this.itemData })
+
+      Scroll(this.mScroller) {
+        Row() {
+          FrontItem({ itemData: this.itemData, isSubItem: this.isSubItem })
+          IconListComponent({ iconAlpha: 0, itemData: this.itemData })
+        }
+      }
+      .scrollable(ScrollDirection.Horizontal)
+      .scrollBar(BarState.On)
+      .onScroll(() => {
+        this.mIconAlpha += 0.1;
+        this.mIconAlpha = this.mScroller.currentOffset().xOffset * 1.0 / getIconListSize();
+      })
+      .onScrollEnd(() => {
+        this.mEdgeEnd = (this.mEdgeEnd &&
+        this.mScroller.currentOffset().xOffset > (getIconListSize() - Layout.SCROLL_THRESHOLD))
+        || (!this.mEdgeEnd && this.mScroller.currentOffset().xOffset > Layout.SCROLL_THRESHOLD)
+        ScrollbarManager.restoreOtherScroll(this.mScroller);
+      })
+    }.width(this.itemWidth)
+    .borderRadius(!this.isSubItem ? $r("sys.float.ohos_id_corner_radius_default_l") : 0)
+    .clip(!this.isSubItem)
+  }
+
+  scrollEdge() {
+    this.mScroller.scrollEdge(this.mEdgeEnd ? Edge.End : Edge.Start)
+  }
+}
+
+@Component
+struct FrontItem {
+  private itemData: any = {}
+  private nowWant: any;
+  private isSubItem: boolean= false;
+  private devicesDialogController: CustomDialogController = new CustomDialogController({
+    builder: DevicesDialog({
+      action: (deviceID) => this.selectedDevice(deviceID)
     }),
     autoCancel: false,
     offset: { dx: 0, dy: 200 }
   });
 
-  confirmDialogController: CustomDialogController = new CustomDialogController({
-    builder: ConfirmDialog({
-      title: $r('app.string.closeNovice'),
-      bundleName: this.itemData.name,
-      action:  ViewModel.removeNotificationItem.bind(ViewModel,this.itemData,true)
-    }),
-    autoCancel: false,
-    offset: { dx: 0, dy: 250 }
-  });
-
-  aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear Start`)
-    if (CheckEmptyUtils.isEmpty(this.itemData.largeIcon)) {
-      this.hasPicture = false;
-    } else {
-      this.hasPicture = true;
-    }
-    this.needExpand=this.checkItemNeedExpand()
-  }
-
-  checkItemNeedExpand(){
-    if(this.itemData.contentType===Constants.NOTIFICATION_TYPE_BASIC&&(!(this.itemData.actionButtons?.length>0))){
-      return false;
-    }else{
-      return true;
-    }
-  }
-
-  aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisappear`);
-  }
-
   build() {
-    Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
-      Row() {
-        Column() {
-          titleItem({
-            notificationSmallIcon: this.itemData.smallIcon,
-            notificationName: this.itemData.appName,
-            notificationTime: this.itemData.time,
-            isExpand: $isExpand,
-            needExpand: this.needExpand
-          })
-
-          Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.Start, alignItems: ItemAlign.Start }) {
-            Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.Start, alignItems: ItemAlign.Start }) {
-              if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_BASIC) {
-                basicItem({
-                  itemData: this.itemData
-                });
-              }
-              if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_LONG) {
-                longItem({
-                  itemData: this.itemData,
-                  isExpand: this.isExpand
-                });
-              }
-              if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_MULTILINE) {
-                multiItem({
-                  itemData: this.itemData,
-                  isExpand: this.isExpand
-                });
-              }
-            }
-            .width(this.hasPicture ? '85%' : '100%')
-            .margin({ top: $r('app.float.body_margin_top') })
-
-            if (this.hasPicture) {
-              Column() {
-                Image(this.itemData.largeIcon)
-                  .objectFit(ImageFit.Contain)
-                  .width(50)
-                  .height(50)
-              }
-              .alignItems(HorizontalAlign.End)
-              .width('15%')
-            }
-          }
-          .onClick(() => {
-            ViewModel.startTargetAbility(this.itemData);
-          })
-
-          if (this.isExpand) {
-            Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.Start, alignItems: ItemAlign.Start }) {
-              ForEach(this.itemData.actionButtons, (item: any) => {
-                Text(item.title)
-                  .fontSize(20)
-                  .height(30)
-                  .fontColor(Color.Blue)
-                  .margin({ right: 20 })
-                  .onClick(() => {
-                    ViewModel.startTargetAbility(this.itemData);
-                  })
-              })
-            }
-            .margin({ top: 10 })
-          }
-        }
-        .backgroundColor($r('app.color.notificationitem_background'))
-        .opacity($r('app.float.item_opicaty'))
-        .borderRadius($r('app.float.item_borderradius'))
-        .margin({
-          left: $r('app.float.item_marginleft'),
-          right: $r('app.float.item_marginright'),
-          top: $r('app.float.item_margintop')
-        })
-        .padding({
-          left: $r('app.float.item_paddingleft'),
-          right: $r('app.float.item_paddingright'),
-          bottom: $r('app.float.item_paddingbottom')
-        })
-        .onTouch(this.touchNotificationItem.bind(this))
-        .width(this.itemWidth)
-
-        if (this.deleteIconDisplay) {
-          Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.SpaceAround, alignItems: ItemAlign.Center }) {
-            Row({ space: 30 }) {
-              Image($r("app.media.ic_setting")) //setting
-                .objectFit(ImageFit.Contain)
-                .width($r('app.float.item_delete_image_width'))
-                .height($r('app.float.item_delete_image_height'))
-                .onClick(this.showSettingDialog.bind(this))
-              Image($r('app.media.delete')) //delete
-                .objectFit(ImageFit.Contain)
-                .width($r('app.float.item_delete_image_width'))
-                .height($r('app.float.item_delete_image_height'))
-                .onClick(() => {
-                  ViewModel.removeNotificationItem(this.itemData, true);
-                })
-            }
-          }
-            .width('30%')
-        }
-      }
-    }
-  }
-
-  showSettingDialog() {
-    Log.showInfo(TAG, `showSettingDialog`)
-    this.settingDialogController.open()
-  }
-
-  showConfirmDialog() {
-    Log.showInfo(TAG, `showConfirmDialog`)
-    this.confirmDialogController.open()
-  }
-  touchNotificationItem(event: TouchEvent) {
-    if (event.type == Constants.TOUCH_TYPE_DOWN) { //down
-      this.startX = event.touches[0].x;
-      this.startY = event.touches[0].y;
-      Log.showInfo(TAG, `touchStart=======startX: ${this.startX}, startY: ${this.startY}`);
-    } else if (event.type == Constants.TOUCH_TYPE_MOVE) { //move
-      this.moveX = event.touches[0].x - this.startX;
-      this.moveY = event.touches[0].y - this.startY;
-    } else if (event.type == Constants.TOUCH_TYPE_UP) { //up
-      Log.showInfo(TAG, `touchEnd, moveX: ${this.moveX}, moveY: ${this.moveY}`);
-      if (this.deleteIconDisplay) {
-        if (this.moveX > Constants.HIDDEN_TRANSLATE_X) {
-          //hidden
-          this.deleteIconDisplay = false;
-          this.itemWidth = '100%';
-          Log.showInfo(TAG, 'hidden');
-        }
+    Column() {
+      if (this.itemData.template) {
+        CustomItem({ customItemData: this.itemData, isSubItem: this.isSubItem })
       } else {
-        if (this.moveX < Constants.DISPLAY_TRANSLATE_X) {
-          this.deleteIconDisplay = true;
-          this.itemWidth = '70%';
-          Log.showInfo(TAG, 'display');
-        } else if (this.moveX > Constants.REMOVE_TRANSLATE_X) {
-          ViewModel.removeNotificationItem(this.itemData, true);
-        }
+        GeneralItem({ itemData: this.itemData, clickAction: () => this.showDevicesDialog(), isSubItem: this.isSubItem })
       }
+    }
+    .width('100%')
+    .borderRadius(!this.isSubItem ? $r("sys.float.ohos_id_corner_radius_default_l") : 0)
+    .backgroundColor($r('app.color.notificationitem_background'))
+  }
+
+  showDevicesDialog() {
+    Log.showInfo(TAG, `showDevicesDialog isDistributed: ${this.itemData?.distributedOption?.isDistributed}`)
+    if (!this.itemData?.distributedOption?.isDistributed) {
+      ViewModel.clickItem(this.itemData);
+      return;
+    }
+    let wantAgent = this.itemData?.want;
+    if (!!wantAgent) {
+      WantAgent.getWant(wantAgent).then((want) => {
+        this.nowWant = want
+        Log.showInfo(TAG, `showDevicesDialog want: ${JSON.stringify(this.nowWant)}`)
+        if (!want?.deviceId) {
+          this.devicesDialogController.open()
+        } else {
+          ViewModel.clickItem(this.itemData);
+        }
+      })
+    } else {
+      ViewModel.clickItem(this.itemData);
     }
   }
 
+  selectedDevice(deviceID) {
+    Log.showInfo(TAG, `selectedDevice deviceID:${deviceID}`)
+    this.nowWant.deviceId = deviceID;
+    let triggerInfo = {
+      code: 0,
+      want: this.nowWant,
+      permission: '',
+      extraInfo: {}
+    };
+    ViewModel.clickDistributionItem(this.itemData, triggerInfo)
+  }
 }
+

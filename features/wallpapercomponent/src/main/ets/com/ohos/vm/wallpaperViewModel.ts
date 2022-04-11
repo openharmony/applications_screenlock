@@ -14,8 +14,7 @@
  */
 
 import WallpaperMar from '@ohos.app.wallpaperability'
-import Log from '../../../../../../../../common/src/main/ets/default/Log.ets'
-//TODO:import image from '@ohos.multimedia.image'
+import Log from '../../../../../../../../common/src/main/ets/default/Log'
 
 const TAG = 'ScreenLock-WallpaperViewModel'
 

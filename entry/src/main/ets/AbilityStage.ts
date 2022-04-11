@@ -14,7 +14,7 @@
  */
 
 import AbilityStage from "@ohos.application.AbilityStage"
-import Log from '../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../common/src/main/ets/default/Log'
 
 const TAG = "MainAbilityStage"
 

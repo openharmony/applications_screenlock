@@ -13,13 +13,15 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import Constants from '../../common/constants.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import Constants from '../../common/constants'
+import BaseViewModel from '../../vm/baseViewModel'
 
 const TAG = 'ScreenLock-NumkeyBoard'
 
 @Component
 export default struct NumkeyBoard {
+  private viewModel: BaseViewModel
   private onKeypress: (params, callback) => void;
   @StorageLink('numKeyboard') numKeyboard: any[]  = Constants.NUMKEY_BOARD;
 
@@ -78,42 +80,24 @@ export default struct NumkeyBoard {
                 .height($r('app.float.digitalpsd_row_height'))
               }
 
-              if (item.bkg) {
-                if (item.value == Constants.CALL_PHONE ||
-                item.value == Constants.GO_BACK ||
-                item.value == Constants.DEL_PWD) {
-                  Column()
-                    .backgroundColor(Color.Gray)
-                    .opacity(0.5)
-                    .clip(new Rect({
-                      width: Constants.DIGITALPSD_BUTTON_RECT_WH,
-                      height: Constants.DIGITALPSD_BUTTON_RECT_HH
-                    }))
+              if (item.value == Constants.CALL_PHONE ||
+              item.value == Constants.GO_BACK ||
+              item.value == Constants.DEL_PWD) {
+                Column() {
+                  Button({ type: ButtonType.Normal, stateEffect: true })
+                    .backgroundColor("#00FFFFFF")
                     .width(Constants.DIGITALPSD_BUTTON_RECT_WH)
                     .height(Constants.DIGITALPSD_BUTTON_RECT_HH)
-                } else {
-                  Column()
-                    .backgroundColor(Color.Gray)
-                    .opacity(0.5)
-                    .clip(new Circle({
-                      width: Constants.DIGITALPSD_BUTTON_DIAMETER,
-                      height: Constants.DIGITALPSD_BUTTON_DIAMETER
-                    }))
+                }
+              } else {
+                Column() {
+                  Button({ type: ButtonType.Circle, stateEffect: !this.viewModel.inhibitInput })
+                    .backgroundColor("#00FFFFFF")
                     .width(Constants.DIGITALPSD_BUTTON_DIAMETER)
                     .height(Constants.DIGITALPSD_BUTTON_DIAMETER)
                 }
               }
             }
-            .onTouch((event: TouchEvent) => {
-              Log.showInfo(TAG, `onTouch`)
-              if (event.type == TouchType.Down) {
-                Log.showInfo(TAG, `TouchType.Down`)
-                item.bkg = true;
-              } else if (event.type == TouchType.Up) {
-                Log.showInfo(TAG, `TouchType.Up`)
-                item.bkg = false
-              }
-            })
             .onClick(() => {
               Log.showInfo(TAG, `onClick:${item.index}`)
               setTimeout(this.onKeypress.bind(this), 0, item.index, (data) => {

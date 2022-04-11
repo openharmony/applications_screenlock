@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Log from '../../../../../../common/src/main/ets/default/Log.ets';
+import Log from '../../../../../../common/src/main/ets/default/Log';
 
 const TAG = 'ScreenLock-App'
 

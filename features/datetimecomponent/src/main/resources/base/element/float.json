@@ -14,7 +14,12 @@
     },
     {
       "name": "date_fontsize",
-      "value": "18"
+      "value": "36"
+    },
+    {
+      "name": "date_week_area_height",
+      "value": "48"
     }
+
   ]
 }

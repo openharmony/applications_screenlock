@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import Constants from '../../common/constants.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import Constants from '../../common/constants'
 import NumkeyBoard from './numkeyBoard.ets'
-import ViewModel from '../../vm/digitalPSDViewModel.ets'
+import ViewModel, {AuthType} from '../../vm/digitalPSDViewModel'
 
 const TAG = 'ScreenLock-DigitalPSD'
 
@@ -27,10 +27,14 @@ export default struct DigitalPSD {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
+    this.mViewModel.checkFreezingTime(AuthType.PIN, (data) => {
+      Log.showInfo(TAG, `onClick callback is called`)
+    });
   }
 
   aboutToDisappear() {
     Log.showInfo(TAG, `aboutToDisappear`)
+    this.mViewModel.clearPassword()
   }
 
   build() {
@@ -49,13 +53,9 @@ export default struct DigitalPSD {
         Grid() {
           ForEach(this.passwdMaskArr, (item) => {
             GridItem() {
-              Column()
-                .backgroundColor(item)
-                .clip(new Circle({ width: Constants.DIGITALPSD_IC_DIAMETER, height: Constants.DIGITALPSD_IC_DIAMETER }))
+              Image(item)
                 .width(Constants.DIGITALPSD_IC_DIAMETER)
                 .height(Constants.DIGITALPSD_IC_DIAMETER)
-                .border({ width: 2, color: $r('app.color.circle_background'), radius: 45 })
-                .alignItems(HorizontalAlign.Center)
             }
           })
         }
@@ -66,11 +66,12 @@ export default struct DigitalPSD {
       }
       .margin({ bottom: $r('app.float.digitalpsd_passwdmask_margin_bottom') })
       .width(Constants.FULL_CONTAINER_WIDTH)
-      .height( $r('app.float.digitalpsd_input_area_height'))
+      .height($r('app.float.digitalpsd_input_area_height'))
       .flexShrink(1)
 
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
         NumkeyBoard({
+          viewModel: this.mViewModel,
           onKeypress: (index, callback) => this.mViewModel.onKeyPress(index, callback)
         })
       }

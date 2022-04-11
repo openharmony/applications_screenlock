@@ -67,8 +67,6 @@
 
 				<filteritem type="filepath" name="features/noticeitem/src/main/resources/base/media/.*.png" desc="self developed image"/>
 
-				<filteritem type="filepath" name="features/notificationservice/src/main/resources/base/media/.*.png" desc="self developed image"/>
-
 				<filteritem type="filepath" name="features/screenlock/src/main/resources/base/media/.*.png" desc="self developed image"/>
 
 				<filteritem type="filepath" name="product/pc/src/main/resources/base/media/.*.png" desc="self developed image"/>

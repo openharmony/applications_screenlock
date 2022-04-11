@@ -14,13 +14,25 @@
  */
 
 import featureAbility from '@ohos.ability.featureAbility'
+import commonEvent from '@ohos.commonEvent';
 import settings from '@ohos.settingsnapi';
-import Log from '../../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import DateTimeCommon from '../../../../../../../../common/src/main/ets/default/DateTimeCommon'
-import Constants from '../common/constants'
-import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon.ets'
+import sTimeManager, {TimeEventArgs, TIME_CHANGE_EVENT,
+}  from '../../../../../../../../common/src/main/ets/default/TimeManager';
+import EventManager, {unsubscribe} from '../../../../../../../../common/src/main/ets/default/event/EventManager'
 
 const TAG = 'ScreenLock-DateTimeViewModel'
+
+let mCommonEventSubscribeInfo = {
+    events: [
+        commonEvent.Support.COMMON_EVENT_TIME_CHANGED,
+        commonEvent.Support.COMMON_EVENT_TIMEZONE_CHANGED,
+        commonEvent.Support.COMMON_EVENT_TIME_TICK
+    ]
+};
+
+let mEventSubscriber
 
 /**
  * DateTimeViewModel class
@@ -29,74 +41,38 @@ export default class DateTimeViewModel {
     timeVal: string = ''
     dateVal: any = {}
     weekVal: any = {}
-    setDateTimeHandle: number = -1
-    isUsing24hFormat: boolean= false
+    unSubscriber?: unsubscribe;
 
     ViewModelInit(): void{
         Log.showInfo(TAG, 'ViewModelInit');
 
-        // TODO api 8 下有问题，临时注释
-        // this.timeFormatMonitor();
-
         this.setDateTime.bind(this)()
-        this.setDateTimeHandle = setInterval(this.setDateTime.bind(this), Constants.INTERVAL);
+        commonEvent.createSubscriber(mCommonEventSubscribeInfo, this.createSubscriberCallBack.bind(this));
+        this.unSubscriber = EventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
+            this.setDateTime(args.date)
+        });
         Log.showInfo(TAG, 'ViewModelInit end');
     }
 
-    private timeFormatMonitor(): void {
-        Log.showInfo(TAG, 'timeFormatMonitor');
-        let urivar = settings.getUri('settings.time.format')
-        let helper = featureAbility.acquireDataAbilityHelper(urivar);
-        this.checkTimeFormat(helper);
-        helper.on("dataChange", urivar, (err) => {
-            if (err.code !== 0) {
-                Log.showError(TAG, `failed to getAbilityWant because ${err.message}`);
-                return;
-            } else {
-                this.checkTimeFormat(helper);
-            }
-            Log.showInfo(TAG, 'observer reveive notifychange on success data : ' + JSON.stringify(err))
-        })
-    }
-
-    private checkTimeFormat(helper) {
-        Log.showInfo(TAG, 'checkTimeFormat');
-        let getRetValue = settings.getValue(helper, 'settings.time.format', '24')
-        if (getRetValue === '12') {
-            this.isUsing24hFormat = false;
-        } else if (getRetValue === '24') {
-            this.isUsing24hFormat = true;
-        }
-    }
-
-    private setDateTime() {
+    private setDateTime(date?: Date) {
         Log.showInfo(TAG, `setDateTime`)
-        this.timeVal = DateTimeCommon.getSystemTime(this.isUsing24hFormat)
+        this.timeVal = sTimeManager.formatTime(date ?? new Date())
         this.dateVal = DateTimeCommon.getSystemDate()
         this.weekVal = DateTimeCommon.getSystemWeek()
     }
 
-    stopPolling() {
-        Log.showInfo(TAG, `stopPolling start`)
-        Log.showInfo(TAG, `stopPolling setDateTimeHandle:${this.setDateTimeHandle}`);
-        if (this.setDateTimeHandle > 0) {
-            clearInterval(this.setDateTimeHandle)
-            this.setDateTimeHandle = -1
-            Log.showInfo(TAG, `stopPolling setDateTimeHandle new :${this.setDateTimeHandle}`);
-        }
-        Log.showInfo(TAG, `stopPolling end`)
+    private createSubscriberCallBack(err, data) {
+        Log.showInfo(TAG, "start createSubscriberCallBack " + JSON.stringify(data))
+        mEventSubscriber = data
+        commonEvent.subscribe(data, this.setDateTime.bind(this));
+        Log.showInfo(TAG, "start createSubscriberCallBack finish")
     }
 
-    onStatusChange(lockStatus: ScreenLockStatus): void {
-        Log.showInfo(TAG, `onStatusChange lockStatus:${lockStatus}`);
-        Log.showInfo(TAG, `onStatusChange setDateTimeHandle:${this.setDateTimeHandle}`);
-        if (lockStatus == ScreenLockStatus.Locking) {
-            if (this.setDateTimeHandle <= 0) {
-                this.setDateTimeHandle = setInterval(this.setDateTime.bind(this), Constants.INTERVAL);
-                Log.showInfo(TAG, `onStatusChange setDateTimeHandle new:${this.setDateTimeHandle}`);
-            }
-        } else {
-            this.stopPolling();
-        }
+    stopPolling() {
+        Log.showInfo(TAG, `stopPolling start`)
+        commonEvent.unsubscribe(mEventSubscriber);
+        this.unSubscriber && this.unSubscriber();
+        this.unSubscriber = undefined;
+        Log.showInfo(TAG, `stopPolling end`)
     }
 }

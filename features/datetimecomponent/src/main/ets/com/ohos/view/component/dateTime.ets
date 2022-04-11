@@ -13,18 +13,17 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import ViewModel from '../../vm/dateTimeViewModel'
 import Constants from '../../common/constants'
-import {ScreenLockStatus} from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon.ets'
+import {ScreenLockStatus} from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
 
 const TAG = 'ScreenLock-DateTime'
 
 @Component
 export default struct DateTime {
-  @StorageLink('lockStatus') @Watch("onStatusChange") lockStatus: ScreenLockStatus = ScreenLockStatus.Locking
   @State mViewModel: ViewModel = new ViewModel()
-  private isShowData: boolean= true
+  @Prop isShowDate: boolean
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -37,26 +36,21 @@ export default struct DateTime {
   }
 
   build() {
-    Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+    Column() {
       Text(this.mViewModel.timeVal)
         .fontSize($r('app.float.time_fontsize'))
         .fontColor($r('app.color.date_time_color'))
         .margin({ top: $r('app.float.time_top_margin'), bottom: $r('app.float.time_bottom_margin') })
-      if (this.isShowData) {
+      if (this.isShowDate) {
         Row() {
           Text($r('app.string.yyyy_mm_dd', this.mViewModel.dateVal.year, this.mViewModel.dateVal.month, this.mViewModel.dateVal.day))
             .fontSize($r('app.float.date_fontsize'))
             .fontColor($r('app.color.date_time_color'))
           Text(this.mViewModel.weekVal).fontSize($r('app.float.date_fontsize'))
             .fontColor($r('app.color.date_time_color'))
-        }
+        }.height($r('app.float.date_week_area_height'))
       }
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
-  }
-
-  onStatusChange(propName: string): void {
-    Log.showInfo(TAG, `onStatusChange`)
-    this.mViewModel.onStatusChange(this.lockStatus)
   }
 }
