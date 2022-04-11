@@ -13,18 +13,28 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../common/src/main/ets/default/Log'
+import CommonStyleManager from '../../../../../../../common/src/main/ets/default/StyleManager'
+import AbilityManager from '../../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
 import StatusBar from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/statusBar.ets'
 import CustomPSD from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/customPSD.ets'
-import Constants from '../common/constants.ets'
+import Constants from '../common/constants'
+import StyleManager from '../common/StyleManager'
 
 const TAG = 'ScreenLock-CustomPassword'
 
 @Entry
 @Component
 export default struct CustomPassword {
+  @State mHeightPx: number = 44
+
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
+    setAppBgColor('#00000000')
+    CommonStyleManager.setAbilityPageName(TAG)
+    let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+    this.mHeightPx = configInfo.height
+    StyleManager.setStyle()
   }
 
   aboutToDisappear() {
@@ -33,13 +43,15 @@ export default struct CustomPassword {
 
   build() {
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
-        Column() {
-          StatusBar()
-        }
-        Column() {
-          CustomPSD()
-        }
-        .width(Constants.PASSWORD_AREA_WIDTH)
+      Column() {
+        StatusBar()
+      }
+      .height(this.mHeightPx + 'px')
+
+      Column() {
+        CustomPSD()
+      }
+      .width(Constants.PASSWORD_AREA_WIDTH)
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
     .height(Constants.FULL_CONTAINER_HEIGHT)

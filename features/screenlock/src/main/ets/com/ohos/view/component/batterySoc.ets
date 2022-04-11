@@ -13,24 +13,38 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import ViewModel from '../../vm/batterySocViewModel.ets'
-import Constants from '../../common/constants.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import Constants from '../../common/constants'
 
 const TAG = 'ScreenLock-BatterySoc'
 
 @Component
 export default struct BatterySoc {
-  @State mViewModel: ViewModel = new ViewModel()
+  @StorageLink('batterySoc') @Watch('onBatterySocChanged') batterySoc: number = 100
+  @StorageLink('batteryCharging') @Watch('onBatterySocChanged') batteryCharging: boolean = false
+  @State batterySocText: string | Resource = ''
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    this.mViewModel.ViewModelInit()
+    this.onBatterySocChanged('');
   }
 
   build() {
-    Text(this.mViewModel.batterySocStr)
+    Text(this.batterySocText)
       .fontSize($r('app.float.batterysoc_fontsize'))
       .fontColor($r('app.color.batterysoc_text_color'))
+  }
+
+  onBatterySocChanged(propName: string): void {
+    Log.showInfo(TAG, `onBatterySocChanged batterySoc:${this.batterySoc}  batteryCharging:${this.batteryCharging}` )
+    if (this.batteryCharging) {
+      if (this.batterySoc < 100) {
+        this.batterySocText = $r('app.string.charging', this.batterySoc + '%');
+      } else {
+        this.batterySocText = $r('app.string.charge_full')
+      }
+    } else {
+      this.batterySocText = $r('app.string.battery_soc', this.batterySoc + '%');
+    }
   }
 }

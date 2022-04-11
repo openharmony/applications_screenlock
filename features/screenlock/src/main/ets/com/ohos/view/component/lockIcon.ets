@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import {ScreenLockStatus} from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon.ets'
-import ViewModel from '../../vm/lockIconViewModel.ets'
-import Constants from '../../common/constants.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import {ScreenLockStatus} from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
+import ViewModel from '../../vm/lockIconViewModel'
+import Constants from '../../common/constants'
 
 const TAG = 'ScreenLock-LockIcon'
 
@@ -42,6 +42,12 @@ export default struct LockIcon {
         .fontColor($r('app.color.lock_prompt_color'))
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
+    .gesture(GestureGroup(GestureMode.Exclusive, TapGesture({ count: 2 })
+      .onAction((event: GestureEvent) => {
+        Log.showInfo(TAG, 'double click');
+        this.mViewModel.onRecognizeFace(this.lockStatus);
+      })
+    ))
   }
 
   onStatusChange(propName: string): void {

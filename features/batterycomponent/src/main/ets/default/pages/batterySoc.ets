@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,12 +13,16 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../common/src/main/ets/default/Log'
+import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
+
 const TAG = 'BatteryComponent-batterySoc'
 @Component
 export default
 struct BatterySoc {
   @StorageLink('batterySoc') batterySoc: number = 100
+  @Prop mContentColor: string
+  @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
 
   aboutToAppear(){
     Log.showInfo(TAG,'aboutToAppear Start');
@@ -29,11 +33,8 @@ struct BatterySoc {
   }
 
   build() {
-    Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
-      Text(this.batterySoc + '%')
-        .height('100%')
-        .fontColor($r('app.color.battery_default_color'))
-        .fontSize($r('app.float.fontSize_network_state'))
-    }
+    Text(this.batterySoc + '%')
+      .fontColor(this.mContentColor)
+      .fontSize(this.styleCommon.statusBarFontSize)
   }
 }

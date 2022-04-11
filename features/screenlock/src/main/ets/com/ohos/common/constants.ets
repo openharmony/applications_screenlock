@@ -62,4 +62,9 @@ export default class Constants {
   //max password length
   static PASSWORD_MAX_LEN = 32
 
+  static ACCOUNT_SPACE = 24
+}
+export class StatusBarGroupComponentData {
+  backgroundColor: string = "#00000000";
+  contentColor: string = "#FFFFFFFF";
 }

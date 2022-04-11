@@ -11,6 +11,10 @@
     {
       "name": "page_background",
       "value": "#19181B"
+    },
+    {
+      "name":"notificationitem_background",
+      "value":"#99D8F8E7"
     }
   ]
 }
