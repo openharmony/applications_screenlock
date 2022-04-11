@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import Constants from '../../common/constants.ets'
-import ViewModel from '../../vm/mixedPSDViewModel.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import Constants from '../../common/constants'
+import ViewModel, {AuthType}from '../../vm/mixedPSDViewModel'
 
 const TAG = 'ScreenLock-MixedPSD'
 
@@ -25,10 +25,14 @@ export default struct MixedPSD {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
+    this.mViewModel.checkFreezingTime(AuthType.PIN, (data) => {
+      Log.showInfo(TAG, `onClick callback is called`)
+    });
   }
 
   aboutToDisappear() {
     Log.showInfo(TAG, `aboutToDisappear`)
+    this.mViewModel.clearPassword()
   }
 
   build() {
@@ -55,6 +59,11 @@ export default struct MixedPSD {
           .border({ width: 2, color: Color.Gray, radius: 15 })
           .enabled(!this.mViewModel.inhibitInput)
           .onChange(this.mViewModel.onInputChange.bind(this.mViewModel))
+          .onSubmit((entryKey) => {
+            this.mViewModel.onAuthPassword(() => {
+              Log.showInfo(TAG, `onSubmit callback prompt:${this.mViewModel.prompt} inhibitInput:${this.mViewModel.inhibitInput}`)
+            })
+          })
           .margin({ bottom: $r('app.float.mixedpsd_input_margin_bottom') })
 
         Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween }) {

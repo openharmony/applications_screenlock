@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../common/src/main/ets/default/Log'
 
 const TAG = 'ScreenLock-CustomScreenlock'
 
-//TODO:Custom screenlock
 @Entry
 @Component
 export default struct CustomScreenlock {

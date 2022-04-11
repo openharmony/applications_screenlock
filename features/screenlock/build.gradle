@@ -19,4 +19,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
     implementation project(':common')
     implementation project(':features:batterycomponent')
+    implementation project(':features:clockcomponent')
+    implementation project(':features:wificomponent')
+    implementation project(':features:signalcomponent')
+
 }

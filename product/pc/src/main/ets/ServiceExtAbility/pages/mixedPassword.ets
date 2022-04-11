@@ -13,18 +13,28 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../common/src/main/ets/default/Log'
+import CommonStyleManager from '../../../../../../../common/src/main/ets/default/StyleManager'
+import AbilityManager from '../../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
 import StatusBar from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/statusBar.ets'
 import MixedPSD from '../../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/MixedPSD.ets'
-import Constants from '../common/constants.ets'
+import Constants from '../common/constants'
+import StyleManager from '../common/StyleManager'
 
 const TAG = 'ScreenLock-MixedPassword'
 
 @Entry
 @Component
 export default struct MixedPassword {
+  @State mHeightPx: number = 44
+
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
+    setAppBgColor('#00000000')
+    CommonStyleManager.setAbilityPageName(TAG)
+    let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+    Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+    StyleManager.setStyle()
   }
 
   aboutToDisappear() {
@@ -35,7 +45,8 @@ export default struct MixedPassword {
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
       Column() {
         StatusBar()
-      }
+      }.height(this.mHeightPx + 'px' )
+
       Column() {
         MixedPSD()
       }

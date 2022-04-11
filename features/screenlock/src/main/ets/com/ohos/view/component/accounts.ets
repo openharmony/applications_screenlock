@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
-import ViewModel from '../../vm/accountsViewModel.ets'
-import Constants from '../../common/constants.ets'
-import {UserData} from '../../data/userData.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import ViewModel from '../../vm/accountsViewModel'
+import Constants from '../../common/constants'
+import {UserData} from '../../data/userData'
 
 const TAG = 'ScreenLock-Accounts'
 
@@ -27,26 +27,25 @@ export default struct Accounts {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    this.mViewModel.viewModelInit()
   }
 
   aboutToDisappear() {
     Log.showInfo(TAG, `aboutToDisappear`)
-    this.mViewModel.viewModelFinish()
   }
 
   build() {
     Row() {
-      List() {
-        ForEach(this.accountList, (item: any) => {
-          ListItem() {
-            UserItem({ userItem: item, viewModel: this.mViewModel })
-          }
-        })
+      if (this.accountList.length > 1) {
+        List({ space: Constants.ACCOUNT_SPACE }) {
+          ForEach(this.accountList, (item: any) => {
+            ListItem() {
+              UserItem({ userItem: item, viewModel: this.mViewModel })
+            }
+          })
+        }
+        .listDirection(Axis.Horizontal)
       }
-      .listDirection(Axis.Horizontal)
     }
-
   }
 }
 
@@ -69,10 +68,10 @@ struct UserItem {
       Text(this.userItem.userName)
         .fontSize(Constants.SHORTCUT_TEXT_SIZE)
         .fontColor($r('app.color.shortcut_text_color'))
-      //.fontWeight(FontWeight.Bold)
+        .margin({ top: $r("app.float.accounts_block") })
     }
     .onClick(event => {
-      this.viewModel.onUserSwitch(this.userItem.userId)
+      this.viewModel.onUserClick(this.userItem.userId)
     })
   }
 }

@@ -15,6 +15,7 @@
 
 export default class Constants {
     //Shortcut params
+    static SHORTCUT_SPACE = 24
     static SHORTCUT_CIRCLE_WIDTH = '80px'
     static SHORTCUT_CIRCLE_HEIGHT = '80px'
     static SHORTCUT_TEXT_SIZE = '24px'

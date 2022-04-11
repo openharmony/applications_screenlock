@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../common/constants'
 import ViewModel from '../../vm/shortcutViewModel'
 import power from '@ohos.power'
@@ -33,7 +33,7 @@ export default struct Shortcut {
   }
 
   build() {
-    Row({ space: '30px' }) {
+    Row({ space: Constants.SHORTCUT_SPACE }) {
       ShortcutComponent({
         mTag: 'ScreenLock-Shutdown',
         mIcon: this.shutdownIcon,
@@ -68,7 +68,7 @@ struct ShortcutComponent {
   }
 
   build() {
-    Column() {
+    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center }) {
       Stack() {
         Flex()
           .backgroundColor($r('app.color.shortcut_icon_color'))
@@ -80,17 +80,11 @@ struct ShortcutComponent {
           .objectFit(ImageFit.Contain)
       }
 
-      Column()
-        .width(Constants.SHORTCUT_CIRCLE_WIDTH)
-        .height(Constants.SHORTCUT_BLOCK_HEIGHT)
-
       Text(this.mLabel)
         .fontSize(Constants.SHORTCUT_TEXT_SIZE)
         .fontColor($r('app.color.shortcut_text_color'))
-        .width(Constants.SHORTCUT_TEXT_WIDTH)
-        .height(Constants.SHORTCUT_TEXT_HEIGHT)
+        .margin({ top: $r("app.float.shortcut_block") })
     }
-    .width(Constants.SHORTCUT_CIRCLE_WIDTH)
     .onClick(this.onItemClick.bind(this))
   }
 

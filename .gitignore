@@ -7,8 +7,8 @@
 /features/shortcutcomponent/build/
 /features/wallpapercomponent/build/
 /features/noticeitem/build/
-/features/notificationservice/build/
 /features/screenlock/build/
 /.idea
 /.gradle
 local.properties
+tsconfig.json

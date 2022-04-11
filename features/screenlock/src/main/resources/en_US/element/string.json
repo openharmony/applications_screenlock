@@ -9,6 +9,18 @@
       "value": "Please slide to unlock"
     },
     {
+      "name": "recognizing_face",
+      "value": "Recognizing face..."
+    },
+    {
+      "name": "face_not_recognized",
+      "value": "Face not recognized. Touch twice to try again"
+    },
+    {
+      "name": "yyyy_mm_dd",
+      "value": "%d/%d/%d"
+    },
+    {
       "name": "nonotification_text",
       "value": "No Notification"
     },
@@ -51,6 +63,14 @@
     {
       "name": "charge_full",
       "value": "Already full"
+    },
+    {
+      "name": "charging",
+      "value": "Charging %s"
+    },
+    {
+      "name": "battery_soc",
+      "value": "Battery Level %s"
     }
   ]
 }

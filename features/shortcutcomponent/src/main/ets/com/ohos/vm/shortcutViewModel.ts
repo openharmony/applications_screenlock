@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../common/src/main/ets/default/Log.ets'
+import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../common/constants'
 import power from '@ohos.power'
 
