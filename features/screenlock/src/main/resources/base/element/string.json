@@ -9,6 +9,18 @@
       "value": "上滑解锁"
     },
     {
+      "name": "recognizing_face",
+      "value": "正在识别人脸"
+    },
+    {
+      "name": "face_not_recognized",
+      "value": "未识别成功, 双击重试"
+    },
+    {
+      "name": "yyyy_mm_dd",
+      "value": "%d/%d/%d"
+    },
+    {
       "name": "nonotification_text",
       "value": "无通知"
     },
@@ -51,6 +63,14 @@
     {
       "name": "charge_full",
       "value": "已充满"
+    },
+    {
+      "name": "charging",
+      "value": "正在充电%s"
+    },
+    {
+      "name": "battery_soc",
+      "value": "目前电量%s"
     }
   ]
 }

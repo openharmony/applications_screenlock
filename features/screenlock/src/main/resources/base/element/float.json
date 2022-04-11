@@ -45,6 +45,10 @@
       "value": "24"
     },
     {
+      "name": "accounts_block",
+      "value": "8"
+    },
+    {
       "name": "digitalpsd_prompt_fontsize",
       "value": "32"
     },
@@ -66,7 +70,7 @@
     },
     {
       "name": "digitalpsd_passwdmask_height",
-      "value": "24"
+      "value": "24vp"
     },
     {
       "name": "digitalpsd_passwdmask_margin_bottom",
@@ -128,7 +132,6 @@
       "name": "mixedpsd_input_margin_bottom",
       "value": "128"
     },
-
     {
       "name": "custompsd_prompt_fontsize",
       "value": "32"
@@ -152,6 +155,10 @@
     {
       "name": "custompsd_input_height",
       "value": "72"
+    },
+    {
+      "name": "custompsd_input_radius",
+      "value": "36"
     },
     {
       "name": "custompsd_input_margin_bottom",

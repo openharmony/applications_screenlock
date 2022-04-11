@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 include ':entry', ':phone', ':pc', ':common', ':features:screenlock',
-        ':features:noticeitem', ':features:notificationservice', ':features:batterycomponent',
-        ':features:datetimecomponent', ':features:wallpapercomponent', ':features:shortcutcomponent'
+        ':features:noticeitem', ':features:batterycomponent',
+        ':features:datetimecomponent', ':features:wallpapercomponent', ':features:shortcutcomponent',
+        ':features:clockcomponent', ':features:wificomponent', ':features:signalcomponent'
 project(':phone').projectDir = new File('./product/phone')
 project(':pc').projectDir = new File('./product/pc')

@@ -7,7 +7,7 @@
     },
     {
       "name": "datetime_area_height",
-      "value": "192"
+      "value": "240"
     },
     {
       "name": "datetime_margin_top",
@@ -18,8 +18,44 @@
       "value": "48"
     },
     {
+      "name": "shortcut_area_margin_top",
+      "value": "24"
+    },
+    {
       "name": "shortcut_area_height",
       "value": "120"
+    },
+    {
+      "name": "notificationList_margin_top",
+      "value": "32"
+    },
+    {
+      "name": "title_font_height",
+      "value": "28vp"
+    },
+    {
+      "name": "title_font_margin_t",
+      "value": "13vp"
+    },
+    {
+      "name": "setting_cont_fontsize",
+      "value": "32"
+    },
+    {
+      "name": "close_notification_margin_top",
+      "value": "15vp"
+    },
+    {
+      "name": "notification_appname_margin_top",
+      "value": "11vp"
+    },
+    {
+      "name": "notification_cancle_margin_top",
+      "value": "11vp"
+    },
+    {
+      "name": "status_bar_height",
+      "value": "48vp"
     }
   ]
 }
