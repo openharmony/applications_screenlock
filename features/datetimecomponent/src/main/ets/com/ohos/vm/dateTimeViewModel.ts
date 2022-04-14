@@ -49,14 +49,14 @@ export default class DateTimeViewModel {
         this.setDateTime.bind(this)()
         commonEvent.createSubscriber(mCommonEventSubscribeInfo, this.createSubscriberCallBack.bind(this));
         this.unSubscriber = EventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
-            this.setDateTime(args.date)
+            this.setDateTime()
         });
         Log.showInfo(TAG, 'ViewModelInit end');
     }
 
-    private setDateTime(date?: Date) {
+    private setDateTime() {
         Log.showInfo(TAG, `setDateTime`)
-        this.timeVal = sTimeManager.formatTime(date ?? new Date())
+        this.timeVal = sTimeManager.formatTime(new Date())
         this.dateVal = DateTimeCommon.getSystemDate()
         this.weekVal = DateTimeCommon.getSystemWeek()
     }

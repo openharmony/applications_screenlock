@@ -312,9 +312,10 @@ export class ScreenLockService {
         })
     }
 
-    private publish(eventName:string) {
+    private publish(eventName: string) {
+        Log.showInfo(TAG, `publish event name: ${eventName}`)
         commonEvent.publish(eventName, (error, value) => {
-            if (error != null) {
+            if (error.code) {
                 Log.showError(TAG, 'Operation failed. Cause: ' + JSON.stringify(error));
             } else {
                 Log.showInfo(TAG, 'publish common event success. ' + JSON.stringify(value));
