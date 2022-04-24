@@ -77,6 +77,12 @@
 
 				<filteritem type="filepath" name="figures/.*.jpg" desc="self developed image"/>
 			</filefilter>
+			<filefilter name="defaultFilter" desc="Files not to check">
+				<filteritem type="filepath" name=".*.json5" desc="build config file"/>
+				<filteritem type="filepath" name="**/.*.json5" desc="build config file"/>
+				<filteritem type="filepath" name="features/.*/.*.json5" desc="build config file"/>
+				<filteritem type="filepath" name="product/.*/.*.json5" desc="build config file"/>
+			</filefilter>
 		</filefilterlist>
     </oatconfig>
 </configuration>
