@@ -15,10 +15,10 @@
 
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../common/constants'
-import BaseViewModel, {service, UnlockResult,AuthType, AuthSubType} from './baseViewModel'
+import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
+import {Callback} from 'basic';
 
 const TAG = 'ScreenLock-CustomPSDViewModel'
-export {AuthType}
 
 export default class CustomPSDViewModel extends BaseViewModel {
     passwordArr: any[] = [];
@@ -61,7 +61,7 @@ export default class CustomPSDViewModel extends BaseViewModel {
         Log.showInfo(TAG, 'onCallPhone');
     }
 
-    onAuthPassword(callback) {
+    onAuthPassword(callback: Callback<void>) {
         Log.showInfo(TAG, `onAuthPassword`);
         if (this.passwordArr.length == 0 || this.inhibitInput) {
             this.updateStorage(callback);

@@ -80,30 +80,30 @@ class TimeManager {
     Log.showInfo(TAG, "initTimeFormat");
     this.mSettingsHelper = featureAbility.acquireDataAbilityHelper(context, URI_VAR);
 
-    const handleTimeFormatChange = () => {
-      if (!this.mSettingsHelper) {
-        Log.showError(TAG, `Can't get dataAbility helper.`);
-        return;
-      }
-      let timeString = settings.getValueSync(this.mSettingsHelper, TIME_FORMAT_KEY, "24");
-      Log.showDebug(TAG, `timeFormat change: ${timeString}`);
-      this.mUse24hFormat = timeString == "24";
-      this.notifyTimeChange();
-    };
-
     try {
       this.mSettingsHelper.on("dataChange", settings.getUriSync(TIME_FORMAT_KEY), (err) => {
         if (err.code !== 0) {
           Log.showError(TAG, `failed to getAbilityWant, code: ${err.code}.`);
           return;
         }
-        handleTimeFormatChange();
       });
     } catch (e) {
       Log.showError(TAG, `Can't listen timeformate change.`);
     }
-    handleTimeFormatChange();
+    this.handleTimeFormatChange();
   }
+
+  private handleTimeFormatChange() {
+    Log.showInfo(TAG, "handleTimeFormatChange")
+    if (!this.mSettingsHelper) {
+      Log.showError(TAG, `Can't get dataAbility helper.`);
+      return;
+    }
+    let timeString = settings.getValueSync(this.mSettingsHelper, TIME_FORMAT_KEY, "24");
+    Log.showDebug(TAG, `timeFormat change: ${timeString}`);
+    this.mUse24hFormat = timeString == "24";
+    this.notifyTimeChange();
+  };
 
   private notifyTimeChange() {
     Log.showInfo(TAG, "notifyTimeChange");

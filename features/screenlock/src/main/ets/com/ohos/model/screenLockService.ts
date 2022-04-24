@@ -294,7 +294,6 @@ export class ScreenLockService {
     destroy() {
         this.screenLockModel.eventCancelListener(EVENT_END_SCREEN_ON);
         this.screenLockModel.eventCancelListener(EVENT_BEGIN_SLEEP);
-        this.screenLockModel.eventCancelListener(EVENT_CHANGE_USER);
         this.screenLockModel.eventCancelListener(EVENT_UNLOCK_SCREEN);
         this.accountModel.eventCancelListener(ACTIVATING_TYPE, ACTIVATING_EVENT);
         this.accountModel.eventCancelListener(ACTIVATE_TYPE, ACTIVATE_EVENT)

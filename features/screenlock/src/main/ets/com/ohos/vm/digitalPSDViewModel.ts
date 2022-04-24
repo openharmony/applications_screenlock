@@ -15,14 +15,12 @@
 
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../common/constants'
-import BaseViewModel, {service, UnlockResult, AuthType, AuthSubType} from './baseViewModel'
+import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
+import {Callback} from 'basic';
 
 const TAG = 'ScreenLock-DigitalPSDViewModel'
 
 const PW_LEN = 6
-
-
-export {AuthType}
 
 export default class DigitalPSDViewModel extends BaseViewModel {
     password: number[]= []
@@ -39,7 +37,7 @@ export default class DigitalPSDViewModel extends BaseViewModel {
         super.ViewModelInit();
     }
 
-    onKeyPress(index, callback) {
+    onKeyPress(index, callback: Callback<void>) {
         Log.showInfo(TAG, `onKeyPress start param: ${index}`)
         let keyValue = this.numKeyboard[index].value;
         if (keyValue >= 0 && !this.inhibitInput) {
