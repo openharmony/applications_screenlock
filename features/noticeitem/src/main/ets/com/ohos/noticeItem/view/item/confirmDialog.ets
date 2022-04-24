@@ -23,7 +23,7 @@ const TAG = 'NoticeItem-Confirm';
  */
 @CustomDialog
 export default struct ConfirmDialog {
-  private title: string
+  private title: string | Resource
   private bundleName: string
   public controller: CustomDialogController
   public action: () => void

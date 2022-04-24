@@ -14,7 +14,7 @@
  */
 
 import Log from '../../../../../../../common/src/main/ets/default/Log'
-import StyleConfiguration from '../common/StyleConfiguration'
+import StyleConfiguration from '../common/styleconfiguration'
 import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
 import {StatusBarGroupComponentData} from '../../../../../../screenlock/src/main/ets/com/ohos/common/Constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'

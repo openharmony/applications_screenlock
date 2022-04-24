@@ -16,6 +16,7 @@
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../common/constants'
 import service, {UnlockResult, AuthType, AuthSubType} from '../model/screenLockService'
+import {Callback} from 'basic';
 
 const TAG = 'ScreenLock-BaseViewModel'
 const MINUTE_NM = '分钟'
@@ -27,8 +28,6 @@ export {service, UnlockResult, AuthType, AuthSubType}
 export default class BaseViewModel {
     prompt: Resource | string;
     inhibitInput: boolean = false;
-    countdownHandle: number = -1;
-    freezingMillisecond: number = 0;
 
     constructor() {
         this.ViewModelInit()
@@ -39,42 +38,42 @@ export default class BaseViewModel {
         this.prompt = $r('app.string.input');
     }
 
-    countdown(callback) {
+    countdown() {
         Log.showInfo(TAG, `countdown`)
-        let promptText: Resource | string = '';
-        this.freezingMillisecond -= Constants.INTERVAL;
-        Log.showInfo(TAG, `countdown freezingMillisecond:${this.freezingMillisecond}`)
-        if (this.freezingMillisecond > 0) {
-            promptText = this.getFreezingTimeNm();
-            promptText += TRY_AGAIN;
-        } else {
-            Log.showInfo(TAG, `countdown clearInterval`)
-            clearInterval(this.countdownHandle)
-            this.countdownHandle = -1
-            this.inhibitInput = false
-            promptText = $r('app.string.input');
-        }
-        Log.showInfo(TAG, `countdown promptText:${promptText}`)
-        this.prompt = promptText;
-        this.updateStorage(callback)
+        service.getAuthProperty(AuthType.PIN, (properties) => {
+            let promptText: Resource | string = '';
+            let freezingMillisecond = properties.freezingTime;
+            Log.showInfo(TAG, `countdown freezingMillisecond:${freezingMillisecond}`)
+            if (freezingMillisecond > 0) {
+                promptText = this.getFreezingTimeNm(freezingMillisecond);
+                promptText += TRY_AGAIN;
+                setTimeout(this.countdown.bind(this), Constants.INTERVAL)
+            } else {
+                Log.showInfo(TAG, `countdown clearInterval`)
+                this.inhibitInput = false
+                promptText = $r('app.string.input');
+            }
+            Log.showInfo(TAG, `countdown promptText:${promptText}`)
+            this.prompt = promptText;
+        })
     }
 
-    changePrompt(remainTimes, freezingTime, callback) {
+    changePrompt(remainTimes, freezingTime, callback: Callback<void>) {
         Log.showInfo(TAG, `changePrompt remainTimes:${remainTimes} freezingTime:${freezingTime}`)
         let promptText: Resource | string = $r('app.string.incorrect');
-        this.freezingMillisecond = freezingTime
 
         if (0 < remainTimes && remainTimes <= 2) {
-            if (!!this.freezingMillisecond && this.freezingMillisecond != 0) {
-                promptText = $r('app.string.incorrect_promp_freezing', remainTimes, this.getFreezingTimeNm());
+            if (freezingTime > 0) {
+                let freezingTimeNm = this.getFreezingTimeNm(freezingTime)
+                promptText = $r('app.string.incorrect_promp_freezing', remainTimes, freezingTimeNm);
             } else {
                 promptText = $r('app.string.incorrect_promp_times', remainTimes);
             }
         } else if (0 == remainTimes) {
-            if (!!this.freezingMillisecond && this.freezingMillisecond != 0) {
+            if (freezingTime > 0) {
                 this.inhibitInput = true
-                promptText = $r('app.string.input_promp', this.getFreezingTimeNm());
-                this.countdownHandle = setInterval(this.countdown.bind(this), Constants.INTERVAL, callback);
+                promptText = $r('app.string.input_promp', this.getFreezingTimeNm(freezingTime));
+                setTimeout(this.countdown.bind(this), Constants.INTERVAL)
             }
         }
         this.prompt = promptText;
@@ -84,11 +83,11 @@ export default class BaseViewModel {
         Log.showInfo(TAG, `changePrompt end`)
     }
 
-    getFreezingTimeNm(): string {
+    getFreezingTimeNm(freezingMillisecond: number): string {
         Log.showInfo(TAG, `getFreezingTimeNm start`)
-        let minute = Math.floor(this.freezingMillisecond / (60 * 1000));
+        let minute = Math.floor(freezingMillisecond / (60 * 1000));
         Log.showInfo(TAG, `getFreezingTimeNm minute:${minute}`)
-        let second = Math.round((this.freezingMillisecond % (60 * 1000)) / 1000);
+        let second = Math.round((freezingMillisecond % (60 * 1000)) / 1000);
         Log.showInfo(TAG, `getFreezingTimeNm second:${second}`)
         let timeName = '';
         if (minute != 0) {
@@ -106,14 +105,12 @@ export default class BaseViewModel {
         callback()
     }
 
-    checkFreezingTime(authType, callback?) {
-        let callBackFun = Function;
-        if (callback) callBackFun = callback;
-        service.getAuthProperty(authType, (properties) => {
+    checkFreezingTime(callback: Callback<void>) {
+        service.getAuthProperty(AuthType.PIN, (properties) => {
             if (properties.freezingTime > 0) {
                 this.inhibitInput = true
                 //Clear the entered password
-                this.changePrompt(properties.remainTimes, properties.freezingTime, callBackFun)
+                this.changePrompt(properties.remainTimes, properties.freezingTime, callback)
             }
         })
     }

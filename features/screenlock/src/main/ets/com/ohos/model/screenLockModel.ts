@@ -21,20 +21,32 @@ import { Callback } from 'basic';
 const TAG = 'ScreenLock-ScreenLockModel';
 
 export default class ScreenLockModel {
-    eventListener(typeName: string, callback:Callback<void>) {
+    eventListener(typeName: string, callback: Callback<void>) {
         Log.showInfo(TAG, `eventListener:typeName ${typeName}`);
-        ScreenLockMar.on(typeName, (err, data) => {
-            Log.showInfo(TAG, `eventListener:callback err:${JSON.stringify(err)}  data:${JSON.stringify(data)}`);
-            callback();
-        })
+        switch (typeName) {
+            case "endScreenOn":
+            case "unlockScreen":
+                ScreenLockMar.on(typeName, () => {
+                    Log.showInfo(TAG, `eventListener:callback`);
+                    callback();
+                })
+                break;
+            case "beginSleep":
+                ScreenLockMar.on(typeName, (userId: number) => {
+                    Log.showInfo(TAG, `eventListener:callback userId:${userId}`);
+                    callback();
+                })
+                break;
+            default:
+                Log.showError(TAG, `eventListener:typeName ${typeName}`)
+        }
+
         Log.showInfo(TAG, `eventListener:typeName ${typeName} finish`);
     }
 
     eventCancelListener(typeName: string) {
         Log.showInfo(TAG, `eventCancleListener:typeName ${typeName}`);
-        ScreenLockMar.off(typeName, (err, data) => {
-            Log.showInfo(TAG, `eventCancleListener:callback err:${JSON.stringify(err)}  data:${JSON.stringify(data)}`);
-        })
+        // As off has some problem and there is no case to cancel, do nothing
     }
 
     sendScreenLockEvent(typeName: string, typeNo: number, callback) {
@@ -45,7 +57,7 @@ export default class ScreenLockModel {
         })
     }
 
-    showScreenLockWindow(callback:Callback<void>) {
+    showScreenLockWindow(callback: Callback<void>) {
         Log.showInfo(TAG, 'showScreenLockWindow');
         windowManager.find(Constants.WIN_NAME).then((win) => {
             Log.showInfo(TAG, 'find window finish');
@@ -56,7 +68,7 @@ export default class ScreenLockModel {
         })
     }
 
-    hiddenScreenLockWindow(callback:Callback<void>) {
+    hiddenScreenLockWindow(callback: Callback<void>) {
         Log.showInfo(TAG, 'hiddenScreenLockWindow');
         windowManager.find(Constants.WIN_NAME).then((win) => {
             Log.showInfo(TAG, 'find window finish');

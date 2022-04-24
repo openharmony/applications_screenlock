@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "signalcomponent",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}

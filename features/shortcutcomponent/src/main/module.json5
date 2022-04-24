@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "shortcutcomponent",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "uiSyntax": "ets"
+  }
+}
