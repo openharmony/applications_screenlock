@@ -46,17 +46,22 @@ export default class DateTimeViewModel {
     ViewModelInit(): void{
         Log.showInfo(TAG, 'ViewModelInit');
 
-        this.setDateTime.bind(this)()
+        this.getAndSetDateTime.bind(this)()
         commonEvent.createSubscriber(mCommonEventSubscribeInfo, this.createSubscriberCallBack.bind(this));
         this.unSubscriber = EventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
-            this.setDateTime()
+            this.setDateTime(args.date)
         });
         Log.showInfo(TAG, 'ViewModelInit end');
     }
 
-    private setDateTime() {
+    private getAndSetDateTime() {
+        Log.showInfo(TAG, `getAndSetDateTime`)
+        this.setDateTime(new Date())
+    }
+
+    private setDateTime(date: Date) {
         Log.showInfo(TAG, `setDateTime`)
-        this.timeVal = sTimeManager.formatTime(new Date())
+        this.timeVal = sTimeManager.formatTime(date)
         this.dateVal = DateTimeCommon.getSystemDate()
         this.weekVal = DateTimeCommon.getSystemWeek()
     }
@@ -64,7 +69,7 @@ export default class DateTimeViewModel {
     private createSubscriberCallBack(err, data) {
         Log.showInfo(TAG, "start createSubscriberCallBack " + JSON.stringify(data))
         mEventSubscriber = data
-        commonEvent.subscribe(data, this.setDateTime.bind(this));
+        commonEvent.subscribe(data, this.getAndSetDateTime.bind(this));
         Log.showInfo(TAG, "start createSubscriberCallBack finish")
     }
 
