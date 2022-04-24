@@ -14,10 +14,10 @@
  */
 
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
-import BaseViewModel, {service, UnlockResult,AuthType, AuthSubType} from './baseViewModel'
+import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
+import {Callback} from 'basic';
 
 const TAG = 'ScreenLock-MixedPSDViewModel'
-export {AuthType}
 
 export default class MixedPSDViewModel extends BaseViewModel {
   password: string= '';
@@ -40,7 +40,7 @@ export default class MixedPSDViewModel extends BaseViewModel {
     Log.showInfo(TAG, 'onCallPhone');
   }
 
-  onAuthPassword(callback) {
+  onAuthPassword(callback: Callback<void>) {
     Log.showInfo(TAG, `onAuthPassword`);
     if (!this.password || this.inhibitInput) {
       callback();

@@ -1,11 +1,15 @@
 {
   "string": [
     {
+      "name": "pc_desc",
+      "value": "description"
+    },
+    {
       "name": "app_name",
       "value": "ScreenLock"
     },
     {
-      "name": "mainability_description",
+      "name": "MainAbility_desc",
       "value": "JS_Phone_Empty Feature Ability"
     },
     {

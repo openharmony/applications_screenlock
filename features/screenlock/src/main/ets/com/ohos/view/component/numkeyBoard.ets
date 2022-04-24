@@ -100,7 +100,7 @@ export default struct NumkeyBoard {
             }
             .onClick(() => {
               Log.showInfo(TAG, `onClick:${item.index}`)
-              setTimeout(this.onKeypress.bind(this), 0, item.index, (data) => {
+              setTimeout(this.onKeypress.bind(this), 0, item.index, () => {
                 Log.showInfo(TAG, `onClick callback is called`)
               });
             })

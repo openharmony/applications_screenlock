@@ -15,7 +15,7 @@
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../common/constants'
-import ViewModel, {AuthType}from '../../vm/mixedPSDViewModel'
+import ViewModel from '../../vm/mixedPSDViewModel'
 
 const TAG = 'ScreenLock-MixedPSD'
 
@@ -25,7 +25,7 @@ export default struct MixedPSD {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    this.mViewModel.checkFreezingTime(AuthType.PIN, (data) => {
+    this.mViewModel.checkFreezingTime(() => {
       Log.showInfo(TAG, `onClick callback is called`)
     });
   }

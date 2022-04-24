@@ -15,8 +15,8 @@
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../common/constants'
-import NumkeyBoard from './numkeyBoard.ets'
-import ViewModel, {AuthType} from '../../vm/digitalPSDViewModel'
+import NumkeyBoard from './numkeyBoard'
+import ViewModel from '../../vm/digitalPSDViewModel'
 
 const TAG = 'ScreenLock-DigitalPSD'
 
@@ -27,7 +27,7 @@ export default struct DigitalPSD {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    this.mViewModel.checkFreezingTime(AuthType.PIN, (data) => {
+    this.mViewModel.checkFreezingTime(() => {
       Log.showInfo(TAG, `onClick callback is called`)
     });
   }
