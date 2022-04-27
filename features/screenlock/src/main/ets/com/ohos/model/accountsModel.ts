@@ -111,12 +111,10 @@ export default class AccountsModel {
 
     private addAllUsers() {
         Log.showInfo(TAG, "start getAllUsers")
-        let tempLink = AppStorage.SetAndLink('userList', []);
-        let accountList = tempLink.get();
-        let accountMap = new Map();
-        Log.showInfo(TAG, "start query")
         osAccount.getAccountManager().queryAllCreatedOsAccounts().then((list) => {
             Log.showInfo(TAG, "start sort")
+            let accountList = [];
+            let accountMap = new Map();
             list.sort(this.sortAccount.bind(this));
             for (const user of list) {
                 Log.showInfo(TAG, "start get user" + JSON.stringify(user))
@@ -135,6 +133,7 @@ export default class AccountsModel {
                     accountMap.get(user.localId).userIconPath = path
                 })
             }
+            AppStorage.SetOrCreate('userList', accountList);
         })
     }
 

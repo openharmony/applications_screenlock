@@ -97,8 +97,8 @@ export class ScreenLockService {
         //The device is going to sleep
         this.screenLockModel.eventListener(EVENT_BEGIN_SLEEP, () => {
             Log.showInfo(TAG, `EVENT_BEGIN_SLEEP event`);
-            this.accountModel.updateAllUsers()
             this.lockScreen();
+            this.accountModel.updateAllUsers()
             AppStorage.SetOrCreate('deviceStatus', EVENT_BEGIN_SLEEP);
         })
 
