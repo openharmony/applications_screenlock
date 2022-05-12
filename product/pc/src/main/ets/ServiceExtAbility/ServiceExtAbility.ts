@@ -52,6 +52,10 @@ class ServiceExtAbility extends ServiceExtension {
     private async statusBarWindow() {
     	Log.showInfo(TAG, `statusBarWindow`);
         let dis = await display.getDefaultDisplay();
+        while (dis === null) {
+            await new Promise((resolve)=>{setTimeout(resolve, 1000)});
+            dis = await display.getDefaultDisplay();
+        }
         Log.showInfo(TAG, `getDefaultDisplay, dis: ${JSON.stringify(dis)}`);
         let rect;
         if (dis.width > dis.height) { // Pad¡¢PC horizontalScreen Mode
