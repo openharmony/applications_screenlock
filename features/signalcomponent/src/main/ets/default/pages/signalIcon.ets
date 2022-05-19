@@ -18,22 +18,25 @@ import mSignalModel from '../SignalModel';
 import Log from '../../../../../../../common/src/main/ets/default/Log'
 import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
 import StyleConfiguration from '../common/StyleConfiguration'
-import {StatusBarGroupComponentData
+import { StatusBarGroupComponentData
 } from '../../../../../../screenlock/src/main/ets/com/ohos/common/Constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
+import deviceInfo from '@ohos.deviceInfo';
+
+const deviceTypeInfo = deviceInfo.deviceType
 const TAG = 'SignalComponent-SignalIcon'
 
 @Component
-export default
-struct SignalIcon {
-  @StorageLink('cellularLevel') cellularLevel : number = Constants.CELLULAR_NO_SIM_CARD
-  @StorageLink('cellularType') cellularType : number = Constants.NETWORK_TYPE_UNKNOWN
-  @StorageLink('networkState') networkState : string = Constants.NET_NULL
-  @StorageLink('signalObserved') signalObserved:boolean = false
+export default struct SignalIcon {
+  @StorageLink('cellularLevel') cellularLevel: number = Constants.CELLULAR_NO_SIM_CARD
+  @StorageLink('cellularType') cellularType: number = Constants.NETWORK_TYPE_UNKNOWN
+  @StorageLink('networkState') networkState: string = Constants.NET_NULL
+  @StorageLink('signalObserved') signalObserved: boolean = false
   private mGroupId: string = ''
   @State mStatusBarGroupComponentData: StatusBarGroupComponentData = new StatusBarGroupComponentData()
   @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
   @State style: any = StyleConfiguration.getSignalComponentStyle()
+  private isPhone: boolean= false
 
   aboutToAppear() {
     Log.showInfo(TAG, 'aboutToAppear');
@@ -41,6 +44,11 @@ struct SignalIcon {
     if (!this.signalObserved) {
       mSignalModel.initSignalModel();
       this.signalObserved = true;
+    }
+    if (deviceTypeInfo === "phone") {
+      this.isPhone = true
+    } else {
+      this.isPhone = false
     }
   }
 
@@ -50,16 +58,17 @@ struct SignalIcon {
 
   build() {
     Row() {
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.isPhone ? 0 : this.styleCommon.statusBarMarginLeftRight).height('100%')
       Text(this.updateNetworkState(this.networkState))
-        .fontSize(this.styleCommon.statusBarFontSize)
-        .fontColor(this.mStatusBarGroupComponentData.contentColor)
+        .fontSize(this.isPhone ? '12fp' : this.styleCommon.statusBarFontSize)
+        .fontWeight(this.isPhone ? FontWeight.Medium : FontWeight.Normal)
+        .fontColor(this.isPhone ? "#FFFFFF" : this.mStatusBarGroupComponentData.contentColor)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
-        .constraintSize({ maxWidth: this.style.signalTextMaxWeight})
+        .constraintSize({ maxWidth: this.style.signalTextMaxWeight })
         .flexShrink(0)
         .maxLines(1)
         .textAlign(TextAlign.Center)
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.isPhone ? 0 : this.styleCommon.statusBarMarginLeftRight).height('100%')
 
       Stack({ alignContent: Alignment.TopStart }) {
         Text(this.updateCellularType(this.cellularType))
@@ -67,7 +76,8 @@ struct SignalIcon {
           .fontColor(this.mStatusBarGroupComponentData.contentColor)
           .width(this.style.netSignalTextMaxWidth)
           .fontWeight(FontWeight.Bold)
-          .textAlign(TextAlign.Center)
+          .textAlign(this.isPhone ? TextAlign.Start : TextAlign.Center)
+          .margin({ left: this.isPhone ? "3vp" : 0 })
         Image(this.updateCellularImage(this.cellularLevel))
           .objectFit(ImageFit.Contain)
           .width(this.style.cellularImageWidth)
@@ -75,19 +85,19 @@ struct SignalIcon {
           .fillColor(this.mStatusBarGroupComponentData.contentColor)
       }.flexShrink(1)
 
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.isPhone ? 0 : this.styleCommon.statusBarMarginLeftRight).height('100%')
     }
     .height('100%')
   }
 
-/**
-     * Get the string of cellular type
-     *
-     * @param {number} type - number of cellular type
-     * @return {string} typeString type of cellular type
-     */
-  private updateCellularType(signalType) : string {
-    Log.showInfo(TAG, `updateCellularType, signalType: ${ signalType }`);
+  /**
+       * Get the string of cellular type
+       *
+       * @param {number} type - number of cellular type
+       * @return {string} typeString type of cellular type
+       */
+  private updateCellularType(signalType): string {
+    Log.showInfo(TAG, `updateCellularType, signalType: ${signalType}`);
     let typeString;
     switch (signalType) {
       case Constants.NETWORK_TYPE_UNKNOWN:
@@ -112,12 +122,12 @@ struct SignalIcon {
     return typeString;
   }
 
-/**
-     * Get the cellular signal image
-     *
-     * @param {number} level - signal level from signalModel
-     * @return {string} cellularImage image of cellular signal
-     */
+  /**
+       * Get the cellular signal image
+       *
+       * @param {number} level - signal level from signalModel
+       * @return {string} cellularImage image of cellular signal
+       */
   private updateCellularImage(level) {
     Log.showInfo(TAG, `updateCellularImage, level: ${level}`);
     let cellularImage;
@@ -149,18 +159,18 @@ struct SignalIcon {
     return cellularImage;
   }
 
-/**
-     * Get the NetworkState signal name
-     *
-     * @param {string} netWorkState - network state from signal model
-     * @return {string} vendor's name or signal state
-     */
+  /**
+       * Get the NetworkState signal name
+       *
+       * @param {string} netWorkState - network state from signal model
+       * @return {string} vendor's name or signal state
+       */
   private updateNetworkState(netWorkState) {
     Log.showInfo(TAG, `updateNetworkState, netWorkState: ${netWorkState}`);
     let networkStateName;
-    if(netWorkState == Constants.NET_NULL){
+    if (netWorkState == Constants.NET_NULL) {
       networkStateName = $r('app.string.net_null');
-    }else {
+    } else {
       networkStateName = netWorkState;
     }
     return networkStateName;
