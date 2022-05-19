@@ -18,10 +18,12 @@ import mWifiModel from '../WifiModel'
 import Log from '../../../../../../../common/src/main/ets/default/Log'
 import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
 import StyleConfiguration from '../common/StyleConfiguration'
-import {StatusBarGroupComponentData
+import { StatusBarGroupComponentData
 } from '../../../../../../screenlock/src/main/ets/com/ohos/common/Constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vM/StatusBarVM'
+import deviceInfo from '@ohos.deviceInfo';
 
+const deviceTypeInfo = deviceInfo.deviceType
 const TAG = 'WifiComponent-WifiIcon'
 
 @Component
@@ -32,11 +34,17 @@ export default struct WifiIcon {
   @State mStatusBarGroupComponentData: StatusBarGroupComponentData = new StatusBarGroupComponentData()
   @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
   @State style: any = StyleConfiguration.getStartsBarWifiComponentStyle()
+  private isPhone: boolean= false
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
     this.mStatusBarGroupComponentData = StatusBarVM.getStatusBarGroupComponentData(this.mGroupId)
     mWifiModel.initWifiModel()
+    if (deviceTypeInfo === "phone") {
+      this.isPhone = true
+    } else {
+      this.isPhone = false
+    }
   }
 
   aboutToDisappear() {
@@ -46,13 +54,13 @@ export default struct WifiIcon {
   build() {
     Row() {
       if (this.wifiStatus) {
-        Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+        Row().width(this.isPhone ? 0 : this.styleCommon.statusBarMarginLeftRight).height('100%')
         Image(this.getImage(this.wifiInfo))
           .objectFit(ImageFit.Contain)
           .width(this.style.statusBarWifiWidth)
           .height(this.style.statusBarWifiHeight)
           .fillColor(this.mStatusBarGroupComponentData.contentColor)
-        Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+        Row().width(this.isPhone ? 0 : this.styleCommon.statusBarMarginLeftRight).height('100%')
       }
     }
     .height('100%')

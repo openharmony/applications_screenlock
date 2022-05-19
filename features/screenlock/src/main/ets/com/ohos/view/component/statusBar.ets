@@ -20,29 +20,46 @@ import BatteryIcon from '../../../../../../../../../features/batterycomponent/sr
 import ClockIcon from '../../../../../../../../../features/clockcomponent/src/main/ets/default/pages/clockIcon.ets'
 import WifiIcon from '../../../../../../../../../features/wificomponent/src/main/ets/default/pages/wifiIcon.ets'
 import SignalIcon from '../../../../../../../../../features/signalcomponent/src/main/ets/default/pages/signalIcon'
+import deviceInfo from '@ohos.deviceInfo';
 
+const deviceTypeInfo = deviceInfo.deviceType
 const TAG = 'ScreenLock-StatusBar'
 
 @Component
 export default struct statusBar {
+  private isPhone: boolean= false
+
+  aboutToAppear() {
+    Log.showInfo(TAG, `aboutToAppear`)
+    if (deviceTypeInfo === "phone") {
+      this.isPhone = true
+    } else {
+      this.isPhone = false
+    }
+  }
+
   build() {
-    Row(){
+    Row() {
       Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Start }) {
         SignalIcon()
         WifiIcon()
       }.width(Constants.HALF_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)
+
       Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
-        BatteryIcon()
-        ClockIcon()
+        if (this.isPhone) {
+          BatteryIcon()
+        } else {
+          BatteryIcon()
+          ClockIcon()
+        }
       }.width(Constants.HALF_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)
-    }.width(Constants.FULL_CONTAINER_WIDTH)
-    .height(Constants.FULL_CONTAINER_HEIGHT)
+    }
+    .width(Constants.FULL_CONTAINER_WIDTH)
+    .height(this.isPhone ? '24vp' : Constants.FULL_CONTAINER_HEIGHT)
+    .padding({ left: this.isPhone ? '24vp' : 0, right: this.isPhone ? '24vp' : 0 })
+    .margin({ top: this.isPhone ? '4vp' : 0 })
+    .opacity(this.isPhone ? 0.7 : 1)
   }
-
-  aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
-  }
-
 }
