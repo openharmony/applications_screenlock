@@ -16,6 +16,7 @@
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../common/constants'
 import BaseViewModel from '../../vm/baseViewModel'
+import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'ScreenLock-NumkeyBoard'
 
@@ -50,51 +51,57 @@ export default struct NumkeyBoard {
                   item.value == Constants.DEL_PWD) {
                     Text(item.row1)
                       .fontSize($r('app.float.digitalpsd_prompt_fontsize'))
-                      .fontWeight(FontWeight.Bold)
+                      .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : 'Medium')
                       .fontColor(Color.White)
                       .textAlign(TextAlign.Center)
                       .width(Constants.FULL_CONTAINER_WIDTH)
+                      .lineHeight(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_HEIGHT : 21)
                       .padding(0)
                       .margin(0)
                   } else {
                     Text(item.row1)
                       .fontSize($r('app.float.digitalpsd_row1_fontsize'))
-                      .fontWeight(FontWeight.Bold)
+                      .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : 'Medium')
                       .fontColor(Color.White)
                       .textAlign(TextAlign.Center)
                       .width(Constants.FULL_CONTAINER_WIDTH)
+                      .lineHeight(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_HEIGHT : 38)
                       .padding(0)
                       .margin(0)
                   }
                   if (!!item.row2) {
                     Text(item.row2)
                       .fontSize($r('app.float.digitalpsd_row2_fontsize'))
-                      .fontWeight(FontWeight.Bold)
+                      .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : 'Regular')
                       .fontColor(Color.White)
+                      .opacity(deviceInfo.deviceType === 'tablet' ? 1 : 0.6)
                       .textAlign(TextAlign.Center)
                       .width(Constants.FULL_CONTAINER_WIDTH)
                       .padding(0)
                       .margin(0)
                   }
                 }
+                .width(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_WIDTH : 98.75)
                 .height($r('app.float.digitalpsd_row_height'))
               }
 
-              if (item.value == Constants.CALL_PHONE ||
-              item.value == Constants.GO_BACK ||
-              item.value == Constants.DEL_PWD) {
-                Column() {
-                  Button({ type: ButtonType.Normal, stateEffect: true })
-                    .backgroundColor("#00FFFFFF")
-                    .width(Constants.DIGITALPSD_BUTTON_RECT_WH)
-                    .height(Constants.DIGITALPSD_BUTTON_RECT_HH)
-                }
-              } else {
-                Column() {
-                  Button({ type: ButtonType.Circle, stateEffect: !this.viewModel.inhibitInput })
-                    .backgroundColor("#00FFFFFF")
-                    .width(Constants.DIGITALPSD_BUTTON_DIAMETER)
-                    .height(Constants.DIGITALPSD_BUTTON_DIAMETER)
+              if (deviceInfo.deviceType === 'tablet') {
+                if (item.value == Constants.CALL_PHONE ||
+                item.value == Constants.GO_BACK ||
+                item.value == Constants.DEL_PWD) {
+                  Column() {
+                    Button({ type: ButtonType.Normal, stateEffect: true })
+                      .backgroundColor("#00FFFFFF")
+                      .width(Constants.DIGITALPSD_BUTTON_RECT_WH)
+                      .height(Constants.DIGITALPSD_BUTTON_RECT_HH)
+                  }
+                } else {
+                  Column() {
+                    Button({ type: ButtonType.Circle, stateEffect: !this.viewModel.inhibitInput })
+                      .backgroundColor("#00FFFFFF")
+                      .width(Constants.DIGITALPSD_BUTTON_DIAMETER)
+                      .height(Constants.DIGITALPSD_BUTTON_DIAMETER)
+                  }
                 }
               }
             }
@@ -109,8 +116,9 @@ export default struct NumkeyBoard {
       }
       .columnsTemplate('1fr 1fr 1fr')
       .rowsTemplate('1fr 1fr 1fr 1fr')
-      .width(Constants.FULL_CONTAINER_WIDTH)
-      .height(Constants.FULL_CONTAINER_HEIGHT)
+      .rowsGap(deviceInfo.deviceType === 'tablet' ? 0 : 22)
+      .width(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_WIDTH : 312)
+      .height(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_HEIGHT : 288)
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
     .height(Constants.FULL_CONTAINER_HEIGHT)
