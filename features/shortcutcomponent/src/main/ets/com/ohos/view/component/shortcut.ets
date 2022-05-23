@@ -29,7 +29,7 @@ export default struct Shortcut {
   private rebootLabel: Resource = $r("app.string.reboot")
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
   }
 
   build() {
@@ -60,11 +60,11 @@ struct ShortcutComponent {
   private mClickEvent: Function
 
   aboutToAppear() {
-    Log.showInfo(this.mTag, `aboutToAppear Start`)
+    Log.showDebug(this.mTag, `aboutToAppear Start`)
   }
 
   aboutToDisappear() {
-    Log.showInfo(this.mTag, `aboutToDisAppear`)
+    Log.showDebug(this.mTag, `aboutToDisAppear`)
   }
 
   build() {

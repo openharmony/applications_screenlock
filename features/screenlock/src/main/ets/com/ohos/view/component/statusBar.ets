@@ -42,7 +42,7 @@ export default struct statusBar {
   }
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
   }
 
 }

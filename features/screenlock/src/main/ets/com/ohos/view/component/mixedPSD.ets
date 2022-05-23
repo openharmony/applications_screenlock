@@ -24,14 +24,14 @@ export default struct MixedPSD {
   @State mViewModel: ViewModel = new ViewModel()
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     this.mViewModel.checkFreezingTime(() => {
       Log.showInfo(TAG, `onClick callback is called`)
     });
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisappear`)
+    Log.showDebug(TAG, `aboutToDisappear`)
     this.mViewModel.clearPassword()
   }
 

@@ -26,14 +26,14 @@ export default struct CustomPSD {
   @StorageLink('passwordArr') passwordArr: any[]  = this.mViewModel.passwordArr
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     this.mViewModel.checkFreezingTime(() => {
       Log.showInfo(TAG, `onClick callback is called`)
     });
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisappear`)
+    Log.showDebug(TAG, `aboutToDisappear`)
     this.mViewModel.clearPassword()
   }
 

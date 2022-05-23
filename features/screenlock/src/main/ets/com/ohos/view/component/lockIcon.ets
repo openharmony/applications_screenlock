@@ -26,7 +26,7 @@ export default struct LockIcon {
   @State mViewModel: ViewModel = new ViewModel()
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
   }
 
@@ -51,7 +51,6 @@ export default struct LockIcon {
   }
 
   onStatusChange(propName: string): void {
-    Log.showInfo(TAG, `onStatusChange`)
     Log.showInfo(TAG, `lockStatus:${this.lockStatus}`);
     this.mViewModel.onStatusChange(this.lockStatus)
   }

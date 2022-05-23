@@ -72,8 +72,6 @@ export default class DigitalPSDViewModel extends BaseViewModel {
             service.goBack();
         } else if (keyValue == Constants.CALL_PHONE) {
         }
-
-        Log.showInfo(TAG, `onKeyPress end`)
     }
 
     clearPassword() {

@@ -23,24 +23,21 @@ export default class IndexViewModel {
   mode: LockStyleMode = LockStyleMode.SlideScreenLock
 
   ViewModelInit(): void{
-    Log.showInfo(TAG, 'ViewModelInit');
     this.serviceInit();
     this.mode = this.getMode();
     Log.showInfo(TAG, `ViewModelInit this.mode=${this.mode}`);
   }
 
   serviceInit() {
-    Log.showInfo(TAG, `monitorEvents`)
     ScreenLockService.init();
   }
 
   getMode(): number {
-    Log.showInfo(TAG, `getMode`)
     return ScreenlockStyle.readMode("phone")
   }
 
   onPageShow() {
-    Log.showInfo(TAG, `onPageShow`)
+    Log.showDebug(TAG, `onPageShow`)
     ScreenLockService.notifyDrawDone();
   }
 
