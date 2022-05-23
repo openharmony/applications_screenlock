@@ -90,7 +90,7 @@
     },
     {
       "name": "digitalpsd_row_height",
-      "value": "48vp"
+      "value": "52vp"
     },
     {
       "name": "digitalpsd_key_area_height",
@@ -179,6 +179,26 @@
     {
       "name": "custompsd_key_area_margin_bottom",
       "value": "52vp"
+    },
+    {
+      "name": "custompsd_text_opacity",
+      "value": "0.2"
+    },
+    {
+      "name": "custompsd_digitalpsd_ic_diameter",
+      "value": "9vp"
+    },
+    {
+      "name": "custompsd_button_height",
+      "value": "40vp"
+    },
+    {
+      "name": "numkeyBoard_text_opacity",
+      "value": "0.6"
+    },
+    {
+      "name": "numkeyBoard_rowsGap",
+      "value": "22vp"
     }
   ]
 }

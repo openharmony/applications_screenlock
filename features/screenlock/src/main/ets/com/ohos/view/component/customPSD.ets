@@ -43,7 +43,7 @@ export default struct CustomPSD {
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
         Text(this.mViewModel.prompt)
           .fontSize($r('app.float.custompsd_prompt_fontsize'))
-          .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : 'Medium')
+          .fontWeight(FontWeight.Medium)
           .fontColor(Color.White)
           .margin({ bottom: $r('app.float.custompsd_prompt_margin_bottom') })
           .textAlign(TextAlign.Center)
@@ -53,23 +53,23 @@ export default struct CustomPSD {
 
         Stack({ alignContent: Alignment.Center }) {
           Text()
-            .width(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_WIDTH : 288)
-            .height(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_HEIGHT : 36)
+            .width(Constants.FULL_CONTAINER_WIDTH)
+            .height(Constants.FULL_CONTAINER_HEIGHT)
             .backgroundColor(Color.Gray)
             .borderRadius($r('app.float.custompsd_input_radius'))
-            .opacity(deviceInfo.deviceType === 'tablet' ? 1 : 0.2)
+            .opacity($r("app.float.custompsd_text_opacity"))
 
           List({ space: Constants.DIGITALPSD_IC_DIAMETER }) {
             ForEach(this.passwordArr, (item) => {
               ListItem() {
                 Image($r("app.media.ic_solid_dot"))
-                  .width(deviceInfo.deviceType === 'tablet' ? Constants.DIGITALPSD_IC_DIAMETER : 9)
-                  .height(deviceInfo.deviceType === 'tablet' ? Constants.DIGITALPSD_IC_DIAMETER : 9)
+                  .width($r("app.float.custompsd_digitalpsd_ic_diameter"))
+                  .height($r("app.float.custompsd_digitalpsd_ic_diameter"))
               }
             })
           }
           .listDirection(Axis.Horizontal)
-          .height(deviceInfo.deviceType === 'tablet' ? Constants.DIGITALPSD_IC_DIAMETER : 9)
+          .height($r("app.float.custompsd_digitalpsd_ic_diameter"))
         }
         .width($r('app.float.custompsd_input_width'))
         .height($r('app.float.custompsd_input_height'))
@@ -79,7 +79,7 @@ export default struct CustomPSD {
           stateEffect: true
         })
           .width($r('app.float.custompsd_input_width'))
-          .height(deviceInfo.deviceType === 'tablet' ? $r('app.float.custompsd_input_height') : 40)
+          .height($r("app.float.custompsd_button_height"))
           .enabled(this.passwordArr.length > 1)
           .opacity(deviceInfo.deviceType === 'tablet' ? 1 : (this.passwordArr.length > 1 ? 1 : 0.4))
           .onClick(() => {
@@ -88,7 +88,7 @@ export default struct CustomPSD {
               Log.showInfo(TAG, `onClick callback promptText:${JSON.stringify(this.mViewModel.prompt)}`)
             });
           })
-          .margin({ top: deviceInfo.deviceType === 'tablet' ? $r('sys.float.ohos_id_elements_margin_vertical_l') : 16 })
+          .margin({ top:  $r('sys.float.ohos_id_elements_margin_vertical_l')})
       }
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height($r('app.float.custompsd_input_area_height'))

@@ -17,7 +17,6 @@ import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../common/constants'
 import NumkeyBoard from './numkeyBoard'
 import ViewModel from '../../vm/digitalPSDViewModel'
-import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'ScreenLock-DigitalPSD'
 
@@ -43,7 +42,7 @@ export default struct DigitalPSD {
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
         Text(this.mViewModel.prompt)
           .fontSize($r('app.float.digitalpsd_prompt_fontsize'))
-          .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : "Medium")
+          .fontWeight(FontWeight.Medium)
           .fontColor(Color.White)
           .margin({ bottom: $r('app.float.digitalpsd_prompt_margin_bottom') })
           .textAlign(TextAlign.Center)
@@ -55,8 +54,8 @@ export default struct DigitalPSD {
           ForEach(this.passwdMaskArr, (item) => {
             GridItem() {
               Image(item)
-                .width(deviceInfo.deviceType === 'tablet' ? Constants.DIGITALPSD_IC_DIAMETER : 12)
-                .height(deviceInfo.deviceType === 'tablet' ? Constants.DIGITALPSD_IC_DIAMETER : 12)
+                .width(Constants.DIGITALPSD_IC_DIAMETER)
+                .height(Constants.DIGITALPSD_IC_DIAMETER)
             }
           })
         }

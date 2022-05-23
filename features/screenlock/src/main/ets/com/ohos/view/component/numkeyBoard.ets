@@ -51,37 +51,35 @@ export default struct NumkeyBoard {
                   item.value == Constants.DEL_PWD) {
                     Text(item.row1)
                       .fontSize($r('app.float.digitalpsd_prompt_fontsize'))
-                      .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : 'Medium')
+                      .fontWeight(FontWeight.Medium)
                       .fontColor(Color.White)
                       .textAlign(TextAlign.Center)
                       .width(Constants.FULL_CONTAINER_WIDTH)
-                      .lineHeight(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_HEIGHT : 21)
                       .padding(0)
                       .margin(0)
                   } else {
                     Text(item.row1)
                       .fontSize($r('app.float.digitalpsd_row1_fontsize'))
-                      .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : 'Medium')
+                      .fontWeight(FontWeight.Medium)
                       .fontColor(Color.White)
                       .textAlign(TextAlign.Center)
                       .width(Constants.FULL_CONTAINER_WIDTH)
-                      .lineHeight(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_HEIGHT : 38)
                       .padding(0)
                       .margin(0)
                   }
                   if (!!item.row2) {
                     Text(item.row2)
                       .fontSize($r('app.float.digitalpsd_row2_fontsize'))
-                      .fontWeight(deviceInfo.deviceType === 'tablet' ? FontWeight.Bold : 'Regular')
+                      .fontWeight(FontWeight.Regular)
                       .fontColor(Color.White)
-                      .opacity(deviceInfo.deviceType === 'tablet' ? 1 : 0.6)
+                      .opacity($r("app.float.numkeyBoard_text_opacity"))
                       .textAlign(TextAlign.Center)
                       .width(Constants.FULL_CONTAINER_WIDTH)
                       .padding(0)
                       .margin(0)
                   }
                 }
-                .width(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_WIDTH : 98.75)
+                .width(Constants.FULL_CONTAINER_WIDTH)
                 .height($r('app.float.digitalpsd_row_height'))
               }
 
@@ -116,9 +114,9 @@ export default struct NumkeyBoard {
       }
       .columnsTemplate('1fr 1fr 1fr')
       .rowsTemplate('1fr 1fr 1fr 1fr')
-      .rowsGap(deviceInfo.deviceType === 'tablet' ? 0 : 22)
-      .width(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_WIDTH : 312)
-      .height(deviceInfo.deviceType === 'tablet' ? Constants.FULL_CONTAINER_HEIGHT : 288)
+      .rowsGap($r("app.float.numkeyBoard_rowsGap"))
+      .width(Constants.FULL_CONTAINER_WIDTH)
+      .height(Constants.FULL_CONTAINER_HEIGHT)
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
     .height(Constants.FULL_CONTAINER_HEIGHT)

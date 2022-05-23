@@ -179,6 +179,27 @@
     {
       "name": "custompsd_key_area_margin_bottom",
       "value": "64"
+    },
+    {
+      "name": "custompsd_text_opacity",
+      "value": "1"
+    },
+    {
+      "name": "custompsd_digitalpsd_ic_diameter",
+      "value": "12vp"
+    },
+    {
+      "name": "custompsd_button_height",
+      "value": "36vp"
+    },
+    {
+      "name": "numkeyBoard_text_opacity",
+      "value": "1"
+    },
+    {
+      "name": "numkeyBoard_rowsGap",
+      "value": "0"
     }
+
   ]
 }
