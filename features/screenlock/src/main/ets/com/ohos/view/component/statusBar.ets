@@ -27,14 +27,14 @@ const TAG = 'ScreenLock-StatusBar'
 
 @Component
 export default struct statusBar {
-  private isPhone: boolean= false
+  private isShow: boolean
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
     if (deviceTypeInfo === "phone") {
-      this.isPhone = true
+      this.isShow = false
     } else {
-      this.isPhone = false
+      this.isShow = true
     }
   }
 
@@ -47,19 +47,20 @@ export default struct statusBar {
       .height(Constants.FULL_CONTAINER_HEIGHT)
 
       Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
-        if (this.isPhone) {
-          BatteryIcon()
-        } else {
-          BatteryIcon()
+        BatteryIcon()
+        if (this.isShow) {
           ClockIcon()
         }
       }.width(Constants.HALF_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
-    .height(this.isPhone ? '24vp' : Constants.FULL_CONTAINER_HEIGHT)
-    .padding({ left: this.isPhone ? '24vp' : 0, right: this.isPhone ? '24vp' : 0 })
-    .margin({ top: this.isPhone ? '4vp' : 0 })
-    .opacity(this.isPhone ? 0.7 : 1)
+    .height($r("app.float.status_bar_height"))
+    .padding({
+      left: $r("app.float.status_bar_padding_left_right"),
+      right: $r("app.float.status_bar_padding_left_right")
+    })
+    .margin({ top: $r("app.float.status_bar_margin_top") })
+    .opacity($r("app.float.status_bar_opacity"))
   }
 }

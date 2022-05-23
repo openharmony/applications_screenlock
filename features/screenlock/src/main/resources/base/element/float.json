@@ -179,6 +179,22 @@
     {
       "name": "custompsd_key_area_margin_bottom",
       "value": "64"
+    },
+    {
+      "name": "status_bar_height",
+      "value": "48vp"
+    },
+    {
+      "name": "status_bar_padding_left_right",
+      "value": "0"
+    },
+    {
+      "name": "status_bar_margin_top",
+      "value": "0"
+    },
+    {
+      "name": "status_bar_opacity",
+      "value": "1"
     }
   ]
 }
