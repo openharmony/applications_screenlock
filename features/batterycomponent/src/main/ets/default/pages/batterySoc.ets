@@ -15,9 +15,7 @@
 
 import Log from '../../../../../../../common/src/main/ets/default/Log'
 import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
-import deviceInfo from '@ohos.deviceInfo';
 
-const deviceTypeInfo = deviceInfo.deviceType
 const TAG = 'BatteryComponent-batterySoc'
 
 @Component
@@ -25,15 +23,9 @@ export default struct BatterySoc {
   @StorageLink('batterySoc') batterySoc: number = 100
   @Prop mContentColor: string
   @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
-  private isPhone: boolean= false
 
   aboutToAppear() {
     Log.showInfo(TAG, 'aboutToAppear Start');
-    if (deviceTypeInfo === "phone") {
-      this.isPhone = true
-    } else {
-      this.isPhone = false
-    }
   }
 
   aboutToDisappear() {
@@ -43,7 +35,7 @@ export default struct BatterySoc {
   build() {
     Text(this.batterySoc + '%')
       .fontColor(this.mContentColor)
-      .fontSize(this.isPhone ? '12fp' : this.styleCommon.statusBarFontSize)
-      .fontWeight(this.isPhone ? FontWeight.Medium : FontWeight.Normal)
+      .fontSize(this.styleCommon.statusBarFontSize)
+      .fontWeight(FontWeight.Medium)
   }
 }

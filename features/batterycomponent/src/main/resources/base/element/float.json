@@ -1,10 +1,6 @@
 {
   "float": [
     {
-      "name": "battery_component_gap",
-      "value": "8.5vp"
-    },
-    {
       "name": "battery_component_pic_gap",
       "value": "2vp"
     },
@@ -39,6 +35,10 @@
     {
       "name": "battery_component_pic_head_height",
       "value": "10vp"
+    },
+    {
+      "name": "battery_component_gap",
+      "value": "8.5vp"
     }
   ]
 }
