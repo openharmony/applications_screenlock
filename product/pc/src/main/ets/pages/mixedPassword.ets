@@ -29,16 +29,16 @@ export default struct MixedPassword {
   @State mHeightPx: number = 44
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     setAppBgColor('#00000000')
     CommonStyleManager.setAbilityPageName(TAG)
     let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-    Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+    Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
     StyleManager.setStyle()
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisappear`)
+    Log.showDebug(TAG, `aboutToDisappear`)
   }
 
   build() {

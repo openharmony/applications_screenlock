@@ -29,7 +29,7 @@ export default struct DigitalPassword {
   @State mHeightPx: number = 44
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     setAppBgColor('#00000000')
     CommonStyleManager.setAbilityPageName(TAG)
     let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
@@ -38,7 +38,7 @@ export default struct DigitalPassword {
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisappear`)
+    Log.showDebug(TAG, `aboutToDisappear`)
   }
 
   build() {

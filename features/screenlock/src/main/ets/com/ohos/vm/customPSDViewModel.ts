@@ -54,7 +54,6 @@ export default class CustomPSDViewModel extends BaseViewModel {
             service.goBack();
         } else if (keyValue == Constants.CALL_PHONE) {
         }
-        Log.showInfo(TAG, `onKeyPress end`)
     }
 
     onCallPhone() {

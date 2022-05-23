@@ -36,7 +36,7 @@ export default struct SlideScreenlock {
   private mHeightPx : number =  44
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
   }
 

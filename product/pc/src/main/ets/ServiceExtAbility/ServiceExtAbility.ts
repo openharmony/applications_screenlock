@@ -26,7 +26,7 @@ const TAG = "ScreenLock-ServiceExtAbility"
 
 class ServiceExtAbility extends ServiceExtension {
     onCreate(want) {
-        Log.showInfo(TAG, 'onCreate, want:' + want.abilityName);
+        Log.showDebug(TAG, 'onCreate, want:' + want.abilityName);
         AbilityManager.setContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK, this.context)
         sTimeManager.init(this.context)
         this.statusBarWindow()
@@ -38,15 +38,13 @@ class ServiceExtAbility extends ServiceExtension {
         windowManager.create(this.context, name, 2110).then((win) => {
             Log.showInfo(TAG, "before begin " + name + " window show!")
             win.loadContent("pages/index").then(() => {
-                Log.showInfo(TAG, name + " window loadContent in then! ")
                 win.show().then(() => {
-                    Log.showInfo(TAG, "then begin " + name + " window show in then! ");
+                    Log.showInfo(TAG, "window show in then!");
                 })
             })
         }, (error) => {
-            Log.showInfo(TAG, name + " window createFailed, error.code = " + error.code)
+            Log.showError(TAG, name + " window createFailed, error.code = " + error.code)
         })
-        Log.showInfo(TAG, name + " after window create")
     }
 
     private async statusBarWindow() {
@@ -58,7 +56,7 @@ class ServiceExtAbility extends ServiceExtension {
         }
         Log.showInfo(TAG, `getDefaultDisplay, dis: ${JSON.stringify(dis)}`);
         let rect;
-        if (dis.width > dis.height) { // Pad¡¢PC horizontalScreen Mode
+        if (dis.width > dis.height) { // Padï¿½ï¿½PC horizontalScreen Mode
             rect = {
                 left: 0,
                 top: 0,
@@ -78,11 +76,10 @@ class ServiceExtAbility extends ServiceExtension {
             width: dis.width,
             height: dis.height,
         });
-        Log.showInfo(TAG, `createWindow success.`);
     }
 
     onDestroy() {
-        Log.showInfo(TAG, 'api8New onDestroy');
+        Log.showDebug(TAG, 'api8New onDestroy');
         sTimeManager.release()
     }
 }

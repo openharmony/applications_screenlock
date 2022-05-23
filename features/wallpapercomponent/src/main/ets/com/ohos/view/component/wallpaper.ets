@@ -24,7 +24,7 @@ export default struct Wallpaper {
   @State mViewModel: ViewModel = new ViewModel()
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
   }
 

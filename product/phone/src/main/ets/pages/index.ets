@@ -35,42 +35,42 @@ struct Index {
   @State mHeightPx: number = 48
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
     this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     try {
       setAppBgColor('#00000000')
       CommonStyleManager.setAbilityPageName(TAG)
       let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-      Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+      Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
       this.mHeightPx = configInfo.height
       StyleManager.setStyle()
       this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     } catch (error) {
-      Log.showInfo(TAG, `set status error:` + JSON.stringify(error));
+      Log.showError(TAG, `set status error:` + JSON.stringify(error));
     }
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisAppear`)
+    Log.showDebug(TAG, `aboutToDisAppear`)
     this.pageStatus = Constants.STATUS_ABOUT_TO_DISAPPEAR
     this.mViewModel.ViewModelDestroy()
   }
 
   onPageShow() {
-    Log.showInfo(TAG, `onPageShow`)
+    Log.showDebug(TAG, `onPageShow`)
     this.pageStatus = Constants.STATUS_ON_PAGE_SHOW
     this.mViewModel.onPageShow();
   }
 
   onPageHide() {
-    Log.showInfo(TAG, `onPageHide`)
+    Log.showDebug(TAG, `onPageHide`)
     this.pageStatus = Constants.STATUS_ON_PAGE_HIDE
   }
 
   onBackPress(): boolean {
     let length = Router.getLength()
-    Log.showInfo(TAG, `onBackPress length: ${length}`)
+    Log.showDebug(TAG, `onBackPress length: ${length}`)
     if (length > 1) {
       Router.back()
       return false

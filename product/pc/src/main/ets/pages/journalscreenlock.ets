@@ -25,11 +25,11 @@ export default struct JournalScreenlock {
   }
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear Start`)
+    Log.showDebug(TAG, `aboutToAppear Start`)
 
   }
 
   onDisappear() {
-    Log.showInfo(TAG, `onDisappear Start`)
+    Log.showDebug(TAG, `onDisappear Start`)
   }
 }

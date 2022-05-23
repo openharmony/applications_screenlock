@@ -35,15 +35,15 @@ struct Index {
   @State mHeightPx: number = 0
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
     try {
       setAppBgColor('#00000000')
     } catch (error) {
-      Log.showInfo(TAG, `setAppBgColor error:` + JSON.stringify(error));
+      Log.showDebug(TAG, `setAppBgColor error:` + JSON.stringify(error));
     }
     CommonStyleManager.setAbilityPageName(TAG)
     let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-    Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+    Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
     this.mHeightPx = configInfo.height
     StyleManager.setStyle()
     this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
@@ -51,19 +51,19 @@ struct Index {
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisAppear`)
+    Log.showDebug(TAG, `aboutToDisAppear`)
     this.pageStatus = Constants.STATUS_ABOUT_TO_DISAPPEAR
     this.mViewModel.ViewModelDestroy()
   }
 
   onPageShow() {
-    Log.showInfo(TAG, `onPageShow`)
+    Log.showDebug(TAG, `onPageShow`)
     this.pageStatus = Constants.STATUS_ON_PAGE_SHOW
     this.mViewModel.onPageShow();
   }
 
   onPageHide() {
-    Log.showInfo(TAG, `onPageHide`)
+    Log.showDebugTAG, `onPageHide`)
     this.pageStatus = Constants.STATUS_ON_PAGE_HIDE
   }
 

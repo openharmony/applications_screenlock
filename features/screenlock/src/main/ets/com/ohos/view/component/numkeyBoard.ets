@@ -26,11 +26,11 @@ export default struct NumkeyBoard {
   @StorageLink('numKeyboard') numKeyboard: any[]  = Constants.NUMKEY_BOARD;
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showDebug(TAG, `aboutToAppear`)
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisappear`)
+    Log.showDebug(TAG, `aboutToDisappear`)
   }
 
   build() {

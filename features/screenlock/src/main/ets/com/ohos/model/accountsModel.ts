@@ -79,8 +79,7 @@ export default class AccountsModel {
     pinAuthManager = new osAccount.PINAuth();
 
     modelInit() {
-        Log.showInfo(TAG, "start ModelInit")
-        Log.showInfo(TAG, "start ModelInit finish")
+        Log.showDebug(TAG, "start ModelInit")
     }
 
     eventListener(typeName: "activate" | "activating", name: string, callback: Callback<void>) {
@@ -112,12 +111,12 @@ export default class AccountsModel {
     private addAllUsers() {
         Log.showInfo(TAG, "start getAllUsers")
         osAccount.getAccountManager().queryAllCreatedOsAccounts().then((list) => {
-            Log.showInfo(TAG, "start sort")
+            Log.showDebug(TAG, "start sort")
             let accountList = [];
             let accountMap = new Map();
             list.sort(this.sortAccount.bind(this));
             for (const user of list) {
-                Log.showInfo(TAG, "start get user" + JSON.stringify(user))
+                Log.showDebug(TAG, "start get user" + JSON.stringify(user))
                 if (user.isActived) {
                     mCurrentUserId = user.localId
                 }
@@ -129,7 +128,7 @@ export default class AccountsModel {
                 accountList.push(userData)
                 accountMap.set(user.localId, userData)
                 osAccount.getAccountManager().getOsAccountProfilePhoto(user.localId).then((path) => {
-                    Log.showInfo(TAG, "start get photo:" + path)
+                    Log.showDebug(TAG, "start get photo:" + path)
                     accountMap.get(user.localId).userIconPath = path
                 })
             }
@@ -150,15 +149,15 @@ export default class AccountsModel {
     }
 
     onUserSwitch(userId: number) {
-        Log.showInfo(TAG, "onUserSwitch:" + userId)
+        Log.showDebug(TAG, "onUserSwitch:" + userId)
         osAccount.getAccountManager().activateOsAccount(userId).then(() => {
             Log.showInfo(TAG, "activateOsAccount")
         })
-        Log.showInfo(TAG, "onUserSwitch:" + userId + "finish")
+        Log.showDebug(TAG, "onUserSwitch:" + userId + "finish")
     }
 
     authUser(challenge, authType: AuthType, authLevel: number, callback) {
-        Log.showInfo(TAG, `authUser param: userId ${mCurrentUserId} challenge ${challenge}`);
+        Log.showDebug(TAG, `authUser param: userId ${mCurrentUserId} challenge ${challenge}`);
         this.userAuthManager.authUser(mCurrentUserId, challenge, authType, authLevel, {
             onResult: (result, extraInfo) => {
                 Log.showInfo(TAG, `authUser UserAuthManager.authUser onResult`);
@@ -172,7 +171,7 @@ export default class AccountsModel {
     }
 
     getAuthProperty(authType, callback) {
-        Log.showInfo(TAG, `getAuthProperty param: authType ${authType}`);
+        Log.showDebug(TAG, `getAuthProperty param: authType ${authType}`);
         let keyArray = [GetPropertyType.AUTH_SUB_TYPE, GetPropertyType.REMAIN_TIMES, GetPropertyType.FREEZING_TIME]
         let request = {
             'authType': authType,
@@ -185,7 +184,7 @@ export default class AccountsModel {
     }
 
     registerPWDInputer(password: string): Promise<void> {
-        Log.showInfo(TAG, `registerPWDInputer`);
+        Log.showDebug(TAG, `registerPWDInputer`);
         let result = this.registerInputer(password);
         if (result) {
             return Promise.resolve();
@@ -195,13 +194,13 @@ export default class AccountsModel {
     }
 
     private registerInputer(password: string): boolean {
-        Log.showInfo(TAG, `registerInputer`);
+        Log.showDebug(TAG, `registerInputer`);
         let result = this.pinAuthManager.registerInputer({
             onGetData: (passType, inputData) => {
-                Log.showInfo(TAG, `registerInputer onSetData passType:${passType}`);
+                Log.showDebug(TAG, `registerInputer onSetData passType:${passType}`);
                 let textEncoder = new util.TextEncoder();
                 let uint8PW = textEncoder.encode(password);
-                Log.showInfo(TAG, `registerInputer onSetData call`);
+                Log.showDebug(TAG, `registerInputer onSetData call`);
                 inputData.onSetData(passType, uint8PW);
             }
         })
@@ -219,7 +218,7 @@ export default class AccountsModel {
     }
 
     isActivateAccount(callback: Callback<boolean>) {
-        Log.showInfo(TAG, `isActivateAccount userId:${mCurrentUserId}`)
+        Log.showDebug(TAG, `isActivateAccount userId:${mCurrentUserId}`)
         osAccount.getAccountManager().isOsAccountActived(mCurrentUserId).then((isActivate) => {
             Log.showInfo(TAG, `isActivateAccount userId:${mCurrentUserId} result: ${isActivate}`)
             callback(isActivate)
