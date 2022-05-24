@@ -42,7 +42,7 @@ export default struct DigitalPSD {
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
         Text(this.mViewModel.prompt)
           .fontSize($r('app.float.digitalpsd_prompt_fontsize'))
-          .fontWeight(FontWeight.Bold)
+          .fontWeight(FontWeight.Medium)
           .fontColor(Color.White)
           .margin({ bottom: $r('app.float.digitalpsd_prompt_margin_bottom') })
           .textAlign(TextAlign.Center)
@@ -64,7 +64,9 @@ export default struct DigitalPSD {
         .height($r('app.float.digitalpsd_passwdmask_height'))
         .margin(0)
       }
-      .margin({ bottom: $r('app.float.digitalpsd_passwdmask_margin_bottom') })
+      .margin({
+        bottom: $r('app.float.digitalpsd_passwdmask_margin_bottom')
+      })
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height($r('app.float.digitalpsd_input_area_height'))
       .flexShrink(1)
