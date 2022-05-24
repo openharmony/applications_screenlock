@@ -22,10 +22,10 @@ export default class StyleConfiguration {
         const key: string = TAG + "-Common";
         return StyleManager.getStyle(key, () => {
             return {
-                statusBarFontSize: '16fp',
+                statusBarFontSize: $r("app.float.signal_fontSize"),
                 statusBarIconWidth: '24vp',
                 statusBarIconHeight: '24vp',
-                statusBarMarginLeftRight: '5vp',
+                statusBarMarginLeftRight: $r("app.float.signal_status_margin_Left_right"),
             };
         });
     }

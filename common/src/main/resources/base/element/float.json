@@ -1,0 +1,12 @@
+{
+  "float": [
+    {
+      "name": "signal_status_margin_Left_right",
+      "value": "5vp"
+    },
+    {
+      "name": "signal_fontSize",
+      "value": "16fp"
+    }
+  ]
+}
