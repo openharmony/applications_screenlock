@@ -200,7 +200,7 @@
       "name": "numkeyBoard_rowsGap",
       "value": "0"
     },
-     {
+    {
       "name": "status_bar_height",
       "value": "48vp"
     },
@@ -216,6 +216,5 @@
       "name": "status_bar_opacity",
       "value": "1"
     }
-
   ]
 }
