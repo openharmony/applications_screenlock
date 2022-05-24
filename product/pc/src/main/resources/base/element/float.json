@@ -1,6 +1,5 @@
 {
   "float": [
-
     {
       "name": "lockicon_area_height",
       "value": "44"
@@ -56,6 +55,122 @@
     {
       "name": "status_bar_height",
       "value": "48vp"
+    },
+    {
+      "name": "status_bar_padding_left_right",
+      "value": "0"
+    },
+    {
+      "name": "status_bar_margin_top",
+      "value": "0"
+    },
+    {
+      "name": "status_bar_opacity",
+      "value": "1"
+    },
+    {
+      "name": "signal_status_margin_Left_right",
+      "value": "5vp"
+    },
+    {
+      "name": "signal_fontSize",
+      "value": "16fp"
+    },
+    {
+      "name": "signal_margin",
+      "value": "0"
+    },
+    {
+      "name": "status_bar_signal_type_font_size",
+      "value": "10fp"
+    },
+    {
+      "name": "status_bar_signal_unknown_font_size",
+      "value": "14fp"
+    },
+    {
+      "name": "signal_component_icon_width",
+      "value": "32vp"
+    },
+    {
+      "name": "signal_component_icon_height",
+      "value": "24vp"
+    },
+    {
+      "name": "signal_text_max_width",
+      "value": "113vp"
+    },
+    {
+      "name": "status_bar_signal_net_signal_text_max_width",
+      "value": "18vp"
+    },
+    {
+      "name": "status_bar_wifi_width",
+      "value": "24vp"
+    },
+    {
+      "name": "status_bar_wifi_height",
+      "value": "24vp"
+    },
+    {
+      "name": "wifi_margin_left_right",
+      "value": "5vp"
+    },
+    {
+      "name": "battery_margin_left_right_o",
+      "value": "5vp"
+    },
+    {
+      "name": "battery_component_gap",
+      "value": "8.5vp"
+    },
+    {
+      "name": "battery_margin_left_right_t",
+      "value": "5vp"
+    },
+    {
+      "name": "battery_fontSize",
+      "value": "16fp"
+    },
+    {
+      "name": "battery_component_pic_gap",
+      "value": "2vp"
+    },
+    {
+      "name": "battery_component_pic_body_height",
+      "value": "19vp"
+    },
+    {
+      "name": "battery_component_pic_body_width",
+      "value": "34.5vp"
+    },
+    {
+      "name": "battery_component_pic_body_padding",
+      "value": "2vp"
+    },
+    {
+      "name": "battery_component_pic_body_border_width",
+      "value": "1vp"
+    },
+    {
+      "name": "battery_component_pic_border_radius",
+      "value": "2vp"
+    },
+    {
+      "name": "battery_component_pic_head_radius",
+      "value": "2vp"
+    },
+    {
+      "name": "battery_component_pic_head_width",
+      "value": "3vp"
+    },
+    {
+      "name": "battery_component_pic_head_height",
+      "value": "10vp"
+    },
+    {
+      "name": "status_bar_clock_margin",
+      "value": "0"
     }
   ]
 }

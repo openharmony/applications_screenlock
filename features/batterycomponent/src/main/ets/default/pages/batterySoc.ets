@@ -17,24 +17,25 @@ import Log from '../../../../../../../common/src/main/ets/default/Log'
 import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
 
 const TAG = 'BatteryComponent-batterySoc'
+
 @Component
-export default
-struct BatterySoc {
+export default struct BatterySoc {
   @StorageLink('batterySoc') batterySoc: number = 100
   @Prop mContentColor: string
   @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
 
-  aboutToAppear(){
-    Log.showInfo(TAG,'aboutToAppear Start');
+  aboutToAppear() {
+    Log.showInfo(TAG, 'aboutToAppear Start');
   }
 
-  aboutToDisappear(){
-    Log.showInfo(TAG,'aboutToDisappear');
+  aboutToDisappear() {
+    Log.showInfo(TAG, 'aboutToDisappear');
   }
 
   build() {
     Text(this.batterySoc + '%')
       .fontColor(this.mContentColor)
       .fontSize(this.styleCommon.statusBarFontSize)
+      .fontWeight(FontWeight.Medium)
   }
 }
