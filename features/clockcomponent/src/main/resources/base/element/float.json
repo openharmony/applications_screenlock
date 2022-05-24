@@ -3,6 +3,10 @@
     {
       "name": "status_bar_clock_width",
       "value": "60vp"
+    },
+    {
+      "name": "status_bar_clock_margin",
+      "value": "0"
     }
   ]
 }

@@ -199,6 +199,23 @@
     {
       "name": "numkeyBoard_rowsGap",
       "value": "22vp"
+    },
+     {
+      "name": "status_bar_height",
+      "value": "24vp"
+    },
+    {
+      "name": "status_bar_padding_left_right",
+      "value": "24vp"
+    },
+    {
+      "name": "status_bar_margin_top",
+      "value": "4vp"
+    },
+    {
+      "name": "status_bar_opacity",
+      "value": "0.7"
     }
+   
   ]
 }

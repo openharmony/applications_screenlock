@@ -2,11 +2,11 @@
   "float": [
     {
       "name": "status_bar_wifi_width",
-      "value": "24vp"
+      "value": "15.75vp"
     },
     {
       "name": "status_bar_wifi_height",
-      "value": "24vp"
+      "value": "15vp"
     }
   ]
 }
