@@ -64,17 +64,17 @@ export default struct IconListComponent {
     {
       src: $r("app.media.ic_public_settings_filled"),
       callback: () => {
-        Log.showInfo(TAG, `click settings hashcode: ${this.itemData?.hashcode}`);
+        Log.showDebug(TAG, `click settings hashcode: ${this.itemData?.hashcode}`);
         this.settingDialogController.open()
       }
     }, {
       src: $r("app.media.ic_public_delete_filled"),
       callback: () => {
         if (!this.isGroup) {
-          Log.showInfo(TAG, `click delete hashcode: ${this.itemData?.hashcode}`);
+          Log.showDebug(TAG, `click delete hashcode: ${this.itemData?.hashcode}`);
           ViewModel.removeNotificationItem(this.itemData, true)
         } else {
-          Log.showInfo(TAG, `click delete groupName: ${this.itemData?.groupName}`);
+          Log.showDebug(TAG, `click delete groupName: ${this.itemData?.groupName}`);
           ViewModel.removeGroupNotification(this.itemData, true)
         }
       }
@@ -82,7 +82,7 @@ export default struct IconListComponent {
   ]
 
   aboutToAppear() {
-    Log.showInfo(TAG, `iconConfigs: ${JSON.stringify(this.iconConfigs)}`)
+    Log.showInfo(TAG, `aboutToAppear iconConfigs: ${JSON.stringify(this.iconConfigs)}`)
     iconSize = this.iconConfigs.length;
   }
 

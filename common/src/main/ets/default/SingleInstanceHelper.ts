@@ -22,7 +22,7 @@ const AUDIO_MANAGER_KEY = 'MultiMediaAudioManager';
 export default function createOrGet<T>(objectClass: { new(): T }, storageKey: string): T {
   if (!globalThis[storageKey]) {
     globalThis[storageKey] = new objectClass();
-    Log.showInfo(TAG, `Create key of ${storageKey}`);
+    Log.showDebug(TAG, `Create key of ${storageKey}`);
   }
   return globalThis[storageKey];
 }

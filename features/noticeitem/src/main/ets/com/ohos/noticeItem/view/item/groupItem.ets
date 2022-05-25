@@ -188,6 +188,6 @@ struct ContentList {
 
   remainderChange() {
     this.remainderNum = this.groupData.length - 2;
-    Log.showInfo(TAG, `aboutToAppear remainderNum:${this.remainderNum}`)
+    Log.showDebug(TAG, `aboutToAppear remainderNum:${this.remainderNum}`)
   }
 }

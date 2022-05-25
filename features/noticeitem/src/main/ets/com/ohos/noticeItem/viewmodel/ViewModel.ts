@@ -41,7 +41,7 @@ export class ViewModel {
   mNotificationCtrl: any = {};
 
   constructor() {
-    Log.showInfo(TAG, `constructor`);
+    Log.showDebug(TAG, `constructor`);
     this.mNotificationList = [];
     this.audioPlayer = media.createAudioPlayer();
     //    this.audioPlayer.src = 'file://system/etc/capture.ogg';
@@ -67,7 +67,7 @@ export class ViewModel {
   }
 
   userChange(userInfo) {
-    Log.showInfo(TAG, `UserChange, userInfo: ${JSON.stringify(userInfo)}`);
+    Log.showDebug(TAG, `UserChange, userInfo: ${JSON.stringify(userInfo)}`);
     this.unregisterCallback();
     this.mNotificationList.length = 0;
     this.initFlowControlInfos();
@@ -83,11 +83,11 @@ export class ViewModel {
    */
   onNotificationConsume(notificationItemData) {
     if (notificationItemData === undefined) {
-      Log.showInfo(TAG, `onNotificationConsume notificationItemData is undefined`);
+      Log.showDebug(TAG, `onNotificationConsume notificationItemData is undefined`);
       return;
     }
     this.onNotificationCancel(notificationItemData.hashcode)
-    Log.showInfo(TAG, `onNotificationConsume  ${JSON.stringify(notificationItemData)}`);
+    Log.showDebug(TAG, `onNotificationConsume  ${JSON.stringify(notificationItemData)}`);
     //Verify the notifications can be displayed
     if (!this.isCanShow(notificationItemData.bundleName)) {
       //can not displayed
@@ -98,9 +98,9 @@ export class ViewModel {
     }
     if (notificationItemData.ruleData.isAllowNotificationListShow) {
       this.mNotificationList.unshift(notificationItemData);
-      Log.showInfo(TAG, `reminder start `);
+      Log.showDebug(TAG, `reminder start `);
       this.reminderWay(notificationItemData);
-      Log.showInfo(TAG, `reminder end `);
+      Log.showDebug(TAG, `reminder end `);
       this.updateFlowControlInfos(notificationItemData.bundleName, true)
     }
     this.updateNotification();
@@ -110,13 +110,12 @@ export class ViewModel {
    * notification CancelCallback
    */
   onNotificationCancel(hashCode: string) {
-    Log.showInfo(TAG, `onNotificationCancel hashCode: ${JSON.stringify(hashCode)}`);
+    Log.showDebug(TAG, `onNotificationCancel hashCode: ${hashCode}`);
     // Common Notification Deletion Logic Processing
     for (let i = 0, len = this.mNotificationList.length; i < len; i++) {
       if (this.mNotificationList[i].hashcode == hashCode) {
-        Log.showInfo(TAG, `removeNotificationItem i = ${i}`);
         let removeItemArr = this.mNotificationList.splice(i, 1);
-        Log.showInfo(TAG, `onNotificationCancel removeItemArr= ${JSON.stringify(removeItemArr)}`);
+        Log.showDebug(TAG, `onNotificationCancel removeItemArr= ${JSON.stringify(removeItemArr)}`);
         if (!CheckEmptyUtils.isEmpty(removeItemArr)) {
           this.updateFlowControlInfos(removeItemArr[0].bundleName, false)
         }
@@ -127,15 +126,14 @@ export class ViewModel {
   }
 
   updateNotification() {
-    Log.showInfo(TAG, `updateNotification list: ${JSON.stringify(this.mNotificationList)}`);
-    Log.showInfo(TAG, `updateNotification length: ${this.mNotificationList.length}`);
+    Log.showDebug(TAG, `updateNotification length: ${this.mNotificationList.length}`);
     this.sortNotification()
     let notificationList = this.groupByGroupName();
     AppStorage.SetOrCreate('notificationList', notificationList);
   }
 
   groupByGroupName(): any[]{
-    Log.showInfo(TAG, `groupByGroupName`);
+    Log.showDebug(TAG, `groupByGroupName`);
     if (!this.mNotificationList || this.mNotificationList.length < 1) {
       return [];
     }
@@ -143,14 +141,14 @@ export class ViewModel {
     let groups = {};
     this.mNotificationList.forEach((item) => {
       const groupName = `${item.bundleName}_${item.groupName}`;
-      Log.showInfo(TAG, `groupByGroupName groupName:${groupName}`);
+      Log.showDebug(TAG, `groupByGroupName groupName:${groupName}`);
       if (!groups[groupName] || groups[groupName].length < 1) {
         groups[groupName] = [];
         groupArr.push(groups[groupName]);
       }
       groups[groupName].push(item)
     })
-    Log.showInfo(TAG, `groupByGroupName groupArr:${JSON.stringify(groupArr)}`);
+    Log.showDebug(TAG, `groupByGroupName groupArr:${JSON.stringify(groupArr)}`);
     return groupArr;
   }
 
@@ -159,7 +157,7 @@ export class ViewModel {
    * Sort the notifications.
    */
   sortNotification() {
-    Log.showInfo(TAG, `sortNotification`);
+    Log.showDebug(TAG, `sortNotification`);
     if (this.mNotificationList == undefined || this.mNotificationList == null || this.mNotificationList.length < 1) {
       return
     }
@@ -184,24 +182,24 @@ export class ViewModel {
    * Remove all notifications.
    */
   removeAllNotifications() {
-    Log.showInfo(TAG, `removeAllNotifications`);
+    Log.showDebug(TAG, `removeAllNotifications`);
     if (this.mNotificationList == undefined || this.mNotificationList == null || this.mNotificationList.length < 1) {
       this.mNotificationList = []
     } else {
       let index = this.mNotificationList.length
       while (index--) {
-        Log.showInfo(TAG, `removeAllNotifications isRemoveAllowed: ${index}  ${this.mNotificationList[index].isRemoveAllowed} `);
-        Log.showInfo(TAG, `removeAllNotifications isOngoing: ${index}  ${this.mNotificationList[index].isOngoing} `);
-        Log.showInfo(TAG, `removeAllNotifications isUnremovable: ${index}  ${this.mNotificationList[index].isUnremovable} `);
+        Log.showDebug(TAG, `removeAllNotifications isRemoveAllowed: ${index} ${this.mNotificationList[index].isRemoveAllowed} `);
+        Log.showDebug(TAG, `removeAllNotifications `);
+        Log.showDebug(TAG, `removeAllNotifications isUnremovable: ${index}  ${this.mNotificationList[index].isUnremovable} `);
 
         //Except the Long term notifications
         if (this.mNotificationList[index].isRemoveAllowed &&
         !this.mNotificationList[index].isOngoing && !this.mNotificationList[index].isUnremovable) {
-          Log.showInfo(TAG, `mNotificationList[${index}].hashcode: ${this.mNotificationList[index].hashcode}`);
+          Log.showDebug(TAG, `mNotificationList[${index}].hashcode: ${this.mNotificationList[index].hashcode}`);
           let hashCode = this.mNotificationList[index].hashcode
           this.removeSysNotificationItem(hashCode)
           let removeItemArr = this.mNotificationList.splice(index, 1)
-          Log.showInfo(TAG, `removeAllNotifications removeItemArr= ${JSON.stringify(removeItemArr)}`);
+          Log.showDebug(TAG, `removeAllNotifications removeItemArr= ${JSON.stringify(removeItemArr)}`);
           if (!CheckEmptyUtils.isEmpty(removeItemArr)) {
             this.updateFlowControlInfos(removeItemArr[0].bundleName, false)
           }
@@ -212,12 +210,12 @@ export class ViewModel {
   }
 
   removeNotificationItem(itemData, isDelSysConent) {
-    Log.showInfo(TAG, `removeNotificationItem, hashcode: ${itemData.hashcode}`);
+    Log.showDebug(TAG, `removeNotificationItem, hashcode: ${itemData.hashcode}`);
     for (let i = 0, len = this.mNotificationList.length; i < len; i++) {
       if (this.mNotificationList[i].hashcode == itemData.hashcode) {
-        Log.showInfo(TAG, `removeNotificationItem i = ${i}`);
+        Log.showDebug(TAG, `removeNotificationItem i = ${i}`);
         let removeItemArr = this.mNotificationList.splice(i, 1);
-        Log.showInfo(TAG, `removeNotificationItem removeItemArr= ${JSON.stringify(removeItemArr)}`);
+        Log.showDebug(TAG, `removeNotificationItem removeItemArr= ${JSON.stringify(removeItemArr)}`);
         if (!CheckEmptyUtils.isEmpty(removeItemArr)) {
           this.updateFlowControlInfos(removeItemArr[0].bundleName, false)
         }
@@ -232,15 +230,15 @@ export class ViewModel {
   }
 
   removeGroupNotification(itemData, isDelSysConent) {
-    Log.showInfo(TAG, `removeGroupNotification, groupName: ${itemData.groupName}`);
+    Log.showDebug(TAG, `removeGroupNotification, groupName: ${itemData.groupName}`);
     let groupName = itemData.groupName
     for (let i = 0, len = this.mNotificationList.length; i < len; i++) {
       if (this.mNotificationList[i].groupName == groupName) {
-        Log.showInfo(TAG, `removeGroupNotification i = ${i}`);
+        Log.showDebug(TAG, `removeGroupNotification i = ${i}`);
         let id = this.mNotificationList[i].id
         let hashcode = this.mNotificationList[i].hashcode
         let removeItemArr = this.mNotificationList.splice(i, 1);
-        Log.showInfo(TAG, `removeGroupNotification removeItemArr= ${JSON.stringify(removeItemArr)}`);
+        Log.showDebug(TAG, `removeGroupNotification removeItemArr= ${JSON.stringify(removeItemArr)}`);
         if (!CheckEmptyUtils.isEmpty(removeItemArr)) {
           this.updateFlowControlInfos(removeItemArr[0].bundleName, false)
         }
@@ -258,14 +256,14 @@ export class ViewModel {
   }
 
   clickItem(itemData, want?: any) {
-    Log.showInfo(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}`);
+    Log.showDebug(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}`);
     NotificationWindowManager.hideNotificationWindow();
     CommonUtil.startWant((want) ? want : itemData.want);
     this.removeNotificationItem(itemData, true);
   }
 
   clickReply(inputKey, content, want) {
-    Log.showInfo(TAG, `clickReply inputKey: ${inputKey}, content: ${content}, want: ${JSON.stringify(want)}`);
+    Log.showDebug(TAG, `clickReply inputKey: ${inputKey}, content: ${content}, want: ${JSON.stringify(want)}`);
     let info = {
       code: 0,
       want: { key: inputKey, data: content },
@@ -276,11 +274,11 @@ export class ViewModel {
   }
 
   initFlowControlInfos() {
-    Log.showInfo(TAG, 'initFlowControlInfos enter');
+    Log.showDebug(TAG, 'initFlowControlInfos enter');
     let notificationConfig = NotificationConfig.readNotificationConfig('statusbar')
-    Log.showInfo(TAG, 'NotificationConfig: ' + JSON.stringify(notificationConfig));
+    Log.showDebug(TAG, 'NotificationConfig: ' + JSON.stringify(notificationConfig));
     if (CheckEmptyUtils.isEmpty(notificationConfig)) {
-      Log.showInfo(TAG, 'NotificationConfig is no definition');
+      Log.showDebug(TAG, 'NotificationConfig is no definition');
       return
     }
     this.mNotificationCtrl = {
@@ -296,32 +294,32 @@ export class ViewModel {
       }
       this.mNotificationCtrl['app'].set(item.bundleName, tmp);
     }
-    Log.showInfo(TAG, 'initFlowControlInfos end, mNotificationCtrl: ' + JSON.stringify(this.mNotificationCtrl));
+    Log.showDebug(TAG, 'initFlowControlInfos end, mNotificationCtrl: ' + JSON.stringify(this.mNotificationCtrl));
   }
 
   isCanShow(bundleName: string): boolean {
-    Log.showInfo(TAG, 'isCanShow');
+    Log.showDebug(TAG, 'isCanShow');
     let result: boolean = true
     if (!CheckEmptyUtils.isEmpty(this.mNotificationCtrl)) {
       let currentTotal = this.mNotificationCtrl['currentTotal']
       let limitTotal = this.mNotificationCtrl['limitTotal']
-      Log.showInfo(TAG, `isCanShow Total: currentTotal=${currentTotal},limitTotal=${limitTotal}`);
+      Log.showDebug(TAG, `isCanShow Total: currentTotal=${currentTotal},limitTotal=${limitTotal}`);
       if (currentTotal + 1 > limitTotal) {
         result = false
       } else if (this.mNotificationCtrl['app'].has(bundleName)) {
         let tmp = this.mNotificationCtrl['app'].get(bundleName)
-        Log.showInfo(TAG, `isCanShow appTotal: canShow=${tmp['canShow']},tmp['currentNum']=${tmp['currentNum']}`);
+        Log.showDebug(TAG, `isCanShow appTotal: canShow=${tmp['canShow']},tmp['currentNum']=${tmp['currentNum']}`);
         if (tmp['canShow'] === false || (tmp['currentNum'] + 1 > tmp['limit'])) {
           result = false
         }
       }
     }
-    Log.showInfo(TAG, `isCanShow :${result}`);
+    Log.showDebug(TAG, `isCanShow :${result}`);
     return result;
   }
 
   updateFlowControlInfos(bundleName: string, plusOrMinus: boolean): void {
-    Log.showInfo(TAG, `updateFlowControlInfos`);
+    Log.showDebug(TAG, `updateFlowControlInfos`);
     if (!CheckEmptyUtils.isEmpty(this.mNotificationCtrl)) {
       if (this.mNotificationCtrl['app'].has(bundleName)) {
         let tmp = this.mNotificationCtrl['app'].get(bundleName)
@@ -340,25 +338,25 @@ export class ViewModel {
       }
     }
 
-    Log.showInfo(TAG, `updateFlowControlInfos:${JSON.stringify(this.mNotificationCtrl)}`);
+    Log.showDebug(TAG, `updateFlowControlInfos:${JSON.stringify(this.mNotificationCtrl)}`);
   }
 
   reminderWay(itemData) {
     if (itemData.ruleData.isAllowBanner) {
-      Log.showInfo(TAG, `banner start `);
+      Log.showDebug(TAG, `banner start `);
       AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_BANNER_NOTICE, 'itemData', itemData);
       EventManager.publish(obtainLocalEvent('onBannerNoticeShow', { 'itemData': itemData }))
-      Log.showInfo(TAG, `banner end `);
+      Log.showDebug(TAG, `banner end `);
     }
     if (itemData.notificationFlags?.soundEnabled != Constants.NOTIFICATION_TYPE_CLOSE) {
       if (itemData.ruleData.isAllowSound) {
         try {
           this.audioPlayer.src = itemData.sound;
-          Log.showInfo(TAG, `sound start `);
+          Log.showDebug(TAG, `sound start `);
           this.audioPlayer.play();
-          Log.showInfo(TAG, `sound end `);
+          Log.showDebug(TAG, `sound end `);
         } catch (e) {
-          Log.showInfo(TAG, `sound notificationItem id：${itemData.id} alert error: ${e.toString()}`);
+          Log.showError(TAG, `sound notificationItem id：${itemData.id} alert error: ${JSON.stringify(e)}`);
         }
       }
     }
@@ -380,17 +378,17 @@ export class ViewModel {
   }
 
   getPluginTempLate(templateName) {
-    Log.showInfo(TAG, 'getPluginTempLate: ' + templateName);
+    Log.showDebug(TAG, 'getPluginTempLate: ' + templateName);
     return NotificationService.getPluginTempLate(templateName)
   }
 
   enableNotification(itemData, enable: boolean) {
-    Log.showInfo(TAG, `enableNotification, bundleName: ${itemData.bundleName}  uid: ${itemData.uid}`);
+    Log.showDebug(TAG, `enableNotification, bundleName: ${itemData.bundleName}  uid: ${itemData.uid}`);
     return NotificationService.enableNotification({ bundle: itemData.bundleName, uid: itemData.uid }, enable);
   }
 
   clickDistributionItem(itemData, triggerInfo) {
-    Log.showInfo(TAG, `clickDistributionItem wantAgen: ${JSON.stringify(itemData.want)}, triggerInfo: ${JSON.stringify(triggerInfo)}`);
+    Log.showDebug(TAG, `clickDistributionItem wantAgen: ${JSON.stringify(itemData.want)}, triggerInfo: ${JSON.stringify(triggerInfo)}`);
     NotificationWindowManager.hideNotificationWindow();
     CommonUtil.startWant(itemData.want, triggerInfo);
     this.removeNotificationItem(itemData, true);
@@ -398,9 +396,9 @@ export class ViewModel {
 
   //get distributed device name
   getDistributedDeviceName(itemData): Promise<string>{
-    Log.showInfo(TAG, `getDistributedDeviceName`);
-    Log.showInfo(TAG, `getDistributedDeviceName itemData want:${JSON.stringify(itemData.want)}`);
-    Log.showInfo(TAG, `getDistributedDeviceName itemData deviceId:${itemData.deviceId}`);
+    Log.showDebug(TAG, `getDistributedDeviceName`);
+    Log.showDebug(TAG, `getDistributedDeviceName itemData want:${JSON.stringify(itemData.want)}`);
+    Log.showDebug(TAG, `getDistributedDeviceName itemData deviceId:${itemData.deviceId}`);
 
     return new Promise((resolve) => {
       let deviceName: string = '';
