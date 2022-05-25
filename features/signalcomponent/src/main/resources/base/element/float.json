@@ -23,6 +23,10 @@
     {
       "name":"status_bar_signal_net_signal_text_max_width",
       "value":"18vp"
+    },
+    {
+      "name": "signal_margin",
+      "value": "0"
     }
   ]
 }

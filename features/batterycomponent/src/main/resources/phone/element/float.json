@@ -2,19 +2,19 @@
   "float": [
     {
       "name": "battery_component_pic_gap",
-      "value": "2vp"
+      "value": "1.2vp"
     },
     {
       "name": "battery_component_pic_body_height",
-      "value": "19vp"
+      "value": "11vp"
     },
     {
       "name": "battery_component_pic_body_width",
-      "value": "34.5vp"
+      "value": "18.5vp"
     },
     {
       "name": "battery_component_pic_body_padding",
-      "value": "2vp"
+      "value": "1vp"
     },
     {
       "name": "battery_component_pic_body_border_width",
@@ -22,23 +22,23 @@
     },
     {
       "name": "battery_component_pic_border_radius",
-      "value": "2vp"
+      "value": "2.5vp"
     },
     {
       "name": "battery_component_pic_head_radius",
-      "value": "2vp"
-    },
-    {
-      "name": "battery_component_pic_head_width",
       "value": "3vp"
     },
     {
+      "name": "battery_component_pic_head_width",
+      "value": "1.5vp"
+    },
+    {
       "name": "battery_component_pic_head_height",
-      "value": "10vp"
+      "value": "5.75vp"
     },
     {
       "name": "battery_component_gap",
-      "value": "8.5vp"
+      "value": "2vp"
     }
   ]
 }

@@ -17,6 +17,7 @@ import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../common/constants'
 import NumkeyBoard from './numkeyBoard'
 import ViewModel from '../../vm/customPSDViewModel'
+import deviceInfo from '@ohos.deviceInfo';
 
 const TAG = 'ScreenLock-CustomPSD'
 
@@ -42,7 +43,7 @@ export default struct CustomPSD {
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
         Text(this.mViewModel.prompt)
           .fontSize($r('app.float.custompsd_prompt_fontsize'))
-          .fontWeight(FontWeight.Bold)
+          .fontWeight(FontWeight.Medium)
           .fontColor(Color.White)
           .margin({ bottom: $r('app.float.custompsd_prompt_margin_bottom') })
           .textAlign(TextAlign.Center)
@@ -56,33 +57,38 @@ export default struct CustomPSD {
             .height(Constants.FULL_CONTAINER_HEIGHT)
             .backgroundColor(Color.Gray)
             .borderRadius($r('app.float.custompsd_input_radius'))
+            .opacity($r("app.float.custompsd_text_opacity"))
 
           List({ space: Constants.DIGITALPSD_IC_DIAMETER }) {
             ForEach(this.passwordArr, (item) => {
               ListItem() {
                 Image($r("app.media.ic_solid_dot"))
-                  .width(Constants.DIGITALPSD_IC_DIAMETER)
-                  .height(Constants.DIGITALPSD_IC_DIAMETER)
+                  .width($r("app.float.custompsd_digitalpsd_ic_diameter"))
+                  .height($r("app.float.custompsd_digitalpsd_ic_diameter"))
               }
             })
           }
           .listDirection(Axis.Horizontal)
-          .height(Constants.DIGITALPSD_IC_DIAMETER)
+          .height($r("app.float.custompsd_digitalpsd_ic_diameter"))
         }
         .width($r('app.float.custompsd_input_width'))
         .height($r('app.float.custompsd_input_height'))
 
-        Button($r('app.string.done'), { type: ButtonType.Capsule, stateEffect: true })
+        Button($r('app.string.done'), {
+          type: ButtonType.Capsule,
+          stateEffect: true
+        })
           .width($r('app.float.custompsd_input_width'))
-          .height($r('app.float.custompsd_input_height'))
+          .height($r("app.float.custompsd_button_height"))
           .enabled(this.passwordArr.length > 1)
+          .opacity(deviceInfo.deviceType === 'tablet' ? 1 : (this.passwordArr.length > 1 ? 1 : 0.4))
           .onClick(() => {
             Log.showInfo(TAG, `onClick`)
             this.mViewModel.onAuthPassword(() => {
               Log.showInfo(TAG, `onClick callback promptText:${JSON.stringify(this.mViewModel.prompt)}`)
             });
           })
-          .margin({ top: $r('sys.float.ohos_id_elements_margin_vertical_l') })
+          .margin({ top:  $r('sys.float.ohos_id_elements_margin_vertical_l')})
       }
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height($r('app.float.custompsd_input_area_height'))

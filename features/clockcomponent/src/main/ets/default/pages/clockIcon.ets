@@ -16,13 +16,13 @@
 import Log from '../../../../../../../common/src/main/ets/default/Log'
 import StyleConfiguration from '../common/styleconfiguration'
 import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
-import {StatusBarGroupComponentData} from '../../../../../../screenlock/src/main/ets/com/ohos/common/Constants'
+import { StatusBarGroupComponentData } from '../../../../../../screenlock/src/main/ets/com/ohos/common/Constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
 import TimeManager, {
   TimeEventArgs,
   TIME_CHANGE_EVENT,
 } from '../../../../../../../common/src/main/ets/default/TimeManager'
-import EventManager, {unsubscribe} from '../../../../../../../common/src/main/ets/default/event/EventManager'
+import EventManager, { unsubscribe } from '../../../../../../../common/src/main/ets/default/event/EventManager'
 
 const TAG = 'ClockComponent-clockIcon';
 
@@ -57,6 +57,8 @@ export default struct ClockIcon {
         .fontColor(this.mStatusBarGroupComponentData.contentColor)
         .fontSize(this.styleCommon.statusBarFontSize)
         .width(this.style.statusBarClockMaxWidth)
+        .fontWeight(FontWeight.Medium)
+        .margin({ left: $r("app.float.status_bar_clock_margin") })
       Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
     }
   }
