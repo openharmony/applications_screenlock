@@ -16,7 +16,7 @@
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import {ScreenLockStatus} from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
 import ViewModel from '../../vm/lockIconViewModel'
-import Constants from '../../common/constants'
+import Constants from '../../common/Constants'
 
 const TAG = 'ScreenLock-LockIcon'
 

@@ -61,19 +61,30 @@ class WindowManager {
 
   async createWindow(context: any, name: WindowType, rect: Rect, loadContent: string): Promise<WindowHandle> {
     Log.showInfo(TAG, `createWindow name: ${name}, rect: ${JSON.stringify(rect)}, url: ${loadContent}`);
-    let winHandle = await Window.create(context, name, SYSTEM_WINDOW_TYPE_MAP[name]);
-    await winHandle.moveTo(rect.left, rect.top);
-    await winHandle.resetSize(rect.width, rect.height);
-    await winHandle.loadContent(loadContent);
-    this.mWindowInfos.set(name, { visibility: false, rect });
-    Log.showInfo(TAG, `create window[${name}] success.`);
+    let winHandle = null;
+    try{
+      winHandle = await Window.create(context, name, SYSTEM_WINDOW_TYPE_MAP[name]);
+      await winHandle.moveTo(rect.left, rect.top);
+      await winHandle.resetSize(rect.width, rect.height);
+      await winHandle.loadContent(loadContent);
+      this.mWindowInfos.set(name, { visibility: false, rect });
+      Log.showInfo(TAG, `create window[${name}] success.`);
+    } catch (err) {
+      Log.showError(TAG, `create window[${name}] failed. error:${JSON.stringify(err)}`);
+    }
     return winHandle;
   }
 
   async resetSizeWindow(name: WindowType, rect: Rect): Promise<void> {
-    let window = await Window.find(name);
-    await window.moveTo(rect.left, rect.top);
-    await window.resetSize(rect.width, rect.height);
+    Log.showInfo(TAG, `resetSizeWindow name: ${name}, rect: ${JSON.stringify(rect)}`);
+    let window = null;
+    try {
+      window = await Window.find(name);
+      await window.moveTo(rect.left, rect.top);
+      await window.resetSize(rect.width, rect.height);
+    } catch(err) {
+      Log.showError(TAG, `resetSizeWindow failed. error:${JSON.stringify(err)}`);
+    }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), rect });
     EventManager.publish(
       obtainLocalEvent(WINDOW_RESIZE_EVENT, {
@@ -81,12 +92,18 @@ class WindowManager {
         rect,
       })
     );
-    Log.showInfo(TAG, `resize window[${name}] success, rect: ${JSON.stringify(rect)}.`);
+    Log.showInfo(TAG, `resize window[${name}] success.`);
   }
 
   async showWindow(name: WindowType): Promise<void> {
-    let window = await Window.find(name);
-    await window.show();
+    Log.showInfo(TAG, `showWindow name: ${name}`);
+    let window = null;
+    try {
+      window = await Window.find(name);
+      await window.show();
+    } catch (err) {
+      Log.showError(TAG, `showWindow failed. error:${JSON.stringify(err)}`);
+    }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), visibility: true });
     EventManager.publish(
       obtainLocalEvent(WINDOW_SHOW_HIDE_EVENT, {
@@ -98,8 +115,14 @@ class WindowManager {
   }
 
   async hideWindow(name: WindowType): Promise<void> {
-    let window = await Window.find(name);
-    await window.hide();
+    Log.showInfo(TAG, `hideWindow name: ${name}`);
+    let window = null;
+    try {
+      window = await Window.find(name);
+      await window.hide();
+    } catch (err) {
+      Log.showError(TAG, `hideWindow failed. error:${JSON.stringify(err)}`);
+    }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), visibility: false });
     EventManager.publish(
       obtainLocalEvent(WINDOW_SHOW_HIDE_EVENT, {
@@ -116,7 +139,7 @@ class WindowManager {
 
   // function need remove
   setWindowInfo(configInfo) {
-    Log.showInfo(TAG, `setWindowInfo, configInfo ${JSON.stringify(configInfo)}`);
+    Log.showDebug(TAG, `setWindowInfo, configInfo ${JSON.stringify(configInfo)}`);
     let maxWidth = AppStorage.SetAndLink("maxWidth", configInfo.maxWidth);
     let maxHeight = AppStorage.SetAndLink("maxHeight", configInfo.maxHeight);
     let minHeight = AppStorage.SetAndLink("minHeight", configInfo.minHeight);

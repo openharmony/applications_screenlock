@@ -15,7 +15,7 @@
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import ScreenLockMar from '@ohos.screenlock';
 import windowManager  from '@ohos.window'
-import Constants from '../common/constants'
+import Constants from '../common/Constants'
 import { Callback } from 'basic';
 
 const TAG = 'ScreenLock-ScreenLockModel';

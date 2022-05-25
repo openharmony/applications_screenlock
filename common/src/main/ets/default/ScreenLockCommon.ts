@@ -28,6 +28,8 @@ export enum ScreenLockStatus {
 
 export function ReadConfigFile(fileName) {
   Log.showInfo(TAG, `readConfigFile fileName:${fileName}`);
+  let stream;
+  let content : string = "";
   try {
     let stream = FileIo.createStreamSync(fileName, 'r');
     Log.showInfo(TAG, `readConfigFile stream:` + stream);
@@ -39,11 +41,13 @@ export function ReadConfigFile(fileName) {
     for (let i = len;i < DFAULT_SIZE; i++) {
       arr[i] = charAt;
     }
-    let content = String.fromCharCode.apply(null, arr);
-    stream.closeSync();
-    Log.showInfo(TAG, `readConfigFile content:` + JSON.stringify(content));
-    return JSON.parse(content);
+    content = String.fromCharCode.apply(null, arr);
+    Log.showDebug(TAG, `readConfigFile content:` + JSON.stringify(content));
   } catch (error) {
-    Log.showInfo(TAG, `readConfigFile error:` + JSON.stringify(error));
+    Log.showError(TAG, `readConfigFile error:` + JSON.stringify(error));
+    content = "";
+  } finally {
+    stream.closeSync();
   }
+  return JSON.stringify(content);
 }

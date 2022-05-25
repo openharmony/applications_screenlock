@@ -32,7 +32,7 @@ const SUBSCRIBE_INFO = {
 };
 
 function getChargingStatus(state: typeof BatteryInfo.BatteryChargeState): boolean {
-  Log.showInfo(TAG, `charging status update: ${state}`);
+  Log.showDebug(TAG, `charging status update: ${state}`);
   let batteryStatus = false;
   switch (state) {
     case BatteryInfo.BatteryChargeState.DISABLE:
@@ -62,7 +62,7 @@ export class BatteryModel {
       () => this.updateBatteryStatus(),
       (isSubscribe: boolean) => isSubscribe && this.updateBatteryStatus()
     );
-    Log.showInfo(TAG, "initBatteryModel");
+    Log.showDebug(TAG, "initBatteryModel");
     this.mBatterySoc = AppStorage.SetAndLink("batterySoc", 0);
     this.mBatteryCharging = AppStorage.SetAndLink("batteryCharging", false);
     this.mManager.subscriberCommonEvent();
@@ -70,7 +70,7 @@ export class BatteryModel {
   }
 
   unInitBatteryModel() {
-    Log.showInfo(TAG, "unInitBatteryModel");
+    Log.showDebug(TAG, "unInitBatteryModel");
     this.mManager?.release();
     this.mManager = undefined;
   }
@@ -79,7 +79,7 @@ export class BatteryModel {
    * Get battery status and remaining power
    */
   private updateBatteryStatus() {
-    Log.showInfo(TAG, "updateBatteryStatus");
+    Log.showDebug(TAG, "updateBatteryStatus");
     let batterySoc = BatteryInfo.batterySOC ?? DEFAULT_PROGRESS;
     let batteryCharging = BatteryInfo.chargingStatus;
     if (batterySoc <= 0) {

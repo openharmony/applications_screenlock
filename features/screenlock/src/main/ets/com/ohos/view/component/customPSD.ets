@@ -14,7 +14,7 @@
  */
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
-import Constants from '../../common/constants'
+import Constants from '../../common/Constants'
 import NumkeyBoard from './numkeyBoard'
 import ViewModel from '../../vm/customPSDViewModel'
 import deviceInfo from '@ohos.deviceInfo';

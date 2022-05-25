@@ -25,7 +25,7 @@ class NotificationWindowManager {
   }
 
   hideNotificationWindow() {
-    Log.showInfo(TAG, 'hide Notification window');
+    Log.showDebug(TAG, 'hide Notification window');
     EventManager.publish(obtainLocalEvent('hideNotificationWindowEvent', ''));
   }
 }

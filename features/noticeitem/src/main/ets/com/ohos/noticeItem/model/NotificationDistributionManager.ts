@@ -27,39 +27,38 @@ export default class NotificationDistributionManager {
   static getInstance() {
     Log.showInfo(TAG, `getInstance`);
     if (distributionManager == null) {
-      Log.showInfo(TAG, `getInstance distributionManager new`);
+      Log.showDebug(TAG, `getInstance distributionManager new`);
       distributionManager = new NotificationDistributionManager();
       distributionManager.initDeviceManager();
       return distributionManager;
     }
-    Log.showInfo(TAG, `getInstance return distributionManager`);
+    Log.showDebug(TAG, `getInstance return distributionManager`);
     return distributionManager;
   }
 
   constructor() {
-    Log.showInfo(TAG, `constructor`);
+    Log.showDebug(TAG, `constructor`);
   }
 
   initDeviceManager() {
     Log.showInfo(TAG, `initDeviceManager`);
     DeviceManager.createDeviceManager("com.ohos.systemui", (err, data) => {
       if (err) {
-        console.info("createDeviceManager err:" + JSON.stringify(err));
+        Log.showError(TAG, `createDeviceManager err: ${JSON.stringify(err)}`);
         return;
       }
-      console.info("createDeviceManager success");
+      Log.showInfo(TAG, "createDeviceManager success");
       this.deviceManager = data;
     });
   }
 
   getTrustedDeviceDeviceName(deviceId) {
-    Log.showInfo(TAG, `getTrustedDeviceDeviceName deviceId:${deviceId}`);
+    Log.showDebug(TAG, `getTrustedDeviceDeviceName deviceId:${deviceId}`);
     let deviceName = '';
     let deviceArr:any[] = this.getTrustedDeviceListSync();
-    Log.showInfo(TAG, `getTrustedDeviceDeviceName deviceArr:${JSON.stringify(deviceArr)}`);
+    Log.showDebug(TAG, `getTrustedDeviceDeviceName deviceArr:${deviceArr.length}`);
     if (deviceArr && deviceArr.length > 0) {
       for (let item of deviceArr) {
-        Log.showInfo(TAG, `getTrustedDeviceDeviceName deviceArr item:${JSON.stringify(item)}`);
         if (item.deviceId == deviceId) {
           deviceName = item.deviceName;
           break;
@@ -70,12 +69,12 @@ export default class NotificationDistributionManager {
   }
 
   getTrustedDeviceListSync(): Array<any>{
-    Log.showInfo(TAG, `getTrustedDeviceListSync`);
+    Log.showDebug(TAG, `getTrustedDeviceListSync`);
     return this.deviceManager.getTrustedDeviceListSync();
   }
 
   getLocalDeviceInfoSync() {
-    Log.showInfo(TAG, `getLocalDeviceInfoSync`);
+    Log.showDebug(TAG, `getLocalDeviceInfoSync`);
     return this.deviceManager.getLocalDeviceInfoSync();
   }
 

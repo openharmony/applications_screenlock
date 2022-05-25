@@ -17,7 +17,7 @@ import ServiceExtension from '@ohos.application.ServiceExtensionAbility'
 import windowManager from '@ohos.window'
 import display from '@ohos.display'
 import Log from '../../../../../../common/src/main/ets/default/Log'
-import Constants from '../../../../../../features/screenlock/src/main/ets/com/ohos/common/constants'
+import Constants from '../../../../../../features/screenlock/src/main/ets/com/ohos/common/Constants'
 import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
 import sTimeManager from '../../../../../../common/src/main/ets/default/TimeManager'
 

@@ -120,7 +120,7 @@ export default struct BannerNotificationItem {
           })
           .onClick(this.showDevicesDialog.bind(this))
           .onAreaChange((e, e2) => {
-            Log.showInfo(TAG, `onAreaChange, e: ${JSON.stringify(e)} e2: ${JSON.stringify(e2)}`);
+            Log.showDebug(TAG, `onAreaChange, e: ${JSON.stringify(e)} e2: ${JSON.stringify(e2)}`);
             let heightEx = parseInt(e['height']);
             let heightCur = parseInt(e2['height']);
             let heightWin = parseInt(this.mDefaultBannerRect['height']);
@@ -154,12 +154,12 @@ export default struct BannerNotificationItem {
   }
 
   isCreateNewNotification(notificationCount:number):boolean{
-    Log.showInfo(TAG, `isCreateNewNotification, notificationCount: ${notificationCount}`);
+    Log.showDebug(TAG, `isCreateNewNotification, notificationCount: ${notificationCount}`);
     return true;
   }
 
   hideWindowForTimeout() {
-    Log.showInfo(TAG, `check need hide window or not.`)
+    Log.showDebug(TAG, `check need hide window or not.`)
     if ((new Date()).getTime() - this.mLastActionTime >= this.mInterval) {
       if (this.mCloseEnableFlg) {
         this.mLastActionTime = (new Date()).getTime();
@@ -177,12 +177,12 @@ export default struct BannerNotificationItem {
   }
 
   clickCloseIcon() {
-    Log.showInfo(TAG, 'clickCloseIcon');
+    Log.showDebug(TAG, 'clickCloseIcon');
     this.onBannerNoticeHide();
   }
 
   showDevicesDialog() {
-    Log.showInfo(TAG, `showDevicesDialog`)
+    Log.showDebug(TAG, `showDevicesDialog`)
     if (!this.want?.distributedOption?.isDistributed) {
       ViewModel.clickItem(this.want);
       this.onBannerNoticeHide();
@@ -203,7 +203,7 @@ export default struct BannerNotificationItem {
   }
 
   selectedDevice(deviceID) {
-    Log.showInfo(TAG, `selectedDevice deviceID:${deviceID}`)
+    Log.showDebug(TAG, `selectedDevice deviceID:${deviceID}`)
     this.nowWant.deviceId = deviceID;
     let triggerInfo = {
       code: 0,
@@ -229,8 +229,7 @@ struct ContentComponent {
   itemData: any;
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToDisappear pict: ${this.itemData.picture}`);
-    Log.showInfo(TAG, `NotificationItemData: ${JSON.stringify(this.itemData)}`)
+    Log.showDebug(TAG, `NotificationItemData: ${JSON.stringify(this.itemData)}`)
   }
 
   build() {

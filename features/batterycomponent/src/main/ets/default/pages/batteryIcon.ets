@@ -22,7 +22,7 @@ import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/d
 import StyleConfiguration from '../common/StyleConfiguration'
 import { StatusBarGroupComponentData
 } from '../../../../../../screenlock/src/main/ets/com/ohos/common/Constants'
-import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vM/StatusBarVM'
+import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
 
 const TAG = 'BatteryComponent-batteryIcon'
 
