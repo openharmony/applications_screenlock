@@ -30,18 +30,18 @@ export class RuleController {
      * @param {callback} Data of the type to show the notification
      */
   getNotificationData(notificationItemData: NotificationItemData, callback) {
-    Log.showInfo(TAG, "getNotificationData start")
+    Log.showDebug(TAG, "getNotificationData start")
 
     this.isAllowSendNotification(notificationItemData, (isSuccess) => {
       if (!isSuccess) {
-        Log.showInfo(TAG, "user is not allow this to send notification");
+        Log.showDebug(TAG, "user is not allow this to send notification");
         callback(undefined);
         return;
       }
       this.getNotificationDataByApp(notificationItemData, (originalData) => {
-        Log.showInfo(TAG, `originalData = ${JSON.stringify(originalData)}`);
+        Log.showDebug(TAG, `originalData = ${JSON.stringify(originalData)}`);
         this.updateNotificationDataBySense(originalData, (finalData) => {
-          Log.showInfo(TAG, `finalData = ${JSON.stringify(finalData)}`);
+          Log.showDebug(TAG, `finalData = ${JSON.stringify(finalData)}`);
           callback(finalData);
         });
       });
@@ -55,7 +55,7 @@ export class RuleController {
      * @param {callback} The user allow the app send notification or not
      */
   isAllowSendNotification(notificationItemData, callback) {
-    Log.showInfo(TAG, "isAllowSendNotification start");
+    Log.showDebug(TAG, "isAllowSendNotification start");
     Notification.isNotificationEnabled({ bundle: notificationItemData.bundleName, uid: notificationItemData.uid })
       .then((flag) => {
         Log.showInfo(TAG, `Notification.isNotificationEnabled:` + flag)
@@ -71,16 +71,16 @@ export class RuleController {
    */
 
   SoundOrVibrate(notificationItemData, callback) {
-    Log.showInfo(TAG, "SoundOrVibrate start")
+    Log.showDebug(TAG, "SoundOrVibrate start")
     let sound = false;
     let vibrationValues = false;
     if (!CheckEmptyUtils.checkStrIsEmpty(notificationItemData.sound)) {
       sound = true;
-      Log.showInfo(TAG, `notificationItemData.sound is allowed = ${sound}`);
+      Log.showDebug(TAG, `notificationItemData.sound is allowed = ${sound}`);
     }
     if (!CheckEmptyUtils.isEmptyArr(notificationItemData.vibrationValues)) {
       vibrationValues = true;
-      Log.showInfo(TAG, `notificationItemData.vibrationValues is allowed = ${vibrationValues}`);
+      Log.showDebug(TAG, `notificationItemData.vibrationValues is allowed = ${vibrationValues}`);
     }
     callback(sound, vibrationValues);
   }
@@ -93,7 +93,7 @@ export class RuleController {
      * @param {callback} The type to show notification
      */
   getNotificationDataByApp(notificationItemData, callback) {
-    Log.showInfo(TAG, "getNotificationDataByApp start")
+    Log.showDebug(TAG, "getNotificationDataByApp start")
     let mNotificationItemData : NotificationItemData = notificationItemData;
     mNotificationItemData.ruleData = {
       isAllowBanner: false,
@@ -102,7 +102,7 @@ export class RuleController {
       isAllowStatusBarShow : false,
       isAllowNotificationListShow : false
     };
-    Log.showInfo(TAG, `notificationItemData.slotLevel = ${notificationItemData.slotLevel}`);
+    Log.showDebug(TAG, `notificationItemData.slotLevel = ${notificationItemData.slotLevel}`);
     if (notificationItemData.slotLevel === SlotLevel.LEVEL_HIGH) {
       mNotificationItemData.ruleData.isAllowBanner = true;
       this.SoundOrVibrate(notificationItemData, (sound, vibrationValues) => {
@@ -125,7 +125,7 @@ export class RuleController {
     } else {
       mNotificationItemData.ruleData.isAllowNotificationListShow = false;
     }
-    Log.showInfo(TAG, `mNotificationItemData.ruleData = ${JSON.stringify(mNotificationItemData.ruleData)}`);
+    Log.showDebug(TAG, `mNotificationItemData.ruleData = ${JSON.stringify(mNotificationItemData.ruleData)}`);
     callback(mNotificationItemData);
   }
 
@@ -138,7 +138,7 @@ export class RuleController {
    * @param {callback} The final notification data
    */
   updateNotificationDataBySense(notificationItemData, callback) {
-    Log.showInfo(TAG, "updateNotificationDataBySense start")
+    Log.showDebug(TAG, "updateNotificationDataBySense start")
     let mNotificationItemData = notificationItemData;
     callback(mNotificationItemData);
   }

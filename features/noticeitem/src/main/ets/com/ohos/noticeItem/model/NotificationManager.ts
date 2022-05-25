@@ -117,14 +117,13 @@ export default class NotificationManager {
       jsonPath: templatePath
     };
 
-    Log.showInfo(TAG, `requestTemplate requestParam: ${JSON.stringify(requestParam)}`)
+    Log.showDebug(TAG, `requestTemplate requestParam: ${JSON.stringify(requestParam)}`)
     NotificationManager.request(tag, requestParam, (err, data) => {
-      Log.showInfo(TAG, `request finished err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`)
-      Log.showInfo(TAG, `request finished templateData: ${templateName} data: ${JSON.stringify(data.componentTemplate)}`)
+      Log.showDebug(TAG, `request finished err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`)
       if (data !== null && data !== undefined) {
-        Log.showInfo(TAG, `request finished data.componentTemplate.source:${JSON.stringify(data.componentTemplate.source)}`)
         let templates = JSON.parse(data.componentTemplate.source);
-        Log.showInfo(TAG, `request templates: ${JSON.stringify(templates)}`)
+        Log.showDebug(TAG, `request data.componentTemplate.source:${JSON.stringify(data.componentTemplate.source)}`+
+          `templates: ${JSON.stringify(templates)}`)
         for (let key in templates) {
           NotificationManager.NotificationTemplateMap.set(key, {
             "source": templates[key], "ability": ""
@@ -146,18 +145,18 @@ export default class NotificationManager {
       name: DEBUG_TEMPLATE_NAME,
       data: reqData
     };
-    Log.showInfo(TAG, `requestDebugTemplate requestParam: ${JSON.stringify(requestParam)}`);
+    Log.showDebug(TAG, `requestDebugTemplate requestParam: ${JSON.stringify(requestParam)}`);
     NotificationManager.request(tag, requestParam, (err, data) => {
-      Log.showInfo(TAG, `requestDebugTemplate finished err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`)
+      Log.showDebug(TAG, `requestDebugTemplate finished err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`)
       if (!!data) {
-        Log.showInfo(TAG, `requestDebugTemplate finished data.componentTemplate.source:${JSON.stringify(data.componentTemplate.source)}`)
+        Log.showDebug(TAG, `requestDebugTemplate finished data.componentTemplate.source:${JSON.stringify(data.componentTemplate.source)}`)
         NotificationManager.NotificationTemplateMap.set(DEBUG_TEMPLATE_NAME, data.componentTemplate);
       }
     });
   }
 
   static isDebugMode(tag): boolean{
-    Log.showInfo(TAG, `isDebugMode from: ${tag}`);
+    Log.showDebug(TAG, `isDebugMode from: ${tag}`);
     let debug = Systemparameter.getSync(DEBUG_SETTING_KEY, "")
     Log.showInfo(TAG, `Systemparameter DEBUG_SETTING: ${debug}`);
     return!!debug;

@@ -21,18 +21,17 @@ const TAG = 'FeatureAbilityManager';
 export default class FeatureAbilityManager {
 
   openAbility(tag, want) {
-    Log.showInfo(TAG, `openAbility from: ${tag}`));
+    Log.showInfo(TAG, `openAbility from: ${tag}`);
     let result = FeatureAbility.startAbility(want)
       .then(data =>
     Log.showInfo(TAG, `tag: ${tag} promise then: ${JSON.stringify(data)}`))
       .catch(error =>
-    Log.showError(TAG, `tag: ${tag} promise catch: ${JSON.stringify(error)}`));
-    Log.showInfo(TAG, `tag: ${tag} openAbility result: ${result}`);
+    Log.showError(TAG, `tag: ${tag} promise catch: ${JSON.stringify(error)}, openAbility result: ${result}`));
   }
 
   getAbilityWant(listener) {
     FeatureAbility.getWant((err, data) => {
-      Log.showInfo(TAG, `getAbilityWant callBack err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
+      Log.showDebug(TAG, `getAbilityWant callBack err: ${JSON.stringify(err)} data: ${JSON.stringify(data)}`);
       if (err.code !== 0) {
         Log.showError(TAG, `failed to getAbilityWant because ${err.message}`);
         return;
@@ -60,7 +59,7 @@ export default class FeatureAbilityManager {
         Log.showError(TAG, `failed to finishAbility because ${JSON.stringify(err)}`);
         return;
       }
-      Log.showInfo(TAG, ` finishAbility callback err: ${JSON.stringify(err)} data:${data}`);
+      Log.showInfo(TAG, ` finishAbility callback: data:${data}`);
     });
   }
 }

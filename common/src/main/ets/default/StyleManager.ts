@@ -21,7 +21,7 @@ export class StyleManager {
     mAbilityPageName: string = '';
 
     setAbilityPageName(name: string): void{
-        Log.showInfo(TAG, `setAbilityPageName, name: ${name}`);
+        Log.showDebug(TAG, `setAbilityPageName, name: ${name}`);
         this.mAbilityPageName = name;
     }
 
@@ -30,7 +30,7 @@ export class StyleManager {
         if (!AppStorage.Has(newKey)) {
             let defaultStyle = generateDefaultFunction();
             AppStorage.SetOrCreate(newKey, defaultStyle);
-            Log.showInfo(TAG, `Create storageKey of ${newKey}`);
+            Log.showDebug(TAG, `Create storageKey of ${newKey}`);
         }
         return AppStorage.Get(newKey);
     }

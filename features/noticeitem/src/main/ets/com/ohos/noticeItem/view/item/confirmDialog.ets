@@ -64,7 +64,7 @@ export default struct ConfirmDialog {
             .fontSize($r('app.float.confirm_cont_fontsize'))
             .fontColor(Color.Red)
         }.onClick(() => {
-          Log.showInfo(TAG, `confirm button of TimeDialog on click`)
+          Log.showDebug(TAG, `confirm button of TimeDialog on click`)
           this.controller.close();
           this.action();
         })
