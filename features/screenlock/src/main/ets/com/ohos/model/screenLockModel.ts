@@ -52,7 +52,6 @@ export default class ScreenLockModel {
     sendScreenLockEvent(typeName: string, typeNo: number, callback) {
         Log.showInfo(TAG, `sendScreenLockEvent: typeName ${typeName} typeNo  ${typeNo} `);
         ScreenLockMar.sendScreenLockEvent(typeName, typeNo, (err, data) => {
-            Log.showDebug(TAG, `sendScreenLockEvent:callback err:${JSON.stringify(err)}  data:${JSON.stringify(data)}`);
             callback(err, data);
         })
     }
