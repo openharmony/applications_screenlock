@@ -1,0 +1,76 @@
+{
+  "string": [
+    {
+      "name": "lock_prompt",
+      "value": "屏幕锁定中"
+    },
+    {
+      "name": "unlock_prompt",
+      "value": "上滑解锁"
+    },
+    {
+      "name": "recognizing_face",
+      "value": "正在识别人脸"
+    },
+    {
+      "name": "face_not_recognized",
+      "value": "未识别成功, 双击重试"
+    },
+    {
+      "name": "yyyy_mm_dd",
+      "value": "%d/%d/%d"
+    },
+    {
+      "name": "nonotification_text",
+      "value": "无通知"
+    },
+    {
+      "name": "input",
+      "value": "输入密码"
+    },
+    {
+      "name": "incorrect",
+      "value": "密码错误"
+    },
+    {
+      "name": "incorrect_promp_times",
+      "value": "密码错误，还可尝试%d次"
+    },
+    {
+      "name": "incorrect_promp_freezing",
+      "value": "密码错误，还可尝试%d次，失败后将锁定%s"
+    },
+    {
+      "name": "input_promp",
+      "value": "请%s后重试"
+    },
+    {
+      "name": "emergency_call",
+      "value": "紧急呼叫"
+    },
+    {
+      "name": "back",
+      "value": "返回"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "done",
+      "value": "确认"
+    },
+    {
+      "name": "charge_full",
+      "value": "已充满"
+    },
+    {
+      "name": "charging",
+      "value": "正在充电%s"
+    },
+    {
+      "name": "battery_soc",
+      "value": "目前电量%s"
+    }
+  ]
+}

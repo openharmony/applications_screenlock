@@ -43,17 +43,23 @@ export default struct DigitalPassword {
   }
 
   build() {
-    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
-      Column() {
-        StatusBar()
-      }.height(this.mHeightPx + 'px' )
-      Column() {
-        DigitalPSD()
+    Stack() {
+      Image($r('app.media.bg')).width(Constants.FULL_CONTAINER_WIDTH)
+        .height(Constants.FULL_CONTAINER_HEIGHT)
+      Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+        Column() {
+          StatusBar()
+        }.height(this.mHeightPx + 'px')
+
+        Column() {
+          DigitalPSD()
+        }
+        .width(Constants.PASSWORD_AREA_WIDTH)
       }
-      .width(Constants.PASSWORD_AREA_WIDTH)
+      .width(Constants.FULL_CONTAINER_WIDTH)
+      .height(Constants.FULL_CONTAINER_HEIGHT)
+
     }
-    .width(Constants.FULL_CONTAINER_WIDTH)
-    .height(Constants.FULL_CONTAINER_HEIGHT)
     .backgroundColor($r('app.color.page_background'))
   }
 }
