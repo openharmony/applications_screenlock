@@ -40,12 +40,10 @@ export default class ScreenLockModel {
             default:
                 Log.showError(TAG, `eventListener:typeName ${typeName}`)
         }
-
-        Log.showDebug(TAG, `eventListener:typeName ${typeName} finish`);
     }
 
     eventCancelListener(typeName: string) {
-        Log.showInfo(TAG, `eventCancleListener:typeName ${typeName}`);
+        Log.showDebug(TAG, `eventCancleListener:typeName ${typeName}`);
         // As off has some problem and there is no case to cancel, do nothing
     }
 

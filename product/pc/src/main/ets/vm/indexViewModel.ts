@@ -38,7 +38,7 @@ export default class IndexViewModel {
     }
 
     onPageShow() {
-        Log.showDebug(TAG, `onPageShow`)
+        Log.showInfo(TAG, `onPageShow`)
         ScreenLockService.notifyDrawDone();
     }
 

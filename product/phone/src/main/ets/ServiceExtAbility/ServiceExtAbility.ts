@@ -25,7 +25,7 @@ const TAG = "ScreenLock-ServiceExtAbility"
 
 class ServiceExtAbility extends ServiceExtension {
     onCreate(want) {
-        Log.showDebug(TAG, 'onCreate, want:' + want.abilityName);
+        Log.showInfo(TAG, 'onCreate, want:' + want.abilityName);
         AbilityManager.setContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK, this.context)
         sTimeManager.init(this.context)
         this.statusBarWindow()
@@ -33,7 +33,7 @@ class ServiceExtAbility extends ServiceExtension {
     }
 
     private createWindow(name: string) {
-        Log.showInfo(TAG, `createWindow name:${name}`)
+        Log.showDebug(TAG, `createWindow name:${name}`)
         windowManager.create(this.context, name, 2110).then((win) => {
             win.loadContent("pages/index").then(() => {
                 Log.showInfo(TAG, name + " window loadContent in then! ")
@@ -74,7 +74,7 @@ class ServiceExtAbility extends ServiceExtension {
     }
 
     onDestroy() {
-        Log.showDebug(TAG, 'api8New onDestroy');
+        Log.showInfo(TAG, 'api8New onDestroy');
         sTimeManager.release()
 
     }

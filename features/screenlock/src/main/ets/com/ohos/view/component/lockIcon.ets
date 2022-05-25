@@ -26,7 +26,7 @@ export default struct LockIcon {
   @State mViewModel: ViewModel = new ViewModel()
 
   aboutToAppear() {
-    Log.showDebug(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
   }
 

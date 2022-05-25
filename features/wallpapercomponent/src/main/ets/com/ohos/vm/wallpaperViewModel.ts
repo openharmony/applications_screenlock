@@ -22,7 +22,7 @@ export default class WallpaperViewModel {
     screenlockWallpaper: string = ''
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, 'ViewModelInit');
+        Log.showDebug(TAG, 'ViewModelInit');
         this.getScreenLockWallpaper()
     }
 

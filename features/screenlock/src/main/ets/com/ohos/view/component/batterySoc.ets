@@ -25,7 +25,7 @@ export default struct BatterySoc {
   @State batterySocText: string | Resource = ''
 
   aboutToAppear() {
-    Log.showDebug(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, `aboutToAppear`)
     this.onBatterySocChanged('');
   }
 

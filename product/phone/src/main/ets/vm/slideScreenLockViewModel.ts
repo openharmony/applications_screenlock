@@ -38,7 +38,7 @@ export default class SlideScreenLockViewModel {
     toggleShow: boolean = false
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, `ViewModelInit`);
+        Log.showDebug(TAG, `ViewModelInit`);
         ScreenLockService.setUnlockAnimation((callback: Callback<void>) => {
             this.elementAlpha = 0
             this.elementScale = 0.85
