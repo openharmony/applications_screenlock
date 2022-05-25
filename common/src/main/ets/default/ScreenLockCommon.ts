@@ -49,5 +49,5 @@ export function ReadConfigFile(fileName) {
   } finally {
     stream.closeSync();
   }
-  return JSON.stringify(content);
+  return JSON.parse(content);
 }

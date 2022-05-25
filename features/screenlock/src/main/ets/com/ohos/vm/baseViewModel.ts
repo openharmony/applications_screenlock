@@ -14,7 +14,7 @@
  */
 
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
-import Constants from '../common/Constants'
+import Constants from '../common/constants'
 import service, {UnlockResult, AuthType, AuthSubType} from '../model/screenLockService'
 import {Callback} from 'basic';
 

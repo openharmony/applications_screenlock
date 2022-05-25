@@ -42,12 +42,12 @@ class ScreenlockStyle {
     readMode(deviceType: string): number{
         Log.showInfo(TAG, `readMode deviceType:${deviceType}`);
         try {
-            let modeJson = ReadConfigFile(FILE_URI.replace('{0}', deviceType))
-            Log.showDebug(TAG, `ReadConfigFile content:` + JSON.stringify(modeJson));
-            this.screenMode = modeJson.mode
+            let modeJson = ReadConfigFile(FILE_URI.replace('{0}', deviceType));
+            Log.showInfo(TAG, `ReadConfigFile content:` + JSON.stringify(modeJson));
+            this.screenMode = modeJson.mode;
         } catch(error) {
-            Log.showError(TAG, `ReadConfigFile content error: ${error}`);
-            this.screenMode = 1
+            Log.showInfo(TAG, `ReadConfigFile content error: ${error}`);
+            this.screenMode = 1;
         }
         return this.screenMode
     }

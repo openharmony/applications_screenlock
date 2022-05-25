@@ -15,7 +15,7 @@
 
 import Log from '../../../../../../../../common/src/main/ets/default/Log';
 import WindowManager, { WindowType } from '../../../../../../../../common/src/main/ets/default/WindowManager';
-import Constants, {StatusBarGroupComponentData} from '../common/Constants';
+import Constants, {StatusBarGroupComponentData} from '../common/constants';
 
 const TAG = 'StatusBarVM';
 
