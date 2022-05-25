@@ -26,11 +26,11 @@ export default struct Accounts {
   private mViewModel: ViewModel = new ViewModel()
 
   aboutToAppear() {
-    Log.showDebug(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, `aboutToAppear`)
   }
 
   aboutToDisappear() {
-    Log.showDebug(TAG, `aboutToDisappear`)
+    Log.showInfo(TAG, `aboutToDisappear`)
   }
 
   build() {

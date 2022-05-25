@@ -74,7 +74,7 @@ export class ScreenLockService {
     screenLockModel: ScreenLockModel = new ScreenLockModel()
 
     init() {
-        Log.showInfo(TAG, 'screen lock service init');
+        Log.showDebug(TAG, 'init');
         this.accountModel.modelInit();
         this.monitorEvents();
         this.accountModel.updateAllUsers()
@@ -148,7 +148,6 @@ export class ScreenLockService {
             Log.showInfo(TAG, `checkPinAuthProperty：AUTH_SUB_TYPE:${properties.authSubType}`);
             switch (properties.authSubType) {
                 case AuthSubType.PIN_SIX:
-                    Log.showDebug(TAG, "AuthSubType.PIN_SIX")
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Locking);
                     mRouterPath = URI_DIGITALPASSWORD;
                     this.checkFaceAuthProperty(() => {
@@ -156,7 +155,6 @@ export class ScreenLockService {
                     })
                     break;
                 case AuthSubType.PIN_MIXED:
-                    Log.showDebug(TAG, "AuthSubType.PIN_MIXED")
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Locking);
                     mRouterPath = URI_MIXEDPASSWORD;
                     this.checkFaceAuthProperty(() => {
@@ -164,7 +162,6 @@ export class ScreenLockService {
                     })
                     break;
                 case AuthSubType.PIN_NUMBER:
-                    Log.showDebug(TAG, "AuthSubType.PIN_NUMBER")
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Locking);
                     mRouterPath = URI_CUSTOMPASSWORD;
                     this.checkFaceAuthProperty(() => {
@@ -172,7 +169,6 @@ export class ScreenLockService {
                     })
                     break;
                 default:
-                    Log.showDebug(TAG, "lockStatus: unlocked")
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Unlock);
                     mWillRecognizeFace = false
             }
@@ -231,7 +227,7 @@ export class ScreenLockService {
     notifyScreenResult(result: UnlockResult) {
         Log.showInfo(TAG, `notifyScreenResult`);
         this.screenLockModel.sendScreenLockEvent(UNLOCK_SCREEN_RESULT, result, (error, data) => {
-            Log.showDebug(TAG, `notifyScreenResult: error:${JSON.stringify(error)} data:${JSON.stringify(data)}`);
+            Log.showInfo(TAG, `notifyScreenResult: error:${JSON.stringify(error)} data:${JSON.stringify(data)}`);
         });
     }
 
@@ -239,7 +235,7 @@ export class ScreenLockService {
         Log.showInfo(TAG, `notifyDrawDone`);
         //notify the base service that the screen is loaded
         this.screenLockModel.sendScreenLockEvent(SCREENLOCK_DRAW_DONE, 0, (error, result) => {
-            Log.showDebug(TAG, `notifyDrawDone:  error:${JSON.stringify(error)} result:${JSON.stringify(result)}`);
+            Log.showInfo(TAG, `notifyDrawDone:  error:${JSON.stringify(error)} result:${JSON.stringify(result)}`);
         });
     }
 

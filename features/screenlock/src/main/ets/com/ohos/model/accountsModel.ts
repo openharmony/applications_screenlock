@@ -116,7 +116,7 @@ export default class AccountsModel {
             let accountMap = new Map();
             list.sort(this.sortAccount.bind(this));
             for (const user of list) {
-                Log.showDebug(TAG, "start get user" + JSON.stringify(user))
+                Log.showDebug(TAG, `start get user, localId=${user.localId}, localName=${user.localName}`);
                 if (user.isActived) {
                     mCurrentUserId = user.localId
                 }

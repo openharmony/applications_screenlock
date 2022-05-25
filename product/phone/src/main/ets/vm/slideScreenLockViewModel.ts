@@ -55,7 +55,7 @@ export default class SlideScreenLockViewModel {
     }
 
     touchEvent(event: TouchEvent) {
-        Log.showDebug(TAG, `Touch Event ${event.type} at Point ${event.touches[0].x}, ${event.touches[0].y}`)
+        Log.showInfo(TAG, `Touch Event ${event.type} at Point ${event.touches[0].x}, ${event.touches[0].y}`)
         if (event.type == Constants.TOUCHTYPE_DOWN) {
             this.startX = event.touches[0].screenX
             this.startY = event.touches[0].screenY
