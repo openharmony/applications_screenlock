@@ -14,13 +14,13 @@
  */
 
 import Constants from '../common/constants'
-import mWifiModel from '../WifiModel'
+import mWifiModel from '../wifiModel'
 import Log from '../../../../../../../common/src/main/ets/default/Log'
 import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
 import StyleConfiguration from '../common/StyleConfiguration'
-import { StatusBarGroupComponentData
-} from '../../../../../../screenlock/src/main/ets/com/ohos/common/Constants'
-import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vM/StatusBarVM'
+import {StatusBarGroupComponentData
+} from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
+import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
 
 const TAG = 'WifiComponent-WifiIcon'
 

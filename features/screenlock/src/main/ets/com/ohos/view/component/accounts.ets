@@ -15,7 +15,7 @@
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import ViewModel from '../../vm/accountsViewModel'
-import Constants from '../../common/Constants'
+import Constants from '../../common/constants'
 import {UserData} from '../../data/userData'
 
 const TAG = 'ScreenLock-Accounts'
