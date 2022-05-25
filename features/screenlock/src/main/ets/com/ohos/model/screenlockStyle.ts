@@ -31,12 +31,11 @@ class ScreenlockStyle {
     private screenMode: LockStyleMode = LockStyleMode.SlideScreenLock
 
     setMode(mode: LockStyleMode): number {
-        Log.showInfo(TAG, 'setMode:${mode}');
+        Log.showDebug(TAG, `setMode:${mode}`);
         return this.screenMode = mode
     }
 
     getMode(): number {
-        Log.showInfo(TAG, 'getMode');
         return this.screenMode
     }
 
@@ -44,10 +43,10 @@ class ScreenlockStyle {
         Log.showInfo(TAG, `readMode deviceType:${deviceType}`);
         try {
             let modeJson = ReadConfigFile(FILE_URI.replace('{0}', deviceType))
-            Log.showInfo(TAG, `ReadConfigFile content:` + JSON.stringify(modeJson));
+            Log.showDebug(TAG, `ReadConfigFile content:` + JSON.stringify(modeJson));
             this.screenMode = modeJson.mode
         } catch(error) {
-            Log.showInfo(TAG, `ReadConfigFile content error: ${error}`);
+            Log.showError(TAG, `ReadConfigFile content error: ${error}`);
             this.screenMode = 1
         }
         return this.screenMode

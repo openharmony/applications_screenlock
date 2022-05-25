@@ -42,12 +42,12 @@ struct Index {
       setAppBgColor('#00000000')
       CommonStyleManager.setAbilityPageName(TAG)
       let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-      Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+      Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
       this.mHeightPx = configInfo.height
       StyleManager.setStyle()
       this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     } catch (error) {
-      Log.showInfo(TAG, `set status error:` + JSON.stringify(error));
+      Log.showError(TAG, `set status error:` + JSON.stringify(error));
     }
   }
 
@@ -70,7 +70,7 @@ struct Index {
 
   onBackPress(): boolean {
     let length = Router.getLength()
-    Log.showInfo(TAG, `onBackPress length: ${length}`)
+    Log.showDebug(TAG, `onBackPress length: ${length}`)
     if (length > 1) {
       Router.back()
       return false

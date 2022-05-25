@@ -30,27 +30,24 @@ export default class StyleManager {
     static maxWidth: number = StyleManager.STANDARD_DISPLAY_WIDTH;
 
     static setStyle() {
-        Log.showInfo(TAG, `setStyle`)
         let dis = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'dis');
-        Log.showInfo(TAG, `configMaxWidth${JSON.stringify(dis.width)}`)
+        Log.showInfo(TAG, `setStyle, configMaxWidth${JSON.stringify(dis.width)}`)
         StyleManager.maxWidth = dis.width;
 
         // Common
         {
-            Log.showInfo(TAG, `setStyle_Common`)
             let style: any = CommonStyleConfiguration.getCommonStyle();
             style.statusBarFontSize = StyleManager.calcScaleSizePx(14);
             style.statusBarMarginLeftRight = StyleManager.calcScaleSizePx(10);
-            Log.showInfo(TAG, `setStyle ${JSON.stringify(style.statusBarFontSize)}`)
-            Log.showInfo(TAG, `setStyle ${JSON.stringify(style.statusBarMarginLeftRight)}`)
+            Log.showDebug(TAG, `setStyle ${JSON.stringify(style.statusBarFontSize)},
+                ${JSON.stringify(style.statusBarMarginLeftRight)}`)
         }
 
         // Clock
         {
             let style: any = ClockStyleConfiguration.getClockComponentStyle();
             style.statusBarClockMaxWidth = StyleManager.calcScaleSizePx(37);
-            Log.showInfo(TAG, `statusBarClockMaxWidth ${JSON.stringify(style.statusBarClockMaxWidth)}`)
-
+            Log.showDebug(TAG, `statusBarClockMaxWidth ${JSON.stringify(style.statusBarClockMaxWidth)}`)
         }
 
         // Battery-Icon
@@ -73,7 +70,7 @@ export default class StyleManager {
             style.picLevelLowColor = '#ff0000';
             style.picHeadWidth = StyleManager.calcScaleSizePx(1.5);
             style.picHeadHeight = StyleManager.calcScaleSizePx(5);
-            Log.showInfo(TAG, `picHeadHeight: ${JSON.stringify(style.picHeadHeight)}`)
+            Log.showDebug(TAG, `picHeadHeight: ${JSON.stringify(style.picHeadHeight)}`)
 
         }
 
@@ -94,7 +91,7 @@ export default class StyleManager {
             let style: any = WifiStyleConfiguration.getStartsBarWifiComponentStyle();
             style.statusBarWifiWidth = StyleManager.calcScaleSizePx(20);
             style.statusBarWifiHeight = StyleManager.calcScaleSizePx(20);
-            Log.showInfo(TAG, `statusBarWifiHeight ${JSON.stringify(style.statusBarWifiHeight)}`)
+            Log.showDebug(TAG, `statusBarWifiHeight ${JSON.stringify(style.statusBarWifiHeight)}`)
         }
 
     }

@@ -22,7 +22,7 @@ export default class BatterySocViewModel {
   mbatterySocStr= AppStorage.SetAndLink('batterySoc', 0);
 
   ViewModelInit(): void{
-    Log.showInfo(TAG, 'ViewModelInit');
+    Log.showDebug(TAG, 'ViewModelInit');
     let batteryValue: number = this.mbatterySocStr.get();
     if (batteryValue < 100) {
       this.batterySocStr = ""

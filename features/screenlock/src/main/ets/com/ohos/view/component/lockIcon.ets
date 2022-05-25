@@ -51,7 +51,6 @@ export default struct LockIcon {
   }
 
   onStatusChange(propName: string): void {
-    Log.showInfo(TAG, `onStatusChange`)
     Log.showInfo(TAG, `lockStatus:${this.lockStatus}`);
     this.mViewModel.onStatusChange(this.lockStatus)
   }

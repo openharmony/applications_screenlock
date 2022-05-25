@@ -62,7 +62,7 @@ export default struct SlideScreenlock {
         }
         .height(this.mHeightPx + 'px' )
         .onAreaChange((e, e2) => {
-          Log.showInfo(TAG, `onAreaChange, e: ${JSON.stringify(e)} e2: ${JSON.stringify(e2)}`);
+          Log.showDebug(TAG, `onAreaChange, e: ${JSON.stringify(e)} e2: ${JSON.stringify(e2)}`);
         })
     }
 
