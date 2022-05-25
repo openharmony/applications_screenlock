@@ -29,7 +29,7 @@ export default class CustomPSDViewModel extends BaseViewModel {
     }
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, 'ViewModelInit');
+        Log.showDebug(TAG, 'ViewModelInit');
         super.ViewModelInit();
     }
 

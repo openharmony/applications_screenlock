@@ -37,7 +37,7 @@ var mStateLink;
 
 export class SignalModel {
   initSignalModel() {
-    Log.showInfo(TAG, 'initSignalModel');
+    Log.showDebug(TAG, 'initSignalModel');
     mLevelLink = AppStorage.SetAndLink("cellularLevel", Constants.CELLULAR_NO_SIM_CARD);
     mTypeLink = AppStorage.SetAndLink("cellularType", Constants.NETWORK_TYPE_UNKNOWN);
     mStateLink = AppStorage.SetAndLink("networkState", Constants.NET_NULL);
@@ -45,7 +45,7 @@ export class SignalModel {
   }
 
   uninitSignalModel() {
-    Log.showInfo(TAG, 'uninitSignalModel');
+    Log.showDebug(TAG, 'uninitSignalModel');
     this.unInitObserver();
   }
 
@@ -120,7 +120,7 @@ export class SignalModel {
      * init the observer of the cellular and signal
      */
   initObserver() {
-    Log.showInfo(TAG, 'initObserver');
+    Log.showDebug(TAG, 'initObserver');
     isInitObserver = true;
     Observer.on('signalInfoChange', (signalInfoChange) => {
       Log.showInfo(TAG, 'signalInfoChange');
@@ -140,7 +140,7 @@ export class SignalModel {
      * Uninit the observer of the cellular and signal
      */
   unInitObserver() {
-    Log.showInfo(TAG, 'unInitObserver');
+    Log.showDebug(TAG, 'unInitObserver');
     Observer.off('signalInfoChange');
     Observer.off('networkStateChange');
     Observer.off('simStateChange');

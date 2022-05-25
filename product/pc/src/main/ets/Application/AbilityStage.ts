@@ -20,6 +20,6 @@ const TAG = "ScreenLock-MainAbilityStage"
 
 export default class MainAbilityStage extends AbilityStage {
     onCreate() {
-        Log.showDebug(TAG, "onCreate")
+        Log.showInfo(TAG, "onCreate")
     }
 }

@@ -36,7 +36,7 @@ struct SignalIcon {
   @State style: any = StyleConfiguration.getSignalComponentStyle()
 
   aboutToAppear() {
-    Log.showDebug(TAG, 'aboutToAppear');
+    Log.signalIcon(TAG, 'aboutToAppear');
     this.mStatusBarGroupComponentData = StatusBarVM.getStatusBarGroupComponentData(this.mGroupId)
     if (!this.signalObserved) {
       mSignalModel.initSignalModel();
@@ -45,7 +45,7 @@ struct SignalIcon {
   }
 
   aboutToDisappear() {
-    Log.showDebug(TAG, 'aboutToDisappear');
+    Log.signalIcon(TAG, 'aboutToDisappear');
   }
 
   build() {

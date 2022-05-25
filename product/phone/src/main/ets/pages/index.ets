@@ -35,7 +35,7 @@ struct Index {
   @State mHeightPx: number = 48
 
   aboutToAppear() {
-    Log.showDebug(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
     this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     try {
@@ -52,19 +52,19 @@ struct Index {
   }
 
   aboutToDisappear() {
-    Log.showDebug(TAG, `aboutToDisAppear`)
+    Log.showInfo(TAG, `aboutToDisAppear`)
     this.pageStatus = Constants.STATUS_ABOUT_TO_DISAPPEAR
     this.mViewModel.ViewModelDestroy()
   }
 
   onPageShow() {
-    Log.showDebug(TAG, `onPageShow`)
+    Log.showInfo(TAG, `onPageShow`)
     this.pageStatus = Constants.STATUS_ON_PAGE_SHOW
     this.mViewModel.onPageShow();
   }
 
   onPageHide() {
-    Log.showDebug(TAG, `onPageHide`)
+    Log.showInfo(TAG, `onPageHide`)
     this.pageStatus = Constants.STATUS_ON_PAGE_HIDE
   }
 

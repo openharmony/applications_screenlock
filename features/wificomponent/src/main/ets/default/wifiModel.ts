@@ -32,7 +32,7 @@ export class WifiModel {
     if (this.mIsStart) {
       return;
     }
-    Log.showInfo(TAG, `initWifiModel`)
+    Log.showDebug(TAG, `initWifiModel`)
     this.mIsStart = true;
 
     mWifiInfo = AppStorage.SetAndLink("wifiInfo", Constants.DEFAULT_WIFI_INFO);
@@ -118,7 +118,7 @@ export class WifiModel {
   }
 
   getLinkedInfo() {
-    Log.showInfo(TAG, `getLinkedInfo`)
+    Log.showDebug(TAG, `getLinkedInfo`)
     wifi.getLinkedInfo((err, data) => {
       if (wifi.isConnected()) {
         mWifiStatus.set(true);
@@ -140,13 +140,11 @@ export class WifiModel {
   }
 
   enableWifi() {
-    Log.showInfo(TAG, 'enableWifi');
     let result = wifi.enableWifi();
     Log.showInfo(TAG, `enableWifi, result: ${result}`);
   }
 
   disableWifi() {
-    Log.showInfo(TAG, 'disableWifi');
     let result = wifi.disableWifi();
     Log.showInfo(TAG, `disableWifi, result: ${result}`);
   }

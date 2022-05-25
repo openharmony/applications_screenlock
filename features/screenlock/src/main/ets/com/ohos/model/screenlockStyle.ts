@@ -31,7 +31,7 @@ class ScreenlockStyle {
     private screenMode: LockStyleMode = LockStyleMode.SlideScreenLock
 
     setMode(mode: LockStyleMode): number {
-        Log.showInfo(TAG, `setMode:${mode}`);
+        Log.showDebug(TAG, `setMode:${mode}`);
         return this.screenMode = mode
     }
 

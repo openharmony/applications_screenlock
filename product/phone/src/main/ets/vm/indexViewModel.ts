@@ -25,7 +25,7 @@ export default class IndexViewModel {
   ViewModelInit(): void{
     this.serviceInit();
     this.mode = this.getMode();
-    Log.showInfo(TAG, `ViewModelInit this.mode=${this.mode}`);
+    Log.showDebug(TAG, `ViewModelInit this.mode=${this.mode}`);
   }
 
   serviceInit() {
@@ -37,12 +37,12 @@ export default class IndexViewModel {
   }
 
   onPageShow() {
-    Log.showDebug(TAG, `onPageShow`)
+    Log.showInfo(TAG, `onPageShow`)
     ScreenLockService.notifyDrawDone();
   }
 
   ViewModelDestroy() {
-    Log.showInfo(TAG, 'ViewModelDestroy');
+    Log.showDebug(TAG, 'ViewModelDestroy');
     ScreenLockService.destroy()
   }
 }

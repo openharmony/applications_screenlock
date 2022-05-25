@@ -34,13 +34,13 @@ export default struct WifiIcon {
   @State style: any = StyleConfiguration.getStartsBarWifiComponentStyle()
 
   aboutToAppear() {
-    Log.showDebug(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, `aboutToAppear`)
     this.mStatusBarGroupComponentData = StatusBarVM.getStatusBarGroupComponentData(this.mGroupId)
     mWifiModel.initWifiModel()
   }
 
   aboutToDisappear() {
-    Log.showDebug(TAG, `aboutToDisappear`)
+    Log.showInfo(TAG, `aboutToDisappear`)
   }
 
   build() {

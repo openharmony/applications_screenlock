@@ -33,7 +33,7 @@ export default struct SlideScreenlock {
   @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ""
   private mHeightPx : number = 48
   aboutToAppear() {
-    Log.showDebug(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
   }
 

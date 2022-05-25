@@ -109,7 +109,7 @@ export default class AccountsModel {
     }
 
     private addAllUsers() {
-        Log.showInfo(TAG, "start getAllUsers")
+        Log.showDebug(TAG, "start getAllUsers")
         osAccount.getAccountManager().queryAllCreatedOsAccounts().then((list) => {
             Log.showDebug(TAG, "start sort")
             let accountList = [];
@@ -151,9 +151,8 @@ export default class AccountsModel {
     onUserSwitch(userId: number) {
         Log.showDebug(TAG, "onUserSwitch:" + userId)
         osAccount.getAccountManager().activateOsAccount(userId).then(() => {
-            Log.showInfo(TAG, "activateOsAccount")
+            Log.showInfo(TAG, "activateOsAccount : " + userId);
         })
-        Log.showDebug(TAG, "onUserSwitch:" + userId + "finish")
     }
 
     authUser(challenge, authType: AuthType, authLevel: number, callback) {
@@ -204,17 +203,17 @@ export default class AccountsModel {
                 inputData.onSetData(passType, uint8PW);
             }
         })
-        Log.showInfo(TAG, `registerInputer result:${result} `);
+        Log.showInfo(TAG, `registerInputer result:${result}`);
         return result;
     }
 
     unregisterInputer() {
-        Log.showInfo(TAG, `unregisterInputer`);
+        Log.showDebug(TAG, `unregisterInputer`);
         this.pinAuthManager.unregisterInputer();
     }
 
     modelFinish() {
-        Log.showInfo(TAG, "start modelFinish")
+        Log.showDebug(TAG, "start modelFinish")
     }
 
     isActivateAccount(callback: Callback<boolean>) {

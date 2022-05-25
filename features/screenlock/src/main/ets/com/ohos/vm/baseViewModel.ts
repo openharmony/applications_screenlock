@@ -34,7 +34,7 @@ export default class BaseViewModel {
     }
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, 'ViewModelInit');
+        Log.showDebug(TAG, 'ViewModelInit');
         this.prompt = $r('app.string.input');
     }
 
@@ -80,7 +80,6 @@ export default class BaseViewModel {
         this.updateStorage(callback)
         //notify the base service that the unlock is fail
         service.notifyScreenResult(UnlockResult.Fail);
-        Log.showDebug(TAG, `changePrompt end`)
     }
 
     getFreezingTimeNm(freezingMillisecond: number): string {
