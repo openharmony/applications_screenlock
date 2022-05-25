@@ -41,8 +41,9 @@ export class UserInfo {
 
 async function getCurrentAccountInfo(): Promise<AccountInfo> {
   let accountInfos = await AccountManager.getAccountManager().queryAllCreatedOsAccounts();
+  Log.showInfo(TAG, `accountInfos size:${accountInfos.length}`);
   for (let accountInfo of accountInfos) {
-    Log.showInfo(TAG, `accountInfo: ${accountInfo.localId}, isActive: ${accountInfo.isActived}`);
+    Log.showDebug(TAG, `accountInfo: ${accountInfo.localId}, isActive: ${accountInfo.isActived}`);
     if (accountInfo.isActived) {
       return accountInfo;
     }
@@ -68,7 +69,7 @@ export default class SwitchUserManager {
   }
 
   constructor() {
-    Log.showInfo(TAG, `SwitchUserManager constructor`);
+    Log.showDebug(TAG, `SwitchUserManager constructor`);
     AccountManager.getAccountManager().on(USER_CHANGE_EVENT, SUBSCRIBE_KEY, this.handleUserChange.bind(this));
   }
 

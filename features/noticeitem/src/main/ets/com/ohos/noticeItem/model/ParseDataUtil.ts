@@ -39,8 +39,11 @@ type NotificationContent = {
 }
 
 async function getUserId(uid) {
-  let userId = await AccountManager.getAccountManager().getOsAccountLocalIdFromUid(uid);
-  Log.showInfo(TAG, `getOsAccountLocalIdFromUid uid = ${uid}, userId = ${userId}`);
+  let userId = await AccountManager.getAccountManager().getOsAccountLocalIdFromUid(uid)
+    .catch((err)=>{
+      Log.showError(TAG, `getOsAccountLocalIdFromUid error error: ${JSON.stringify(err)}`);
+    })
+  Log.showDebug(TAG, `getOsAccountLocalIdFromUid uid = ${uid}, userId = ${userId}`);
   return userId;
 }
 
@@ -53,8 +56,8 @@ export default class ParseDataUtil {
     if (!request) {
       return Promise.reject('consumeCallback request is empty');
     }
-    Log.showInfo(TAG, `parse data start, want = ${JSON.stringify(request.wantAgent)}`);
-    Log.showInfo(TAG, `actionButtons = ${JSON.stringify(request.actionButtons)}`);
+    Log.showDebug(TAG, `parse data start, want = ${JSON.stringify(request.wantAgent)}`+
+      `actionButtons = ${JSON.stringify(request.actionButtons)}`);
     let userId = await getUserId(request.creatorUid);
     let appMessage = await ParseDataUtil.getAppData(request.creatorBundleName, userId);
     let notificationItem: NotificationItemData = {
@@ -84,7 +87,7 @@ export default class ParseDataUtil {
       deviceId: request.deviceId,
       groupName: request.groupName??request.hashcode
     };
-    Log.showInfo(TAG, `notificationItem construct over ====================`);
+    Log.showDebug(TAG, `notificationItem construct over`);
     notificationItem = {
       ...notificationItem, ...ParseDataUtil.getContentByType(request?.content?.contentType, request)
     }
@@ -98,9 +101,9 @@ export default class ParseDataUtil {
    * @return {object} appData
    */
   static async getAppData(bundleName, userId) {
-    Log.showInfo(TAG, `getAppName start by ${bundleName}`);
+    Log.showDebug(TAG, `getAppName start by ${bundleName}`);
     if (appDataMap.has(bundleName)) {
-      Log.showInfo(TAG, `getAppData success.`);
+      Log.showDebug(TAG, `getAppData success.`);
       return appDataMap.get(bundleName);
     }
     let data = await BundleManager.getBundleInfo(TAG, bundleName, 0, userId);
@@ -167,10 +170,10 @@ export default class ParseDataUtil {
         ['expandedTitle', ''], ['picture', '']], request.content.picture)
         break;
       default:
-        Log.showInfo(TAG, 'no match content type');
+        Log.showDebug(TAG, 'no match content type');
         break;
     }
-    Log.showInfo(TAG, `notificationType = ${notificationType}, content = ${JSON.stringify(content)}`);
+    Log.showDebug(TAG, `notificationType = ${notificationType}, content = ${JSON.stringify(content)}`);
     return content
   }
 }

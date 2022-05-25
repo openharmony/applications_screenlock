@@ -44,40 +44,40 @@ export default class DateTimeViewModel {
     unSubscriber?: unsubscribe;
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, 'ViewModelInit');
+        Log.showDebug(TAG, 'ViewModelInit');
 
         this.getAndSetDateTime.bind(this)()
         commonEvent.createSubscriber(mCommonEventSubscribeInfo, this.createSubscriberCallBack.bind(this));
         this.unSubscriber = EventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
             this.setDateTime(args.date)
         });
-        Log.showInfo(TAG, 'ViewModelInit end');
+        Log.showDebug(TAG, 'ViewModelInit end');
     }
 
     private getAndSetDateTime() {
-        Log.showInfo(TAG, `getAndSetDateTime`)
+        Log.showDebug(TAG, `getAndSetDateTime`)
         this.setDateTime(new Date())
     }
 
     private setDateTime(date: Date) {
-        Log.showInfo(TAG, `setDateTime`)
+        Log.showDebug(TAG, `setDateTime`)
         this.timeVal = sTimeManager.formatTime(date)
         this.dateVal = DateTimeCommon.getSystemDate()
         this.weekVal = DateTimeCommon.getSystemWeek()
     }
 
     private createSubscriberCallBack(err, data) {
-        Log.showInfo(TAG, "start createSubscriberCallBack " + JSON.stringify(data))
+        Log.showDebug(TAG, "start createSubscriberCallBack " + JSON.stringify(data))
         mEventSubscriber = data
         commonEvent.subscribe(data, this.getAndSetDateTime.bind(this));
-        Log.showInfo(TAG, "start createSubscriberCallBack finish")
+        Log.showDebug(TAG, "start createSubscriberCallBack finish")
     }
 
     stopPolling() {
-        Log.showInfo(TAG, `stopPolling start`)
+        Log.showDebug(TAG, `stopPolling start`)
         commonEvent.unsubscribe(mEventSubscriber);
         this.unSubscriber && this.unSubscriber();
         this.unSubscriber = undefined;
-        Log.showInfo(TAG, `stopPolling end`)
+        Log.showDebug(TAG, `stopPolling end`)
     }
 }

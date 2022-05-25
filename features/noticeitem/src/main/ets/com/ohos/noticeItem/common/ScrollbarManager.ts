@@ -20,23 +20,23 @@ export default class ScrollbarManager {
   static NotificationScrollBar = new Set<Scroller>();
 
   static add(scroller) {
-    Log.showInfo(TAG, `add`);
+    Log.showDebug(TAG, `add`);
     let res = ScrollbarManager.NotificationScrollBar.add(scroller);
-    Log.showInfo(TAG, `add set's size:${res.size}`);
+    Log.showDebug(TAG, `add set's size:${res.size}`);
   }
 
   static delete(scroller) {
-    Log.showInfo(TAG, `delete`);
+    Log.showDebug(TAG, `delete`);
     ScrollbarManager.NotificationScrollBar.delete(scroller);
   }
 
   static clear() {
-    Log.showInfo(TAG, `clear`);
+    Log.showDebug(TAG, `clear`);
     ScrollbarManager.NotificationScrollBar.clear();
   }
 
   static restoreOtherScroll(scroller) {
-    Log.showInfo(TAG, `restoreOtherScroll`);
+    Log.showDebug(TAG, `restoreOtherScroll`);
     if (scroller.currentOffset().xOffset > 0) {
       ScrollbarManager.NotificationScrollBar.forEach((item) => {
         if (item !== scroller && item.currentOffset().xOffset > 0) {

@@ -14,7 +14,7 @@
  */
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
-import Constants from '../../common/constants'
+import Constants from '../../common/Constants'
 import ViewModel from '../../vm/mixedPSDViewModel'
 
 const TAG = 'ScreenLock-MixedPSD'
