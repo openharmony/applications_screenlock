@@ -24,7 +24,7 @@ export default class LockIconViewModel {
     iconPath: any= {}
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, `ViewModelInit`);
+        Log.showDebug(TAG, `ViewModelInit`);
         this.iconPath = $r('app.media.ic_public_lock_filled');
         this.cutMessage = $r('app.string.lock_prompt')
     }

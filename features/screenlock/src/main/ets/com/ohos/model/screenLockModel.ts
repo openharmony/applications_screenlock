@@ -22,7 +22,7 @@ const TAG = 'ScreenLock-ScreenLockModel';
 
 export default class ScreenLockModel {
     eventListener(typeName: string, callback: Callback<void>) {
-        Log.showInfo(TAG, `eventListener:typeName ${typeName}`);
+        Log.showDebug(TAG, `eventListener:typeName ${typeName}`);
         switch (typeName) {
             case "endScreenOn":
             case "unlockScreen":
@@ -40,27 +40,22 @@ export default class ScreenLockModel {
             default:
                 Log.showError(TAG, `eventListener:typeName ${typeName}`)
         }
-
-        Log.showInfo(TAG, `eventListener:typeName ${typeName} finish`);
     }
 
     eventCancelListener(typeName: string) {
-        Log.showInfo(TAG, `eventCancleListener:typeName ${typeName}`);
+        Log.showDebug(TAG, `eventCancleListener:typeName ${typeName}`);
         // As off has some problem and there is no case to cancel, do nothing
     }
 
     sendScreenLockEvent(typeName: string, typeNo: number, callback) {
         Log.showInfo(TAG, `sendScreenLockEvent: typeName ${typeName} typeNo  ${typeNo} `);
         ScreenLockMar.sendScreenLockEvent(typeName, typeNo, (err, data) => {
-            Log.showInfo(TAG, `sendScreenLockEvent:callback err:${JSON.stringify(err)}  data:${JSON.stringify(data)}`);
             callback(err, data);
         })
     }
 
     showScreenLockWindow(callback: Callback<void>) {
-        Log.showInfo(TAG, 'showScreenLockWindow');
         windowManager.find(Constants.WIN_NAME).then((win) => {
-            Log.showInfo(TAG, 'find window finish');
             win.show().then(() => {
                 Log.showInfo(TAG, `window show`);
                 callback();
@@ -69,9 +64,7 @@ export default class ScreenLockModel {
     }
 
     hiddenScreenLockWindow(callback: Callback<void>) {
-        Log.showInfo(TAG, 'hiddenScreenLockWindow');
         windowManager.find(Constants.WIN_NAME).then((win) => {
-            Log.showInfo(TAG, 'find window finish');
             win.hide().then(() => {
                 Log.showInfo(TAG, `window hide`);
                 callback();

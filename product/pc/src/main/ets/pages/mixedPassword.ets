@@ -33,7 +33,7 @@ export default struct MixedPassword {
     setAppBgColor('#00000000')
     CommonStyleManager.setAbilityPageName(TAG)
     let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-    Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+    Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
     StyleManager.setStyle()
   }
 

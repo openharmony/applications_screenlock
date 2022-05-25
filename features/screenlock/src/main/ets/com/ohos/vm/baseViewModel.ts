@@ -34,7 +34,7 @@ export default class BaseViewModel {
     }
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, 'ViewModelInit');
+        Log.showDebug(TAG, 'ViewModelInit');
         this.prompt = $r('app.string.input');
     }
 
@@ -49,11 +49,11 @@ export default class BaseViewModel {
                 promptText += TRY_AGAIN;
                 setTimeout(this.countdown.bind(this), Constants.INTERVAL)
             } else {
-                Log.showInfo(TAG, `countdown clearInterval`)
+                Log.showDebug(TAG, `countdown clearInterval`)
                 this.inhibitInput = false
                 promptText = $r('app.string.input');
             }
-            Log.showInfo(TAG, `countdown promptText:${promptText}`)
+            Log.showDebug(TAG, `countdown promptText:${promptText}`)
             this.prompt = promptText;
         })
     }
@@ -80,15 +80,12 @@ export default class BaseViewModel {
         this.updateStorage(callback)
         //notify the base service that the unlock is fail
         service.notifyScreenResult(UnlockResult.Fail);
-        Log.showInfo(TAG, `changePrompt end`)
     }
 
     getFreezingTimeNm(freezingMillisecond: number): string {
-        Log.showInfo(TAG, `getFreezingTimeNm start`)
         let minute = Math.floor(freezingMillisecond / (60 * 1000));
-        Log.showInfo(TAG, `getFreezingTimeNm minute:${minute}`)
         let second = Math.round((freezingMillisecond % (60 * 1000)) / 1000);
-        Log.showInfo(TAG, `getFreezingTimeNm second:${second}`)
+        Log.showInfo(TAG, `getFreezingTimeNm minute:${minute}, second:${second}`)
         let timeName = '';
         if (minute != 0) {
             timeName += minute + MINUTE_NM
@@ -96,7 +93,6 @@ export default class BaseViewModel {
         if (second != 0) {
             timeName += second + SECOND_NM
         }
-        Log.showInfo(TAG, `getFreezingTimeNm end`)
         return timeName;
     }
 

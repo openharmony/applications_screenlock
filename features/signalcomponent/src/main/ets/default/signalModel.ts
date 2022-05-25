@@ -37,7 +37,7 @@ var mStateLink;
 
 export class SignalModel {
   initSignalModel() {
-    Log.showInfo(TAG, 'initSignalModel');
+    Log.showDebug(TAG, 'initSignalModel');
     mLevelLink = AppStorage.SetAndLink("cellularLevel", Constants.CELLULAR_NO_SIM_CARD);
     mTypeLink = AppStorage.SetAndLink("cellularType", Constants.NETWORK_TYPE_UNKNOWN);
     mStateLink = AppStorage.SetAndLink("networkState", Constants.NET_NULL);
@@ -45,7 +45,7 @@ export class SignalModel {
   }
 
   uninitSignalModel() {
-    Log.showInfo(TAG, 'uninitSignalModel');
+    Log.showDebug(TAG, 'uninitSignalModel');
     this.unInitObserver();
   }
 
@@ -55,7 +55,7 @@ export class SignalModel {
   checkCellularStatus() {
     let cellularStatus;
     let slotId = 0;
-    Log.showInfo(TAG, 'enter checkCellularStatus ============');
+    Log.showInfo(TAG, 'enter checkCellularStatus');
 
     Sim.hasSimCard(slotId, (err, value) => {
       if (value === true) {
@@ -69,7 +69,6 @@ export class SignalModel {
             mTypeLink.set(Constants.NETWORK_TYPE_UNKNOWN);
           } else {
             // Call interface succeed，error is null
-            Log.showInfo(TAG, `success to getSignalInformation: ${JSON.stringify(value)}`);
             // Since the value might be empty, set it as no signal by hand
             if (!value || !value.length) {
               Log.showError(TAG, 'value from api is empty, set 0');
@@ -82,7 +81,6 @@ export class SignalModel {
             }
           }
 
-          Log.showInfo(TAG, 'enter checknetworkState ============');
           //The interface of getting the cellular signal status is unavailable temporarily
           Radio.getNetworkState((err, value) => {
             if (err) {
@@ -92,7 +90,7 @@ export class SignalModel {
               mStateLink.set(Constants.NET_NULL);
             } else {
               // Call interface succeed，error is null
-              Log.showInfo(TAG, `success to getnetworkState: ${JSON.stringify(value)}`);
+              Log.showDebug(TAG, `success to getnetworkState: ${JSON.stringify(value)}`);
               // Since the value might be empty, set it as no signal by hand
               if (!value) {
                 Log.showError(TAG, 'value from api is empty, set 0');
@@ -122,18 +120,18 @@ export class SignalModel {
      * init the observer of the cellular and signal
      */
   initObserver() {
-    Log.showInfo(TAG, 'initObserver');
+    Log.showDebug(TAG, 'initObserver');
     isInitObserver = true;
     Observer.on('signalInfoChange', (signalInfoChange) => {
-      Log.showInfo(TAG, `signalInfoChange ${JSON.stringify(signalInfoChange)}`);
+      Log.showInfo(TAG, 'signalInfoChange');
       this.checkCellularStatus();
     });
     Observer.on('networkStateChange', (networkState) => {
-      Log.showInfo(TAG, `networkStateChange ${JSON.stringify(networkState)}`);
+      Log.showInfo(TAG, 'networkStateChange');
       this.checkCellularStatus();
     });
     Observer.on('simStateChange', (simStateInfo) => {
-      Log.showInfo(TAG, `simStateChange ${JSON.stringify(simStateInfo)}`);
+      Log.showInfo(TAG, 'simStateChange');
       this.checkCellularStatus();
     });
   }
@@ -142,7 +140,7 @@ export class SignalModel {
      * Uninit the observer of the cellular and signal
      */
   unInitObserver() {
-    Log.showInfo(TAG, 'unInitObserver');
+    Log.showDebug(TAG, 'unInitObserver');
     Observer.off('signalInfoChange');
     Observer.off('networkStateChange');
     Observer.off('simStateChange');

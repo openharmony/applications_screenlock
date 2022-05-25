@@ -32,6 +32,5 @@ export default class ShortcutViewModel {
             default:
                 Log.showError(TAG, `${shortcutType} is not support`)
         }
-        Log.showInfo(TAG, `onShortcutClick ${shortcutType} success`)
     }
 }

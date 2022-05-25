@@ -22,7 +22,7 @@ export default class WallpaperViewModel {
     screenlockWallpaper: string = ''
 
     ViewModelInit(): void{
-        Log.showInfo(TAG, 'ViewModelInit');
+        Log.showDebug(TAG, 'ViewModelInit');
         this.getScreenLockWallpaper()
     }
 
@@ -30,9 +30,9 @@ export default class WallpaperViewModel {
         Log.showInfo(TAG, 'getScreenLockWallpaper');
         WallpaperMar.getPixelMap(WallpaperMar.WALLPAPER_LOCKSCREEN, (error, data) => {
             if (error != undefined && error != null) {
-                Log.showInfo(TAG, 'getScreenLockWallpaper error:' + JSON.stringify(error));
+                Log.showError(TAG, 'getScreenLockWallpaper error:' + JSON.stringify(error));
             } else {
-                Log.showInfo(TAG, 'getScreenLockWallpaper data:' + JSON.stringify(data));
+                Log.showDebug(TAG, 'getScreenLockWallpaper data:' + JSON.stringify(data));
                 this.screenlockWallpaper = data
             }
         })

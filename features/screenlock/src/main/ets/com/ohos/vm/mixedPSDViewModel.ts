@@ -27,7 +27,7 @@ export default class MixedPSDViewModel extends BaseViewModel {
   }
 
   ViewModelInit(): void{
-    Log.showInfo(TAG, 'ViewModelInit');
+    Log.showDebug(TAG, 'ViewModelInit');
     super.ViewModelInit();
   }
 
@@ -58,7 +58,7 @@ export default class MixedPSDViewModel extends BaseViewModel {
     });
   }
 
-    clearPassword() {
+  clearPassword() {
     Log.showInfo(TAG, `clearPassword`)
     this.password = '';
   }
