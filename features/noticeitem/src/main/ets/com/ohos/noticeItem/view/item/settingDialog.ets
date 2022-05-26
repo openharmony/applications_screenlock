@@ -39,12 +39,13 @@ export default struct SettingDialog {
             .objectFit(ImageFit.Contain)
             .width($r('app.float.title_image_width'))
             .height($r('app.float.title_image_height'))
+            .margin({ left: $r("app.float.title_image_left_margin"), right: $r("app.float.title_image_right_margin") })
         }
         Text(this.itemData.appName)
           .fontSize($r('app.float.setting_title_fontsize'))
           .fontWeight(500)
       }.width(Constants.SETTING_DIALOG_WITH)
-      .margin( {top: $r('app.float.notification_appname_margin_top')} )
+      .margin({ top: $r('app.float.notification_appname_margin_top') })
       .height($r('app.float.title_font_height'))
 
       Row() {
@@ -52,11 +53,11 @@ export default struct SettingDialog {
           Text($r('app.string.closeNotification'))
             .fontSize($r('app.float.setting_cont_fontsize'))
             .fontColor($r('app.color.dialog_font_color'))
-            .height(Constants.SETTING_CONT_HEIGHT)
+            .height($r("app.float.setting_cont_height"))
         }.alignItems(HorizontalAlign.Center)
-        .width(Constants.SETTING_CONTENT_WITH)
+        .width($r("app.float.setting_cont_width"))
       }
-      .width(Constants.SETTING_DIALOG_WITH)
+      .width($r("app.float.setting_dialog_width"))
       .alignItems(VerticalAlign.Center)
       .align(Alignment.Center)
       .margin({ top: $r('app.float.close_notification_margin_top') })
@@ -72,10 +73,10 @@ export default struct SettingDialog {
             .fontColor($r('app.color.dialog_font_back_color'))
             .height(Constants.SETTING_CONT_HEIGHT)
         }.alignItems(HorizontalAlign.Center)
-        .width(Constants.SETTING_CONTENT_WITH)
+        .width($r("app.float.setting_cont_width"))
         .align(Alignment.Center)
       }
-      .width(Constants.SETTING_DIALOG_WITH)
+      .width($r("app.float.setting_dialog_width"))
       .alignItems(VerticalAlign.Center)
       .border({ width: $r('app.float.setting_border_width'), color: Color.White,
         radius: $r('app.float.setting_border_radius') })
@@ -90,10 +91,10 @@ export default struct SettingDialog {
             .fontSize($r('app.float.setting_cont_fontsize'))
             .fontColor($r('app.color.dialog_font_back_color'))
         }.alignItems(HorizontalAlign.Center)
-        .width(Constants.SETTING_CONTENT_WITH)
+        .width($r("app.float.setting_cont_width"))
       }
-      .width(Constants.SETTING_DIALOG_WITH)
-      .margin( {top: $r('app.float.notification_cancle_margin_top')} )
+      .width($r("app.float.setting_dialog_width"))
+      .margin({ top: $r('app.float.notification_cancle_margin_top') })
       .alignItems(VerticalAlign.Center)
       .align(Alignment.Center)
       .border({ width: $r('app.float.setting_border_width'), color: Color.White,
@@ -101,9 +102,9 @@ export default struct SettingDialog {
       .backgroundColor($r('app.color.dialog_font_color'))
       .onClick(this.closeAbility.bind(this))
     }.height(Constants.SETTING_DIALOG_HEIGHT)
-     .width(Constants.SETTING_DIALOG_WIDTH)
-     .backgroundColor('#FFFFFFFF')
-     .border({ width: $r('app.float.setting_border_width'), color: Color.White,
+    .width($r("app.float.setting_dialog_Width"))
+    .backgroundColor('#FFFFFFFF')
+    .border({ width: $r('app.float.setting_border_width'), color: Color.White,
       radius: $r('app.float.notification_border_radius') })
   }
 

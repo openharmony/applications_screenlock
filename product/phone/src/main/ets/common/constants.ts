@@ -26,7 +26,9 @@ export default class Constants {
   static NOTIFICATION_AREA_WIDTH = '96%'
   static NOTIFICATION_AREA_HEIGHT = '40%'
   static LOCKICON_AREA_WIDTH = '15%'
+  static P_LOCKICON_AREA_WIDTH = '77vp'
   static DATETIME_AREA_WIDTH = '20%'
+  static P_DATETIME_AREA_WIDTH = '123vp'
 
   static PASSWORD_AREA_WIDTH = '312vp'
 

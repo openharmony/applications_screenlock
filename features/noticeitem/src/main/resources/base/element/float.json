@@ -1,6 +1,10 @@
 {
   "float": [
     {
+      "name": "notificationList_width",
+      "value": "834vp"
+    },
+    {
       "name": "notification_title_fontsize",
       "value": "20"
     },
@@ -93,6 +97,14 @@
       "value": "30"
     },
     {
+      "name": "title_image_left_margin",
+      "value": "0"
+    },
+    {
+      "name": "title_image_right_margin",
+      "value": "0"
+    },
+    {
       "name": "title_font_height",
       "value": "28vp"
     },
@@ -133,6 +145,14 @@
       "value": "32"
     },
     {
+      "name": "setting_cont_height",
+      "value": "40vp"
+    },
+    {
+      "name": "setting_cont_width",
+      "value": "300vp"
+    },
+    {
       "name": "setting_border_width",
       "value": "1"
     },
@@ -161,6 +181,10 @@
       "value": "40"
     },
     {
+      "name": "confirm_title_width",
+      "value": "330vp"
+    },
+    {
       "name": "confirm_cont_fontsize",
       "value": "32"
     },
@@ -177,12 +201,24 @@
       "value": "23vp"
     },
     {
+      "name": "confirm_button_width",
+      "value": "140"
+    },
+    {
       "name": "icon_item_fontsize",
       "value": "18"
     },
     {
       "name": "setting_dialog_dy",
       "value": "200"
+    },
+    {
+      "name": "setting_dialog_width",
+      "value": "330vp"
+    },
+    {
+      "name": "setting_dialog_Width",
+      "value": "362vp"
     },
     {
       "name": "confirm_dialog_dy",
@@ -215,6 +251,10 @@
     {
       "name": "device_border_radius",
       "value": "30"
+    },
+    {
+      "name": "device_image_radius",
+      "value": "0"
     }
   ]
 }

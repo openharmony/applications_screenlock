@@ -5,6 +5,10 @@
       "value": "148"
     },
     {
+      "name": "time_fontWeight",
+      "value": "400"
+    },
+    {
       "name": "time_top_margin",
       "value": "10"
     },
@@ -19,7 +23,18 @@
     {
       "name": "date_week_area_height",
       "value": "48"
+    },
+    {
+      "name": "date_lunar_calendar_height",
+      "value": "0"
+    },
+    {
+      "name": "date_lunar_calendar_fontSize",
+      "value": "14fp"
+    },
+    {
+      "name": "date_lunar_calendar_top_margin",
+      "value": "6vp"
     }
-
   ]
 }

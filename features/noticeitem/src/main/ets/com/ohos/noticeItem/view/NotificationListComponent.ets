@@ -57,6 +57,6 @@ export default struct NotificationListComponent {
         }
       }, (list: any) => JSON.stringify(list.map((item) => item.hashcode)))
     }
-    .width('100%')
+    .width($r("app.float.notificationList_width"))
   }
 }

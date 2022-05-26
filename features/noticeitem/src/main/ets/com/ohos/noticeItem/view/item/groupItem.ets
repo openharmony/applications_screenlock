@@ -61,7 +61,9 @@ export default struct GroupItem {
               })
             }.backgroundColor($r('app.color.notificationitem_background'))
             .width(Constants.FULL_CONTAINER_WIDTH)
-
+            if (this.toExpand) {
+              Row() {}.height(1)
+            }
             Row() {
               ContentList({ groupData: this.groupData, toExpand: this.toExpand })
             }.width(Constants.FULL_CONTAINER_WIDTH)
