@@ -2,7 +2,7 @@
   "float": [
     {
       "name": "notificationList_width",
-      "value": "834vp"
+      "value": "336vp"
     },
     {
       "name": "notification_title_fontsize",
@@ -90,19 +90,19 @@
     },
     {
       "name": "title_image_width",
-      "value": "30"
+      "value": "24vp"
     },
     {
       "name": "title_image_height",
-      "value": "30"
+      "value": "24vp"
     },
     {
       "name": "title_image_left_margin",
-      "value": "0"
+      "value": "24vp"
     },
     {
       "name": "title_image_right_margin",
-      "value": "0"
+      "value": "8vp"
     },
     {
       "name": "title_font_height",
@@ -114,7 +114,7 @@
     },
     {
       "name": "message_font_margin_t",
-      "value": "14vp"
+      "value": "23vp"
     },
     {
       "name": "title_name_fontsize",
@@ -138,11 +138,11 @@
     },
     {
       "name": "setting_title_fontsize",
-      "value": "40"
+      "value": "20fp"
     },
     {
       "name": "setting_cont_fontsize",
-      "value": "32"
+      "value": "16fp"
     },
     {
       "name": "setting_cont_height",
@@ -150,7 +150,7 @@
     },
     {
       "name": "setting_cont_width",
-      "value": "300vp"
+      "value": "288vp"
     },
     {
       "name": "setting_border_width",
@@ -178,19 +178,19 @@
     },
     {
       "name": "confirm_title_fontsize",
-      "value": "40"
+      "value": "20fp"
     },
     {
       "name": "confirm_title_width",
-      "value": "330vp"
+      "value": "288vp"
     },
     {
       "name": "confirm_cont_fontsize",
-      "value": "32"
+      "value": "16fp"
     },
     {
       "name": "confirm_divider_height",
-      "value": "44"
+      "value": "24vp"
     },
     {
       "name": "confirm_button_height",
@@ -202,7 +202,7 @@
     },
     {
       "name": "confirm_button_width",
-      "value": "140"
+      "value": "128fp"
     },
     {
       "name": "icon_item_fontsize",
@@ -210,23 +210,23 @@
     },
     {
       "name": "setting_dialog_dy",
-      "value": "200"
+      "value": "288vp"
     },
     {
       "name": "setting_dialog_width",
-      "value": "330vp"
+      "value": "304vp"
     },
     {
       "name": "setting_dialog_Width",
-      "value": "362vp"
+      "value": "336vp"
     },
     {
       "name": "confirm_dialog_dy",
-      "value": "250"
+      "value": "310vp"
     },
     {
       "name": "close_notification_margin_top",
-      "value": "15vp"
+      "value": "17vp"
     },
     {
       "name": "notification_appname_margin_top",
@@ -234,7 +234,7 @@
     },
     {
       "name": "notification_cancle_margin_top",
-      "value": "11vp"
+      "value": "9vp"
     },
     {
       "name": "device_divider_margin_l",
@@ -254,7 +254,7 @@
     },
     {
       "name": "device_image_radius",
-      "value": "0"
+      "value": "12vp"
     }
   ]
 }

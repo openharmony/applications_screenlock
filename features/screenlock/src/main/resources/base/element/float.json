@@ -17,8 +17,16 @@
       "value": "10"
     },
     {
+      "name": "lockicon_right_margin",
+      "value": "0"
+    },
+    {
       "name": "lock_prompt_fontsize",
       "value": "32"
+    },
+    {
+      "name": "lock_Text_top_margin",
+      "value": "0"
     },
     {
       "name": "deleteall_image_opacity",
@@ -105,8 +113,16 @@
       "value": "32"
     },
     {
+      "name": "mixedpsd_prompt_text_fontsize",
+      "value": "32"
+    },
+    {
       "name": "mixedpsd_prompt_margin_bottom",
       "value": "48"
+    },
+    {
+      "name": "mixedpsd_prompt_margin_top",
+      "value": "0"
     },
     {
       "name": "mixedpsd_prompt_width",

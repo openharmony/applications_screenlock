@@ -138,6 +138,7 @@ struct ContentComponent {
           .objectFit(ImageFit.Contain)
           .width(Layout.NOTIFICATION_PIC_SIZE)
           .height(Layout.NOTIFICATION_PIC_SIZE)
+          .borderRadius($r("app.float.device_image_radius"))
       }
     }.margin({ left: Layout.ITEM_MARGIN, right: Layout.ITEM_MARGIN })
   }
