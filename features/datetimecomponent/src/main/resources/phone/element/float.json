@@ -2,31 +2,31 @@
   "float": [
     {
       "name": "time_fontsize",
-      "value": "148"
+      "value": "72fp"
     },
     {
       "name": "time_fontWeight",
-      "value": "400"
+      "value": "300"
     },
     {
       "name": "time_top_margin",
-      "value": "10"
+      "value": "11vp"
     },
     {
       "name": "time_bottom_margin",
-      "value": "10"
+      "value": "3vp"
     },
     {
       "name": "date_fontsize",
-      "value": "36"
+      "value": "18fp"
     },
     {
       "name": "date_week_area_height",
-      "value": "48"
+      "value": "24vp"
     },
     {
       "name": "date_lunar_calendar_height",
-      "value": "0"
+      "value": "19vp"
     },
     {
       "name": "date_lunar_calendar_fontSize",

@@ -5,7 +5,15 @@
       "value": "24vp"
     },
     {
-      "name": "status_bar_padding_left_right",
+      "name": "DateTime_margin_top",
+      "value": "7vp"
+    },
+    {
+      "name": "DateTime_margin_bottom",
+      "value": "52vp"
+    },
+
+    { "name": "status_bar_padding_left_right",
       "value": "24vp"
     },
     {

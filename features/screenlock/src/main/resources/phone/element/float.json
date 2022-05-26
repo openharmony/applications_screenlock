@@ -2,23 +2,31 @@
   "float": [
     {
       "name": "lockicon_width",
-      "value": "40"
+      "value": "16vp"
     },
     {
       "name": "lockicon_height",
-      "value": "45"
+      "value": "16vp"
     },
     {
       "name": "lockicon_top_margin",
-      "value": "10"
+      "value": "60vp"
     },
     {
       "name": "lockicon_bottom_margin",
       "value": "10"
     },
     {
+      "name": "lockicon_right_margin",
+      "value": "4vp"
+    },
+    {
       "name": "lock_prompt_fontsize",
-      "value": "32"
+      "value": "14vp"
+    },
+    {
+      "name": "lock_Text_top_margin",
+      "value": "58vp"
     },
     {
       "name": "deleteall_image_opacity",
@@ -90,7 +98,7 @@
     },
     {
       "name": "digitalpsd_row_height",
-      "value": "52vp"
+      "value": "54vp"
     },
     {
       "name": "digitalpsd_key_area_height",
@@ -102,11 +110,19 @@
     },
     {
       "name": "mixedpsd_prompt_fontsize",
-      "value": "32"
+      "value": "16fp"
+    },
+    {
+      "name": "mixedpsd_prompt_margin_top",
+      "value": "239vp"
+    },
+    {
+      "name": "mixedpsd_prompt_text_fontsize",
+      "value": "20fp"
     },
     {
       "name": "mixedpsd_prompt_margin_bottom",
-      "value": "48"
+      "value": "24vp"
     },
     {
       "name": "mixedpsd_prompt_width",
@@ -122,15 +138,15 @@
     },
     {
       "name": "mixedpsd_input_width",
-      "value": "600"
+      "value": "288vp"
     },
     {
       "name": "mixedpsd_input_height",
-      "value": "72"
+      "value": "36vp"
     },
     {
       "name": "mixedpsd_input_margin_bottom",
-      "value": "128"
+      "value": "16vp"
     },
     {
       "name": "custompsd_prompt_fontsize",

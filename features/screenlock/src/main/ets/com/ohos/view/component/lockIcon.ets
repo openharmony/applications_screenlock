@@ -40,6 +40,7 @@ export default struct LockIcon {
         .fillColor($r('app.color.lock_ic_color'))
       Text(this.mViewModel.cutMessage).fontSize($r('app.float.lock_prompt_fontsize'))
         .fontColor($r('app.color.lock_prompt_color'))
+        .margin({ top: $r("app.float.lock_Text_top_margin") })
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
     .gesture(GestureGroup(GestureMode.Exclusive, TapGesture({ count: 2 })

@@ -69,15 +69,16 @@ export default struct SlideScreenlock {
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Start }) {
         Column() {
         }
-        .height($r('app.float.status_bar_height'))
+        .height(0)
 
         Column() {
           LockIcon()
-        }.height(Constants.LOCKICON_AREA_WIDTH)
+        }.height(Constants.P_LOCKICON_AREA_WIDTH)
 
         Column() {
           DateTime({ isShowDate: true })
-        }.height(Constants.DATETIME_AREA_WIDTH)
+        }.height(Constants.P_DATETIME_AREA_WIDTH)
+        .margin({ top: $r("app.float.DateTime_margin_top"), bottom: $r("app.float.DateTime_margin_bottom") })
 
         Column() {
           NotificationListComponent()
