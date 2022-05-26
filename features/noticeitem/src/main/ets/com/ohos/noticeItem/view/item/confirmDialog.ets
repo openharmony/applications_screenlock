@@ -34,26 +34,27 @@ export default struct ConfirmDialog {
       Row() {
         Text(this.title)
           .fontSize($r('app.float.confirm_title_fontsize'))
-          .fontWeight(FontWeight.Bold)
-      }.width(Constants.SETTING_DIALOG_WITH)
-      .margin({top:$r('app.float.title_font_margin_t')})
+          .fontWeight(FontWeight.Medium)
+      }.width($r("app.float.confirm_title_width"))
+      .margin({ top: $r('app.float.title_font_margin_t') })
 
       Row() {
         Text($r('app.string.confirm_message', this.bundleName))
           .fontSize($r('app.float.confirm_cont_fontsize'))
-      }.width(Constants.SETTING_DIALOG_WITH)
-      .margin({top:$r('app.float.message_font_margin_t')})
+      }.width($r("app.float.confirm_title_width"))
+      .margin({ top: $r('app.float.message_font_margin_t') })
 
       Row() {
         Column() {
           Text($r('app.string.cancel'))
             .fontSize($r('app.float.confirm_cont_fontsize'))
-            .fontColor(Color.Blue)
+            .fontColor($r("app.color.dialog_back_color"))
         }.onClick(() => {
           this.controller.close();
         })
         .alignItems(HorizontalAlign.Center)
         .width(Constants.CONFIRM_BUTTON_WITH)
+
         Divider()
           .vertical(true)
           .color($r('app.color.confirm_divider_color'))
@@ -62,7 +63,7 @@ export default struct ConfirmDialog {
         Column() {
           Text($r('app.string.close'))
             .fontSize($r('app.float.confirm_cont_fontsize'))
-            .fontColor(Color.Red)
+            .fontColor($r("app.color.confirm_text_color"))
         }.onClick(() => {
           Log.showDebug(TAG, `confirm button of TimeDialog on click`)
           this.controller.close();
@@ -72,9 +73,9 @@ export default struct ConfirmDialog {
         .width(Constants.CONFIRM_BUTTON_WITH)
       }
       .width(Constants.CONFIRM_DIALOG_WITH)
-      .margin({top:$r('app.float.confirm_button_margin_t')})
+      .margin({ top: $r('app.float.confirm_button_margin_t') })
     }.height(Constants.CONFIRM_DIALOG_HEIGHT)
-    .width(Constants.SETTING_DIALOG_WIDTH)
+    .width($r("app.float.setting_dialog_Width"))
     .backgroundColor('#FFFFFFFF')
     .border({ width: $r('app.float.setting_border_width'), color: Color.White,
       radius: $r('app.float.notification_border_radius') })
