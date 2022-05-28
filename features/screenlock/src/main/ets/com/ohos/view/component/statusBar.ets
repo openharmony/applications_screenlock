@@ -31,7 +31,7 @@ export default struct statusBar {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    if (deviceTypeInfo === "phone") {
+    if (deviceTypeInfo === "phone" || deviceTypeInfo === "default") {
       this.isShow = false
     } else {
       this.isShow = true
