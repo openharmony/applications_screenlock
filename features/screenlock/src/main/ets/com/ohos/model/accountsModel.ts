@@ -73,11 +73,11 @@ export enum ResultCode {
     FAIL = 1,
 }
 
-let mCurrentUserId: number = 100
 
 export default class AccountsModel {
     userAuthManager = new osAccount.UserAuth();
     pinAuthManager = new osAccount.PINAuth();
+    mCurrentUserId: number = 100
 
     modelInit() {
         Log.showDebug(TAG, "start ModelInit")
@@ -87,7 +87,7 @@ export default class AccountsModel {
         Log.showInfo(TAG, `eventListener:typeName ${typeName}`);
         osAccount.getAccountManager().on(typeName, name, (userId: number) => {
             Log.showInfo(TAG, `on ${typeName} callback userId = ${userId}`)
-            mCurrentUserId = userId
+            this.mCurrentUserId = userId
             callback()
         })
     }
@@ -119,7 +119,7 @@ export default class AccountsModel {
             for (const user of list) {
                 Log.showDebug(TAG, `start get user, localId=${user.localId}, localName=${user.localName}`);
                 if (user.isActived) {
-                    mCurrentUserId = user.localId
+                    this.mCurrentUserId = user.localId
                 }
                 let userData: UserData = {
                     userId: user.localId,
@@ -157,9 +157,9 @@ export default class AccountsModel {
     }
 
     authUser(challenge, authType: AuthType, authLevel: number, callback) {
-        Log.showDebug(TAG, `authUser param: userId ${mCurrentUserId} challenge ${challenge}`);
+        Log.showDebug(TAG, `authUser param: userId ${this.mCurrentUserId} challenge ${challenge}`);
         Trace.end(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
-        this.userAuthManager.authUser(mCurrentUserId, challenge, authType, authLevel, {
+        this.userAuthManager.authUser(this.mCurrentUserId, challenge, authType, authLevel, {
             onResult: (result, extraInfo) => {
                 Log.showInfo(TAG, `authUser UserAuthManager.authUser onResult`);
                 Trace.start(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
@@ -220,10 +220,13 @@ export default class AccountsModel {
     }
 
     isActivateAccount(callback: Callback<boolean>) {
-        Log.showDebug(TAG, `isActivateAccount userId:${mCurrentUserId}`)
-        osAccount.getAccountManager().isOsAccountActived(mCurrentUserId).then((isActivate) => {
-            Log.showInfo(TAG, `isActivateAccount userId:${mCurrentUserId} result: ${isActivate}`)
+        Log.showDebug(TAG, `isActivateAccount userId:${this.mCurrentUserId}`)
+        osAccount.getAccountManager().isOsAccountActived(this.mCurrentUserId).then((isActivate) => {
+            Log.showInfo(TAG, `isActivateAccount userId:${this.mCurrentUserId} result: ${isActivate}`)
             callback(isActivate)
         })
+    }
+    getCurrentUserId() {
+        return this.mCurrentUserId;
     }
 }
