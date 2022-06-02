@@ -17,6 +17,7 @@ import osAccount from '@ohos.account.osAccount'
 import commonEvent from '@ohos.commonEvent';
 import util from '@ohos.util';
 import {Callback} from 'basic';
+import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import {UserData} from '../data/userData'
 
@@ -157,9 +158,11 @@ export default class AccountsModel {
 
     authUser(challenge, authType: AuthType, authLevel: number, callback) {
         Log.showDebug(TAG, `authUser param: userId ${mCurrentUserId} challenge ${challenge}`);
+        Trace.end(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
         this.userAuthManager.authUser(mCurrentUserId, challenge, authType, authLevel, {
             onResult: (result, extraInfo) => {
                 Log.showInfo(TAG, `authUser UserAuthManager.authUser onResult`);
+                Trace.start(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
                 callback(result, extraInfo);
             },
             onAcquireInfo: (moduleId, acquire, extraInfo) => {

@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "ScreenLock"
+    },
+    {
+      "name": "mainability_description",
+      "value": "JS_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "monday",
+      "value": "Monday"
+    },
+    {
+      "name": "tuesday",
+      "value": "Tuesday"
+    },
+    {
+      "name": "wednesday",
+      "value": "Wednesday"
+    },
+    {
+      "name": "thursday",
+      "value": "Thursday"
+    },
+    {
+      "name": "friday",
+      "value": "Friday"
+    },
+    {
+      "name": "saturday",
+      "value": "Saturday"
+    },
+    {
+      "name": "sunday",
+      "value": "Sunday"
+    }
+  ]
+}

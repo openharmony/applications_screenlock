@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../common/constants'
 import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
@@ -66,6 +67,7 @@ export default class CustomPSDViewModel extends BaseViewModel {
             this.updateStorage(callback);
             return;
         }
+        Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
         service.authUser(AuthSubType.PIN_MIXED, this.passwordArr, (result, extraInfo) => {
             this.clearPassword();
             if (result == 0) {

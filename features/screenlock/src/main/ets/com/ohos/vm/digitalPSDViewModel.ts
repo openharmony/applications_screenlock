@@ -14,6 +14,7 @@
  */
 
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
+import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Constants from '../common/constants'
 import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
 import {Callback} from 'basic';
@@ -49,6 +50,7 @@ export default class DigitalPSDViewModel extends BaseViewModel {
                 this.updateStorage(callback);
             }
             if (this.password.length >= PW_LEN) {
+                Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
                 service.authUser(AuthSubType.PIN_SIX, this.password, (result, extraInfo) => {
                     this.clearPassword()
                     if (result == 0) {
