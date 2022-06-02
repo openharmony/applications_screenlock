@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import ScreenLockMar from '@ohos.screenlock';
 import windowManager  from '@ohos.window'
@@ -64,7 +65,9 @@ export default class ScreenLockModel {
     }
 
     hiddenScreenLockWindow(callback: Callback<void>) {
+        Trace.end(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
         windowManager.find(Constants.WIN_NAME).then((win) => {
+            Trace.start(Trace.CORE_METHOD_CALL_PAGE_HIDE);
             win.hide().then(() => {
                 Log.showInfo(TAG, `window hide`);
                 callback();
