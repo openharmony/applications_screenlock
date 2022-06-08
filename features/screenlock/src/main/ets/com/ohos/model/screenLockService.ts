@@ -19,6 +19,7 @@ import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/defa
 import createOrGet from '../../../../../../../../common/src/main/ets/default/SingleInstanceHelper'
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
+import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
 import {Callback} from 'basic';
 
 const TAG = 'ScreenLock-ScreenLockService';
@@ -72,7 +73,7 @@ let mUnLockBeginAnimation: Callback<Callback<void>> = (callback: Callback<void>)
 export class ScreenLockService {
     accountModel: AccountModel = new AccountModel()
     screenLockModel: ScreenLockModel = new ScreenLockModel()
-
+    currentLockStatus : ScreenLockStatus;
     init() {
         Log.showDebug(TAG, 'init');
         this.accountModel.modelInit();
@@ -138,7 +139,13 @@ export class ScreenLockService {
             Log.showInfo(TAG, `showScreenLockWindow finish`);
             this.checkPinAuthProperty(() => {
             });
-            this.publish("common.event.LOCK_SCREEN");
+            Log.showInfo(TAG, `screenlock status:${this.currentLockStatus}, userId : ${this.accountModel.getCurrentUserId()}`);
+            if (this.currentLockStatus == ScreenLockStatus.Locking) {
+                Log.showInfo(TAG, `had locked, no need to publish lock_screen`);
+            } else {
+                this.publishByUser("common.event.LOCK_SCREEN", this.accountModel.getCurrentUserId());
+                this.currentLockStatus = ScreenLockStatus.Locking;
+            }
         });
     }
 
@@ -215,12 +222,13 @@ export class ScreenLockService {
         Log.showInfo(TAG, `unlocking`);
         //set the lockStatus to 'Unlock'
         AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Unlock);
+        this.currentLockStatus = ScreenLockStatus.Unlock;
         //unlock the screen
         this.screenLockModel.hiddenScreenLockWindow(() => {
             Log.showInfo(TAG, `hiddenScreenLockWindow finish`);
             //notify the base service that the unlock is completed
             this.notifyScreenResult(UnlockResult.Success);
-            this.publish("common.event.UNLOCK_SCREEN");
+            this.publishByUser("common.event.UNLOCK_SCREEN", this.accountModel.getCurrentUserId());
         });
     }
 
@@ -272,6 +280,7 @@ export class ScreenLockService {
                 this.unlockScreen()
             } else {
                 AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.FaceNotRecognized);
+                this.currentLockStatus = ScreenLockStatus.FaceNotRecognized;
             }
         })
     }
@@ -306,9 +315,14 @@ export class ScreenLockService {
         })
     }
 
-    private publish(eventName: string) {
-        Log.showInfo(TAG, `publish event name: ${eventName}`)
-        commonEvent.publish(eventName, (error, value) => {
+    private publishByUser(eventName: string, activeUserId: number) {
+        Log.showDebug(TAG, `publishByUser event name: ${eventName}, userId: ${activeUserId}`)
+        let publishData : CommonEventPublishData = {
+            parameters : {
+                userId : activeUserId
+            }
+        };
+        commonEvent.publish(eventName, publishData, (error, value) => {
             if (error.code) {
                 Log.showError(TAG, 'Operation failed. Cause: ' + JSON.stringify(error));
             } else {
