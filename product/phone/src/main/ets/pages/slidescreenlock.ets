@@ -15,6 +15,7 @@
 
 import Log from '../../../../../../common/src/main/ets/default/Log'
 import Accounts from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/accounts'
+import {UserData} from '../../../../../../features/screenlock/src/main/ets/com/ohos/data/userData'
 import DateTime from '../../../../../../features/datetimecomponent/src/main/ets/com/ohos/view/component/dateTime'
 import LockIcon from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/lockIcon'
 import Wallpaper from '../../../../../../features/wallpapercomponent/src/main/ets/com/ohos/view/component/wallpaper'
@@ -31,6 +32,7 @@ export default struct SlideScreenlock {
   @StorageLink('batteryCharging') @Watch('onCharging') batteryCharging: boolean = false
   @Prop @Watch("onStatusChange") pageStatus: number
   @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ""
+  @StorageLink("userList") accountList: UserData[] = []
   private mHeightPx : number = 48
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -72,6 +74,17 @@ export default struct SlideScreenlock {
         .height(0)
 
         Column() {
+          Row() {
+            Blank()
+            Accounts()
+          }
+          .width(Constants.NOTIFICATION_AREA_WIDTH)
+          .height($r("app.float.accounts_area_height"))
+        }
+        .margin({ top: $r("app.float.accounts_area_margin_top") })
+        .visibility(this.accountList.length > 1 ? Visibility.Visible : Visibility.None)
+
+        Column() {
           LockIcon()
         }.height(Constants.P_LOCKICON_AREA_WIDTH)
 
@@ -85,7 +98,6 @@ export default struct SlideScreenlock {
         }
         .alignItems(HorizontalAlign.Center)
         .width(Constants.NOTIFICATION_AREA_WIDTH)
-        //        .height(Constants.NOTIFICATION_AREA_HEIGHT)
       }
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)
