@@ -72,6 +72,16 @@ export default struct SlideScreenlock {
         .height(0)
 
         Column() {
+          Row() {
+            Blank()
+            Accounts()
+          }
+          .width(Constants.NOTIFICATION_AREA_WIDTH)
+          .height($r("app.float.accounts_area_height"))
+        }
+        .margin({ top: $r("app.float.accounts_area_margin_top") })
+
+        Column() {
           LockIcon()
         }.height(Constants.P_LOCKICON_AREA_WIDTH)
 
