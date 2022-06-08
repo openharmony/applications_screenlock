@@ -21,6 +21,10 @@
       "value": "%d/%d/%d"
     },
     {
+      "name": "mm_dd",
+      "value": "%d/%d"
+    },
+    {
       "name": "nonotification_text",
       "value": "无通知"
     },

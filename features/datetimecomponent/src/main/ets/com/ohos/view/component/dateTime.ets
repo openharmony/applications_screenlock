@@ -19,9 +19,11 @@ import Constants from '../../common/constants'
 import { ScreenLockStatus } from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
 import { ConvertLunarCalendar } from '../../../../../../../../../common/src/main/ets/default/LunarCalendar'
 import deviceInfo from '@ohos.deviceInfo';
+import i18n from '@ohos.i18n';
 
 const DEVICETYPE = deviceInfo.deviceType;
-const TAG = 'ScreenLock-DateTime'
+const DEFAULTLANG: string = "zh-Hans";
+const TAG = 'ScreenLock-DateTime';
 
 
 @Component
@@ -32,10 +34,12 @@ export default struct DateTime {
   @State month: string = ''
   @State day: string = ''
   @State isPhone: boolean = false
+  @State currentLanguage: string = DEFAULTLANG
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
+    this.currentLanguage = i18n.getSystemLanguage()
     this.year =
     ConvertLunarCalendar(this.mViewModel.dateVal.year, this.mViewModel.dateVal.month, this.mViewModel.dateVal.day)
     .lunarYear
@@ -66,11 +70,12 @@ export default struct DateTime {
       if (this.isShowDate) {
         Row() {
           if (this.isPhone) {
-            Text(this.mViewModel.dateVal.month + "月" + this.mViewModel.dateVal.day + "日")
+            Text($r("app.string.mm_dd", this.mViewModel.dateVal.month, this.mViewModel.dateVal.day))
               .fontSize($r('app.float.date_fontsize'))
               .fontColor($r('app.color.date_time_color'))
           } else {
-            Text($r('app.string.yyyy_mm_dd', this.mViewModel.dateVal.year, this.mViewModel.dateVal.month, this.mViewModel.dateVal.day))
+            Text($r('app.string.yyyy_mm_dd', this.mViewModel.dateVal.year, this.mViewModel.dateVal.month,
+              this.mViewModel.dateVal.day))
               .fontSize($r('app.float.date_fontsize'))
               .fontColor($r('app.color.date_time_color'))
           }
@@ -85,6 +90,7 @@ export default struct DateTime {
             .fontSize($r("app.float.date_lunar_calendar_fontSize"))
             .margin({ top: 6 })
         }
+        .visibility(this.currentLanguage === DEFAULTLANG ? Visibility.Visible : Visibility.None)
       }
     }
     .width(Constants.FULL_CONTAINER_WIDTH)

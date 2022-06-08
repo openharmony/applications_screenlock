@@ -3,6 +3,10 @@
     {
       "name": "yyyy_mm_dd",
       "value": "%d/%d/%d"
+    },
+    {
+      "name": "mm_dd",
+      "value": "%d/%d"
     }
   ]
 }

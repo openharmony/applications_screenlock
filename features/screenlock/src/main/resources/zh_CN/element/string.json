@@ -21,6 +21,10 @@
       "value": "%d年%d月%d日"
     },
     {
+      "name": "mm_dd",
+      "value": "%d月%d日"
+    },
+    {
       "name": "nonotification_text",
       "value": "无通知"
     },
