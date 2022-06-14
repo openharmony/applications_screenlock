@@ -30,9 +30,6 @@ const TAG = 'ScreenLock-DateTime';
 export default struct DateTime {
   @State mViewModel: ViewModel = new ViewModel()
   @Prop isShowDate: boolean
-  @State year: string = ''
-  @State month: string = ''
-  @State day: string = ''
   @State isPhone: boolean = false
   @State currentLanguage: string = DEFAULTLANG
 
@@ -40,15 +37,6 @@ export default struct DateTime {
     Log.showInfo(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
     this.currentLanguage = i18n.getSystemLanguage()
-    this.year =
-    ConvertLunarCalendar(this.mViewModel.dateVal.year, this.mViewModel.dateVal.month, this.mViewModel.dateVal.day)
-    .lunarYear
-    this.month =
-    ConvertLunarCalendar(this.mViewModel.dateVal.year, this.mViewModel.dateVal.month, this.mViewModel.dateVal.day)
-    .lunarMonth
-    this.day =
-    ConvertLunarCalendar(this.mViewModel.dateVal.year, this.mViewModel.dateVal.month, this.mViewModel.dateVal.day)
-    .lunarDay
     if (DEVICETYPE == 'phone') {
       this.isPhone = true
     }
@@ -84,7 +72,7 @@ export default struct DateTime {
         }.height($r('app.float.date_week_area_height'))
 
         Row() {
-          Text(this.year + '年' + this.month + '月' + this.day)
+          Text(this.mViewModel.calendarVal.calendarYear + '年' + this.mViewModel.calendarVal.calendarMonth + '月' + this.mViewModel.calendarVal.calendarDay)
             .height($r("app.float.date_lunar_calendar_height"))
             .fontColor(Color.White)
             .fontSize($r("app.float.date_lunar_calendar_fontSize"))
