@@ -17,7 +17,6 @@ import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import ViewModel from '../../vm/dateTimeViewModel'
 import Constants from '../../common/constants'
 import { ScreenLockStatus } from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
-import { ConvertLunarCalendar } from '../../../../../../../../../common/src/main/ets/default/LunarCalendar'
 import deviceInfo from '@ohos.deviceInfo';
 import i18n from '@ohos.i18n';
 
