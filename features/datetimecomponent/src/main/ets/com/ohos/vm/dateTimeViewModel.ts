@@ -41,6 +41,7 @@ export default class DateTimeViewModel {
     timeVal: string = ''
     dateVal: any = {}
     weekVal: any = {}
+    calendarVal: any = {}
     unSubscriber?: unsubscribe;
 
     ViewModelInit(): void{
@@ -64,6 +65,7 @@ export default class DateTimeViewModel {
         this.timeVal = sTimeManager.formatTime(date)
         this.dateVal = DateTimeCommon.getSystemDate()
         this.weekVal = DateTimeCommon.getSystemWeek()
+        this.calendarVal = DateTimeCommon.getCalendarDate()
     }
 
     private createSubscriberCallBack(err, data) {
