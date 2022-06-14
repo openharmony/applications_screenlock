@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { ConvertLunarCalendar } from '../../../../../common/src/main/ets/default/LunarCalendar'
 
 export class DateTimeCommon {
   getSystemTime(isUsing24hFormat: boolean) {
@@ -33,6 +34,16 @@ export class DateTimeCommon {
       'day': dateTime.getDate()
     }
     return result
+  }
+
+  getCalendarDate(): {} {
+    let dateTime = new Date();
+    let res = {
+      'calendarYear': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarYear,
+      'calendarMonth': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarMonth,
+      'calendarDay': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarDay
+    }
+    return res
   }
 
   getSystemWeek() {
