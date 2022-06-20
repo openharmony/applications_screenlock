@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import WallpaperMar from '@ohos.app.wallpaperability'
+import WallpaperMar from '@ohos.wallpaper'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 
 const TAG = 'ScreenLock-WallpaperViewModel'
@@ -28,7 +28,7 @@ export default class WallpaperViewModel {
 
     private getScreenLockWallpaper() {
         Log.showInfo(TAG, 'getScreenLockWallpaper');
-        WallpaperMar.getPixelMap(WallpaperMar.WALLPAPER_LOCKSCREEN, (error, data) => {
+        WallpaperMar.getPixelMap(WallpaperMar.WallpaperType.WALLPAPER_LOCKSCREEN, (error, data) => {
             if (error != undefined && error != null) {
                 Log.showError(TAG, 'getScreenLockWallpaper error:' + JSON.stringify(error));
             } else {
