@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import Trace from '../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../common/src/main/ets/default/Log'
 import CommonStyleManager from '../../../../../../common/src/main/ets/default/StyleManager'
 import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
@@ -39,6 +40,15 @@ export default struct MixedPassword {
 
   aboutToDisappear() {
     Log.showInfo(TAG, `aboutToDisappear`)
+  }
+
+  onPageShow() {
+    Log.showInfo(TAG, `onPageShow`)
+  }
+
+  onPageHide() {
+    Log.showInfo(TAG, `onPageHide`)
+    Trace.end(Trace.CORE_METHOD_CALL_PAGE_HIDE);
   }
 
   build() {
