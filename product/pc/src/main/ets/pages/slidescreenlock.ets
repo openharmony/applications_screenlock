@@ -40,6 +40,18 @@ export default struct SlideScreenlock {
     this.mViewModel.ViewModelInit()
   }
 
+  aboutToDisappear() {
+    Log.showInfo(TAG, `aboutToDisAppear`)
+  }
+
+  onPageShow() {
+    Log.showInfo(TAG, `onPageShow`)
+  }
+
+  onPageHide() {
+    Log.showInfo(TAG, `onPageHide`)
+  }
+
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       Column() {
