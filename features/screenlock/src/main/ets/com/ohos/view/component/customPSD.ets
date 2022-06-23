@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-import Trace from '../../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../common/constants'
 import NumkeyBoard from './numkeyBoard'
@@ -36,8 +35,15 @@ export default struct CustomPSD {
 
   aboutToDisappear() {
     Log.showInfo(TAG, `aboutToDisappear`)
-    Trace.end(Trace.CORE_METHOD_CALL_PAGE_HIDE);
     this.mViewModel.clearPassword()
+  }
+
+  onPageShow() {
+    Log.showInfo(TAG, `onPageShow`)
+  }
+
+  onPageHide() {
+    Log.showInfo(TAG, `onPageHide`)
   }
 
   build() {
