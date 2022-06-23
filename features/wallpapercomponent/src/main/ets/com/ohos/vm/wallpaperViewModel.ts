@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import WallpaperMar from '@ohos.app.wallpaperability'
+import WallpaperMar from '@ohos.wallpaper'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 
 const TAG = 'ScreenLock-WallpaperViewModel'
