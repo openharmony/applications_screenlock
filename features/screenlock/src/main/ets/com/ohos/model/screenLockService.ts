@@ -117,6 +117,11 @@ export class ScreenLockService {
             })
         })
 
+        this.accountModel.commonEventListener(()=>{
+            Log.showInfo(TAG, `commonEventListener event`);
+            this.accountModel.updateAllUsers();
+        })
+
         //unlock request was received
         this.screenLockModel.eventListener(EVENT_UNLOCK_SCREEN, () => {
             Log.showInfo(TAG, `EVENT_UNLOCK_SCREEN event`);
@@ -152,7 +157,7 @@ export class ScreenLockService {
     private checkPinAuthProperty(callback: Callback<void>) {
         Log.showDebug(TAG, "checkPinAuthProperty")
         this.accountModel.getAuthProperty(AuthType.PIN, (properties) => {
-            Log.showInfo(TAG, `checkPinAuthProperty：AUTH_SUB_TYPE:${properties.authSubType}`);
+            Log.showInfo(TAG, `checkPinAuthProperty: AUTH_SUB_TYPE:${properties.authSubType}`);
             switch (properties.authSubType) {
                 case AuthSubType.PIN_SIX:
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Locking);
@@ -301,6 +306,7 @@ export class ScreenLockService {
         this.screenLockModel.eventCancelListener(EVENT_UNLOCK_SCREEN);
         this.accountModel.eventCancelListener(ACTIVATING_TYPE, ACTIVATING_EVENT);
         this.accountModel.eventCancelListener(ACTIVATE_TYPE, ACTIVATE_EVENT)
+        this.accountModel.commonEventCancelListener();
         this.accountModel.modelFinish()
     }
 
