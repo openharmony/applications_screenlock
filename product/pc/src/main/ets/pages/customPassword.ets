@@ -47,8 +47,9 @@ export default struct CustomPassword {
   }
 
   onPageHide() {
+    Trace.end(Trace.CORE_METHOD_HIDE_PSD_PAGE);
+    Trace.end(Trace.CORE_METHOD_UNLOCK_SCREEN);
     Log.showInfo(TAG, `onPageHide`)
-    Trace.end(Trace.CORE_METHOD_CALL_PAGE_HIDE);
   }
 
   build() {

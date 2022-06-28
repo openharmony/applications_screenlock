@@ -67,6 +67,7 @@ export default class CustomPSDViewModel extends BaseViewModel {
             this.updateStorage(callback);
             return;
         }
+        Trace.start(Trace.CORE_METHOD_UNLOCK_SCREEN);
         Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
         service.authUser(AuthSubType.PIN_MIXED, this.passwordArr, (result, extraInfo) => {
             this.clearPassword();

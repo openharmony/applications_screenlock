@@ -32,11 +32,22 @@ export default struct SlideScreenlock {
   @StorageLink('batteryCharging') @Watch('onCharging') batteryCharging: boolean = false
   @Prop @Watch("onStatusChange") pageStatus: number
   @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ""
-  @StorageLink("userList") accountList: UserData[] = []
   private mHeightPx : number = 48
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
     this.mViewModel.ViewModelInit()
+  }
+
+  aboutToDisappear() {
+    Log.showInfo(TAG, `aboutToDisAppear`)
+  }
+
+  onPageShow() {
+    Log.showInfo(TAG, `onPageShow`)
+  }
+
+  onPageHide() {
+    Log.showInfo(TAG, `onPageHide`)
   }
 
   build() {
@@ -82,7 +93,6 @@ export default struct SlideScreenlock {
           .height($r("app.float.accounts_area_height"))
         }
         .margin({ top: $r("app.float.accounts_area_margin_top") })
-        .visibility(this.accountList.length > 1 ? Visibility.Visible : Visibility.None)
 
         Column() {
           LockIcon()
