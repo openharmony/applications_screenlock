@@ -17,9 +17,10 @@ import byTrace from "@ohos.bytrace";
 import Log from "./Log";
 
 export default class Trace {
+  static readonly CORE_METHOD_UNLOCK_SCREEN = "startUnlockScreen"
   static readonly CORE_METHOD_CALL_ACCOUNT_SYSTEM = "startToCallAccountSubsystem";
   static readonly CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT = "passingAccountSubsystemResult";
-  static readonly CORE_METHOD_CALL_PAGE_HIDE = "startToHidePage";
+  static readonly CORE_METHOD_HIDE_PSD_PAGE = "startToHidePsdPage";
 
   private static readonly TRACE_TAG = 'ScreenLock:Trace';
   private static readonly RECORD_TRACE = true;
