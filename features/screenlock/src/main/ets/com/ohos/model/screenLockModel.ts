@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,6 +39,13 @@ export default class ScreenLockModel {
                     callback();
                 })
                 break;
+            case "systemReady":
+                ScreenLockMar.on(typeName, (err, data) => {
+                    Log.showInfo(TAG, `eventListener:callback err: ${JSON.stringify(err)},
+                        data:${JSON.stringify(data)}`);
+                    callback();
+                })
+            break;
             default:
                 Log.showError(TAG, `eventListener:typeName ${typeName}`)
         }
@@ -67,7 +75,7 @@ export default class ScreenLockModel {
     hiddenScreenLockWindow(callback: Callback<void>) {
         Trace.end(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
         windowManager.find(Constants.WIN_NAME).then((win) => {
-            Trace.start(Trace.CORE_METHOD_CALL_PAGE_HIDE);
+            Trace.start(Trace.CORE_METHOD_HIDE_PSD_PAGE);
             win.hide().then(() => {
                 Log.showInfo(TAG, `window hide`);
                 callback();

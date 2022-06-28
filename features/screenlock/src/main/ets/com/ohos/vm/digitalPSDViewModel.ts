@@ -50,6 +50,7 @@ export default class DigitalPSDViewModel extends BaseViewModel {
                 this.updateStorage(callback);
             }
             if (this.password.length >= PW_LEN) {
+                Trace.start(Trace.CORE_METHOD_UNLOCK_SCREEN);
                 Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
                 service.authUser(AuthSubType.PIN_SIX, this.password, (result, extraInfo) => {
                     this.clearPassword()

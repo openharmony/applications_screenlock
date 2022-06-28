@@ -41,6 +41,7 @@ const EVENT_BEGIN_SLEEP: string = 'beginSleep'
 const EVENT_END_SLEEP: string = 'endSleep'
 const EVENT_CHANGE_USER: string = 'changeUser'
 const EVENT_SCREENLOCK_ENABLE: string = 'screenlockEnabled'
+const EVENT_SYSTEM_READY: string = 'systemReady'
 
 const UNLOCK_SCREEN_RESULT: string = 'unlockScreenResult'
 const SCREENLOCK_DRAW_DONE: string = 'screenDrawDone'
@@ -87,6 +88,12 @@ export class ScreenLockService {
 
     monitorEvents() {
         Log.showDebug(TAG, 'registered events start');
+
+        // System ready on device boot
+        this.screenLockModel.eventListener(EVENT_SYSTEM_READY, () => {
+            Log.showInfo(TAG, `EVENT_SYSTEM_READY event`);
+            this.lockScreen();
+        })
 
         //Bright screen
         this.screenLockModel.eventListener(EVENT_END_SCREEN_ON, () => {
@@ -301,6 +308,7 @@ export class ScreenLockService {
     }
 
     destroy() {
+        this.screenLockModel.eventCancelListener(EVENT_SYSTEM_READY);
         this.screenLockModel.eventCancelListener(EVENT_END_SCREEN_ON);
         this.screenLockModel.eventCancelListener(EVENT_BEGIN_SLEEP);
         this.screenLockModel.eventCancelListener(EVENT_UNLOCK_SCREEN);

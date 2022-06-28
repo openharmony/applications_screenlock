@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import Trace from '../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../common/src/main/ets/default/Log'
 import CommonStyleManager from '../../../../../../common/src/main/ets/default/StyleManager'
 import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
@@ -40,6 +41,16 @@ export default struct DigitalPassword {
 
   aboutToDisappear() {
     Log.showInfo(TAG, `aboutToDisappear`)
+  }
+
+  onPageShow() {
+    Log.showInfo(TAG, `onPageShow`)
+  }
+
+  onPageHide() {
+    Trace.end(Trace.CORE_METHOD_HIDE_PSD_PAGE);
+    Trace.end(Trace.CORE_METHOD_UNLOCK_SCREEN);
+    Log.showInfo(TAG, `onPageHide`)
   }
 
   build() {
