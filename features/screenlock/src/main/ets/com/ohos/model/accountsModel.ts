@@ -19,6 +19,7 @@ import util from '@ohos.util';
 import {Callback} from 'basic';
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
+import { CommonEventManager, getCommonEventManager } from "../../../../../../../../common/src/main/ets/default/commonEvent/CommonEventManager";
 import {UserData} from '../data/userData'
 
 const TAG = "ScreenLock-AccountsModel"
@@ -72,13 +73,17 @@ export enum ResultCode {
     //fails
     FAIL = 1,
 }
-
+const USER_SUBSCRIBE_INFO = {
+    events: [
+        commonEvent.Support.COMMON_EVENT_USER_REMOVED,
+    ],
+};
 
 export default class AccountsModel {
     userAuthManager = new osAccount.UserAuth();
     pinAuthManager = new osAccount.PINAuth();
     mCurrentUserId: number = 100
-
+    private mManager?: CommonEventManager;
     modelInit() {
         Log.showDebug(TAG, "start ModelInit")
     }
@@ -90,6 +95,34 @@ export default class AccountsModel {
             this.mCurrentUserId = userId
             callback()
         })
+    }
+
+    commonEventListener(callback: Callback<void>) {
+        this.mManager = getCommonEventManager(
+            TAG,
+            USER_SUBSCRIBE_INFO,
+            (data) => {
+                Log.showInfo(TAG, `USER_REMOVED. ${JSON.stringify(data)}`);
+                callback();
+            },
+        );
+        this.mManager.subscriberCommonEvent();
+
+        Log.showInfo(TAG, `commonEventListener eventListener`);
+        let subscribeInfo = {events: ['usual.event.USER_REMOVED']};
+        commonEvent.createSubscriber(subscribeInfo, (error, subscriber) => {
+            Log.showInfo(TAG, `createSubscriber success. ${JSON.stringify(subscriber)}`);
+            commonEvent.subscribe(subscriber, (err, commonEventData) => {
+                Log.showInfo(TAG, `USER_REMOVED subscribe. ${JSON.stringify(commonEventData)}`);
+                callback();
+            });
+        });
+    }
+
+    commonEventCancelListener() {
+        Log.showInfo(TAG, "cancel commonEvent");
+        this.mManager?.release();
+        this.mManager = undefined;
     }
 
     eventCancelListener(typeName: "activate" | "activating", name: string) {
@@ -110,7 +143,7 @@ export default class AccountsModel {
     }
 
     private addAllUsers() {
-        Log.showDebug(TAG, "start getAllUsers")
+        Log.showDebug(TAG, "start getAllUsers");
         osAccount.getAccountManager().queryAllCreatedOsAccounts().then((list) => {
             Log.showDebug(TAG, "start sort")
             let accountList = [];
