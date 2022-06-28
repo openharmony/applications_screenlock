@@ -47,6 +47,7 @@ export default class MixedPSDViewModel extends BaseViewModel {
       callback();
       return;
     }
+    Trace.start(Trace.CORE_METHOD_UNLOCK_SCREEN);
     Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
     service.authUser(AuthSubType.PIN_MIXED, this.password, (result, extraInfo) => {
       this.clearPassword();
