@@ -45,6 +45,9 @@ export default class SlideScreenLockViewModel {
             this.backgroundScale = 1
             setTimeout(() => {
                 callback()
+                this.elementAlpha = 1
+                this.elementScale = 1
+                this.backgroundScale = 1.1
             }, 250);
         })
         this.slidingLength = SLIDING_LENGTH
