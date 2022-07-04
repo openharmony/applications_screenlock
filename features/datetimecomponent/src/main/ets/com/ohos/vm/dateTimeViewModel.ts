@@ -15,7 +15,6 @@
 
 import featureAbility from '@ohos.ability.featureAbility'
 import commonEvent from '@ohos.commonEvent';
-import settings from '@ohos.settingsnapi';
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import DateTimeCommon from '../../../../../../../../common/src/main/ets/default/DateTimeCommon'
 import sTimeManager, {TimeEventArgs, TIME_CHANGE_EVENT,
