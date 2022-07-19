@@ -33,7 +33,7 @@ export default class IndexViewModel {
   }
 
   getMode(): number {
-    return ScreenlockStyle.readMode("phone")
+    return ScreenlockStyle.readMode()
   }
 
   onPageShow() {

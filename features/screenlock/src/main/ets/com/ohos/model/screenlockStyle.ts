@@ -15,9 +15,7 @@
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import {ReadConfigFile} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
 
-
-const FILE_URI = '/data/accounts/account_0/applications/com.ohos.screenlock'
-+ '/com.ohos.screenlock/assets/{0}/resources/rawfile/screenlock.json'
+const SCREENLOCK_MODE_FILE_NAME = "screenlock.json";
 const TAG = 'ScreenLock-ScreenlockStyle';
 
 
@@ -39,17 +37,19 @@ class ScreenlockStyle {
         return this.screenMode
     }
 
-    readMode(deviceType: string): number{
-        Log.showInfo(TAG, `readMode deviceType:${deviceType}`);
+    readMode(): number{
+        Log.showInfo(TAG, `readMode`);
+        let that = this;
         try {
-            let modeJson = ReadConfigFile(FILE_URI.replace('{0}', deviceType));
-            Log.showInfo(TAG, `ReadConfigFile content:` + JSON.stringify(modeJson));
-            this.screenMode = modeJson.mode;
+            ReadConfigFile(SCREENLOCK_MODE_FILE_NAME, (modeJson)=>{
+                Log.showInfo(TAG, `ReadConfigFile content:` + JSON.stringify(modeJson));
+                that.screenMode = modeJson.mode;
+            });
         } catch(error) {
             Log.showInfo(TAG, `ReadConfigFile content error: ${error}`);
-            this.screenMode = 1;
+            this.screenMode = LockStyleMode.SlideScreenLock;
         }
-        return this.screenMode
+        return this.screenMode;
     }
 }
 
