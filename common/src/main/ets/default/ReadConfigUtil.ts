@@ -14,37 +14,24 @@
  */
 
 import Log from './Log';
-import FileIo from '@ohos.fileio';
+import AbilityManager from '../default/abilitymanager/abilityManager'
 
-const DFAULT_SIZE = 4096;
-const CHAR_CODE_AT_INDEX = 0;
 const TAG = 'ReadConfigUtil';
 
 export class ReadConfigUtil {
-  ReadConfigFile(fileName) {
+  ReadConfigFile(fileName, callBack:(data)=>void) {
     Log.showInfo(TAG, `readConfigFile fileName:${fileName}`);
-    let stream;
-    let content : string = "";
-    try {
-      stream = FileIo.createStreamSync(fileName, 'r');
-      Log.showInfo(TAG, `readConfigFile stream:` + stream);
-      let buf = new ArrayBuffer(DFAULT_SIZE);
-      let len = stream.readSync(buf);
-      Log.showInfo(TAG, `readConfigFile len:` + len);
-      let arr = new Uint8Array(buf);
-      let charAt = ' '.charCodeAt(CHAR_CODE_AT_INDEX);
-      for (let i = len;i < DFAULT_SIZE; i++) {
-        arr[i] = charAt;
-      }
-      content = String.fromCharCode.apply(null, arr);
-      Log.showDebug(TAG, `readConfigFile content:` + JSON.stringify(content));
-    } catch (error) {
-      Log.showError(TAG, `readConfigFile error:` + JSON.stringify(error));
-      content = "";
-    } finally{
-      stream.closeSync();
-    }
-    return JSON.parse(content);
+    let jsonCfg : string = "";
+    let resManager = AbilityManager.getContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK)?.resourceManager;
+    resManager.getRawFile(fileName).then((data)=>{
+        let content : string = String.fromCharCode.apply(null, data);
+        Log.showInfo(TAG, `readDefaultFile content length: ${content.length}`);
+        jsonCfg = JSON.parse(content);
+        callBack(jsonCfg);
+    })
+    .catch((error)=>{
+      Log.showError(TAG, `readDefaultFile filed: ${JSON.stringify(error)}`);
+    });
   }
 }
 
