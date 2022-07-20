@@ -13,12 +13,9 @@
  * limitations under the License.
  */
 import Log from './Log';
-import FileIo from '@ohos.fileio';
+import AbilityManager from '../default/abilitymanager/abilityManager'
 
 const TAG = 'ScreenLock-ScreenLockCommon';
-const DFAULT_SIZE = 4096;
-const CHAR_CODE_AT_INDEX = 0;
-
 export enum ScreenLockStatus {
   Locking = 1,
   Unlock = 2,
@@ -26,28 +23,20 @@ export enum ScreenLockStatus {
   FaceNotRecognized = 4
 }
 
-export function ReadConfigFile(fileName) {
+export function ReadConfigFile(fileName, callBack:(data)=>void) {
   Log.showInfo(TAG, `readConfigFile fileName:${fileName}`);
-  let stream;
-  let content : string = "";
-  try {
-    let stream = FileIo.createStreamSync(fileName, 'r');
-    Log.showInfo(TAG, `readConfigFile stream:` + stream);
-    let buf = new ArrayBuffer(DFAULT_SIZE);
-    let len = stream.readSync(buf);
-    Log.showInfo(TAG, `readConfigFile len:` + len);
-    let arr = new Uint8Array(buf);
-    let charAt = ' '.charCodeAt(CHAR_CODE_AT_INDEX);
-    for (let i = len;i < DFAULT_SIZE; i++) {
-      arr[i] = charAt;
-    }
-    content = String.fromCharCode.apply(null, arr);
-    Log.showDebug(TAG, `readConfigFile content:` + JSON.stringify(content));
-  } catch (error) {
-    Log.showError(TAG, `readConfigFile error:` + JSON.stringify(error));
-    content = "";
-  } finally {
-    stream.closeSync();
-  }
-  return JSON.parse(content);
+  let jsonCfg : string = "";
+  let context = AbilityManager.getContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK);
+  Log.showInfo(TAG, `readConfigFile context:${context}`);
+  let resManager = context.resourceManager;
+  Log.showInfo(TAG, `readConfigFile resManager:${resManager}`);
+  resManager.getRawFile(fileName).then((data)=>{
+    let content : string = String.fromCharCode.apply(null, data);
+    Log.showInfo(TAG, `readDefaultFile content length: ${content.length}`);
+    jsonCfg = JSON.parse(content);
+    callBack(jsonCfg);
+  })
+  .catch((error)=>{
+    Log.showError(TAG, `readDefaultFile filed: ${JSON.stringify(error)}`);
+  });
 }
