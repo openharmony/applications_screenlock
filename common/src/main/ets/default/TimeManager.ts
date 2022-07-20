@@ -88,6 +88,7 @@ class TimeManager {
         }
         this.handleTimeFormatChange();
       });
+      this.handleTimeFormatChange();
     } catch (e) {
       Log.showError(TAG, `Can't listen timeformate change.`);
     }
