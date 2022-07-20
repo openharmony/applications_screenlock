@@ -14,7 +14,6 @@
  */
 
 import Log from '../../../../../../common/src/main/ets/default/Log';
-import {ReadConfigFile} from '../../../../../../common/src/main/ets/default/ScreenLockCommon'
 import ScreenLockService from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenLockService'
 import Constants from '../common/constants'
 import {Callback} from 'basic';
@@ -66,7 +65,7 @@ export default class SlideScreenLockViewModel {
             this.moveX = event.touches[0].screenX - this.startX
             this.moveY = event.touches[0].screenY - this.startY
         } else if (event.type == Constants.TOUCHTYPE_UP) {
-            Log.showInfo(TAG, `Touch Event slidingLength：${this.slidingLength}`)
+            Log.showInfo(TAG, `Touch Event slidingLength: ${this.slidingLength}`)
             if (Math.abs(this.moveY) > this.slidingLength) {
                 this.unlockScreen()
             }

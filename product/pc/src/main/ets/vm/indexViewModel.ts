@@ -34,7 +34,7 @@ export default class IndexViewModel {
     }
 
     getMode(): number {
-        return ScreenlockStyle.readMode("pc")
+        return ScreenlockStyle.readMode()
     }
 
     onPageShow() {
