@@ -14,6 +14,10 @@ export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMon
         lunarDay = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '初', '廿'],
         heavenlyStemsAnd = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'],
         earthlyBranches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+
+    let LUNAR_MON_START_INDEX = 0
+    let LUNAR_MON_END_INDEX = 11
+
     let lunarCalendar = [
         0x0b557,
         0x06ca0, 0x0b550, 0x15355, 0x04da0, 0x0a5b0, 0x14573, 0x052b0, 0x0a9a8, 0x0e950, 0x06aa0,
@@ -46,7 +50,8 @@ export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMon
                 break
             }
         }
-        for (let k = 0; k < lunarYearMonths(lunarCalendar[outputLunarYear - initialLunarTime]).length; k++) {
+        let k = 0
+        for (; k < lunarYearMonths(lunarCalendar[outputLunarYear - initialLunarTime]).length; k++) {
             daySpan -= lunarYearMonths(lunarCalendar[outputLunarYear - initialLunarTime])[k];
             if (daySpan <= 0) {
                 if (hasLeapMonth(lunarCalendar[outputLunarYear - initialLunarTime]) > -1 && hasLeapMonth(lunarCalendar[outputLunarYear - initialLunarTime]) <= k) {
@@ -64,6 +69,14 @@ export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMon
                 break
             }
         }
+        if (outputLunarMonth == undefined) {
+            outputLunarMonth = (k > LUNAR_MON_END_INDEX) ? LUNAR_MON_END_INDEX + 1 : k;
+            outputLunarMonth = (k == LUNAR_MON_START_INDEX) ? LUNAR_MON_START_INDEX + 1 : k;
+        } else {
+            outputLunarMonth = (outputLunarMonth > LUNAR_MON_END_INDEX) ? LUNAR_MON_END_INDEX + 1 : outputLunarMonth;
+            outputLunarMonth = (outputLunarMonth == LUNAR_MON_START_INDEX) ? LUNAR_MON_START_INDEX + 1 : outputLunarMonth;
+        }
+
         outputLunarDay = daySpan;
         if (hasLeapMonth(lunarCalendar[outputLunarYear - initialLunarTime]) > -1 && (typeof (outputLunarMonth) === 'string' && outputLunarMonth.indexOf('闰') > -1)) {
             let reg = /\d/.exec(outputLunarMonth)
