@@ -13,12 +13,15 @@
  * limitations under the License.
  */
 import Log from '../../../../../../../../common/src/main/ets/default/Log';
+import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
+import {WriteFaultLog, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
 import ScreenLockModel from './screenLockModel';
 import AccountModel, {AuthType, AuthSubType, AuthTurstLevel} from './accountsModel'
 import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon';
 import createOrGet from '../../../../../../../../common/src/main/ets/default/SingleInstanceHelper'
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
+import hiDebug from '@ohos.hiDebug';
 import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
 import {Callback} from 'basic';
 
@@ -55,6 +58,9 @@ const CHALLENGE_INT = 0
 
 const MAIN_USER = 100
 
+const MEMORY_MONITOR_PERIOD_MS = 600000
+const MEMORY_MONITOR_LIMIT_KB = 120 * 1024
+
 export {AuthType, AuthSubType};
 
 export enum UnlockResult {
@@ -75,8 +81,10 @@ export class ScreenLockService {
     accountModel: AccountModel = new AccountModel()
     screenLockModel: ScreenLockModel = new ScreenLockModel()
     currentLockStatus : ScreenLockStatus;
+    memoryMonitor: number = -1;
     init() {
         Log.showDebug(TAG, 'init');
+        this.startMonitorMemory();
         this.accountModel.modelInit();
         this.monitorEvents();
         this.accountModel.updateAllUsers()
@@ -104,6 +112,7 @@ export class ScreenLockService {
 
         //The device is going to sleep
         this.screenLockModel.eventListener(EVENT_BEGIN_SLEEP, () => {
+            Trace.start(Trace.CORE_METHOD_SLEEP_TO_LOCK_SCREEN);
             Log.showInfo(TAG, `EVENT_BEGIN_SLEEP event`);
             this.lockScreen();
             this.accountModel.updateAllUsers()
@@ -139,6 +148,7 @@ export class ScreenLockService {
     }
 
     lockScreen() {
+        Trace.start(Trace.CORE_METHOD_SHOW_LOCK_SCREEN);
         Log.showDebug(TAG, `lockScreen`);
         let length = Router.getLength()
         Log.showDebug(TAG, `Router.getLength: ${length}`)
@@ -316,6 +326,7 @@ export class ScreenLockService {
         this.accountModel.eventCancelListener(ACTIVATE_TYPE, ACTIVATE_EVENT)
         this.accountModel.commonEventCancelListener();
         this.accountModel.modelFinish()
+        this.stopMonitorMemory()
     }
 
     setUnlockAnimation(beginAnimation: Callback<Callback<void>>) {
@@ -343,6 +354,23 @@ export class ScreenLockService {
                 Log.showDebug(TAG, 'publish common event success. ' + JSON.stringify(value));
             }
         });
+    }
+
+    private startMonitorMemory() {
+        this.memoryMonitor = setInterval(() => {
+            const pss = hiDebug.getPss();
+            Log.showInfo(TAG, `app pss info is: ${pss}`);
+            if (pss > MEMORY_MONITOR_LIMIT_KB) {
+                WriteFaultLog({FAULT_ID: FaultID.MEMORY, MSG: "pss over limit"})
+            }
+        }, MEMORY_MONITOR_PERIOD_MS)
+    }
+
+    private stopMonitorMemory() {
+        if (this.memoryMonitor !== -1) {
+            clearInterval(this.memoryMonitor);
+            this.memoryMonitor = -1;
+        }
     }
 }
 

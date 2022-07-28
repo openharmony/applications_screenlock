@@ -15,6 +15,7 @@
  */
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
+import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
 import ScreenLockMar from '@ohos.screenlock';
 import windowManager  from '@ohos.window'
 import Constants from '../common/constants'
@@ -23,6 +24,7 @@ import { Callback } from 'basic';
 const TAG = 'ScreenLock-ScreenLockModel';
 
 export default class ScreenLockModel {
+    @SysFaultLogger({FAULT_ID: FaultID.SCREEN_LOCK_MANAGER, MSG: "call func on failed"})
     eventListener(typeName: string, callback: Callback<void>) {
         Log.showDebug(TAG, `eventListener:typeName ${typeName}`);
         switch (typeName) {
@@ -56,6 +58,7 @@ export default class ScreenLockModel {
         // As off has some problem and there is no case to cancel, do nothing
     }
 
+    @SysFaultLogger({FAULT_ID: FaultID.SCREEN_LOCK_MANAGER, MSG: "call func sendScreenLockEvent failed"})
     sendScreenLockEvent(typeName: string, typeNo: number, callback) {
         Log.showInfo(TAG, `sendScreenLockEvent: typeName ${typeName} typeNo  ${typeNo} `);
         ScreenLockMar.sendScreenLockEvent(typeName, typeNo, (err, data) => {
