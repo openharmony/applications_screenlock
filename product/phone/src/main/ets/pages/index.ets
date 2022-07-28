@@ -14,6 +14,7 @@
  */
 
 import Log from '../../../../../../common/src/main/ets/default/Log'
+import Trace from '../../../../../../common/src/main/ets/default/Trace'
 import CommonStyleManager from '../../../../../../common/src/main/ets/default/StyleManager'
 import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
 import {LockStyleMode} from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenlockStyle'
@@ -58,6 +59,8 @@ struct Index {
   }
 
   onPageShow() {
+    Trace.end(Trace.CORE_METHOD_SLEEP_TO_LOCK_SCREEN);
+    Trace.end(Trace.CORE_METHOD_SHOW_LOCK_SCREEN);
     Log.showInfo(TAG, `onPageShow`)
     this.pageStatus = Constants.STATUS_ON_PAGE_SHOW
     this.mViewModel.onPageShow();

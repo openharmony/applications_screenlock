@@ -18,6 +18,7 @@ import commonEvent from '@ohos.commonEvent';
 import util from '@ohos.util';
 import {Callback} from 'basic';
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
+import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import { CommonEventManager, getCommonEventManager } from "../../../../../../../../common/src/main/ets/default/commonEvent/CommonEventManager";
 import {UserData} from '../data/userData'
@@ -88,6 +89,7 @@ export default class AccountsModel {
         Log.showDebug(TAG, "start ModelInit")
     }
 
+    @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func on failed"})
     eventListener(typeName: "activate" | "activating", name: string, callback: Callback<void>) {
         Log.showInfo(TAG, `eventListener:typeName ${typeName}`);
         osAccount.getAccountManager().on(typeName, name, (userId: number) => {
@@ -125,6 +127,7 @@ export default class AccountsModel {
         this.mManager = undefined;
     }
 
+    @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func off failed"})
     eventCancelListener(typeName: "activate" | "activating", name: string) {
         Log.showInfo(TAG, `eventCancleListener:typeName ${typeName}`);
         osAccount.getAccountManager().off(typeName, name)
@@ -142,6 +145,7 @@ export default class AccountsModel {
         AppStorage.SetOrCreate('userList', []);
     }
 
+    @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func queryAllCreatedOsAccounts failed"})
     private addAllUsers() {
         Log.showDebug(TAG, "start getAllUsers");
         osAccount.getAccountManager().queryAllCreatedOsAccounts().then((list) => {
@@ -182,6 +186,7 @@ export default class AccountsModel {
         }
     }
 
+    @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func activateOsAccount failed"})
     onUserSwitch(userId: number) {
         Log.showDebug(TAG, "onUserSwitch:" + userId)
         osAccount.getAccountManager().activateOsAccount(userId).then(() => {
@@ -252,6 +257,7 @@ export default class AccountsModel {
         Log.showDebug(TAG, "start modelFinish")
     }
 
+    @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func isOsAccountActived failed"})
     isActivateAccount(callback: Callback<boolean>) {
         Log.showDebug(TAG, `isActivateAccount userId:${this.mCurrentUserId}`)
         osAccount.getAccountManager().isOsAccountActived(this.mCurrentUserId).then((isActivate) => {
