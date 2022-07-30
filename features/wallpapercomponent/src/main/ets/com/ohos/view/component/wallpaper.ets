@@ -24,12 +24,17 @@ export default struct Wallpaper {
   @State mViewModel: ViewModel = new ViewModel()
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, "aboutToAppear")
     this.mViewModel.ViewModelInit()
   }
 
+  aboutToDisappear() {
+    Log.showInfo(TAG, "aboutToDisappear")
+    this.mViewModel.ViewModelDestroy()
+  }
+
   build() {
-    Image(this.mViewModel.screenlockWallpaper)
+    Image(this.mViewModel.getWallpaperData())
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)
       .objectFit(ImageFit.Cover)
