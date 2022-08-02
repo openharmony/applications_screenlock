@@ -32,6 +32,7 @@ export default struct SlideScreenlock {
   @StorageLink('batteryCharging') @Watch('onCharging') batteryCharging: boolean = false
   @Prop @Watch("onStatusChange") pageStatus: number
   @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ""
+  @StorageLink('isWallpaperShow') isWallpaperShow: boolean = true
   private mHeightPx : number = 48
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -53,7 +54,9 @@ export default struct SlideScreenlock {
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       Column() {
-        Wallpaper()
+        if (this.isWallpaperShow === true) {
+          Wallpaper()
+        }
       }
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)
