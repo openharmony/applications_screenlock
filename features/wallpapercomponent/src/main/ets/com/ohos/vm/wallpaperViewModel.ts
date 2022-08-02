@@ -13,17 +13,27 @@
  * limitations under the License.
  */
 
+import image from '@ohos.multimedia.image';
 import WallpaperMar from '@ohos.wallpaper'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 
 const TAG = 'ScreenLock-WallpaperViewModel'
 
 export default class WallpaperViewModel {
-    screenlockWallpaper: string = ''
+    private wallpaperData: image.PixelMap = undefined
 
-    ViewModelInit(): void{
-        Log.showDebug(TAG, 'ViewModelInit');
+    ViewModelInit(): void {
+        Log.showDebug(TAG, "ViewModelInit");
         this.getScreenLockWallpaper()
+    }
+
+    ViewModelDestroy(): void {
+        Log.showDebug(TAG, "ViewModelDestroy");
+        this.freeScreenLockWallpaper();
+    }
+
+    getWallpaperData() {
+        return this.wallpaperData;
     }
 
     private getScreenLockWallpaper() {
@@ -33,8 +43,20 @@ export default class WallpaperViewModel {
                 Log.showError(TAG, 'getScreenLockWallpaper error:' + JSON.stringify(error));
             } else {
                 Log.showDebug(TAG, 'getScreenLockWallpaper data:' + JSON.stringify(data));
-                this.screenlockWallpaper = data
+                this.wallpaperData = data
             }
+        })
+    }
+
+    private freeScreenLockWallpaper() {
+        Log.showInfo(TAG, 'free ScreenLockWallpaper');
+        if (typeof this.wallpaperData === 'undefined' || this.wallpaperData == null) {
+            return;
+        }
+        this.wallpaperData.release().then(() => {
+            Log.showDebug(TAG, 'release succeed');
+        }).catch((err) => {
+            Log.showDebug(TAG, `release failed ${err}`);
         })
     }
 }
