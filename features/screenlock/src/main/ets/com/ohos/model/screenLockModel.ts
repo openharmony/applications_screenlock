@@ -67,6 +67,7 @@ export default class ScreenLockModel {
     }
 
     showScreenLockWindow(callback: Callback<void>) {
+        AppStorage.SetOrCreate('isWallpaperShow', true);
         windowManager.find(Constants.WIN_NAME).then((win) => {
             win.show().then(() => {
                 Log.showInfo(TAG, `window show`);
@@ -82,6 +83,7 @@ export default class ScreenLockModel {
             win.hide().then(() => {
                 Log.showInfo(TAG, `window hide`);
                 callback();
+                AppStorage.SetOrCreate('isWallpaperShow', false);
             })
         })
     }
