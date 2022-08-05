@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +31,7 @@ export type TimeEventArgs = {
   timeFormat: boolean;
 };
 
-const TAG = "TimeManager";
+const TAG = "TimeManagerSc";
 const URI_VAR = "dataability:///com.ohos.settingsdata.DataAbility";
 const TIME_FORMAT_KEY = settings.date.TIME_FORMAT;
 const TIME_SUBSCRIBE_INFO = {

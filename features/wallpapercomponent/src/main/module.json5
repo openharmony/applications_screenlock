@@ -3,7 +3,7 @@
     "name": "wallpapercomponent",
     "type": "har",
     "deviceTypes": [
-      "phone",
+      "default",
       "tablet"
     ],
     "uiSyntax": "ets"

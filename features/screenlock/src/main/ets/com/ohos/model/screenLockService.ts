@@ -150,9 +150,9 @@ export class ScreenLockService {
     lockScreen() {
         Trace.start(Trace.CORE_METHOD_SHOW_LOCK_SCREEN);
         Log.showDebug(TAG, `lockScreen`);
-        let length = Router.getLength()
+        let length = parseInt(Router.getLength())
         Log.showDebug(TAG, `Router.getLength: ${length}`)
-        for (let index = 1;index < length; index++) {
+        for (let index = 1; index < length; index++) {
             Log.showInfo(TAG, `back to index`);
             Router.back();
         }

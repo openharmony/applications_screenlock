@@ -4,7 +4,7 @@
     "type": "feature",
     "srcEntrance": "./ets/Application/AbilityStage.ts",
     "description": "$string:pc_desc",
-    "mainElement": "ServiceExtAbility",
+    "mainElement": "com.ohos.systemui.screenlock.ServiceExtAbility",
     "deviceTypes": [
       "tablet"
     ],
@@ -73,7 +73,7 @@
     ],
     "extensionAbilities": [
       {
-        "name": "ServiceExtAbility",
+        "name": "com.ohos.systemui.screenlock.ServiceExtAbility",
         "srcEntrance": "./ets/ServiceExtAbility/ServiceExtAbility.ts",
         "description": "$string:MainAbility_desc",
         "icon": "$media:icon",
