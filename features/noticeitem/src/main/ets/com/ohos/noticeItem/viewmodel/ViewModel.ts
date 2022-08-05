@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +17,6 @@
 import Log from '../../../../../../../../../common/src/main/ets/default/Log';
 import SwitchUserManager from '../../../../../../../../../common/src/main/ets/default/SwitchUserManager';
 import media from '@ohos.multimedia.media';
-import vibrator from '@ohos.vibrator';
-import wantAgent from '@ohos.wantAgent';
 import SourceType from '@ohos.notification'
 import NotificationService from '../model/NotificationService'
 import NotificationWindowManager from '../model/NotificationWindowManager';
@@ -129,7 +128,7 @@ export class ViewModel {
     Log.showDebug(TAG, `updateNotification length: ${this.mNotificationList.length}`);
     this.sortNotification()
     let notificationList = this.groupByGroupName();
-    AppStorage.SetOrCreate('notificationList', notificationList);
+    AppStorage.SetOrCreate('notificationListSc', notificationList);
   }
 
   groupByGroupName(): any[]{

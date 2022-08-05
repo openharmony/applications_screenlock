@@ -111,6 +111,8 @@ export default struct SlideScreenlock {
         }
         .alignItems(HorizontalAlign.Center)
         .width(Constants.NOTIFICATION_AREA_WIDTH)
+        .borderWidth("4vp")
+        .borderColor(Color.Green)
       }
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)

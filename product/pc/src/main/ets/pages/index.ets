@@ -71,7 +71,7 @@ struct Index {
   }
 
   onBackPress(): boolean {
-    let length = Router.getLength()
+    let length = parseInt(Router.getLength())
     Log.showInfo(TAG, `onBackPress length: ${length}`)
     if (length > 1) {
       Router.back()

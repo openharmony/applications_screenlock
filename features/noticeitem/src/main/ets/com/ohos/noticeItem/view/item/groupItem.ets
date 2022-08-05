@@ -24,7 +24,7 @@ const TAG = 'NoticeItem-GroupItem';
 
 @Component
 export default struct GroupItem {
-  @Consume('notificationUpdate') updateFlag: number;
+  @Consume('notificationUpdateSc') updateFlag: number;
   @State distributedDeviceName: string = ''
   @State @Watch('expandChange') toExpand: boolean = false;
   private groupData: any[] = []

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * Copyright (c) 2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +26,7 @@ import {
   POLICY,
 } from "../../../../../../common/src/main/ets/default/commonEvent/CommonEventManager";
 
-const TAG = "BatteryComponent-batteryModel";
+const TAG = "BatteryComponent-batteryModelSc";
 const DEFAULT_PROGRESS = 100;
 const SUBSCRIBE_INFO = {
   events: [commonEvent.Support.COMMON_EVENT_BATTERY_CHANGED],
