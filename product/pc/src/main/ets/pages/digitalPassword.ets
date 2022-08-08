@@ -31,7 +31,6 @@ export default struct DigitalPassword {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    setAppBgColor('#00000000')
     CommonStyleManager.setAbilityPageName(TAG)
     let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
     Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)

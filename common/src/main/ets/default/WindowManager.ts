@@ -1,3 +1,4 @@
+// @ts-nocheck
 /*
  * Copyright (c) 2021-2022 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +39,7 @@ export const WINDOW_SHOW_HIDE_EVENT = "WindowShowHideEvent";
 export const WINDOW_RESIZE_EVENT = "WindowResizeEvent";
 
 type WindowHandle = typeof Window.Window;
-const TAG = "WindowManager";
+const TAG = "WindowManagerSc";
 const SYSTEM_WINDOW_TYPE_MAP: { [key in WindowType]: number } = {
   SystemUi_StatusBar: 2108,
   SystemUi_NavigationBar: 2112,

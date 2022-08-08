@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-import notification from '@ohos.notification';
-import NotificationSubscriber from '@ohos.notificationSubscriber';
 import Log from '../../../../../../../../../common/src/main/ets/default/Log';
 import NotificationManager from './NotificationManager';
 import ParseDataUtil from './ParseDataUtil';
@@ -23,7 +21,7 @@ import CommonUtil from '../common/CommonUtil';
 import createOrGet from "../../../../../../../../../common/src/main/ets/default/SingleInstanceHelper";
 import DistributionManager from './NotificationDistributionManager';
 
-const TAG = 'NotificationService';
+const TAG = 'NotificationServiceSc';
 
 interface NotificationListener {
   userId: number;
