@@ -22,7 +22,7 @@ import { Callback, createEventBus, EventBus } from "./EventBus";
 export type unsubscribe = () => void;
 export type Events = string | string[];
 
-const TAG = "EventManager";
+const TAG = "EventManagerSc";
 
 class EventManager {
     mEventBus: EventBus<string>;

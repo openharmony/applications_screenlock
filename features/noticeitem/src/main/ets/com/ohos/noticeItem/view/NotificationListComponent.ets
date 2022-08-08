@@ -27,8 +27,8 @@ type NotificationLayoutConfig = {
 
 @Component
 export default struct NotificationListComponent {
-  @Provide('notificationUpdate') update: number = 0;
-  @StorageLink('notificationList') notificationList: any[] = []
+  @Provide('notificationUpdateSc') update: number = 0;
+  @StorageLink('notificationListSc') notificationList: any[] = []
   private config: NotificationLayoutConfig = {
     itemMargin: Layout.ITEM_MARGIN
   }

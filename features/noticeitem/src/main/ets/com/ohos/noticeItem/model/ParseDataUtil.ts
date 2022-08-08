@@ -13,14 +13,12 @@
  * limitations under the License.
  */
 
-import Notification from '@ohos.notification';
 import AccountManager from '@ohos.account.osAccount';
 import Log from '../../../../../../../../../common/src/main/ets/default/Log';
 import BundleManager from '../../../../../../../../../common/src/main/ets/default/abilitymanager/bundleManager';
 import AbilityManager from '../../../../../../../../../common/src/main/ets/default/abilitymanager/abilityManager';
-import DistributionManager from './NotificationDistributionManager';
 import NotificationManager from './NotificationManager';
-import Constants, {NotificationItemData} from '../common/constants';
+import {NotificationItemData} from '../common/constants';
 import {NotificationConfig} from './NotificationConfig';
 
 const TAG = 'Notification_ParseDataUtil';
@@ -39,11 +37,8 @@ type NotificationContent = {
 }
 
 async function getUserId(uid) {
-  let userId = await AccountManager.getAccountManager().getOsAccountLocalIdFromUid(uid)
-    .catch((err)=>{
-      Log.showError(TAG, `getOsAccountLocalIdFromUid error error: ${JSON.stringify(err)}`);
-    })
-  Log.showDebug(TAG, `getOsAccountLocalIdFromUid uid = ${uid}, userId = ${userId}`);
+  let userId = await AccountManager.getAccountManager().getOsAccountLocalIdFromUid(uid);
+  Log.showInfo(TAG, `getOsAccountLocalIdFromUid uid = ${uid}, userId = ${userId}`);
   return userId;
 }
 
@@ -112,8 +107,8 @@ export default class ParseDataUtil {
     let context = AbilityManager.getContext()??AbilityManager.getContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK);
     let item = await BundleManager.getResourceManager(TAG, context, bundleName);
     let appMessage = {
-        appName: labelId > 0 ? await item.getString(labelId) : '',
-        icon: iconId > 0 ? await item.getMediaBase64(iconId) : null
+        appName: parseInt(labelId) > 0 ? await item.getString(parseInt(labelId)) : '',
+        icon: parseInt(iconId) > 0 ? await item.getMediaBase64(parseInt(iconId)) : null
     };
     if (appMessage.icon != null && appMessage.appName) {
       appDataMap.set(bundleName, appMessage);
