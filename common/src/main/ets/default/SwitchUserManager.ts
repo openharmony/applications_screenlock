@@ -17,7 +17,7 @@ import AccountManager from "@ohos.account.osAccount";
 import Log from "./Log";
 import getSingleInstance from "./SingleInstanceHelper";
 
-const TAG = "SwitchUserManager";
+const TAG = "SwitchUserManagerSc";
 const SUBSCRIBE_KEY = "SystemUiAccount";
 const USER_CHANGE_EVENT = "activate";
 const DELAY_TIME = 50 * 1000;
