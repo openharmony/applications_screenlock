@@ -13,11 +13,15 @@
  * limitations under the License.
  */
 
+import Log from '../../../../../../common/src/main/ets/default/Log';
+
+const TAG = "Wifi_Component_App";
+
 export default {
   onCreate() {
-    console.info('Application onCreate')
+    Log.showInfo(TAG, 'Application onCreate')
   },
   onDestroy() {
-    console.info('Application onDestroy')
+    Log.showInfo(TAG, 'Application onDestroy')
   },
 }

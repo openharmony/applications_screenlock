@@ -12,8 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import hiLog from '@ohos.hilog';
 
-const TAG = 'ScreenLock-Default';
+const DOMAIN: number = 0x002A;
+const TAG = "ScreenLock_Default";
+const SYMBOL = " --> ";
 const FILTER_KEYS = [
     new RegExp('hide', "gi")
 ]
@@ -36,32 +39,83 @@ export function filterKey(target: any, propKey: string, descriptor: PropertyDesc
  */
 export default class Log {
     /**
-     * print info level log
+     * Outputs debug-level logs.
      *
-     * @param {string} tag - Page or class tag
-     * @param {string} log - Log needs to be printed
+     * @param tag Identifies the log tag.
+     * @param format Indicates the log format string.
+     * @param args Indicates the log parameters.
+     * @since 7
      */
-    static showInfo(tag: string, log: string) {
-        console.info(`${TAG} tag: ${tag} --> ${log}`);
+    static showDebug(tag: string, format: string, ...args: any[]) {
+        if (Log.isLogGable(hiLog.LogLevel.DEBUG)) {
+            hiLog.debug(DOMAIN, TAG, tag + SYMBOL + format, args);
+        }
     }
 
     /**
-     * print debug level log
+     * Outputs info-level logs.
      *
-     * @param {string} tag - Page or class tag
-     * @param {string} log - Log needs to be printed
+     * @param tag Identifies the log tag.
+     * @param format Indicates the log format string.
+     * @param args Indicates the log parameters.
+     * @since 7
      */
-    static showDebug(tag: string, log: string) {
-        console.debug(`${TAG} tag: ${tag} --> ${log}`);
+    static showInfo(tag: string, format: string, ...args: any[]) {
+        if (Log.isLogGable(hiLog.LogLevel.INFO)) {
+            hiLog.info(DOMAIN, TAG, tag + SYMBOL + format, args);
+        }
     }
 
     /**
-     * print error level log
+     * Outputs warning-level logs.
      *
-     * @param {string} tag - Page or class tag
-     * @param {string} log - Log needs to be printed
+     * @param tag Identifies the log tag.
+     * @param format Indicates the log format string.
+     * @param args Indicates the log parameters.
+     * @since 7
      */
-    static showError(tag: string, log: string) {
-        console.error(`${TAG} tag: ${tag} --> ${log}`);
+    static showWarn(tag: string, format: string, ...args: any[]) {
+        if (Log.isLogGable(hiLog.LogLevel.WARN)) {
+            hiLog.warn(DOMAIN, TAG, tag + SYMBOL + format, args);
+        }
+    }
+
+    /**
+     * Outputs error-level logs.
+     *
+     * @param tag Identifies the log tag.
+     * @param format Indicates the log format string.
+     * @param args Indicates the log parameters.
+     * @since 7
+     */
+    static showError(tag: string, format: string, ...args: any[]) {
+        if (Log.isLogGable(hiLog.LogLevel.ERROR)) {
+            hiLog.error(DOMAIN, TAG, tag + SYMBOL + format, args);
+        }
+    }
+
+    /**
+     * Outputs fatal-level logs.
+     *
+     * @param tag Identifies the log tag.
+     * @param format Indicates the log format string.
+     * @param args Indicates the log parameters.
+     * @since 7
+     */
+    static showFatal(tag: string, format: string, ...args: any[]) {
+        if (Log.isLogGable(hiLog.LogLevel.FATAL)) {
+            hiLog.fatal(DOMAIN, TAG, tag + SYMBOL + format, args);
+        }
+    }
+
+    /**
+     * Checks whether logs of the specified tag, and level can be printed.
+     *
+     * @param tag Identifies the log tag.
+     * @param level log level
+     * @since 7
+     */
+    private static isLogGable(level: hiLog.LogLevel): boolean {
+        return hiLog.isLoggable(DOMAIN, TAG, level);
     }
 }
