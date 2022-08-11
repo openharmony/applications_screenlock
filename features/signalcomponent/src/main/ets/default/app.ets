@@ -12,12 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import Log from '../../../../../../common/src/main/ets/default/Log';
+
+const TAG = "Signal_Component_APP";
 
 export default {
-    onCreate() {
-        console.info('SystemUI statusBar Application onDestroy')
-    },
-    onDestroy() {
-        console.info('SystemUI statusBar Application onDestroy')
-    },
+  onCreate() {
+    Log.showInfo(TAG, 'SystemUI statusBar Application onDestroy')
+  },
+  onDestroy() {
+    Log.showInfo(TAG, 'SystemUI statusBar Application onDestroy')
+  },
 }
