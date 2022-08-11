@@ -13,10 +13,13 @@
  * limitations under the License.
  */
 
-import AbilityStage from "@ohos.application.AbilityStage"
+import AbilityStage from "@ohos.application.AbilityStage";
+import Log from '../../../../../common/src/main/ets/default/Log';
+
+const TAG = "Entry_AbilityStage";
 
 export default class MyAbilityStage extends AbilityStage {
     onCreate() {
-        console.log("[Demo] MyAbilityStage onCreate")
+        Log.showInfo(TAG, "MyAbilityStage onCreate")
     }
 }

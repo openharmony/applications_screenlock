@@ -14,36 +14,39 @@
  */
 
 import Ability from '@ohos.application.Ability'
+import Log from '../../../../../common/src/main/ets/default/Log';
+
+const TAG = "Entry_MainAbility";
 
 export default class MainAbility extends Ability {
     onCreate(want, launchParam) {
-        console.log("[Demo] MainAbility onCreate")
+        Log.showInfo(TAG, "MainAbility onCreate")
         globalThis.abilityWant = want;
     }
 
     onDestroy() {
-        console.log("[Demo] MainAbility onDestroy")
+        Log.showInfo(TAG, "MainAbility onDestroy")
     }
 
     onWindowStageCreate(windowStage) {
         // Main window is created, set main page for this ability
-        console.log("[Demo] MainAbility onWindowStageCreate")
+        Log.showInfo(TAG, "MainAbility onWindowStageCreate")
 
         windowStage.setUIContent(this.context, "pages/index", null)
     }
 
     onWindowStageDestroy() {
         // Main window is destroyed, release UI related resources
-        console.log("[Demo] MainAbility onWindowStageDestroy")
+        Log.showInfo(TAG, "MainAbility onWindowStageDestroy")
     }
 
     onForeground() {
         // Ability has brought to foreground
-        console.log("[Demo] MainAbility onForeground")
+        Log.showInfo(TAG, "MainAbility onForeground")
     }
 
     onBackground() {
         // Ability has back to background
-        console.log("[Demo] MainAbility onBackground")
+        Log.showInfo(TAG, "MainAbility onBackground")
     }
 };
