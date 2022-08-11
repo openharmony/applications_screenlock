@@ -12,12 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import Log from '../../../../../../common/src/main/ets/default/Log';
+
+const TAG = "Clock_Component_APP";
 
 export default {
   onCreate() {
-    console.info('Application onCreate')
+    Log.showInfo(TAG, 'Application onCreate')
   },
   onDestroy() {
-    console.info('Application onDestroy')
+    Log.showInfo(TAG, 'Application onDestroy')
   },
 }
