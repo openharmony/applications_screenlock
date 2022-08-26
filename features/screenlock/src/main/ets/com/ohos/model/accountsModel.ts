@@ -18,16 +18,20 @@ import osAccount from '@ohos.account.osAccount'
 import commonEvent from '@ohos.commonEvent';
 import util from '@ohos.util';
 import {Callback} from 'basic';
-import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
-import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
+import Trace from '../../../../../../../../common/src/main/ets/default/Trace';
+import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger';
+import Log from '../../../../../../../../common/src/main/ets/default/Log';
 import { CommonEventManager, getCommonEventManager } from "../../../../../../../../common/src/main/ets/default/commonEvent/CommonEventManager";
-import {UserData} from '../data/userData'
+import EventManager from "../../../../../../../../common/src/main/ets/default/event/EventManager";
+import { obtainLocalEvent } from "../../../../../../../../common/src/main/ets/default/event/EventUtil";
+import {UserData} from '../data/userData';
 
 const TAG = "ScreenLock-AccountsModel"
 const TYPE_ADMIN = 0;
 const TYPE_NORMAL = 1;
 const TYPE_GUEST = 2;
+
+export const ACCOUNTS_REFRESH_EVENT = "Accounts_Refresh_Event";
 
 export enum AuthType {
     //Authentication type pin.
@@ -131,26 +135,18 @@ export default class AccountsModel {
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func off failed"})
     eventCancelListener(typeName: "activate" | "activating", name: string) {
         Log.showInfo(TAG, `eventCancleListener:typeName ${typeName}`);
-        osAccount.getAccountManager().off(typeName, name)
+        osAccount.getAccountManager().off(typeName, name);
     }
 
     updateAllUsers() {
-        this.clearAllUsers()
-        // add later to avoid list not refresh
-        setTimeout(() => {
-            this.addAllUsers()
-        }, 100);
-    }
-
-    private clearAllUsers() {
-        AppStorage.SetOrCreate('userList', []);
+        this.addAllUsers();
     }
 
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func queryAllCreatedOsAccounts failed"})
     private addAllUsers() {
         Log.showDebug(TAG, "start getAllUsers");
         osAccount.getAccountManager().queryAllCreatedOsAccounts().then((list) => {
-            Log.showDebug(TAG, "start sort")
+            Log.showDebug(TAG, "start sort");
             let accountList = [];
             let accountMap = new Map();
             list.sort(this.sortAccount.bind(this));
@@ -167,11 +163,11 @@ export default class AccountsModel {
                 accountList.push(userData)
                 accountMap.set(user.localId, userData)
                 osAccount.getAccountManager().getOsAccountProfilePhoto(user.localId).then((path) => {
-                    Log.showDebug(TAG, "start get photo:" + path)
-                    accountMap.get(user.localId).userIconPath = path
+                    Log.showDebug(TAG, "start get photo:" + path);
+                    accountMap.get(user.localId).userIconPath = path;
                 })
             }
-            AppStorage.SetOrCreate('userList', accountList);
+            EventManager.publish(obtainLocalEvent(ACCOUNTS_REFRESH_EVENT, accountList));
         })
     }
 
