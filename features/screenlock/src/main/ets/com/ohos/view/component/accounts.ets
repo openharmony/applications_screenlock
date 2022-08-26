@@ -13,24 +13,32 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log'
-import ViewModel from '../../vm/accountsViewModel'
-import Constants from '../../common/constants'
-import {UserData} from '../../data/userData'
+import Log from '../../../../../../../../../common/src/main/ets/default/Log';
+import ViewModel from '../../vm/accountsViewModel';
+import Constants from '../../common/constants';
+import {UserData} from '../../data/userData';
+import { ACCOUNTS_REFRESH_EVENT } from '../../model/accountsModel'
+import EventManager, { unsubscribe } from '../../../../../../../../../common/src/main/ets/default/event/EventManager';
 
 const TAG = 'ScreenLock-Accounts'
 
 @Component
 export default struct Accounts {
-  @StorageLink("userList") accountList: UserData[] = []
-  private mViewModel: ViewModel = new ViewModel()
+  @State accountList: UserData[] = [];
+  private mViewModel: ViewModel = new ViewModel();
+  unSubscriber?: unsubscribe;
 
   aboutToAppear() {
-    Log.showInfo(TAG, `aboutToAppear`)
+    Log.showInfo(TAG, `aboutToAppear`);
+    this.unSubscriber = EventManager.subscribe(ACCOUNTS_REFRESH_EVENT, (data) => {
+      this.accountList = data;
+    });
   }
 
   aboutToDisappear() {
-    Log.showInfo(TAG, `aboutToDisappear`)
+    Log.showInfo(TAG, `aboutToDisappear`);
+    this.unSubscriber && this.unSubscriber();
+    this.unSubscriber = undefined;
   }
 
   build() {
@@ -51,7 +59,7 @@ export default struct Accounts {
 
 @Component
 struct UserItem {
-  private userItem: any;
+  @State userItem: any = {};
   private viewModel: ViewModel;
 
   build() {
@@ -71,7 +79,7 @@ struct UserItem {
         .margin({ top: $r("app.float.accounts_block") })
     }
     .onClick(event => {
-      this.viewModel.onUserClick(this.userItem.userId)
+        this.viewModel.onUserClick(this.userItem.userId);
     })
   }
 }
