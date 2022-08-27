@@ -208,7 +208,7 @@ export class ViewModel {
     this.updateNotification()
   }
 
-  removeNotificationItem(itemData, isDelSysConent) {
+  removeNotificationItem(itemData, isDelSysConent, isClickItem?: boolean) {
     Log.showDebug(TAG, `removeNotificationItem, hashcode: ${itemData.hashcode}`);
     for (let i = 0, len = this.mNotificationList.length; i < len; i++) {
       if (this.mNotificationList[i].hashcode == itemData.hashcode) {
@@ -223,7 +223,7 @@ export class ViewModel {
     }
     this.updateNotification();
     if (isDelSysConent) {
-      this.removeSysNotificationItem(itemData.hashcode);
+      this.removeSysNotificationItem(itemData.hashcode, isClickItem);
     }
     AppStorage.Delete(Constants.KEY_INPUT + itemData.id);
   }
@@ -250,15 +250,15 @@ export class ViewModel {
     this.updateNotification();
   }
 
-  removeSysNotificationItem(hashcode) {
-    NotificationService.remove(hashcode);
+  removeSysNotificationItem(hashcode, isClickItem?: boolean) {
+    NotificationService.remove(hashcode, isClickItem);
   }
 
   clickItem(itemData, want?: any) {
     Log.showDebug(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}`);
     NotificationWindowManager.hideNotificationWindow();
     CommonUtil.startWant((want) ? want : itemData.want);
-    this.removeNotificationItem(itemData, true);
+    this.removeNotificationItem(itemData, true, true);
   }
 
   clickReply(inputKey, content, want) {
