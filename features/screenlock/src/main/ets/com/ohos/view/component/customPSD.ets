@@ -88,8 +88,8 @@ export default struct CustomPSD {
         })
           .width($r('app.float.custompsd_input_width'))
           .height($r("app.float.custompsd_button_height"))
-          .enabled(this.passwordArr.length > 1)
-          .opacity(deviceInfo.deviceType === 'tablet' ? 1 : (this.passwordArr.length > 1 ? 1 : 0.4))
+          .enabled(this.passwordArr.length >= 1)
+          .opacity(deviceInfo.deviceType === 'tablet' ? 1 : (this.passwordArr.length >= 1 ? 1 : 0.4))
           .onClick(() => {
             Log.showInfo(TAG, `onClick`)
             this.mViewModel.onAuthPassword(() => {
