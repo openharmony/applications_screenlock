@@ -21,7 +21,7 @@ import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/defa
 import createOrGet from '../../../../../../../../common/src/main/ets/default/SingleInstanceHelper'
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
-import hiDebug from '@ohos.hiDebug';
+import hiDebug from '@ohos.hidebug';
 import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
 import {Callback} from 'basic';
 
