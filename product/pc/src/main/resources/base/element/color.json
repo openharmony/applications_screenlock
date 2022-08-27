@@ -15,6 +15,110 @@
     {
       "name":"notificationitem_background",
       "value":"#99D8F8E7"
+    },
+    {
+      "name": "battery_component_pic_level_low_color",
+      "value": "#ff0000"
+    },
+    {
+      "name": "battery_component_pic_charging_color",
+      "value": "#00ff21"
+    },
+    {
+      "name": "battery_background",
+      "value": "#00000000"
+    },
+    {
+      "name": "date_time_color",
+      "value": "#ffffff"
+    },
+    {
+      "name":"title_text_color",
+      "value":"#222D37"
+    },
+    {
+      "name":"content_text_color",
+      "value":"#FF435563"
+    },
+    {
+      "name":"name_text_color",
+      "value":"#435563"
+    },
+    {
+      "name": "nonotification_text_color",
+      "value": "#ffffffff"
+    },
+    {
+      "name":"dialog_font_color",
+      "value":"#ffffff"
+    },
+    {
+      "name": "action_button_color",
+      "value": "#007DFF"
+    },
+    {
+      "name":"dialog_font_back_color",
+      "value":"#0759f6"
+    },
+    {
+      "name":"dialog_back_color",
+      "value":"#FF0000FF"
+    },
+    {
+      "name": "confirm_divider_color",
+      "value": "#E3E3E3"
+    },
+    {
+      "name": "confirm_text_color",
+      "value": "#FFFF0000"
+    },
+    {
+      "name":"action_button_click_color",
+      "value":"#0D000000"
+    },
+    {
+      "name": "button_background",
+      "value": "#4d000000"
+    },
+    {
+      "name": "device_divider_color",
+      "value": "#E3E3E3"
+    },
+    {
+      "name": "lock_prompt_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "circle_background",
+      "value": "#ffffff"
+    },
+    {
+      "name": "circle_background_transparent",
+      "value": "#00ffffff"
+    },
+    {
+      "name": "batterysoc_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "accounts_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "lock_ic_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "shortcut_icon_color",
+      "value": "rgba(255, 255, 255, 0.5)"
+    },
+    {
+      "name": "shortcut_text_color",
+      "value": "#ffffff"
+    },
+    {
+      "name": "font_color_white",
+      "value": "#fff"
     }
   ]
 }
