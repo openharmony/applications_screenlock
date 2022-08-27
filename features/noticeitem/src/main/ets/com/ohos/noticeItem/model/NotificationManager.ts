@@ -49,9 +49,10 @@ export default class NotificationManager {
     Notification.removeAll(callback);
   }
 
-  static remove(tag, hashCode, callback) {
+  static remove(tag, hashCode, callback, isClickItem?: boolean) {
     Log.showInfo(TAG, `remove from: ${tag}`);
-    Notification.remove(hashCode, callback)
+    var clickValue = isClickItem == true ? Notification.RemoveReason.CLICK_REASON_REMOVE : Notification.RemoveReason.CANCEL_REASON_REMOVE;
+    Notification.remove(hashCode, clickValue, callback);
   }
 
   static getAllActiveNotifications(tag, callback) {

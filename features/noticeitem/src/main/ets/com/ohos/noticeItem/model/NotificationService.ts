@@ -59,10 +59,10 @@ export class NotificationService {
     });
   }
 
-  public remove(code: string) {
+  public remove(code: string, isClickItem?: boolean) {
     NotificationManager.remove(TAG, code, (data) => {
       Log.showInfo(TAG, `removeNotificationItem ==> data: ${JSON.stringify(data)}`);
-    })
+    }, isClickItem);
   }
 
   public loadAllNotifications() {
