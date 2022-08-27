@@ -15,6 +15,206 @@
     {
       "name": "description_mainability",
       "value": "JS_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "monday",
+      "value": "星期一"
+    },
+    {
+      "name": "tuesday",
+      "value": "星期二"
+    },
+    {
+      "name": "wednesday",
+      "value": "星期三"
+    },
+    {
+      "name": "thursday",
+      "value": "星期四"
+    },
+    {
+      "name": "friday",
+      "value": "星期五"
+    },
+    {
+      "name": "saturday",
+      "value": "星期六"
+    },
+    {
+      "name": "sunday",
+      "value": "星期日"
+    },
+    {
+      "name": "yyyy_mm_dd",
+      "value": "%d/%d/%d"
+    },
+    {
+      "name": "mm_dd",
+      "value": "%d/%d"
+    },
+    {
+      "name": "noticeitem",
+      "value": "noticeitem"
+    },
+    {
+      "name": "nonotification_text",
+      "value": "无通知"
+    },
+    {
+      "name": "closeNotification",
+      "value": "关闭通知"
+    },
+    {
+      "name": "moreSettings",
+      "value": "更多设置"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "enter",
+      "value": "回复"
+    },
+    {
+      "name": "Sending",
+      "value": "发送中"
+    },
+    {
+      "name": "close",
+      "value": "关闭"
+    },
+    {
+      "name": "closeNovice",
+      "value": "关闭通知"
+    },
+    {
+      "name": "confirm_message",
+      "value": "是否关掉”%s“的所有通知?"
+    },
+    {
+      "name": "device_dialog_title",
+      "value": "设备选择"
+    },
+    {
+      "name": "distributed_devicename",
+      "value": "来自”%s“设备"
+    },
+    {
+      "name": "lock_prompt",
+      "value": "屏幕锁定中"
+    },
+    {
+      "name": "unlock_prompt",
+      "value": "上滑解锁"
+    },
+    {
+      "name": "recognizing_face",
+      "value": "正在识别人脸"
+    },
+    {
+      "name": "face_not_recognized",
+      "value": "未识别成功, 双击重试"
+    },
+    {
+      "name": "input",
+      "value": "输入密码"
+    },
+    {
+      "name": "incorrect",
+      "value": "密码错误"
+    },
+    {
+      "name": "incorrect_promp_times",
+      "value": "密码错误，还可尝试%d次"
+    },
+    {
+      "name": "incorrect_promp_freezing",
+      "value": "密码错误，还可尝试%d次，失败后将锁定%s"
+    },
+    {
+      "name": "input_promp",
+      "value": "请%s后重试"
+    },
+    {
+      "name": "emergency_call",
+      "value": "紧急呼叫"
+    },
+    {
+      "name": "back",
+      "value": "返回"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "done",
+      "value": "确定"
+    },
+    {
+      "name": "charge_full",
+      "value": "已充满"
+    },
+    {
+      "name": "charging",
+      "value": "正在充电%s"
+    },
+    {
+      "name": "battery_soc",
+      "value": "目前电量%s"
+    },
+    {
+      "name": "shutdown",
+      "value": "关机"
+    },
+    {
+      "name": "reboot",
+      "value": "重启"
+    },
+    {
+      "name": "signalcomponent",
+      "value": "signalcomponent"
+    },
+    {
+      "name": "mainability_description",
+      "value": "JS_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "china_mobile",
+      "value": "中国移动"
+    },
+    {
+      "name": "china_telecom",
+      "value": "中国电信"
+    },
+    {
+      "name": "china_unicom",
+      "value": "中国联通"
+    },
+    {
+      "name": "net_null",
+      "value": "没有 SIM 卡"
+    },
+    {
+      "name": "2G",
+      "value": "2G"
+    },
+    {
+      "name": "3G",
+      "value": "3G"
+    },
+    {
+      "name": "4G",
+      "value": "4G"
+    },
+    {
+      "name": "5G",
+      "value": "5G"
+    },
+    {
+      "name": "signal_null",
+      "value": "×"
     }
   ]
 }
