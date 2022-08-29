@@ -47,7 +47,13 @@ export default class ScreenLockModel {
                         data:${JSON.stringify(data)}`);
                     callback();
                 })
-            break;
+                break;
+            case "lockScreen":
+                ScreenLockMar.on(typeName, () => {
+                    Log.showInfo(TAG, `eventListener:callback`);
+                    callback();
+                })
+                break;
             default:
                 Log.showError(TAG, `eventListener:typeName ${typeName}`)
         }

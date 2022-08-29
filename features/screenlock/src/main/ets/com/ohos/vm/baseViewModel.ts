@@ -79,7 +79,7 @@ export default class BaseViewModel {
         this.prompt = promptText;
         this.updateStorage(callback)
         //notify the base service that the unlock is fail
-        service.notifyScreenResult(UnlockResult.Fail);
+        service.notifyUnlockScreenResult(UnlockResult.Fail);
     }
 
     getFreezingTimeNm(freezingMillisecond: number): string {
