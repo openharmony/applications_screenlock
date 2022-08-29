@@ -39,6 +39,7 @@ const EVENT_END_SCREEN_ON: string = 'endScreenOn'
 const EVENT_BEGIN_SCREENOFF: string = 'beginScreenOff'
 const EVENT_END_SCREENOFF: string = 'endScreenOff'
 const EVENT_UNLOCK_SCREEN: string = 'unlockScreen'
+const EVENT_LOCK_SCREEN: string = 'lockScreen'
 const EVENT_BEGIN_EXITANIMATION: string = 'beginExitAnimation'
 const EVENT_BEGIN_SLEEP: string = 'beginSleep'
 const EVENT_END_SLEEP: string = 'endSleep'
@@ -46,6 +47,7 @@ const EVENT_CHANGE_USER: string = 'changeUser'
 const EVENT_SCREENLOCK_ENABLE: string = 'screenlockEnabled'
 const EVENT_SYSTEM_READY: string = 'systemReady'
 
+const LOCK_SCREEN_RESULT: string = 'lockScreenResult'
 const UNLOCK_SCREEN_RESULT: string = 'unlockScreenResult'
 const SCREENLOCK_DRAW_DONE: string = 'screenDrawDone'
 
@@ -64,6 +66,12 @@ const MEMORY_MONITOR_LIMIT_KB = 120 * 1024
 export {AuthType, AuthSubType};
 
 export enum UnlockResult {
+    Success = 0,
+    Fail = 1,
+    Cancel = 2
+}
+
+export enum LockResult {
     Success = 0,
     Fail = 1,
     Cancel = 2
@@ -144,6 +152,12 @@ export class ScreenLockService {
             this.unlockScreen();
         });
 
+        //lock request was received
+        this.screenLockModel.eventListener(EVENT_LOCK_SCREEN, () => {
+            Log.showInfo(TAG, `EVENT_LOCK_SCREEN event`);
+            this.lockScreen();
+        });
+
         Log.showDebug(TAG, 'registered events end');
     }
 
@@ -165,6 +179,7 @@ export class ScreenLockService {
             if (this.currentLockStatus == ScreenLockStatus.Locking) {
                 Log.showInfo(TAG, `had locked, no need to publish lock_screen`);
             } else {
+                this.notifyLockScreenResult(LockResult.Success)
                 this.publishByUser("common.event.LOCK_SCREEN", this.accountModel.getCurrentUserId());
                 this.currentLockStatus = ScreenLockStatus.Locking;
             }
@@ -249,15 +264,22 @@ export class ScreenLockService {
         this.screenLockModel.hiddenScreenLockWindow(() => {
             Log.showInfo(TAG, `hiddenScreenLockWindow finish`);
             //notify the base service that the unlock is completed
-            this.notifyScreenResult(UnlockResult.Success);
+            this.notifyUnlockScreenResult(UnlockResult.Success);
             this.publishByUser("common.event.UNLOCK_SCREEN", this.accountModel.getCurrentUserId());
         });
     }
 
-    notifyScreenResult(result: UnlockResult) {
-        Log.showInfo(TAG, `notifyScreenResult`);
+    notifyUnlockScreenResult(result: UnlockResult) {
+        Log.showInfo(TAG, `notifyUnlockScreenResult`);
         this.screenLockModel.sendScreenLockEvent(UNLOCK_SCREEN_RESULT, result, (error, data) => {
-            Log.showInfo(TAG, `notifyScreenResult: error:${JSON.stringify(error)} data:${JSON.stringify(data)}`);
+            Log.showInfo(TAG, `notifyUnlockScreenResult: error:${JSON.stringify(error)} data:${JSON.stringify(data)}`);
+        });
+    }
+
+    notifyLockScreenResult(result: LockResult) {
+        Log.showInfo(TAG, `notifyLockScreenResult`);
+        this.screenLockModel.sendScreenLockEvent(LOCK_SCREEN_RESULT, result, (error, data) => {
+            Log.showInfo(TAG, `notifyLockScreenResult: error:${JSON.stringify(error)} data:${JSON.stringify(data)}`);
         });
     }
 
