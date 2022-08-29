@@ -60,6 +60,7 @@ export default struct SlideScreenlock {
           Wallpaper()
         }
       }
+      .backgroundColor($r('app.color.screenlock_backgroundcolor'))
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height(Constants.FULL_CONTAINER_HEIGHT)
       .scale({
