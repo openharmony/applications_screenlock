@@ -18,8 +18,8 @@ import Log from "./Log";
 import hiSysEvent from '@ohos.hiSysEvent'
 
 const TAG = 'SystemFaultLogger';
-const APP_DOMAIN: string = "CoreApp";
-const APP_LOG_NAME: string = "ScreenLockFault";
+const APP_DOMAIN: string = "SYSTEMUI_APP";
+const APP_LOG_NAME: string = "SCREENLOCK_FAULT";
 
 interface LogParam {
   FAULT_ID: string,
