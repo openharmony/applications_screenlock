@@ -86,29 +86,28 @@ export class NotificationService {
     return this.mSubscriber;
   }
 
-  handleNotificationAddAndSortMap(data) {
-    Log.showInfo(TAG, 'handleNotificationAddAndSortMap, sortingMap' + JSON.stringify(data.sortingMap || {}));
+  handleNotificationAddAndSortMap(data): void {
+    Log.showInfo(TAG, 'handleNotificationAddAndSortMap');
     this.mSortingMap = { ...this.mSortingMap, ...data?.sortingMap };
     this.handleNotificationAdd(data?.request);
   }
 
-  handleNotificationAdd(request) {
+  handleNotificationAdd(request): void {
     ParseDataUtil.parseData(request, this.mSortingMap).then((intermediateData) => {
-      Log.showInfo(TAG, `parseData after = ${JSON.stringify(intermediateData)}`);
+      Log.showInfo(TAG, `parseData id=${intermediateData?.id}, timestamp=${intermediateData?.timestamp}, bundleName=${intermediateData?.bundleName}`);
       RuleController.getNotificationData(intermediateData, (finalItemData) => {
-        Log.showInfo(TAG, `RuleController.getNotificationData after = ${JSON.stringify(finalItemData)}`);
         this.mListeners.forEach((listener) => {
-          Log.showInfo(TAG, `notifcationUserId: ${finalItemData.userId}, listener.userId: ${listener.userId}`);
+          Log.showInfo(TAG, `notifcationUserId: ${finalItemData?.userId}, listener.userId: ${listener?.userId}`);
           if (CommonUtil.checkVisibilityByUser(finalItemData.userId, listener.userId)) {
             listener.onNotificationConsume(finalItemData);
           }
-        })
+        });
       });
     }).catch(errorInfo => Log.showError(TAG, errorInfo));
   }
 
   handleNotificationCancel(data) {
-    Log.showInfo(TAG, `handleNotificationCancel hashCode: ${JSON.stringify(data?.request?.hashCode)}`);
+    Log.showDebug(TAG, `handleNotificationCancel hashCode: ${JSON.stringify(data?.request?.hashCode)}`);
     this.mSortingMap = { ...this.mSortingMap, ...data?.sortingMap };
     const hashCode = data?.request?.hashCode;
     if (!hashCode) {
@@ -140,10 +139,10 @@ export class NotificationService {
     return pluginTempLate;
   }
 
-  enableNotification(bundleOption, data) {
-    Log.showInfo(TAG, `enableNotification bundleOption:${JSON.stringify(bundleOption)} data:${JSON.stringify(data)} `);
-    NotificationManager.enableNotification(TAG, bundleOption, data, (result) => {
-      Log.showInfo(TAG, `enableNotification ==> result: ${JSON.stringify(result)}`);
+  enableNotification(bundleOption, data: boolean): void {
+    Log.showDebug(TAG, `enableNotification bundleOption:${JSON.stringify(bundleOption)} data:${JSON.stringify(data)} `);
+    NotificationManager.enableNotification(TAG, bundleOption, data, () => {
+      Log.showInfo(TAG, 'enableNotification succeed');
     });
   }
 
