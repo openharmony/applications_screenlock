@@ -82,7 +82,6 @@ export default class ParseDataUtil {
       deviceId: request.deviceId,
       groupName: request.groupName??request.hashcode
     };
-    Log.showDebug(TAG, `notificationItem construct over`);
     notificationItem = {
       ...notificationItem, ...ParseDataUtil.getContentByType(request?.content?.contentType, request)
     }

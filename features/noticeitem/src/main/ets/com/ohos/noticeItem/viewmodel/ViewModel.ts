@@ -82,10 +82,10 @@ export class ViewModel {
    */
   onNotificationConsume(notificationItemData) {
     if (notificationItemData === undefined) {
-      Log.showDebug(TAG, `onNotificationConsume notificationItemData is undefined`);
+      Log.showError(TAG, 'onNotificationConsume notificationItemData is undefined');
       return;
     }
-    this.onNotificationCancel(notificationItemData.hashcode)
+    this.onNotificationCancel(notificationItemData.hashcode);
     Log.showDebug(TAG, `onNotificationConsume  ${JSON.stringify(notificationItemData)}`);
     //Verify the notifications can be displayed
     if (!this.isCanShow(notificationItemData.bundleName)) {
@@ -94,6 +94,7 @@ export class ViewModel {
     }
 
     if (notificationItemData.ruleData.isAllowStatusBarShow) {
+      //TODO statusbar show
     }
     if (notificationItemData.ruleData.isAllowNotificationListShow) {
       this.mNotificationList.unshift(notificationItemData);
@@ -108,15 +109,15 @@ export class ViewModel {
   /**
    * notification CancelCallback
    */
-  onNotificationCancel(hashCode: string) {
-    Log.showDebug(TAG, `onNotificationCancel hashCode: ${hashCode}`);
+  onNotificationCancel(hashCode: string): void {
+    Log.showInfo(TAG, `onNotificationCancel hashCode: ` + hashCode);
+
     // Common Notification Deletion Logic Processing
     for (let i = 0, len = this.mNotificationList.length; i < len; i++) {
       if (this.mNotificationList[i].hashcode == hashCode) {
         let removeItemArr = this.mNotificationList.splice(i, 1);
-        Log.showDebug(TAG, `onNotificationCancel removeItemArr= ${JSON.stringify(removeItemArr)}`);
         if (!CheckEmptyUtils.isEmpty(removeItemArr)) {
-          this.updateFlowControlInfos(removeItemArr[0].bundleName, false)
+          this.updateFlowControlInfos(removeItemArr[0].bundleName, false);
         }
         this.updateNotification();
         break;
@@ -124,30 +125,29 @@ export class ViewModel {
     }
   }
 
-  updateNotification() {
-    Log.showDebug(TAG, `updateNotification length: ${this.mNotificationList.length}`);
-    this.sortNotification()
+  updateNotification(): void {
+    this.sortNotification();
     let notificationList = this.groupByGroupName();
+    Log.showInfo(TAG, `updateNotification length: ${notificationList.length}`);
     AppStorage.SetOrCreate('notificationListSc', notificationList);
   }
 
   groupByGroupName(): any[]{
-    Log.showDebug(TAG, `groupByGroupName`);
     if (!this.mNotificationList || this.mNotificationList.length < 1) {
+      Log.showWarn(TAG, 'groupByGroupName, list is empty.');
       return [];
     }
     let groupArr: any[] = [];
     let groups = {};
     this.mNotificationList.forEach((item) => {
       const groupName = `${item.bundleName}_${item.groupName}`;
-      Log.showDebug(TAG, `groupByGroupName groupName:${groupName}`);
+      Log.showDebug(TAG, `groupByGroupName, groupName:${groupName}`);
       if (!groups[groupName] || groups[groupName].length < 1) {
         groups[groupName] = [];
         groupArr.push(groups[groupName]);
       }
-      groups[groupName].push(item)
-    })
-    Log.showDebug(TAG, `groupByGroupName groupArr:${JSON.stringify(groupArr)}`);
+      groups[groupName].push(item);
+    });
     return groupArr;
   }
 
@@ -232,7 +232,7 @@ export class ViewModel {
     Log.showDebug(TAG, `removeGroupNotification, groupName: ${itemData.groupName}`);
     let groupName = itemData.groupName
     for (let i = 0, len = this.mNotificationList.length; i < len; i++) {
-      if (this.mNotificationList[i].groupName == groupName) {
+      if (this.mNotificationList[i]?.groupName == groupName) {
         Log.showDebug(TAG, `removeGroupNotification i = ${i}`);
         let id = this.mNotificationList[i].id
         let hashcode = this.mNotificationList[i].hashcode
@@ -318,7 +318,6 @@ export class ViewModel {
   }
 
   updateFlowControlInfos(bundleName: string, plusOrMinus: boolean): void {
-    Log.showDebug(TAG, `updateFlowControlInfos`);
     if (!CheckEmptyUtils.isEmpty(this.mNotificationCtrl)) {
       if (this.mNotificationCtrl['app'].has(bundleName)) {
         let tmp = this.mNotificationCtrl['app'].get(bundleName)

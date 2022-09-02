@@ -30,19 +30,15 @@ export class RuleController {
      * @param {notificationItemData} Data of the notification
      * @param {callback} Data of the type to show the notification
      */
-  getNotificationData(notificationItemData: NotificationItemData, callback) {
-    Log.showDebug(TAG, "getNotificationData start")
-
+  getNotificationData(notificationItemData: NotificationItemData, callback): void {
     this.isAllowSendNotification(notificationItemData, (isSuccess) => {
       if (!isSuccess) {
-        Log.showDebug(TAG, "user is not allow this to send notification");
+        Log.showWarn(TAG, 'user is not allow this to send notification');
         callback(undefined);
         return;
       }
       this.getNotificationDataByApp(notificationItemData, (originalData) => {
-        Log.showDebug(TAG, `originalData = ${JSON.stringify(originalData)}`);
         this.updateNotificationDataBySense(originalData, (finalData) => {
-          Log.showDebug(TAG, `finalData = ${JSON.stringify(finalData)}`);
           callback(finalData);
         });
       });
@@ -55,11 +51,10 @@ export class RuleController {
      * @param {notificationItemData} The origin notification data
      * @param {callback} The user allow the app send notification or not
      */
-  isAllowSendNotification(notificationItemData, callback) {
-    Log.showDebug(TAG, "isAllowSendNotification start");
+  isAllowSendNotification(notificationItemData, callback): void {
     Notification.isNotificationEnabled({ bundle: notificationItemData.bundleName, uid: notificationItemData.uid })
       .then((flag) => {
-        Log.showInfo(TAG, `Notification.isNotificationEnabled:` + flag)
+        Log.showInfo(TAG, `Notification.isNotificationEnabled: ${flag}`);
         callback(flag);
       });
   }
@@ -93,8 +88,7 @@ export class RuleController {
      * @param {notificationItemData} The origin notification data
      * @param {callback} The type to show notification
      */
-  getNotificationDataByApp(notificationItemData, callback) {
-    Log.showDebug(TAG, "getNotificationDataByApp start")
+  getNotificationDataByApp(notificationItemData, callback): void {
     let mNotificationItemData : NotificationItemData = notificationItemData;
     mNotificationItemData.ruleData = {
       isAllowBanner: false,
@@ -103,7 +97,7 @@ export class RuleController {
       isAllowStatusBarShow : false,
       isAllowNotificationListShow : false
     };
-    Log.showDebug(TAG, `notificationItemData.slotLevel = ${notificationItemData.slotLevel}`);
+    Log.showInfo(TAG, `notificationItemData.slotLevel = ${notificationItemData.slotLevel}`);
     if (notificationItemData.slotLevel === SlotLevel.LEVEL_HIGH) {
       mNotificationItemData.ruleData.isAllowBanner = true;
       this.SoundOrVibrate(notificationItemData, (sound, vibrationValues) => {
@@ -126,7 +120,7 @@ export class RuleController {
     } else {
       mNotificationItemData.ruleData.isAllowNotificationListShow = false;
     }
-    Log.showDebug(TAG, `mNotificationItemData.ruleData = ${JSON.stringify(mNotificationItemData.ruleData)}`);
+    Log.showInfo(TAG, `mNotificationItemData.ruleData = ${JSON.stringify(mNotificationItemData.ruleData)}`);
     callback(mNotificationItemData);
   }
 
@@ -138,9 +132,9 @@ export class RuleController {
    * @param {notificationItemData} The origin notification data
    * @param {callback} The final notification data
    */
-  updateNotificationDataBySense(notificationItemData, callback) {
-    Log.showDebug(TAG, "updateNotificationDataBySense start")
+  updateNotificationDataBySense(notificationItemData, callback): void {
     let mNotificationItemData = notificationItemData;
+    // TODO Scenario Management
     callback(mNotificationItemData);
   }
 
