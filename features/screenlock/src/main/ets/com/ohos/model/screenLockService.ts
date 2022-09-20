@@ -47,6 +47,8 @@ const EVENT_CHANGE_USER: string = 'changeUser'
 const EVENT_SCREENLOCK_ENABLE: string = 'screenlockEnabled'
 const EVENT_SYSTEM_READY: string = 'systemReady'
 
+const SERVICE_RESTART: string = 'serviceRestart'
+
 const LOCK_SCREEN_RESULT: string = 'lockScreenResult'
 const UNLOCK_SCREEN_RESULT: string = 'unlockScreenResult'
 const SCREENLOCK_DRAW_DONE: string = 'screenDrawDone'
@@ -104,27 +106,46 @@ export class ScreenLockService {
 
     monitorEvents() {
         Log.showDebug(TAG, 'registered events start');
-
-        // System ready on device boot
-        this.screenLockModel.eventListener(EVENT_SYSTEM_READY, () => {
-            Log.showInfo(TAG, `EVENT_SYSTEM_READY event`);
-            this.lockScreen();
-        })
-
-        //Bright screen
-        this.screenLockModel.eventListener(EVENT_END_SCREEN_ON, () => {
-            Log.showInfo(TAG, `EVENT_END_SCREEN_ON event`);
-            this.authUserByFace()
-            AppStorage.SetOrCreate('deviceStatus', EVENT_END_SCREEN_ON);
-        })
-
-        //The device is going to sleep
-        this.screenLockModel.eventListener(EVENT_BEGIN_SLEEP, () => {
-            Trace.start(Trace.CORE_METHOD_SLEEP_TO_LOCK_SCREEN);
-            Log.showInfo(TAG, `EVENT_BEGIN_SLEEP event`);
-            this.lockScreen();
-            this.accountModel.updateAllUsers()
-            AppStorage.SetOrCreate('deviceStatus', EVENT_BEGIN_SLEEP);
+        this.screenLockModel.eventListener((typeName: String) => {
+            switch (typeName) {
+            // System ready on device boot
+                case EVENT_SYSTEM_READY:
+                    Log.showInfo(TAG, `EVENT_SYSTEM_READY event`);
+                    this.lockScreen();
+                    break;
+            //Bright screen
+                case EVENT_END_SCREEN_ON:
+                    Log.showInfo(TAG, `EVENT_END_SCREEN_ON event`);
+                    this.authUserByFace()
+                    AppStorage.SetOrCreate('deviceStatus', EVENT_END_SCREEN_ON);
+                    break;
+            //The device is going to sleep
+                case EVENT_BEGIN_SLEEP:
+                    Trace.start(Trace.CORE_METHOD_SLEEP_TO_LOCK_SCREEN);
+                    Log.showInfo(TAG, `EVENT_BEGIN_SLEEP event`);
+                    this.lockScreen();
+                    this.accountModel.updateAllUsers()
+                    AppStorage.SetOrCreate('deviceStatus', EVENT_BEGIN_SLEEP);
+                    break;
+            //unlock request was received
+                case EVENT_UNLOCK_SCREEN:
+                    Log.showInfo(TAG, `EVENT_UNLOCK_SCREEN event`);
+                    this.unlockScreen();
+                    break;
+            //lock request was received
+                case EVENT_LOCK_SCREEN:
+                    Log.showInfo(TAG, `EVENT_UNLOCK_SCREEN event`);
+                    this.unlockScreen();
+                    break;
+                case SERVICE_RESTART:
+                    setTimeout(() => {
+                        this.monitorEvents();
+                        this.lockScreen();
+                    }, 2000);
+                    break;
+                default:
+                    Log.showError(TAG, `eventListener:typeName ${typeName}`)
+            }
         })
 
         this.accountModel.eventListener(ACTIVATING_TYPE, ACTIVATING_EVENT, () => {
@@ -145,18 +166,6 @@ export class ScreenLockService {
             Log.showInfo(TAG, `commonEventListener event`);
             this.accountModel.updateAllUsers();
         })
-
-        //unlock request was received
-        this.screenLockModel.eventListener(EVENT_UNLOCK_SCREEN, () => {
-            Log.showInfo(TAG, `EVENT_UNLOCK_SCREEN event`);
-            this.unlockScreen();
-        });
-
-        //lock request was received
-        this.screenLockModel.eventListener(EVENT_LOCK_SCREEN, () => {
-            Log.showInfo(TAG, `EVENT_LOCK_SCREEN event`);
-            this.lockScreen();
-        });
 
         Log.showDebug(TAG, 'registered events end');
     }
