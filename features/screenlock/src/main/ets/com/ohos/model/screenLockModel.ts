@@ -25,37 +25,16 @@ const TAG = 'ScreenLock-ScreenLockModel';
 
 export default class ScreenLockModel {
     @SysFaultLogger({FAULT_ID: FaultID.SCREEN_LOCK_MANAGER, MSG: "call func on failed"})
-    eventListener(typeName: string, callback: Callback<void>) {
-        Log.showDebug(TAG, `eventListener:typeName ${typeName}`);
-        switch (typeName) {
-            case "endScreenOn":
-            case "unlockScreen":
-                ScreenLockMar.on(typeName, () => {
-                    Log.showInfo(TAG, `eventListener:callback`);
-                    callback();
-                })
-                break;
-            case "beginSleep":
-                ScreenLockMar.on(typeName, (userId: number) => {
-                    Log.showInfo(TAG, `eventListener:callback userId:${userId}`);
-                    callback();
-                })
-                break;
-            case "systemReady":
-                ScreenLockMar.on(typeName, (err, data) => {
-                    Log.showInfo(TAG, `eventListener:callback err: ${JSON.stringify(err)},
-                        data:${JSON.stringify(data)}`);
-                    callback();
-                })
-                break;
-            case "lockScreen":
-                ScreenLockMar.on(typeName, () => {
-                    Log.showInfo(TAG, `eventListener:callback`);
-                    callback();
-                })
-                break;
-            default:
-                Log.showError(TAG, `eventListener:typeName ${typeName}`)
+    eventListener(callback: Callback<String>) {
+        let isSuccess = ScreenLockMar.onSystemEvent((err, event)=>{
+            Log.showInfo(TAG, `eventListener:callback:${event.eventType}`)
+            callback(event.eventType);
+            if (err) {
+                Log.showError(TAG, `on callback error -> ${JSON.stringify(err)}`);
+            }
+        });
+        if (!isSuccess) {
+            callback('serviceRestart');
         }
     }
 
@@ -73,6 +52,7 @@ export default class ScreenLockModel {
     }
 
     showScreenLockWindow(callback: Callback<void>) {
+        Log.showInfo(TAG, `isWallpaperShow is true: ${AppStorage.Get('isWallpaperShow')}`);
         AppStorage.SetOrCreate('isWallpaperShow', true);
         windowManager.find(Constants.WIN_NAME).then((win) => {
             win.show().then(() => {
@@ -83,6 +63,7 @@ export default class ScreenLockModel {
     }
 
     hiddenScreenLockWindow(callback: Callback<void>) {
+        Log.showInfo(TAG, `window hide`);
         Trace.end(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
         windowManager.find(Constants.WIN_NAME).then((win) => {
             Trace.start(Trace.CORE_METHOD_HIDE_PSD_PAGE);
