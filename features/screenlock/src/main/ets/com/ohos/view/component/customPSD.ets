@@ -25,6 +25,7 @@ const TAG = 'ScreenLock-CustomPSD'
 export default struct CustomPSD {
   @State mViewModel: ViewModel = new ViewModel()
   @StorageLink('passwordArr') passwordArr: any[]  = this.mViewModel.passwordArr
+  @StorageLink('screenlockdirection') screenlockdirection: number = 1
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -79,14 +80,14 @@ export default struct CustomPSD {
           .listDirection(Axis.Horizontal)
           .height($r("app.float.custompsd_digitalpsd_ic_diameter"))
         }
-        .width($r('app.float.custompsd_input_width'))
+        .width(this.screenlockdirection ==  1 ? $r('app.float.custompsd_input_width'):$r('app.float.custompsd_input_width_portrait'))
         .height($r('app.float.custompsd_input_height'))
 
         Button($r('app.string.done'), {
           type: ButtonType.Capsule,
           stateEffect: true
         })
-          .width($r('app.float.custompsd_input_width'))
+          .width(this.screenlockdirection ==  1 ? $r('app.float.custompsd_input_width'):$r('app.float.custompsd_input_width_portrait'))
           .height($r("app.float.custompsd_button_height"))
           .enabled(this.passwordArr.length >= 1)
           .opacity(deviceInfo.deviceType === 'tablet' ? 1 : (this.passwordArr.length >= 1 ? 1 : 0.4))
@@ -110,7 +111,7 @@ export default struct CustomPSD {
       }
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height($r('app.float.custompsd_key_area_height'))
-      .margin({ bottom: $r('app.float.custompsd_key_area_margin_bottom') })
+      .margin({ bottom: this.screenlockdirection ==  1 ? $r('app.float.custompsd_key_area_margin_bottom') : $r('app.float.custompsd_key_area_margin_bottom_portrait')})
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
   }

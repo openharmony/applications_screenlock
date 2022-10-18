@@ -27,6 +27,7 @@ export default class Constants {
   static NOTIFICATION_LIST_AREA_WIDTH = '834'
   static NOTIFICATION_AREA_HEIGHT = '40%'
   static PASSWORD_AREA_WIDTH = '33.33%'
+  static PASSWORD_AREA_WIDTH_PORTRAIT = '50%'
   static NOTIFICATION_LIST_AREA_HEIGHT = '300'
 
   static STATUS_ABOUT_TO_APPEAR  = 1

@@ -25,12 +25,40 @@ import sTimeManager from '../../../../../../common/src/main/ets/default/TimeMana
 const TAG = "ScreenLock-ServiceExtAbility"
 
 class ServiceExtAbility extends ServiceExtension {
+    private direction :number;
+
     onCreate(want) {
         Log.showInfo(TAG, 'onCreate, want:' + want.abilityName);
         AbilityManager.setContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK, this.context)
         sTimeManager.init(this.context)
+
+        display.on("change", (id) => {
+            Log.showInfo(TAG, "screenlock display change, data: " + JSON.stringify(id))
+            display.getAllDisplay().then(async (arrayDisplay) => {
+                Log.showInfo(TAG, "getAllDisplay : " + JSON.stringify(arrayDisplay))
+                for (let display of arrayDisplay) {
+                    Log.showInfo(TAG, "getAllDisplay start : " + JSON.stringify(display));
+                    if (id == display.id) {
+                        if (display.width > display.height) {
+                            this.direction = 1;
+                        } else {
+                            this.direction = 2;
+                        }
+                        Log.showInfo(TAG, "direction change : " + this.direction)
+                        AppStorage.SetOrCreate('screenlockdirection', this.direction)
+                        this.resetWindow(display.width,display.height)
+                    }
+                }
+            })
+        })
         this.statusBarWindow()
         this.createWindow(Constants.WIN_NAME)
+    }
+    private async resetWindow(width: number,height:number) {
+        Log.showInfo(TAG, "resetWindow width: " + width +",height:"+height)
+        let window = await windowManager.find(Constants.WIN_NAME);
+        Log.showInfo(TAG, "screenlock window : " + JSON.stringify(window));
+        await  window.resetSize(width,height)
     }
 
     private createWindow(name: string) {
@@ -63,6 +91,7 @@ class ServiceExtAbility extends ServiceExtension {
                 width: '100%',
                 height: (44 * dis.width) / 1280,
             }
+            this.direction =1
         } else { // Phone verticalScreen Mode
             rect = {
                 left: 0,
@@ -70,7 +99,9 @@ class ServiceExtAbility extends ServiceExtension {
                 width: '100%',
                 height: (44 * dis.width) / 800
             }
-        }
+            this.direction =2
+        };
+        AppStorage.SetOrCreate('screenlockdirection', this.direction);
         AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, "rect", rect);
         AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, "dis", {
             width: dis.width,

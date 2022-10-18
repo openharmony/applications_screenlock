@@ -28,6 +28,7 @@ const TAG = 'ScreenLock-CustomPassword'
 @Component
 export default struct CustomPassword {
   @State mHeightPx: number = 44
+  @StorageLink('screenlockdirection') screenlockdirection: number = 1
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -61,7 +62,7 @@ export default struct CustomPassword {
       Column() {
         CustomPSD()
       }
-      .width(Constants.PASSWORD_AREA_WIDTH)
+      .width(this.screenlockdirection ==  1 ? Constants.PASSWORD_AREA_WIDTH : Constants.PASSWORD_AREA_WIDTH_PORTRAIT)
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
     .height(Constants.FULL_CONTAINER_HEIGHT)
