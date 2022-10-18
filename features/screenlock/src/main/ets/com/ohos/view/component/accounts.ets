@@ -26,6 +26,7 @@ const TAG = 'ScreenLock-Accounts'
 export default struct Accounts {
   @State accountList: UserData[] = [];
   private mViewModel: ViewModel = new ViewModel();
+  @StorageLink('screenlockdirection') screenlockdirection: number = 1
   unSubscriber?: unsubscribe;
 
   aboutToAppear() {
@@ -44,7 +45,7 @@ export default struct Accounts {
   build() {
     Row() {
       if (this.accountList.length > 1) {
-        List({ space: Constants.ACCOUNT_SPACE }) {
+        List({ space: this.screenlockdirection ==  1 ? Constants.ACCOUNT_SPACE : Constants.ACCOUNT_SPACE_PORTRAIT }) {
           ForEach(this.accountList, (item: any) => {
             ListItem() {
               UserItem({ userItem: item, viewModel: this.mViewModel })
