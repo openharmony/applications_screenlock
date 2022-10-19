@@ -53,7 +53,6 @@ export default class DigitalPSDViewModel extends BaseViewModel {
                 Trace.start(Trace.CORE_METHOD_UNLOCK_SCREEN);
                 Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
                 service.authUser(AuthSubType.PIN_SIX, this.password, (result, extraInfo) => {
-                    this.clearPassword()
                     if (result == 0) {
                         //unlock the screen
                         service.unlocking();
@@ -62,6 +61,7 @@ export default class DigitalPSDViewModel extends BaseViewModel {
                         super.changePrompt(extraInfo.remainTimes, extraInfo.freezingTime, callback)
                     }
                 })
+                this.clearPassword()
             }
         } else if (keyValue == Constants.DEL_PWD) {
             this.passwdMaskArr[this.password.length-1] = $r('app.media.ic_hollow_dot');
