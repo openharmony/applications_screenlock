@@ -109,6 +109,10 @@
       "value": "64"
     },
     {
+      "name": "digitalpsd_key_area_margin_bottom_portrait",
+      "value": "128"
+    },
+    {
       "name": "mixedpsd_prompt_fontsize",
       "value": "32"
     },
@@ -146,7 +150,7 @@
     },
     {
       "name": "mixedpsd_input_margin_bottom",
-      "value": "128"
+      "value": "64"
     },
     {
       "name": "custompsd_prompt_fontsize",
@@ -167,6 +171,10 @@
     {
       "name": "custompsd_input_width",
       "value": "600"
+    },
+    {
+      "name": "custompsd_input_width_portrait",
+      "value": "700"
     },
     {
       "name": "custompsd_input_height",
@@ -195,6 +203,10 @@
     {
       "name": "custompsd_key_area_margin_bottom",
       "value": "64"
+    },
+    {
+      "name": "custompsd_key_area_margin_bottom_portrait",
+      "value": "128"
     },
     {
       "name": "custompsd_text_opacity",

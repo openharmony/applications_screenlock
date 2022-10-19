@@ -24,6 +24,7 @@ const TAG = 'ScreenLock-DigitalPSD'
 export default struct DigitalPSD {
   @State mViewModel: ViewModel = new ViewModel()
   @StorageLink('passwdMaskArr') passwdMaskArr: any[]  = this.mViewModel.passwdMaskArr
+  @StorageLink('screenlockdirection') screenlockdirection: number = 1
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -87,7 +88,7 @@ export default struct DigitalPSD {
       }
       .width(Constants.FULL_CONTAINER_WIDTH)
       .height($r('app.float.digitalpsd_key_area_height'))
-      .margin({ bottom: $r('app.float.digitalpsd_key_area_margin_bottom') })
+      .margin({ bottom: this.screenlockdirection ==  1 ? $r('app.float.digitalpsd_key_area_margin_bottom') : $r('app.float.digitalpsd_key_area_margin_bottom_portrait') })
       .flexShrink(0)
     }
     .width(Constants.FULL_CONTAINER_WIDTH)
