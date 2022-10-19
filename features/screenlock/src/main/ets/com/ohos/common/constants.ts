@@ -137,6 +137,7 @@ export default class Constants {
     static PASSWORD_TEXT_HEIGHT =40
     static PASSWORD_TEXT_BORDER =20
     static ACCOUNT_SPACE = 24
+    static ACCOUNT_SPACE_PORTRAIT = 40
 }
 
 export class StatusBarGroupComponentData {

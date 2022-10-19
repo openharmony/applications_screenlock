@@ -99,7 +99,9 @@ export default class AccountsModel {
         Log.showInfo(TAG, `eventListener:typeName ${typeName}`);
         osAccount.getAccountManager().on(typeName, name, (userId: number) => {
             Log.showInfo(TAG, `on ${typeName} callback userId = ${userId}`)
-            this.mCurrentUserId = userId
+            if (typeName == "activate"){
+                this.mCurrentUserId = userId
+            }
             callback()
         })
     }
