@@ -23,9 +23,11 @@ import AbilityManager from '../../../../../../common/src/main/ets/default/abilit
 import sTimeManager from '../../../../../../common/src/main/ets/default/TimeManager'
 
 const TAG = "ScreenLock-ServiceExtAbility"
+const AUTO_ROTATION_RETRICTED: number = 8
 
 class ServiceExtAbility extends ServiceExtension {
     private direction :number;
+
 
     onCreate(want) {
         Log.showInfo(TAG, 'onCreate, want:' + want.abilityName);
@@ -65,6 +67,12 @@ class ServiceExtAbility extends ServiceExtension {
         Log.showDebug(TAG, `createWindow name:${name}`)
         windowManager.create(this.context, name, 2110).then((win) => {
             Log.showInfo(TAG, "before begin " + name + " window show!")
+            win.setPreferredOrientation(AUTO_ROTATION_RETRICTED, (err) => {
+                if (err.code) {
+                    Log.showError(TAG, "failed to set window Orientation: " + JSON.stringify(err));
+                }
+                Log.showInfo(TAG, "succeed to set window Orientation");
+            })
             win.loadContent("pages/index").then(() => {
                 win.show().then(() => {
                     Log.showInfo(TAG, "window show in then!");
