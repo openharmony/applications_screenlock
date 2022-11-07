@@ -58,7 +58,7 @@
     },
     {
       "name": "device_divider_color",
-      "value": "transparent"
+      "value": "#00000000"
     }
   ]
 }

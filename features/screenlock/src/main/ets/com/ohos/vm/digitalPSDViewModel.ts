@@ -72,6 +72,7 @@ export default class DigitalPSDViewModel extends BaseViewModel {
             }
             this.updateStorage(callback);
         } else if (keyValue == Constants.GO_BACK) {
+            AppStorage.SetOrCreate('slidestatus', false);
             service.goBack();
         } else if (keyValue == Constants.CALL_PHONE) {
         }
