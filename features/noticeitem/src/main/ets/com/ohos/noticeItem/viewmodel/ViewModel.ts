@@ -255,10 +255,13 @@ export class ViewModel {
   }
 
   clickItem(itemData, want?: any) {
-    Log.showDebug(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}`);
+    Log.showInfo(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}, tapDismissed: ${itemData.tapDismissed}`);
+    //    Log.showDebug(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}`);
     NotificationWindowManager.hideNotificationWindow();
     CommonUtil.startWant((want) ? want : itemData.want);
-    this.removeNotificationItem(itemData, true, true);
+    if (itemData.tapDismissed) {
+      this.removeNotificationItem(itemData, true, true);
+    }
   }
 
   clickReply(inputKey, content, want) {
