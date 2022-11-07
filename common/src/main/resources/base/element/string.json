@@ -1,14 +1,6 @@
 {
   "string": [
     {
-      "name": "app_name",
-      "value": "ScreenLock"
-    },
-    {
-      "name": "mainability_description",
-      "value": "JS_Phone_Empty Feature Ability"
-    },
-    {
       "name": "monday",
       "value": "星期一"
     },

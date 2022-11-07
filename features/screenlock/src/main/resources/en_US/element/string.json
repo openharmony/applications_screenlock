@@ -17,18 +17,6 @@
       "value": "Face not recognized. Touch twice to try again"
     },
     {
-      "name": "yyyy_mm_dd",
-      "value": "%d/%d/%d"
-    },
-    {
-      "name": "mm_dd",
-      "value": "%d/%d"
-    },
-    {
-      "name": "nonotification_text",
-      "value": "No Notification"
-    },
-    {
       "name": "input",
       "value": "Input password"
     },
