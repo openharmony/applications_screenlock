@@ -257,8 +257,12 @@ export class ScreenLockService {
                     Log.showInfo(TAG, `unlock the screen`);
                     this.unlocking();
                 } else {
-                    Log.showInfo(TAG, `unlockScreen Router.push`);
-                    Router.push({ uri: mRouterPath });
+                    let slidestatus = AppStorage.Get('slidestatus')
+                    if(!slidestatus){
+                        AppStorage.SetOrCreate('slidestatus', true);
+                        Log.showInfo(TAG, `unlockScreen Router.push`);
+                        Router.push({ uri: mRouterPath });
+                    }
                 }
             })
         })
@@ -269,6 +273,7 @@ export class ScreenLockService {
         //set the lockStatus to 'Unlock'
         AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Unlock);
         this.currentLockStatus = ScreenLockStatus.Unlock;
+        AppStorage.SetOrCreate('slidestatus', false);
         //unlock the screen
         this.screenLockModel.hiddenScreenLockWindow(() => {
             Log.showInfo(TAG, `hiddenScreenLockWindow finish`);

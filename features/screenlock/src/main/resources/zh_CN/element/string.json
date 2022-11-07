@@ -17,18 +17,6 @@
       "value": "未识别成功, 双击重试"
     },
     {
-      "name": "yyyy_mm_dd",
-      "value": "%d年%d月%d日"
-    },
-    {
-      "name": "mm_dd",
-      "value": "%d月%d日"
-    },
-    {
-      "name": "nonotification_text",
-      "value": "无通知"
-    },
-    {
       "name": "input",
       "value": "输入密码"
     },
