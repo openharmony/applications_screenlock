@@ -33,9 +33,13 @@ export default struct CustomPassword {
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
     CommonStyleManager.setAbilityPageName(TAG)
-    let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-    this.mHeightPx = configInfo.height
-    StyleManager.setStyle()
+    try {
+      let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+      this.mHeightPx = configInfo.height
+      StyleManager.setStyle()
+    } catch (error) {
+      Log.showDebug(TAG, `set status error:` + JSON.stringify(error));
+    }
   }
 
   aboutToDisappear() {

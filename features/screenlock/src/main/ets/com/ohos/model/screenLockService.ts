@@ -134,8 +134,8 @@ export class ScreenLockService {
                     break;
             //lock request was received
                 case EVENT_LOCK_SCREEN:
-                    Log.showInfo(TAG, `EVENT_UNLOCK_SCREEN event`);
-                    this.unlockScreen();
+                    Log.showInfo(TAG, `EVENT_LOCK_SCREEN event`);
+                    this.lockScreen();
                     break;
                 case SERVICE_RESTART:
                     setTimeout(() => {

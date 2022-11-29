@@ -32,9 +32,13 @@ export default struct MixedPassword {
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
     CommonStyleManager.setAbilityPageName(TAG)
-    let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-    Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
-    StyleManager.setStyle()
+    try {
+      let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+      Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+      StyleManager.setStyle()
+    } catch (error) {
+      Log.showDebug(TAG, `set status error:` + JSON.stringify(error));
+    }
   }
 
   aboutToDisappear() {
