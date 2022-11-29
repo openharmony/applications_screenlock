@@ -30,9 +30,13 @@ export default class StyleManager {
     static maxWidth: number = StyleManager.STANDARD_DISPLAY_WIDTH;
 
     static setStyle() {
-        let dis = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'dis');
-        Log.showInfo(TAG, `setStyle, configMaxWidth${JSON.stringify(dis.width)}`)
-        StyleManager.maxWidth = dis.width;
+        try {
+            let dis = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'dis');
+            Log.showInfo(TAG, `setStyle, configMaxWidth${JSON.stringify(dis.width)}`)
+            StyleManager.maxWidth = dis.width;
+        } catch (error) {
+            Log.showDebug(TAG, `set status error:` + JSON.stringify(error));
+        }
 
         // Common
         {

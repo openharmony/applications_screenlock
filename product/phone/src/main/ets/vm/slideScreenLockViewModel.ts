@@ -87,5 +87,6 @@ export default class SlideScreenLockViewModel {
         this.elementAlpha = 1
         this.elementScale = 1
         this.backgroundScale = 1.1
+        AppStorage.SetOrCreate('slidestatus', false);
     }
 }
