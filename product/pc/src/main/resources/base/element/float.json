@@ -25,6 +25,10 @@
       "value": "120"
     },
     {
+      "name": "shortcut_area_height_portrait",
+      "value": "146"
+    },
+    {
       "name": "notificationList_margin_top",
       "value": "32"
     },

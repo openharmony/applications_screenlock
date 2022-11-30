@@ -29,10 +29,6 @@
       "value": "58vp"
     },
     {
-      "name": "deleteall_image_opacity",
-      "value": "0.9"
-    },
-    {
       "name": "batterysoc_fontsize",
       "value": "36"
     },
@@ -109,6 +105,10 @@
       "value": "52vp"
     },
     {
+      "name": "digitalpsd_key_area_margin_bottom_portrait",
+      "value": "52vp"
+    },
+    {
       "name": "mixedpsd_prompt_fontsize",
       "value": "16fp"
     },
@@ -169,6 +169,10 @@
       "value": "288vp"
     },
     {
+      "name": "custompsd_input_width_portrait",
+      "value": "288vp"
+    },
+    {
       "name": "custompsd_input_height",
       "value": "36vp"
     },
@@ -194,6 +198,10 @@
     },
     {
       "name": "custompsd_key_area_margin_bottom",
+      "value": "52vp"
+    },
+    {
+      "name": "custompsd_key_area_margin_bottom_portrait",
       "value": "52vp"
     },
     {

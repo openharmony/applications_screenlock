@@ -122,7 +122,7 @@ export default struct MixedPSD {
             .fontSize($r('app.float.mixedpsd_prompt_text_fontsize'))
             .width($r('app.float.mixedpsd_input_width'))
             .height($r('app.float.mixedpsd_input_height'))
-            .backgroundColor(Color.White)
+            .backgroundColor(Color.Gray)
             .enterKeyType(EnterKeyType.Done)
             .border({ width: 2, color: Color.Gray, radius: 15 })
             .enabled(!this.mViewModel.inhibitInput)
@@ -132,30 +132,42 @@ export default struct MixedPSD {
                 Log.showInfo(TAG, `onSubmit callback prompt:${this.mViewModel.prompt} inhibitInput:${this.mViewModel.inhibitInput}`)
               })
             })
-            .margin({ bottom: $r('app.float.mixedpsd_input_margin_bottom') })
-          Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween }) {
-            Text($r('app.string.emergency_call'))
-              .fontSize($r('app.float.mixedpsd_prompt_fontsize'))
-              .fontWeight(FontWeight.Bold)
-              .fontColor(Color.White)
-              .textAlign(TextAlign.Center)
-              .textOverflow({ overflow: TextOverflow.None })
-              .onClick(this.mViewModel.onCallPhone.bind(this.mViewModel));
 
-            Text($r('app.string.done'))
-              .fontSize($r('app.float.mixedpsd_prompt_fontsize'))
-              .fontWeight(FontWeight.Bold)
-              .fontColor(Color.White)
-              .textAlign(TextAlign.Center)
-              .textOverflow({ overflow: TextOverflow.None })
-              .onClick(() => {
-                Log.showInfo(TAG, `onClick`)
-                this.mViewModel.onAuthPassword(() => {
-                  Log.showInfo(TAG, `onClick callback prompt:${this.mViewModel.prompt} inhibitInput:${this.mViewModel.inhibitInput}`)
-                });
-              })
-          }
-          .width(Constants.HALF_CONTAINER_WIDTH)
+          Button('确认', {
+            type: ButtonType.Capsule,
+            stateEffect: true
+          })
+            .width($r('app.float.mixedpsd_input_width'))
+            .height($r('app.float.mixedpsd_input_height'))
+            .onClick(() => {
+              Log.showInfo(TAG, `onClick`)
+              this.mViewModel.onAuthPassword(() => {
+                Log.showInfo(TAG, `onClick callback prompt:${this.mViewModel.prompt} inhibitInput:${this.mViewModel.inhibitInput}`)
+              });
+            })
+            .margin({ top:  $r('sys.float.ohos_id_elements_margin_vertical_l'),bottom: $r('app.float.mixedpsd_input_margin_bottom')})
+
+          Text($r('app.string.emergency_call'))
+            .fontSize($r('app.float.mixedpsd_prompt_fontsize'))
+            .fontWeight(FontWeight.Bold)
+            .fontColor(Color.White)
+            .textAlign(TextAlign.Center)
+            .textOverflow({ overflow: TextOverflow.None })
+            .onClick(this.mViewModel.onCallPhone.bind(this.mViewModel));
+
+          /*            Text($r('app.string.done'))
+                        .fontSize($r('app.float.mixedpsd_prompt_fontsize'))
+                        .fontWeight(FontWeight.Bold)
+                        .fontColor(Color.White)
+                        .textAlign(TextAlign.Center)
+                        .textOverflow({ overflow: TextOverflow.None })
+                        .onClick(() => {
+                          Log.showInfo(TAG, `onClick`)
+                          this.mViewModel.onAuthPassword(() => {
+                            Log.showInfo(TAG, `onClick callback prompt:${this.mViewModel.prompt} inhibitInput:${this.mViewModel.inhibitInput}`)
+                          });
+                        })*/
+
         }
         .width(Constants.FULL_CONTAINER_WIDTH)
         .height(Constants.FULL_CONTAINER_HEIGHT)

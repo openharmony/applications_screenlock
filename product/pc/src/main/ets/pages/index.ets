@@ -39,15 +39,15 @@ struct Index {
     Log.showInfo(TAG, `aboutToAppear`)
     try {
       setAppBgColor('#00000000')
+      CommonStyleManager.setAbilityPageName(TAG)
+      let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+      Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
+      this.mHeightPx = configInfo.height
+      StyleManager.setStyle()
+      this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     } catch (error) {
-      Log.showDebug(TAG, `setAppBgColor error:` + JSON.stringify(error));
+      Log.showDebug(TAG, `set status error:` + JSON.stringify(error));
     }
-    CommonStyleManager.setAbilityPageName(TAG)
-    let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
-    Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
-    this.mHeightPx = configInfo.height
-    StyleManager.setStyle()
-    this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     this.mViewModel.ViewModelInit()
   }
 
