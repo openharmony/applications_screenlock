@@ -16,11 +16,13 @@
 
 import settings from "@ohos.settings";
 import commonEvent from "@ohos.commonEvent";
+import dataShare from '@ohos.data.dataShare';
 import featureAbility from "@ohos.ability.featureAbility";
 import { DataAbilityHelper } from "ability/dataAbilityHelper";
 import Log from "./Log";
 import EventManager from "./event/EventManager";
 import createOrGet from "./SingleInstanceHelper";
+import Constants from "./Constants";
 import { obtainLocalEvent } from "./event/EventUtil";
 import { CommonEventManager, getCommonEventManager, POLICY } from "./commonEvent/CommonEventManager";
 
@@ -32,7 +34,7 @@ export type TimeEventArgs = {
 };
 
 const TAG = "TimeManagerSc";
-const URI_VAR = "dataability:///com.ohos.settingsdata.DataAbility";
+//const URI_VAR = "dataability:///com.ohos.settingsdata.DataAbility";
 const TIME_FORMAT_KEY = settings.date.TIME_FORMAT;
 const TIME_SUBSCRIBE_INFO = {
   events: [
@@ -58,7 +60,7 @@ class TimeManager {
   public init(context: any) {
     this.mManager = getCommonEventManager(
       TAG,
-      TIME_SUBSCRIBE_INFO, 
+      TIME_SUBSCRIBE_INFO,
       () => this.notifyTimeChange(),
       (isSubscribe) => isSubscribe && this.notifyTimeChange()
     );
@@ -70,38 +72,37 @@ class TimeManager {
   public release() {
     this.mManager?.release();
     this.mManager = undefined;
-    this.mSettingsHelper?.off("dataChange", settings.getUriSync(TIME_FORMAT_KEY));
+    this.mSettingsHelper?.off("dataChange", Constants.getUriSync(TIME_FORMAT_KEY));
   }
 
   public formatTime(date: Date) {
     return concatTime(date.getHours() % (this.mUse24hFormat ? 24 : 12), date.getMinutes());
   }
 
-  private initTimeFormat(context: any) {
+  private async initTimeFormat(context: any) {
     Log.showDebug(TAG, "initTimeFormat");
-    this.mSettingsHelper = featureAbility.acquireDataAbilityHelper(context, URI_VAR);
-
+    //this.mSettingsHelper = featureAbility.acquireDataAbilityHelper(context, URI_VAR);
+    this.mSettingsHelper = await dataShare.createDataShareHelper(context, Constants.getUriSync(TIME_FORMAT_KEY));
+    //Log.showDebug(TAG, "url:"+Constants.getUriSync(TIME_FORMAT_KEY));
+    //Log.showDebug(TAG, "mSettingsHelper:"+JSON.stringify(this.mSettingsHelper));
     try {
-      this.mSettingsHelper.on("dataChange", settings.getUriSync(TIME_FORMAT_KEY), (err) => {
-        if (err.code !== 0) {
-          Log.showError(TAG, `failed to getAbilityWant, code: ${err.code}.`);
-          return;
-        }
-        this.handleTimeFormatChange();
+      this.mSettingsHelper.on("dataChange", Constants.getUriSync(TIME_FORMAT_KEY), () => {
+        Log.showDebug(TAG, "mSettingsHelper on");
+        this.handleTimeFormatChange(context);
       });
-      this.handleTimeFormatChange();
+      this.handleTimeFormatChange(context);
     } catch (e) {
       Log.showError(TAG, `Can't listen timeformate change.`);
     }
   }
 
-  private handleTimeFormatChange() {
+  private handleTimeFormatChange(context: any) {
     Log.showDebug(TAG, "handleTimeFormatChange")
     if (!this.mSettingsHelper) {
       Log.showError(TAG, `Can't get dataAbility helper.`);
       return;
     }
-    let timeString = settings.getValueSync(this.mSettingsHelper, TIME_FORMAT_KEY, "24");
+    let timeString = settings.getValueSync(context, TIME_FORMAT_KEY, "24");
     Log.showDebug(TAG, `timeFormat change: ${timeString}`);
     this.mUse24hFormat = timeString == "24";
     this.notifyTimeChange();

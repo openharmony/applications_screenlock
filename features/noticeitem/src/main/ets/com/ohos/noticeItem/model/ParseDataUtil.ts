@@ -52,7 +52,7 @@ export default class ParseDataUtil {
       return Promise.reject('consumeCallback request is empty');
     }
     Log.showDebug(TAG, `parse data start, want = ${JSON.stringify(request.wantAgent)}`+
-      `actionButtons = ${JSON.stringify(request.actionButtons)}`);
+    `actionButtons = ${JSON.stringify(request.actionButtons)}`);
     let userId = await getUserId(request.creatorUid);
     let appMessage = await ParseDataUtil.getAppData(request.creatorBundleName, userId);
     let notificationItem: NotificationItemData = {
@@ -80,7 +80,8 @@ export default class ParseDataUtil {
       isRemoveAllowed: request.isRemoveAllowed,
       distributedOption: request.distributedOption,
       deviceId: request.deviceId,
-      groupName: request.groupName??request.hashcode
+      groupName: request.groupName??request.hashcode,
+      tapDismissed: request.tapDismissed
     };
     notificationItem = {
       ...notificationItem, ...ParseDataUtil.getContentByType(request?.content?.contentType, request)
@@ -106,8 +107,8 @@ export default class ParseDataUtil {
     let context = AbilityManager.getContext()??AbilityManager.getContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK);
     let item = await BundleManager.getResourceManager(TAG, context, bundleName);
     let appMessage = {
-        appName: parseInt(labelId) > 0 ? await item.getString(parseInt(labelId)) : '',
-        icon: parseInt(iconId) > 0 ? await item.getMediaBase64(parseInt(iconId)) : null
+      appName: parseInt(labelId) > 0 ? await item.getString(parseInt(labelId)) : '',
+      icon: parseInt(iconId) > 0 ? await item.getMediaBase64(parseInt(iconId)) : null
     };
     if (appMessage.icon != null && appMessage.appName) {
       appDataMap.set(bundleName, appMessage);

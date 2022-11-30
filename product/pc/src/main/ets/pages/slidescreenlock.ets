@@ -34,6 +34,7 @@ export default struct SlideScreenlock {
   @Prop @Watch("onStatusChange") pageStatus: number
   @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ""
   @StorageLink('isWallpaperShow') isWallpaperShow: boolean = true
+  @StorageLink('screenlockdirection') screenlockdirection: number = 1
   private mHeightPx : number =  44
 
   aboutToAppear() {
@@ -94,7 +95,7 @@ export default struct SlideScreenlock {
             Accounts()
           }
           .width(Constants.NOTIFICATION_AREA_WIDTH)
-          .height($r('app.float.shortcut_area_height'))
+          .height(this.screenlockdirection ==  1 ? $r('app.float.shortcut_area_height'):$r('app.float.shortcut_area_height_portrait'))
         }
         .margin({ top: $r('app.float.shortcut_area_margin_top') })
 
