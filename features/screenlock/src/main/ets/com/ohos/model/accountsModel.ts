@@ -196,17 +196,22 @@ export default class AccountsModel {
     authUser(challenge, authType: AuthType, authLevel: number, callback) {
         Log.showDebug(TAG, `authUser param: userId ${this.mCurrentUserId} challenge ${challenge}`);
         Trace.end(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
-        this.userAuthManager.authUser(this.mCurrentUserId, challenge, authType, authLevel, {
-            onResult: (result, extraInfo) => {
-                Log.showInfo(TAG, `authUser UserAuthManager.authUser onResult`);
-                Trace.start(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
-                callback(result, extraInfo);
-            },
-            onAcquireInfo: (moduleId, acquire, extraInfo) => {
-                Log.showInfo(TAG, `authUser UserAuthManager.authUser onAcquireInfo`);
+        let challengeArray = new Uint8Array(challenge);
+        try {
+            this.userAuthManager.authUser(this.mCurrentUserId, challengeArray, authType, authLevel, {
+                onResult: (result, extraInfo) => {
+                    Log.showInfo(TAG, `authUser UserAuthManager.authUser onResult`);
+                    Trace.start(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
+                    callback(result, extraInfo);
+                },
+                onAcquireInfo: (moduleId, acquire, extraInfo) => {
+                    Log.showInfo(TAG, `authUser UserAuthManager.authUser onAcquireInfo`);
+                }
             }
+            )
+        } catch(error) {
+            console.error(`authUser failed, code is ${error.code}, message is ${error.message}`);
         }
-        )
     }
 
     getAuthProperty(authType, callback) {
@@ -216,10 +221,14 @@ export default class AccountsModel {
             'authType': authType,
             'keys': keyArray
         }
-        this.userAuthManager.getProperty(request).then((properties) => {
-            Log.showInfo(TAG, `getAuthProperty properties ${JSON.stringify(properties)}`);
-            callback(properties)
-        })
+        try {
+            this.userAuthManager.getProperty(request).then((properties) => {
+                Log.showInfo(TAG, `getAuthProperty properties ${JSON.stringify(properties)}`);
+                callback(properties)
+            })
+        } catch (error) {
+            console.error(`getProperty failed, code is ${error.code}, message is ${error.message}`);
+        };
     }
 
     registerPWDInputer(password: string): Promise<void> {
@@ -234,22 +243,32 @@ export default class AccountsModel {
 
     private registerInputer(password: string): boolean {
         Log.showDebug(TAG, `registerInputer`);
-        let result = this.pinAuthManager.registerInputer({
-            onGetData: (passType, inputData) => {
-                Log.showDebug(TAG, `registerInputer onSetData passType:${passType}`);
-                let textEncoder = new util.TextEncoder();
-                let uint8PW = textEncoder.encode(password);
-                Log.showDebug(TAG, `registerInputer onSetData call`);
-                inputData.onSetData(passType, uint8PW);
-            }
-        })
+        let result = null
+        try {
+            result = this.pinAuthManager.registerInputer({
+                onGetData: (passType, inputData) => {
+                    Log.showDebug(TAG, `registerInputer onSetData passType:${passType}`);
+                    let textEncoder = new util.TextEncoder();
+                    let uint8PW = textEncoder.encode(password);
+                    Log.showDebug(TAG, `registerInputer onSetData call`);
+                    inputData.onSetData(passType, uint8PW);
+                }
+            })
+        } catch(error) {
+            console.error(`registerInputer failed, code is ${e.code}, message is ${e.message}`);
+        }
+
         Log.showInfo(TAG, `registerInputer result:${result}`);
         return result;
     }
 
     unregisterInputer() {
         Log.showDebug(TAG, `unregisterInputer`);
-        this.pinAuthManager.unregisterInputer();
+        try {
+            this.pinAuthManager.unregisterInputer();
+        } catch {
+            LogUtil.debug(`${this.TAG}unregisterInputer failed`);
+        }
     }
 
     modelFinish() {
