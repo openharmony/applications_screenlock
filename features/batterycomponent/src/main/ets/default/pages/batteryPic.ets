@@ -24,7 +24,7 @@ export default
 struct BatteryPic {
   @StorageLink('batterySoc') batterySoc: number = 100
   @StorageLink('batteryCharging') batteryCharging : boolean = false
-  @Prop mContentColor: string
+  @State mContentColor: string = "#FFFFFFFF"
   @State style: any = StyleConfiguration.getBatteryPicStyle()
 
   aboutToAppear(){

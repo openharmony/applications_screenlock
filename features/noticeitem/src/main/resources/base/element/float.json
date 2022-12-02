@@ -6,95 +6,95 @@
     },
     {
       "name": "notification_title_fontsize",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "notification_expanded_text_maxheight",
-      "value": "295"
+      "value": "295px"
     },
     {
       "name": "notification_content_fontsize",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "notification_content_lineheight",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "notification_content_maxlines",
-      "value": "1"
+      "value": "1px"
     },
     {
       "name": "content_margin_top",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "body_margin_top",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "item_opicaty",
-      "value": "0.9"
+      "value": "0.9px"
     },
     {
       "name": "item_borderradius",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "item_margintop",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "item_marginleft",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "item_marginright",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "item_paddingleft",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "item_paddingright",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "item_paddingbottom",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "item_setting_image_width",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "item_setting_image_height",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "item_delete_image_width",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "item_delete_image_height",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "titleitem_row_space",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "titleitem_height",
-      "value": "50"
+      "value": "50px"
     },
     {
       "name": "title_image_width",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "title_image_height",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "title_image_left_margin",
@@ -118,31 +118,31 @@
     },
     {
       "name": "title_name_fontsize",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "title_time_fontsize",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "displayicon_width",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "displayicon_height",
-      "value": "20"
+      "value": "20px"
     },
     {
       "name": "deleteall_image_opacity",
-      "value": "0.9"
+      "value": "0.9px"
     },
     {
       "name": "setting_title_fontsize",
-      "value": "40"
+      "value": "40px"
     },
     {
       "name": "setting_cont_fontsize",
-      "value": "32"
+      "value": "32px"
     },
     {
       "name": "setting_cont_height",
@@ -154,11 +154,11 @@
     },
     {
       "name": "setting_border_width",
-      "value": "1"
+      "value": "1px"
     },
     {
       "name": "setting_border_radius",
-      "value": "80"
+      "value": "80px"
     },
     {
       "name": "notification_border_radius",
@@ -166,19 +166,19 @@
     },
     {
       "name": "action_button_height",
-      "value": "48"
+      "value": "48px"
     },
     {
       "name": "action_button_padding",
-      "value": "12"
+      "value": "12px"
     },
     {
       "name": "picture_default_height",
-      "value": "300"
+      "value": "300px"
     },
     {
       "name": "confirm_title_fontsize",
-      "value": "40"
+      "value": "40px"
     },
     {
       "name": "confirm_title_width",
@@ -186,15 +186,15 @@
     },
     {
       "name": "confirm_cont_fontsize",
-      "value": "32"
+      "value": "32px"
     },
     {
       "name": "confirm_divider_height",
-      "value": "44"
+      "value": "44px"
     },
     {
       "name": "confirm_button_height",
-      "value": "60"
+      "value": "60px"
     },
     {
       "name": "confirm_button_margin_t",
@@ -202,15 +202,15 @@
     },
     {
       "name": "confirm_button_width",
-      "value": "140"
+      "value": "140px"
     },
     {
       "name": "icon_item_fontsize",
-      "value": "18"
+      "value": "18px"
     },
     {
       "name": "setting_dialog_dy",
-      "value": "200"
+      "value": "200px"
     },
     {
       "name": "setting_dialog_width",
@@ -222,7 +222,7 @@
     },
     {
       "name": "confirm_dialog_dy",
-      "value": "250"
+      "value": "250px"
     },
     {
       "name": "close_notification_margin_top",
@@ -238,19 +238,19 @@
     },
     {
       "name": "device_divider_margin_l",
-      "value": "70"
+      "value": "70px"
     },
     {
       "name": "device_divider_margin_r",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "device_border_width",
-      "value": "1"
+      "value": "1px"
     },
     {
       "name": "device_border_radius",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "device_image_radius",
