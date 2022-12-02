@@ -24,7 +24,7 @@ export default class ShortcutViewModel {
         Log.showInfo(TAG, `onShortcutClick ${shortcutType}`)
         switch (shortcutType) {
             case Constants.CLICK_TYPE_SHUTDOWN:
-                power.shutdownDevice("shutdown_device")
+                power.shutdown("shutdown_device")
                 break;
             case Constants.CLICK_TYPE_REBOOT:
                 power.rebootDevice("reboot_device")

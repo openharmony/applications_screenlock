@@ -2,27 +2,27 @@
   "float": [
     {
       "name": "time_fontsize",
-      "value": "148"
+      "value": "148px"
     },
     {
       "name": "time_fontWeight",
-      "value": "400"
+      "value": "400px"
     },
     {
       "name": "time_top_margin",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "time_bottom_margin",
-      "value": "10"
+      "value": "10px"
     },
     {
       "name": "date_fontsize",
-      "value": "36"
+      "value": "36px"
     },
     {
       "name": "date_week_area_height",
-      "value": "48"
+      "value": "48px"
     },
     {
       "name": "date_lunar_calendar_height",
