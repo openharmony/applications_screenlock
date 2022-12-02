@@ -30,27 +30,27 @@
     },
     {
       "name": "batterysoc_fontsize",
-      "value": "36"
+      "value": "36px"
     },
     {
       "name": "accounts_component_height",
-      "value": "120"
+      "value": "120px"
     },
     {
       "name": "accounts_ic_width",
-      "value": "72"
+      "value": "72px"
     },
     {
       "name": "accounts_ic_height",
-      "value": "72"
+      "value": "72px"
     },
     {
       "name": "accounts_name_fontsize",
-      "value": "24"
+      "value": "24px"
     },
     {
       "name": "accounts_block",
-      "value": "8"
+      "value": "8px"
     },
     {
       "name": "digitalpsd_prompt_fontsize",
@@ -62,7 +62,7 @@
     },
     {
       "name": "digitalpsd_prompt_width",
-      "value": "800"
+      "value": "800px"
     },
     {
       "name": "digitalpsd_prompt_height",
@@ -98,7 +98,7 @@
     },
     {
       "name": "digitalpsd_key_area_height",
-      "value": "800"
+      "value": "800px"
     },
     {
       "name": "digitalpsd_key_area_margin_bottom",
@@ -126,15 +126,15 @@
     },
     {
       "name": "mixedpsd_prompt_width",
-      "value": "800"
+      "value": "800px"
     },
     {
       "name": "mixedpsd_prompt_height",
-      "value": "72"
+      "value": "72px"
     },
     {
       "name": "mixedpsd_input_maxlen",
-      "value": "30"
+      "value": "30px"
     },
     {
       "name": "mixedpsd_input_width",
@@ -158,7 +158,7 @@
     },
     {
       "name": "custompsd_prompt_width",
-      "value": "800"
+      "value": "800px"
     },
     {
       "name": "custompsd_prompt_height",
@@ -182,7 +182,7 @@
     },
     {
       "name": "custompsd_input_margin_bottom",
-      "value": "90"
+      "value": "90px"
     },
     {
       "name": "custompsd_passwdmask_margin_bottom",
@@ -194,7 +194,7 @@
     },
     {
       "name": "custompsd_key_area_height",
-      "value": "800"
+      "value": "800px"
     },
     {
       "name": "custompsd_key_area_margin_bottom",
