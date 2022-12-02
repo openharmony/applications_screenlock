@@ -22,8 +22,8 @@ const TAG = 'NoticeItem-TitleItem';
 @Component
 export default struct TitleItem {
   private notificationSmallIcon: PixelMap
-  @Prop notificationName: string
-  @Prop notificationTime: string
+  private notificationName: string
+  private notificationTime: string
   @Link isExpand: boolean
   @Prop needExpand: boolean
   @State rowSpace: any = $r('app.float.titleitem_row_space')

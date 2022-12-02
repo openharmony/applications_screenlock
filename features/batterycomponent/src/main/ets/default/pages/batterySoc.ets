@@ -21,7 +21,7 @@ const TAG = 'BatteryComponent-batterySoc'
 @Component
 export default struct BatterySoc {
   @StorageLink('batterySoc') batterySoc: number = 100
-  @Prop mContentColor: string
+  @State mContentColor: string = "#FFFFFFFF"
   @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
 
   aboutToAppear() {

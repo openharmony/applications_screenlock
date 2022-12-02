@@ -28,7 +28,7 @@ const TAG = 'ScreenLock-DateTime';
 @Component
 export default struct DateTime {
   @State mViewModel: ViewModel = new ViewModel()
-  @Prop isShowDate: boolean
+  @State isShowDate: boolean = true
   @State isPhone: boolean = false
   @State currentLanguage: string = DEFAULTLANG
 

@@ -133,11 +133,11 @@ export default class Constants {
                            }];
     //max password length
     static PASSWORD_MAX_LEN = 32
-    static PASSWORD_TEXT_WIDTH =290
-    static PASSWORD_TEXT_HEIGHT =40
+    static PASSWORD_TEXT_WIDTH ='290px'
+    static PASSWORD_TEXT_HEIGHT ='40px'
     static PASSWORD_TEXT_BORDER =20
-    static ACCOUNT_SPACE = 24
-    static ACCOUNT_SPACE_PORTRAIT = 40
+    static ACCOUNT_SPACE = '24px'
+    static ACCOUNT_SPACE_PORTRAIT = '40px'
 }
 
 export class StatusBarGroupComponentData {

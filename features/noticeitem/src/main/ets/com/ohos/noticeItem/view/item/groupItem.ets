@@ -31,6 +31,7 @@ export default struct GroupItem {
   private mScroller: Scroller = new Scroller();
   @State mIconAlpha: number = 0;
   @State @Watch('scrollEdge') mEdgeEnd: boolean = false;
+  @State needExpand: boolean = true;
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -55,7 +56,7 @@ export default struct GroupItem {
                 notificationName: this.groupData[0].appName,
                 notificationTime: this.groupData[0].time,
                 isExpand: $toExpand,
-                needExpand: true,
+                needExpand: this.needExpand,
                 distributedDeviceName: this.distributedDeviceName,
                 clickTitleAction: () => null
               })
