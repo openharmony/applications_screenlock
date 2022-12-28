@@ -16,12 +16,14 @@
 import Log from '../../../../../../../../../common/src/main/ets/default/Log'
 import ViewModel from '../../vm/wallpaperViewModel'
 import Constants from '../../common/constants'
+import Trace from '../../../../../../../../../common/src/main/ets/default/Trace'
 
 const TAG = 'ScreenLock-Wallpaper'
 
 @Component
 export default struct Wallpaper {
   @State mViewModel: ViewModel = new ViewModel()
+  @StorageLink('isWallpaperShow') isWallpaperShow: boolean = true
 
   aboutToAppear() {
     Log.showInfo(TAG, "aboutToAppear")
@@ -34,10 +36,12 @@ export default struct Wallpaper {
   }
 
   build() {
-    Image(this.mViewModel.getWallpaperData())
-      .width(Constants.FULL_CONTAINER_WIDTH)
-      .height(Constants.FULL_CONTAINER_HEIGHT)
-      .objectFit(ImageFit.Cover)
-      .hoverEffect(HoverEffect.None)
+    if (this.isWallpaperShow === true) {
+      Image(this.mViewModel.getWallpaperData())
+        .width(Constants.FULL_CONTAINER_WIDTH)
+        .height(Constants.FULL_CONTAINER_HEIGHT)
+        .objectFit(ImageFit.Cover)
+        .hoverEffect(HoverEffect.None)
+    }
   }
 }
