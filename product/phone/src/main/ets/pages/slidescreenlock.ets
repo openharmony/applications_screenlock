@@ -54,9 +54,7 @@ export default struct SlideScreenlock {
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       Column() {
-        if (this.isWallpaperShow === true) {
-          Wallpaper()
-        }
+        Wallpaper()
       }
       .backgroundColor($r('app.color.screenlock_backgroundcolor'))
       .width(Constants.FULL_CONTAINER_WIDTH)
@@ -81,7 +79,7 @@ export default struct SlideScreenlock {
         .onAreaChange((e, e2) => {
           Log.showDebug(TAG, `onAreaChange, e: ${JSON.stringify(e)} e2: ${JSON.stringify(e2)}`);
         })
-    }
+      }
 
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Start }) {
         Column() {

@@ -45,7 +45,7 @@ export default struct NotificationItem {
         }
       }
       .scrollable(ScrollDirection.Horizontal)
-      .scrollBar(BarState.On)
+      .scrollBar(BarState.Off)
       .onScroll(() => {
         let accuracy = 0.1
         let newOpacity = this.mScroller.currentOffset().xOffset * 1.0 / getIconListSize()
