@@ -189,7 +189,6 @@ export class ScreenLockService {
                 Log.showInfo(TAG, `had locked, no need to publish lock_screen`);
             } else {
                 this.notifyLockScreenResult(LockResult.Success)
-                this.publishByUser("common.event.LOCK_SCREEN", this.accountModel.getCurrentUserId());
                 this.currentLockStatus = ScreenLockStatus.Locking;
             }
         });
@@ -279,7 +278,6 @@ export class ScreenLockService {
             Log.showInfo(TAG, `hiddenScreenLockWindow finish`);
             //notify the base service that the unlock is completed
             this.notifyUnlockScreenResult(UnlockResult.Success);
-            this.publishByUser("common.event.UNLOCK_SCREEN", this.accountModel.getCurrentUserId());
         });
     }
 
