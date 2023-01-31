@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import ServiceExtension from '@ohos.application.ServiceExtensionAbility'
+import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility'
 import windowManager from '@ohos.window'
 import WindowManagers, { WindowType } from "../../../../../../common/src/main/ets/default/WindowManager";
 import display from '@ohos.display'

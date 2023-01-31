@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Ability from '@ohos.application.Ability'
+import Ability from '@ohos.app.ability.UIAbility'
 import Log from '../../../../../common/src/main/ets/default/Log';
 
 const TAG = "Entry_MainAbility";
