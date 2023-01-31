@@ -81,7 +81,7 @@ export default struct GroupItem {
       .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
       .clip(true)
       .scrollable(ScrollDirection.Horizontal)
-      .scrollBar(BarState.On)
+      .scrollBar(BarState.Off)
       .onScroll(() => {
         let accuracy = 0.1
         let newOpacity = this.mScroller.currentOffset().xOffset * 1.0 / getIconListSize()

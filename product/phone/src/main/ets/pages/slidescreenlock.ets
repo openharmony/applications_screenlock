@@ -54,9 +54,7 @@ export default struct SlideScreenlock {
   build() {
     Stack({ alignContent: Alignment.Bottom }) {
       Column() {
-        if (this.isWallpaperShow === true) {
-          Wallpaper()
-        }
+        Wallpaper()
       }
       .backgroundColor($r('app.color.screenlock_backgroundcolor'))
       .width(Constants.FULL_CONTAINER_WIDTH)
