@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import AbilityStage from "@ohos.application.AbilityStage";
+import AbilityStage from "@ohos.app.ability.AbilityStage";
 import Log from '../../../../../common/src/main/ets/default/Log';
 
 const TAG = "Entry_AbilityStage";
