@@ -176,10 +176,10 @@ export default class AccountsModel {
     private sortAccount(info1, info2): number {
         if (info1.isActived || info2.isActived) {
             return info1.isActived ? -1 : 1;
-        } else if (info1.type.ADMIN == TYPE_ADMIN || info2.type.ADMIN == TYPE_ADMIN) {
-            return info1.type.ADMIN == TYPE_ADMIN ? -1 : 1;
-        } else if (info1.type.GUEST == TYPE_GUEST || info2.type.GUEST == TYPE_GUEST) {
-            return info1.type.GUEST == TYPE_GUEST ? 1 : -1;
+        } else if (info1.type.ADMIN == osAccount.OsAccoutType.ADMIN || info2.type.ADMIN == osAccount.OsAccoutType.ADMIN) {
+            return info1.type.ADMIN == osAccount.OsAccoutType.ADMIN ? -1 : 1;
+        } else if (info1.type.GUEST == osAccount.OsAccoutType.GUEST || info2.type.GUEST == osAccount.OsAccoutType.GUEST) {
+            return info1.type.GUEST == osAccount.OsAccoutType.GUEST ? 1 : -1;
         } else {
             return info2.localId - info1.localId;
         }
