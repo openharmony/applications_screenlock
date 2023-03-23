@@ -118,7 +118,7 @@
     },
     {
       "name": "mixedpsd_prompt_text_fontsize",
-      "value": "20fp"
+      "value": "12fp"
     },
     {
       "name": "mixedpsd_prompt_margin_bottom",
