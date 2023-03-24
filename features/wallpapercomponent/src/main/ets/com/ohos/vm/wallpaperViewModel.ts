@@ -41,6 +41,7 @@ export default class WallpaperViewModel {
         WallpaperMar.getPixelMap(WallpaperMar.WallpaperType.WALLPAPER_LOCKSCREEN, (error, data) => {
             if (error != undefined && error != null) {
                 Log.showError(TAG, 'getScreenLockWallpaper error:' + JSON.stringify(error));
+                this.getScreenLockWallpaper()
             } else {
                 Log.showDebug(TAG, 'getScreenLockWallpaper data:' + JSON.stringify(data));
                 this.wallpaperData = data
