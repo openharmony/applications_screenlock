@@ -21,6 +21,7 @@ import Log from '../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../../../../../features/screenlock/src/main/ets/com/ohos/common/constants'
 import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
 import sTimeManager from '../../../../../../common/src/main/ets/default/TimeManager'
+import inputMethod from '@ohos.inputMethod'
 
 const TAG = "ScreenLock-ServiceExtAbility"
 const AUTO_ROTATION_RETRICTED: number = 8
@@ -49,6 +50,13 @@ class ServiceExtAbility extends ServiceExtension {
                         Log.showInfo(TAG, "direction change : " + this.direction)
                         AppStorage.SetOrCreate('screenlockdirection', this.direction)
                         this.resetWindow(display.width,display.height)
+                        let inputMethodController = inputMethod.getController();
+                        Log.showInfo(TAG, "inputMethodController: "+inputMethodController)
+                        inputMethodController.hideSoftKeyboard().then(() => {
+                            Log.showInfo(TAG, "Succeeded in hiding softKeyboard")
+                        }).catch((err) => {
+                            Log.showError(TAG, "failed to hideSoftKeyboard: " + JSON.stringify(err));
+                        });
                     }
                 }
             })
