@@ -40,7 +40,6 @@ struct Index {
     this.mViewModel.ViewModelInit()
     this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     try {
-      setAppBgColor('#00000000')
       CommonStyleManager.setAbilityPageName(TAG)
       let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
       Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
