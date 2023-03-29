@@ -78,6 +78,9 @@
       },
       {
         "name": "ohos.permission.CONNECT_IME_ABILITY"
+      },
+      {
+        "name": "ohos.permission.ACCESS_SCREEN_LOCK_INNER"
       }
     ],
     "extensionAbilities": [
