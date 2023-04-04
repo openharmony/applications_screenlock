@@ -22,6 +22,7 @@ import createOrGet from '../../../../../../../../common/src/main/ets/default/Sin
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';
+import systemParameter from '@ohos.systemparameter';
 import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
 import {Callback} from 'basic';
 
@@ -182,6 +183,7 @@ export class ScreenLockService {
         //lock the screen
         this.screenLockModel.showScreenLockWindow(() => {
             Log.showInfo(TAG, `showScreenLockWindow finish`);
+            systemParameter.set('bootevent.lockscreen.ready','true')
             this.checkPinAuthProperty(() => {
             });
             Log.showInfo(TAG, `screenlock status:${this.currentLockStatus}, userId : ${this.accountModel.getCurrentUserId()}`);
