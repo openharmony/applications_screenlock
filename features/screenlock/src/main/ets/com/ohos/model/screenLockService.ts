@@ -183,7 +183,6 @@ export class ScreenLockService {
         //lock the screen
         this.screenLockModel.showScreenLockWindow(() => {
             Log.showInfo(TAG, `showScreenLockWindow finish`);
-            systemParameter.set('bootevent.lockscreen.ready','true')
             this.checkPinAuthProperty(() => {
             });
             Log.showInfo(TAG, `screenlock status:${this.currentLockStatus}, userId : ${this.accountModel.getCurrentUserId()}`);
@@ -192,6 +191,9 @@ export class ScreenLockService {
             } else {
                 this.notifyLockScreenResult(LockResult.Success)
                 this.publishByUser("common.event.LOCK_SCREEN", this.accountModel.getCurrentUserId());
+                setTimeout(() => {
+                    systemParameter.set('bootevent.lockscreen.ready','true')
+                }, 1000);
                 this.currentLockStatus = ScreenLockStatus.Locking;
             }
         });
