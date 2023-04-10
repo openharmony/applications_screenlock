@@ -16,7 +16,7 @@
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
-import {Callback} from 'basic';
+import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-MixedPSDViewModel'
 

@@ -16,7 +16,7 @@
 import Log from '../../../../../../common/src/main/ets/default/Log';
 import ScreenLockService from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenLockService'
 import Constants from '../common/constants'
-import {Callback} from 'basic';
+import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-SlideScreenLockViewModel'
 //Height of notification area.
