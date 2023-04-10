@@ -17,7 +17,7 @@
 import osAccount from '@ohos.account.osAccount'
 import commonEvent from '@ohos.commonEvent';
 import util from '@ohos.util';
-import {Callback} from 'basic';
+import {Callback} from '@ohos.base';
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace';
 import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger';
 import Log from '../../../../../../../../common/src/main/ets/default/Log';

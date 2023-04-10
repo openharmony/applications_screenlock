@@ -17,7 +17,7 @@ import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Constants from '../common/constants'
 import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
-import {Callback} from 'basic';
+import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-DigitalPSDViewModel'
 
