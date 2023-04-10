@@ -23,7 +23,7 @@ import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';
 import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
-import {Callback} from 'basic';
+import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-ScreenLockService';
 const URI_DIGITALPASSWORD = 'pages/digitalPassword'

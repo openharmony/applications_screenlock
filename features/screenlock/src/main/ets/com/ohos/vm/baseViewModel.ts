@@ -16,7 +16,7 @@
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../common/constants'
 import service, {UnlockResult, AuthType, AuthSubType} from '../model/screenLockService'
-import {Callback} from 'basic';
+import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-BaseViewModel'
 const MINUTE_NM = '分钟'
