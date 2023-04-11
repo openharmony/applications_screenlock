@@ -16,7 +16,7 @@
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
-import ScreenLockMar from '@ohos.screenlock';
+import ScreenLockMar from '@ohos.screenLock';
 import windowManager  from '@ohos.window'
 import Constants from '../common/constants'
 import { Callback } from '@ohos.base';
