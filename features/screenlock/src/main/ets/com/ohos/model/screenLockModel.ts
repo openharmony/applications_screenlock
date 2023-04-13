@@ -16,7 +16,7 @@
 import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
-import ScreenLockMar from '@ohos.screenlock';
+import ScreenLockMar from '@ohos.screenLock';
 import windowManager  from '@ohos.window'
 import Constants from '../common/constants'
 import { Callback } from '@ohos.base';
@@ -26,15 +26,13 @@ const TAG = 'ScreenLock-ScreenLockModel';
 export default class ScreenLockModel {
     @SysFaultLogger({FAULT_ID: FaultID.SCREEN_LOCK_MANAGER, MSG: "call func on failed"})
     eventListener(callback: Callback<String>) {
-        let isSuccess = null
-        try {
-            isSuccess = ScreenLockMar.onSystemEvent((event)=>{
-                Log.showInfo(TAG, `eventListener:callback:${event.eventType}`)
-                callback(event.eventType);
-            });
-        }  catch (err: any) {
-            Log.showError(TAG, `on callback error -> ${JSON.stringify(err)}`);
-        }
+        let isSuccess = ScreenLockMar.onSystemEvent((err, event)=>{
+            Log.showInfo(TAG, `eventListener:callback:${event.eventType}`)
+            callback(event.eventType);
+            if (err) {
+                Log.showError(TAG, `on callback error -> ${JSON.stringify(err)}`);
+            }
+        });
         if (!isSuccess) {
             callback('serviceRestart');
         }
