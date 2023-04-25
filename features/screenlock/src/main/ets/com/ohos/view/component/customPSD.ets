@@ -74,6 +74,7 @@ export default struct CustomPSD {
                 Image($r("app.media.ic_solid_dot"))
                   .width($r("app.float.custompsd_digitalpsd_ic_diameter"))
                   .height($r("app.float.custompsd_digitalpsd_ic_diameter"))
+                  .syncLoad(true)
               }
             })
           }
