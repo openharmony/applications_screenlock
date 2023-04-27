@@ -348,6 +348,7 @@ export class ScreenLockService {
     goBack() {
         Log.showInfo(TAG, `screen lock service goBack`);
         Router.back();
+        this.notifyLockScreenResult(UnlockResult.Cancel)
         this.accountModel.unregisterInputer();
     }
 
