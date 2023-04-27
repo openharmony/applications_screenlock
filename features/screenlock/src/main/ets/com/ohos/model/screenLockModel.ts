@@ -26,13 +26,15 @@ const TAG = 'ScreenLock-ScreenLockModel';
 export default class ScreenLockModel {
     @SysFaultLogger({FAULT_ID: FaultID.SCREEN_LOCK_MANAGER, MSG: "call func on failed"})
     eventListener(callback: Callback<String>) {
-        let isSuccess = ScreenLockMar.onSystemEvent((err, event)=>{
-            Log.showInfo(TAG, `eventListener:callback:${event.eventType}`)
-            callback(event.eventType);
-            if (err) {
-                Log.showError(TAG, `on callback error -> ${JSON.stringify(err)}`);
-            }
-        });
+        let isSuccess = null
+        try {
+            isSuccess = ScreenLockMar.onSystemEvent((event)=>{
+                Log.showInfo(TAG, `eventListener:callback:${event.eventType}`)
+                callback(event.eventType);
+            });
+        }  catch (err: any) {
+            Log.showError(TAG, `on callback error -> ${JSON.stringify(err)}`);
+        }
         if (!isSuccess) {
             callback('serviceRestart');
         }
