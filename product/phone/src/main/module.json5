@@ -1,7 +1,7 @@
 {
   "module": {
     "name": "phone",
-    "type": "entry",
+    "type": "feature",
     "srcEntrance": "./ets/Application/AbilityStage.ts",
     "description": "$string:phone_desc",
     "mainElement": "com.ohos.systemui.screenlock.ServiceExtAbility",
