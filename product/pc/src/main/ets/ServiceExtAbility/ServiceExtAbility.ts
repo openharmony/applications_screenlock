@@ -73,7 +73,7 @@ class ServiceExtAbility extends ServiceExtension {
 
     private createWindow(name: string) {
         Log.showDebug(TAG, `createWindow name:${name}`)
-        windowManager.create(this.context, name, 2110).then((win) => {
+        windowManager.create(this.context, name, windowManager.WindowType.TYPE_KEYGUARD).then((win) => {
             Log.showInfo(TAG, "before begin " + name + " window show!")
             win.setPreferredOrientation(AUTO_ROTATION_RETRICTED, (err) => {
                 if (err.code) {
