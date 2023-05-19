@@ -34,7 +34,7 @@ class ServiceExtAbility extends ServiceExtension {
 
     private createWindow(name: string) {
         Log.showDebug(TAG, `createWindow name:${name}`)
-        windowManager.create(this.context, name, 2110).then((win) => {
+        windowManager.create(this.context, name, windowManager.WindowType.TYPE_KEYGUARD).then((win) => {
             win.loadContent("pages/index").then(() => {
                 Log.showInfo(TAG, name + " window loadContent in then! ")
                 win.show().then(() => {
