@@ -31,8 +31,9 @@ export default struct ClockIcon {
   @State mTime: string = '16:01'
   private mGroupId: string = ''
   @State mStatusBarGroupComponentData: StatusBarGroupComponentData = new StatusBarGroupComponentData()
-  @State style: any = StyleConfiguration.getClockComponentStyle()
-  @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
+  @State statusBarClockMaxWidth: Resource = $r('app.float.status_bar_clock_width')
+  @State statusBarMarginLeftRight: Resource = $r("app.float.signal_status_margin_Left_right")
+  @State statusBarFontSize: Resource = $r("app.float.signal_fontSize")
   unSubscriber?: unsubscribe;
 
   aboutToAppear() {
@@ -52,14 +53,14 @@ export default struct ClockIcon {
 
   build() {
     Row() {
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.statusBarMarginLeftRight).height('100%')
       Text(this.mTime)
         .fontColor(this.mStatusBarGroupComponentData.contentColor)
-        .fontSize(this.styleCommon.statusBarFontSize)
-        .width(this.style.statusBarClockMaxWidth)
+        .fontSize(this.statusBarFontSize)
+        .width(this.statusBarClockMaxWidth)
         .fontWeight(FontWeight.Medium)
         .margin({ left: $r("app.float.status_bar_clock_margin") })
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.statusBarMarginLeftRight).height('100%')
     }
   }
 }

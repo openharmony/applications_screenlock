@@ -22,7 +22,7 @@ const TAG = 'ScreenLock-BatterySoc'
 export default struct BatterySoc {
   @StorageLink('batterySoc') @Watch('onBatterySocChanged') batterySoc: number = 100
   @StorageLink('batteryCharging') @Watch('onBatterySocChanged') batteryCharging: boolean = false
-  @State batterySocText: any = ''
+  @State batterySocText: Resource = null
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
