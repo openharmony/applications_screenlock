@@ -24,7 +24,7 @@ const TAG = 'NoticeItem-ActionComponent';
 export default struct ActionComponent {
   @State showInputText: boolean = false;
   @State placeholder: string = '';
-  @State inputData: any = undefined;
+  @State inputData: { inputKey: null, wantAgent: null } = undefined;
   @State inputActionData: InputActionButtonData = new InputActionButtonData();
   private itemData: any = undefined;
 

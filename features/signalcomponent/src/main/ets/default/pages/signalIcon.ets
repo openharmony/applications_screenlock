@@ -32,8 +32,14 @@ export default struct SignalIcon {
   @StorageLink('signalObserved') signalObserved: boolean = false
   private mGroupId: string = ''
   @State mStatusBarGroupComponentData: StatusBarGroupComponentData = new StatusBarGroupComponentData()
-  @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
-  @State style: any = StyleConfiguration.getSignalComponentStyle()
+  @State statusBarMarginLeftRight: Resource = $r("app.float.signal_status_margin_Left_right")
+  @State statusBarFontSize: Resource = $r("app.float.signal_fontSize")
+  @State signalTextMaxWeight: Resource = $r('app.float.signal_text_max_width')
+  @State statusBarSignalUnknownFontSize: Resource = $r('app.float.status_bar_signal_unknown_font_size')
+  @State statusBarSignalTypeFontSize: Resource = $r('app.float.status_bar_signal_type_font_size')
+  @State netSignalTextMaxWidth: Resource = $r('app.float.status_bar_signal_net_signal_text_max_width')
+  @State cellularImageWidth: Resource = $r('app.float.signal_component_icon_width')
+  @State cellularImageHeight: Resource = $r('app.float.signal_component_icon_height')
 
   aboutToAppear() {
     Log.showInfo(TAG, 'aboutToAppear');
@@ -50,34 +56,34 @@ export default struct SignalIcon {
 
   build() {
     Row() {
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.statusBarMarginLeftRight).height('100%')
       Text(this.updateNetworkState(this.networkState))
-        .fontSize(this.styleCommon.statusBarFontSize)
+        .fontSize(this.statusBarFontSize)
         .fontWeight(FontWeight.Medium)
         .fontColor(this.mStatusBarGroupComponentData.contentColor)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
-        .constraintSize({ maxWidth: this.style.signalTextMaxWeight })
+        .constraintSize({ maxWidth: this.signalTextMaxWeight })
         .flexShrink(0)
         .maxLines(1)
         .textAlign(TextAlign.Center)
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.statusBarMarginLeftRight).height('100%')
 
       Stack({ alignContent: Alignment.TopStart }) {
         Text(this.updateCellularType(this.cellularType))
-          .fontSize(this.cellularType == Constants.RADIO_TECHNOLOGY_UNKNOWN ? this.style.statusBarSignalUnknownFontSize : this.style.statusBarSignalTypeFontSize)
+          .fontSize(this.cellularType == Constants.RADIO_TECHNOLOGY_UNKNOWN ? this.statusBarSignalUnknownFontSize : this.statusBarSignalTypeFontSize)
           .fontColor(this.mStatusBarGroupComponentData.contentColor)
-          .width(this.style.netSignalTextMaxWidth)
+          .width(this.netSignalTextMaxWidth)
           .fontWeight(FontWeight.Bold)
           .textAlign(TextAlign.Start)
           .margin({ left: $r("app.float.signal_margin") })
         Image(this.updateCellularImage(this.cellularLevel))
           .objectFit(ImageFit.Contain)
-          .width(this.style.cellularImageWidth)
-          .height(this.style.cellularImageHeight)
+          .width(this.cellularImageWidth)
+          .height(this.cellularImageHeight)
           .fillColor(this.mStatusBarGroupComponentData.contentColor)
       }.flexShrink(1)
 
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.statusBarMarginLeftRight).height('100%')
     }
     .height('100%')
   }

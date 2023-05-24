@@ -30,8 +30,9 @@ export default struct WifiIcon {
   @StorageLink('wifiStatus') wifiStatus: boolean = Constants.DEFAULT_WIFI_STATUS
   private mGroupId: string = ''
   @State mStatusBarGroupComponentData: StatusBarGroupComponentData = new StatusBarGroupComponentData()
-  @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
-  @State style: any = StyleConfiguration.getStartsBarWifiComponentStyle()
+  @State statusBarMarginLeftRight: Resource = $r("app.float.signal_status_margin_Left_right")
+  @State statusBarWifiWidth: Resource = $r('app.float.status_bar_wifi_width')
+  @State statusBarWifiHeight: Resource = $r('app.float.status_bar_wifi_height')
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -46,13 +47,13 @@ export default struct WifiIcon {
   build() {
     Row() {
       if (this.wifiStatus) {
-        Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+        Row().width(this.statusBarMarginLeftRight).height('100%')
         Image(this.getImage(this.wifiInfo))
           .objectFit(ImageFit.Contain)
-          .width(this.style.statusBarWifiWidth)
-          .height(this.style.statusBarWifiHeight)
+          .width(this.statusBarWifiWidth)
+          .height(this.statusBarWifiHeight)
           .fillColor(this.mStatusBarGroupComponentData.contentColor)
-        Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+        Row().width(this.statusBarMarginLeftRight).height('100%')
       }
     }
     .height('100%')
