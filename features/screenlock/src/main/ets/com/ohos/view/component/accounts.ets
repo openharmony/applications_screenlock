@@ -60,7 +60,7 @@ export default struct Accounts {
 
 @Component
 struct UserItem {
-  @State userItem: any = {};
+  @State userItem: UserData = null;
   private viewModel: ViewModel;
 
   build() {

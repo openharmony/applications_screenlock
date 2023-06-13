@@ -25,7 +25,17 @@ struct BatteryPic {
   @StorageLink('batterySoc') batterySoc: number = 100
   @StorageLink('batteryCharging') batteryCharging : boolean = false
   @State mContentColor: string = "#FFFFFFFF"
-  @State style: any = StyleConfiguration.getBatteryPicStyle()
+  @State picBodyWidth: Resource = $r('app.float.battery_component_pic_body_width')
+  @State picBodyHeight: Resource = $r('app.float.battery_component_pic_body_height')
+  @State picBodyBorderWidth: Resource = $r('app.float.battery_component_pic_body_border_width')
+  @State picBorderRadius: Resource = $r('app.float.battery_component_pic_border_radius')
+  @State picBodyPadding: Resource = $r('app.float.battery_component_pic_body_padding')
+  @State picGap: Resource = $r('app.float.battery_component_pic_gap')
+  @State picHeadWidth: Resource = $r('app.float.battery_component_pic_head_width')
+  @State picHeadHeight: Resource = $r('app.float.battery_component_pic_head_height')
+  @State picHeadBorderRadius: Resource = $r('app.float.battery_component_pic_head_radius')
+  @State picChargingColor: Resource = $r('app.color.battery_component_pic_charging_color')
+  @State picLevelLowColor: Resource = $r('app.color.battery_component_pic_level_low_color')
 
   aboutToAppear(){
     Log.showInfo(TAG,'aboutToAppear Start');
@@ -46,37 +56,37 @@ struct BatteryPic {
         .width((this.batterySoc < 100 ? this.batterySoc: 100) + '%')
         .backgroundColor(this.getBatteryColor(this.batterySoc, this.batteryCharging))
       }
-      .width(this.style.picBodyWidth)
-      .height(this.style.picBodyHeight)
+      .width(this.picBodyWidth)
+      .height(this.picBodyHeight)
       .backgroundColor($r('app.color.battery_background'))
-      .border({ width: this.style.picBodyBorderWidth,
+      .border({ width: this.picBodyBorderWidth,
         color: this.mContentColor,
-        radius: this.style.picBorderRadius,
+        radius: this.picBorderRadius,
         style: BorderStyle.Solid })
-      .padding(this.style.picBodyPadding)
+      .padding(this.picBodyPadding)
 
       Row() {
 
       }
-      .width(this.style.picGap)
+      .width(this.picGap)
       .height(1)
 
       Row() {
 
       }
-      .width(this.style.picHeadWidth)
-      .height(this.style.picHeadHeight)
+      .width(this.picHeadWidth)
+      .height(this.picHeadHeight)
       .backgroundColor(this.mContentColor)
-      .borderRadius(this.style.picHeadBorderRadius)
+      .borderRadius(this.picHeadBorderRadius)
     }
   }
 
   private getBatteryColor(val, charging) {
     Log.showDebug(TAG, `getBatteryColor, val: ${ val }  charging: ${ charging } `);
     if (charging) {
-      return this.style.picChargingColor;
+      return this.picChargingColor;
     } else if (val <= Constants.BATTERY_LEVEL_LOW) {
-      return this.style.picLevelLowColor;
+      return this.picLevelLowColor;
     } else {
       return this.mContentColor;
     }
