@@ -22,7 +22,7 @@ const TAG = 'BatteryComponent-batterySoc'
 export default struct BatterySoc {
   @StorageLink('batterySoc') batterySoc: number = 100
   @State mContentColor: string = "#FFFFFFFF"
-  @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
+  @State statusBarFontSize: Resource = $r("app.float.signal_fontSize")
 
   aboutToAppear() {
     Log.showInfo(TAG, 'aboutToAppear Start');
@@ -35,7 +35,7 @@ export default struct BatterySoc {
   build() {
     Text(this.batterySoc + '%')
       .fontColor(this.mContentColor)
-      .fontSize(this.styleCommon.statusBarFontSize)
+      .fontSize(this.statusBarFontSize)
       .fontWeight(FontWeight.Medium)
   }
 }

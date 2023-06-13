@@ -32,8 +32,8 @@ export default struct BatteryIcon {
   @StorageLink('StatusCoefficient') StatusCoefficient: number = 1.0
   private mGroupId: string = ''
   @State mStatusBarGroupComponentData: StatusBarGroupComponentData = new StatusBarGroupComponentData()
-  @State style: any = StyleConfiguration.getBatteryComponentStyle()
-  @State styleCommon: any = StyleConfigurationCommon.getCommonStyle()
+  @State componentGap: Resource = $r('app.float.battery_component_gap')
+  @State statusBarMarginLeftRight: Resource = $r("app.float.signal_status_margin_Left_right")
 
   aboutToAppear() {
     this.mStatusBarGroupComponentData = StatusBarVM.getStatusBarGroupComponentData(this.mGroupId)
@@ -47,11 +47,11 @@ export default struct BatteryIcon {
 
   build() {
     Row() {
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.statusBarMarginLeftRight).height('100%')
       BatterySoc({ mContentColor: this.mStatusBarGroupComponentData.contentColor })
-      Row().width(this.style.componentGap).height('100%')
+      Row().width(this.componentGap).height('100%')
       BatteryPic({ mContentColor: this.mStatusBarGroupComponentData.contentColor })
-      Row().width(this.styleCommon.statusBarMarginLeftRight).height('100%')
+      Row().width(this.statusBarMarginLeftRight).height('100%')
     }
     .height('100%')
   }
