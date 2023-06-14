@@ -255,9 +255,9 @@ export class ScreenLockService {
                 return
             }
             mUnLockBeginAnimation(() => {
-                let status = AppStorage.Link('lockStatus')
+                let status = AppStorage.Get('lockStatus')
                 Log.showDebug(TAG, `unlocking lockStatus:${JSON.stringify(status?.get())}`);
-                if (status?.get() == ScreenLockStatus.Unlock) {
+                if (status == ScreenLockStatus.Unlock) {
                     Log.showInfo(TAG, `unlock the screen`);
                     this.unlocking();
                 } else {
