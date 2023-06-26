@@ -80,4 +80,10 @@ export default struct ConfirmDialog {
     .border({ width: $r('app.float.setting_border_width'), color: Color.White,
       radius: $r('app.float.notification_border_radius') })
   }
+
+  aboutToDisappear() {
+    delete this.controller
+    this.controller = undefined
+    Log.showInfo(TAG, 'aboutToDisappear ');
+  }
 }

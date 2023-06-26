@@ -108,6 +108,12 @@ export default struct SettingDialog {
       radius: $r('app.float.notification_border_radius') })
   }
 
+  aboutToDisappear() {
+    delete this.controller
+    this.controller = undefined
+    Log.showInfo(TAG, 'aboutToDisappear ');
+  }
+
   closeNotification() {
     this.action()
     this.closeAbility()

@@ -88,4 +88,10 @@ export default struct DevicesDialog {
     this.deviceInfoList = DistributionManager.getInstance().getTrustedDeviceListSync();
     Log.showDebug(TAG, `aboutToAppear deviceInfoList size: ${this.deviceInfoList.length}`)
   }
+
+  aboutToDisappear() {
+    delete this.controller
+    this.controller = undefined
+    Log.showInfo(TAG, 'aboutToDisappear ');
+  }
 }
