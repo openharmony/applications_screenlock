@@ -22,6 +22,7 @@ import createOrGet from '../../../../../../../../common/src/main/ets/default/Sin
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';
+import systemParameter from '@ohos.systemparameter';
 import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
 import {Callback} from '@ohos.base';
 
@@ -189,6 +190,7 @@ export class ScreenLockService {
                 Log.showInfo(TAG, `had locked, no need to publish lock_screen`);
             } else {
                 this.notifyLockScreenResult(LockResult.Success)
+                systemParameter.set('bootevent.lockscreen.ready','true')
                 this.currentLockStatus = ScreenLockStatus.Locking;
             }
         });
