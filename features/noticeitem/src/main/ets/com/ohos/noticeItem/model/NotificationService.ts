@@ -22,6 +22,7 @@ import createOrGet from "../../../../../../../../../common/src/main/ets/default/
 import DistributionManager from './NotificationDistributionManager';
 
 const TAG = 'NotificationServiceSc';
+const PLUGIN_TEMPLATE = {"source":"/system/etc/notification_template/assets/js/downloadTemplate.js","ability":"" } ;
 
 interface NotificationListener {
   userId: number;
@@ -134,6 +135,9 @@ export class NotificationService {
     let pluginTempLate = null;
     if (NotificationManager.NotificationTemplateMap !== null) {
       pluginTempLate = NotificationManager.NotificationTemplateMap.get(templateName);
+    }
+    if (pluginTempLate == undefined || pluginTempLate == null) {
+      pluginTempLate = PLUGIN_TEMPLATE;
     }
     Log.showInfo(TAG, `getPluginTempLate pluginTempLate:${JSON.stringify(pluginTempLate)}`);
     return pluginTempLate;
