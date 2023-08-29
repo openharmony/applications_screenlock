@@ -14,7 +14,7 @@
  */
 
 import Log from '../../../../../../../../../common/src/main/ets/default/Log';
-import DeviceManager from '@ohos.distributedHardware.deviceManager';
+import DeviceManager from '@ohos.distributedDeviceManager';
 import DeviceInfo from '@ohos.deviceInfo';
 
 const TAG = `NotificationDistributionManager`;
