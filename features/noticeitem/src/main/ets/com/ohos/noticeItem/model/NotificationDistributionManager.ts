@@ -42,14 +42,13 @@ export default class NotificationDistributionManager {
 
   initDeviceManager() {
     Log.showInfo(TAG, `initDeviceManager`);
-    DeviceManager.createDeviceManager("com.ohos.systemui", (err, data) => {
-      if (err) {
-        Log.showError(TAG, `createDeviceManager err: ${JSON.stringify(err)}`);
-        return;
-      }
+    try {
+      this.deviceManager =DeviceManager.createDeviceManager("com.ohos.systemui");
       Log.showInfo(TAG, "createDeviceManager success");
-      this.deviceManager = data;
-    });
+    } catch(err) {
+      Log.showError(TAG, `createDeviceManager err: ${JSON.stringify(err)}`);
+      return;
+    }
   }
 
   getTrustedDeviceDeviceName(deviceId) {
@@ -70,16 +69,22 @@ export default class NotificationDistributionManager {
 
   getTrustedDeviceListSync(): Array<any>{
     Log.showDebug(TAG, `getTrustedDeviceListSync`);
-    return this.deviceManager.getTrustedDeviceListSync();
+    return this.deviceManager.getAvailableDeviceListSync();
   }
 
   getLocalDeviceInfoSync() {
     Log.showDebug(TAG, `getLocalDeviceInfoSync`);
-    return this.deviceManager.getLocalDeviceInfoSync();
+    let deviceInfo = {
+      deviceId : this.deviceManager.getLocalDeviceId(),
+      deviceName : this.deviceManager.getLocalDeviceName(),
+      deviceType : this.deviceManager.getLocalDeviceType(),
+      networkId : this.deviceManager.getLocalDeviceNetworkId()
+    }
+    return deviceInfo;
   }
 
   release() {
-    this.deviceManager.release();
+    DeviceManager.releaseDeviceManager(this.deviceManager);
   }
 }
 
