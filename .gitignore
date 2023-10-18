@@ -4,3 +4,5 @@
 **/build
 /features/**/build
 /.hvigor
+oh_modules
+oh-package-lock.json5
