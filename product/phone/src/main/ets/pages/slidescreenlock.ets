@@ -33,6 +33,7 @@ export default struct SlideScreenlock {
   @Prop @Watch("onStatusChange") pageStatus: number
   @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ""
   @StorageLink('isWallpaperShow') isWallpaperShow: boolean = true
+  @Provide @Watch('unlockScreen') isClickFrontItem: boolean = false
   private mHeightPx : number = 48
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -49,6 +50,14 @@ export default struct SlideScreenlock {
 
   onPageHide() {
     Log.showInfo(TAG, `onPageHide`)
+  }
+
+  unlockScreen() {
+    Log.showInfo(TAG, `unlockScreen in, isClickFrontItem${this.isClickFrontItem}`)
+    if (this.isClickFrontItem) {
+      this.mViewModel.unlockScreen()
+    }
+    this.isClickFrontItem = false
   }
 
   build() {
