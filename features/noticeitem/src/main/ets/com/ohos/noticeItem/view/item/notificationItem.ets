@@ -75,6 +75,7 @@ export default struct NotificationItem {
 
 @Component
 struct FrontItem {
+  @Consume isClickFrontItem: boolean
   private itemData: any = {}
   private nowWant: any;
   private isSubItem: boolean= false;
@@ -101,6 +102,7 @@ struct FrontItem {
 
   showDevicesDialog() {
     Log.showDebug(TAG, `showDevicesDialog isDistributed: ${this.itemData?.distributedOption?.isDistributed}`)
+    this.isClickFrontItem = true
     if (!this.itemData?.distributedOption?.isDistributed) {
       ViewModel.clickItem(this.itemData);
       return;
