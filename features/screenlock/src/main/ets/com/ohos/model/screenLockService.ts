@@ -25,6 +25,7 @@ import hiDebug from '@ohos.hidebug';
 import systemParameter from '@ohos.systemparameter';
 import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
 import {Callback} from '@ohos.base';
+import { UIContext } from '@ohos.arkui.UIContext';
 
 const TAG = 'ScreenLock-ScreenLockService';
 const URI_DIGITALPASSWORD = 'pages/digitalPassword'
@@ -261,8 +262,10 @@ export class ScreenLockService {
                     let slidestatus = AppStorage.Get('slidestatus')
                     if(!slidestatus){
                         AppStorage.SetOrCreate('slidestatus', true);
+                        const UIContext: UIContext = AppStorage.get('UIContext');
+                        Log.showInfo(TAG, `this.UIContext is ${UIContext}`)
                         Log.showInfo(TAG, `unlockScreen Router.push`);
-                        Router.push({ uri: mRouterPath });
+                        UIContext.getRouter().pushUrl({ url: mRouterPath })
                     }
                 }
             })
