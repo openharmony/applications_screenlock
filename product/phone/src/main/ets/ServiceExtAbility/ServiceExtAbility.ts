@@ -20,6 +20,7 @@ import Log from '../../../../../../common/src/main/ets/default/Log'
 import Constants from '../../../../../../features/screenlock/src/main/ets/com/ohos/common/constants'
 import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
 import sTimeManager from '../../../../../../common/src/main/ets/default/TimeManager'
+import { UIContext } from '@ohos.arkui.UIContext'
 
 const TAG = "ScreenLock-ServiceExtAbility"
 
@@ -36,6 +37,9 @@ class ServiceExtAbility extends ServiceExtension {
         Log.showDebug(TAG, `createWindow name:${name}`)
         windowManager.create(this.context, name, windowManager.WindowType.TYPE_KEYGUARD).then((win) => {
             win.loadContent("pages/index").then(() => {
+                const UIContext: UIContext = win.getUIContext();
+                Log.showInfo(TAG, 'get UIContext successful,' + JSON.stringify(UIContext));
+                AppStorage.SetOrCreate('UIContext', UIContext);
                 Log.showInfo(TAG, name + " window loadContent in then! ")
                 win.show().then(() => {
                     Log.showInfo(TAG, "then begin " + name + " window show in then! ");
