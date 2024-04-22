@@ -254,7 +254,7 @@ export default class AccountsModel {
                     inputData.onSetData(passType, uint8PW);
                 }
             })
-        } catch(error) {
+        } catch(e) {
             console.error(`registerInputer failed, code is ${e.code}, message is ${e.message}`);
         }
 
