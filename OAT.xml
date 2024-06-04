@@ -82,6 +82,8 @@
 				<filteritem type="filepath" name="**/.*.json5" desc="build config file"/>
 				<filteritem type="filepath" name="features/.*/.*.json5" desc="build config file"/>
 				<filteritem type="filepath" name="product/.*/.*.json5" desc="build config file"/>
+                <filteritem type="filename" name="hvigorfile.js" desc=".js not need check"/>
+                <filteritem type="filename" name="*.png" desc=".png files"/>
 			</filefilter>
 			<filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
 				<filteritem type="filename" name="README|README_zh|.*.log|.*.json5|.*.json" desc=""/>
