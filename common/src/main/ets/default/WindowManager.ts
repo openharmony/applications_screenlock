@@ -19,7 +19,7 @@ import {Log} from "./Log";
 import EventManager from "./event/EventManager";
 import { obtainLocalEvent } from "./event/EventUtil";
 import { Rect } from "./Constants";
-import createOrGet from "./SingleInstanceHelper";
+import {createOrGet} from "./SingleInstanceHelper";
 
 export type WindowInfo = {
   visibility: boolean;
