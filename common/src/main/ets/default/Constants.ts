@@ -27,7 +27,7 @@ export interface Rect {
 
 export type WindowType = 'status' | 'navigation';
 
-export default class Constants {
+export class Constants {
   static URI_VAR: string = 'dataability:///com.ohos.settingsdata.DataAbility';
 
   static getUriSync(key: string): string {

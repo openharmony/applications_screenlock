@@ -15,9 +15,9 @@
 
 import commonEvent from "@ohos.commonEvent";
 import { CommonEventSubscriber } from "commonEvent/commonEventSubscriber";
-import createOrGet from "./SingleInstanceHelper";
+import {createOrGet} from "./SingleInstanceHelper";
 import EventManager from "./event/EventManager";
-import Log from "./Log";
+import {Log} from "./Log";
 import { obtainLocalEvent } from "./event/EventUtil";
 import { debounce } from "./Decorators";
 export const SCREEN_CHANGE_EVENT = "screenChangeEvent";

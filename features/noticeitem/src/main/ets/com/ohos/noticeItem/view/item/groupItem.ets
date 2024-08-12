@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 import Constants, {NotificationLayout as Layout} from '../../common/constants';
 import NotificationItem from './notificationItem'
 import titleItem from './titleItem';

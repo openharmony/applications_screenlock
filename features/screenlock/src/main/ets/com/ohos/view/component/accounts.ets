@@ -13,12 +13,13 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 import ViewModel from '../../vm/accountsViewModel';
 import Constants from '../../common/constants';
 import {UserData} from '../../data/userData';
 import { ACCOUNTS_REFRESH_EVENT } from '../../model/accountsModel'
-import EventManager, { unsubscribe } from '../../../../../../../../../common/src/main/ets/default/event/EventManager';
+import EventManager  from '../../../../../../../../../common/src/main/ets/default/event/EventManager';
+import {unsubscribe} from '@ohos/common'
 
 const TAG = 'ScreenLock-Accounts'
 

@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import Log from './Log';
+import {Log} from './Log';
 import audio from '@ohos.multimedia.audio';
 
 const TAG = "SingleInstanceHelper";
 const AUDIO_MANAGER_KEY = 'MultiMediaAudioManager';
 
-export default function createOrGet<T>(objectClass: { new(): T }, storageKey: string): T {
+export function createOrGet<T>(objectClass: { new(): T }, storageKey: string): T {
   if (!globalThis[storageKey]) {
     globalThis[storageKey] = new objectClass();
     Log.showDebug(TAG, `Create key of ${storageKey}`);

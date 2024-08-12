@@ -19,8 +19,8 @@ import longItem from './longItem';
 import multiItem from './multiItem';
 import pictureItem from './pictureItem';
 import titleItem from './titleItem';
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
-import CheckEmptyUtils from '../../../../../../../../../../common/src/main/ets/default/CheckEmptyUtils';
+import {Log} from '@ohos/common'
+import {CheckEmptyUtils} from '@ohos/common'
 import ViewModel from '../../viewmodel/ViewModel';
 import ActionComponent from './actionComponent';
 

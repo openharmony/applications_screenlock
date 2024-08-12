@@ -52,7 +52,7 @@ export function concatTime(h: number, m: number) {
   return `${fill(h)}:${fill(m)}`;
 }
 
-class TimeManager {
+export class TimeManager {
   private mUse24hFormat: boolean = false;
   private mSettingsHelper?: DataAbilityHelper;
   private mManager?: CommonEventManager;

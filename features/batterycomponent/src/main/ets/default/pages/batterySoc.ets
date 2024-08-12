@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../common/src/main/ets/default/Log'
-import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
+import {Log} from '@ohos/common';
+// import {StyleConfigurationCommon} from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
 
 const TAG = 'BatteryComponent-batterySoc'
 
