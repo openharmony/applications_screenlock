@@ -15,7 +15,7 @@
  */
 
 import Window from "@ohos.window";
-import Log from "./Log";
+import {Log} from "./Log";
 import EventManager from "./event/EventManager";
 import { obtainLocalEvent } from "./event/EventUtil";
 import { Rect } from "./Constants";
