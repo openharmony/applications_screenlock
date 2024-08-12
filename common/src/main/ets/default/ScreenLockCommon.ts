@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Log from './Log';
-import AbilityManager from '../default/abilitymanager/abilityManager'
+import {Log} from './Log';
+import {AbilityManager} from '../default/abilitymanager/abilityManager'
 
 const TAG = 'ScreenLock-ScreenLockCommon';
 export enum ScreenLockStatus {

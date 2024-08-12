@@ -17,7 +17,7 @@ import StyleManager from './StyleManager';
 
 const TAG = 'Common-StyleConfiguration';
 
-export default class StyleConfiguration {
+export class StyleConfiguration {
     static getCommonStyle() {
         const key: string = TAG + "-Common";
         return StyleManager.getStyle(key, () => {

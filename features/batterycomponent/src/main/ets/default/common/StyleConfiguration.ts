@@ -14,6 +14,7 @@
  */
 
 import StyleManager from '../../../../../../../common/src/main/ets/default/StyleManager';
+// import {StyleManager} from '@ohos/common'
 import Constants from './constants'
 
 const TAG = 'battery-StyleConfiguration';

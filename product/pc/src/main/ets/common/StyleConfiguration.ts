@@ -14,7 +14,7 @@
  */
 
 import StyleManager from '../../../../../../common/src/main/ets/default/StyleManager';
-import Log from '../../../../../../common/src/main/ets/default/Log';
+import {Log} from '../../../../../../common/src/main/ets/default/Log';
 
 const TAG = 'Lock_StatusBar-StyleConfiguration';
 

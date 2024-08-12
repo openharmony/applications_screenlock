@@ -14,8 +14,8 @@
  */
 
 import AccountManager from "@ohos.account.osAccount";
-import Log from "./Log";
-import getSingleInstance from "./SingleInstanceHelper";
+import {Log} from "./Log";
+import {createOrGet} from "./SingleInstanceHelper";
 
 const TAG = "SwitchUserManagerSc";
 const SUBSCRIBE_KEY = "SystemUiAccount";
@@ -59,13 +59,13 @@ function parseAccountInfo(accountInfo: AccountInfo): UserInfo {
   };
 }
 
-export default class SwitchUserManager {
+export class SwitchUserManager {
   mUserInfo: UserInfo = new UserInfo();
   mListeners = new Set<UserChangeListener>();
   mHasWait: boolean = false;
 
   static getInstance(): SwitchUserManager {
-    return getSingleInstance(SwitchUserManager, TAG);
+    return createOrGet(SwitchUserManager, TAG);
   }
 
   constructor() {

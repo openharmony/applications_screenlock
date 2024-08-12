@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 import EventManager from "../../../../../../../../../common/src/main/ets/default/event/EventManager";
-import {obtainLocalEvent} from "../../../../../../../../../common/src/main/ets/default/event/EventUtil";
+import {obtainLocalEvent} from '@ohos/common'
 
 const TAG = `NotificationWindowManager`;
 

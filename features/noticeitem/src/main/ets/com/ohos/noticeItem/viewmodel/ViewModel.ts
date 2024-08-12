@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
-import SwitchUserManager from '../../../../../../../../../common/src/main/ets/default/SwitchUserManager';
+import {Log} from '@ohos/common'
+import {SwitchUserManager} from '@ohos/common'
 import media from '@ohos.multimedia.media';
 import SourceType from '@ohos.notification'
 import NotificationService from '../model/NotificationService'
 import NotificationWindowManager from '../model/NotificationWindowManager';
 import NotificationConfig from '../model/NotificationConfig';
-import CheckEmptyUtils from '../../../../../../../../../common/src/main/ets/default/CheckEmptyUtils';
-import AbilityManager from "../../../../../../../../../common/src/main/ets/default/abilitymanager/abilityManager"
+import {CheckEmptyUtils} from '@ohos/common'
+import {AbilityManager} from '@ohos/common'
 import EventManager from "../../../../../../../../../common/src/main/ets/default/event/EventManager"
-import {obtainLocalEvent} from "../../../../../../../../../common/src/main/ets/default/event/EventUtil"
+import {obtainLocalEvent} from '@ohos/common'
 import CommonUtil from '../common/CommonUtil';
 import Constants from '../common/constants';
 

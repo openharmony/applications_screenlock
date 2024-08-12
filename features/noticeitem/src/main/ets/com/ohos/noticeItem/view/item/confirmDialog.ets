@@ -14,7 +14,7 @@
  */
 
 import Constants from '../../common/constants';
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 
 const TAG = 'NoticeItem-Confirm';
 

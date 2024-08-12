@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import BatteryInfo from "@ohos.batteryInfo";
+import sBatteryInfo from "@ohos.batteryInfo";
 import commonEvent from "@ohos.commonEvent";
-import createOrGet from "../../../../../../common/src/main/ets/default/SingleInstanceHelper";
+import {createOrGet} from '@ohos/common';
 import Constants from "./common/constants";
-import Log from "../../../../../../common/src/main/ets/default/Log";
+import {Log} from '@ohos/common';
 import { CommonEventData } from "commonEvent/commonEventData";
 import {
   CommonEventManager,
   getCommonEventManager,
-  POLICY,
-} from "../../../../../../common/src/main/ets/default/commonEvent/CommonEventManager";
+  POLICY
+} from '@ohos/common';
 
 const TAG = "BatteryComponent-batteryModelSc";
 const DEFAULT_PROGRESS = 100;

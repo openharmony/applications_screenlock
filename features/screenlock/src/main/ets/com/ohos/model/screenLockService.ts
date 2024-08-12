@@ -12,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Log from '../../../../../../../../common/src/main/ets/default/Log';
-import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
-import {WriteFaultLog, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
+import {Log} from '@ohos/common'
+import {Trace} from '@ohos/common'
+import {WriteFaultLog, FaultID} from '@ohos/common'
 import ScreenLockModel from './screenLockModel';
 import AccountModel, {AuthType, AuthSubType, AuthTurstLevel} from './accountsModel'
 import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon';
-import createOrGet from '../../../../../../../../common/src/main/ets/default/SingleInstanceHelper'
+import {createOrGet} from '@ohos/common'
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';

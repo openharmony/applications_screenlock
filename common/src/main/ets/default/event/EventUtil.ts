@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Log from "../Log";
+import {Log} from "../Log";
 
 export type EventTarget = "local" | "remote" | "ability" | "commonEvent";
 export type Event = {

@@ -15,11 +15,12 @@
 
 import featureAbility from '@ohos.ability.featureAbility'
 import commonEvent from '@ohos.commonEvent';
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
+import {Log} from '@ohos/common'
 import DateTimeCommon from '../../../../../../../../common/src/main/ets/default/DateTimeCommon'
-import sTimeManager, {TimeEventArgs, TIME_CHANGE_EVENT,
-}  from '../../../../../../../../common/src/main/ets/default/TimeManager';
-import EventManager, {unsubscribe} from '../../../../../../../../common/src/main/ets/default/event/EventManager'
+import sTimeManager from '../../../../../../../../common/src/main/ets/default/TimeManager';
+import {TimeEventArgs, TIME_CHANGE_EVENT} from '@ohos/common'
+import EventManager from '../../../../../../../../common/src/main/ets/default/event/EventManager'
+import {unsubscribe} from '@ohos/common'
 
 const TAG = 'ScreenLock-DateTimeViewModel'
 

@@ -13,16 +13,18 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../common/src/main/ets/default/Log'
+import {Log} from '@ohos/common'
 import StyleConfiguration from '../common/StyleConfiguration'
-import StyleConfigurationCommon from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
+// import {StyleConfigurationCommon} from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
 import { StatusBarGroupComponentData } from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
-import TimeManager, {
+import TimeManager from '../../../../../../../common/src/main/ets/default/TimeManager'
+import {
   TimeEventArgs,
   TIME_CHANGE_EVENT,
-} from '../../../../../../../common/src/main/ets/default/TimeManager'
-import EventManager, { unsubscribe } from '../../../../../../../common/src/main/ets/default/event/EventManager'
+} from '@ohos/common'
+import EventManager from '../../../../../../../common/src/main/ets/default/event/EventManager'
+import {unsubscribe} from '@ohos/common'
 
 const TAG = 'ClockComponent-clockIcon';
 

@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../common/src/main/ets/default/Log';
-import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager';
+import {Log} from '@ohos/common'
+import {AbilityManager} from '@ohos/common'
 import IndexStyleConfiguration from './StyleConfiguration'
 
 const TAG = 'StatusBar-StyleManager';

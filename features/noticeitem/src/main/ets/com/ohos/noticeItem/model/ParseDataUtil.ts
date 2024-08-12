@@ -14,9 +14,9 @@
  */
 
 import AccountManager from '@ohos.account.osAccount';
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
-import BundleManager from '../../../../../../../../../common/src/main/ets/default/abilitymanager/bundleManager';
-import AbilityManager from '../../../../../../../../../common/src/main/ets/default/abilitymanager/abilityManager';
+import {Log} from '@ohos/common'
+import {BundleManager} from '@ohos/common'
+import {AbilityManager} from '@ohos/common'
 import NotificationManager from './NotificationManager';
 import {NotificationItemData} from '../common/constants';
 import {NotificationConfig} from './NotificationConfig';
