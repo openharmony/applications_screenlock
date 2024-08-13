@@ -14,10 +14,10 @@
  */
 
 import Constants,{NotificationItemData} from '../../common/constants';
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
-import CheckEmptyUtils from '../../../../../../../../../../common/src/main/ets/default/CheckEmptyUtils';
+import {Log} from '@ohos/common'
+import {CheckEmptyUtils} from '@ohos/common'
 import EventManager from "../../../../../../../../../../common/src/main/ets/default/event/EventManager"
-import {obtainStartAbility} from "../../../../../../../../../../common/src/main/ets/default/event/EventUtil"
+import {obtainStartAbility} from '@ohos/common'
 import Notification from '@ohos.notification';
 
 const TAG = 'NoticeItem-Setting';

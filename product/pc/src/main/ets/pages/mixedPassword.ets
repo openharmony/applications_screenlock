@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import Trace from '../../../../../../common/src/main/ets/default/Trace'
-import Log from '../../../../../../common/src/main/ets/default/Log'
+import {Trace} from '../../../../../../common/src/main/ets/default/Trace'
+import {Log} from '../../../../../../common/src/main/ets/default/Log'
 import CommonStyleManager from '../../../../../../common/src/main/ets/default/StyleManager'
-import AbilityManager from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
+import {AbilityManager} from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
 import StatusBar from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/statusBar'
 import MixedPSD from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/mixedPSD'
 import Constants from '../common/constants'

@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
-import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
+import {Log} from '@ohos/common'
+import {Trace} from '@ohos/common'
 import Constants from '../common/constants'
 import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
 import {Callback} from '@ohos.base';

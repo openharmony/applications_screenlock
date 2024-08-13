@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 import DeviceManager from '@ohos.distributedDeviceManager';
 import DeviceInfo from '@ohos.deviceInfo';
 

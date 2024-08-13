@@ -14,7 +14,7 @@
  */
 
 
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 import ViewModel from '../../viewmodel/ViewModel';
 import NotificationManager from '../../model/NotificationManager';
 

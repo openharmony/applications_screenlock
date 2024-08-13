@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
-import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
+import {Trace} from '@ohos/common'
+import {Log} from '@ohos/common'
+import {SysFaultLogger, FaultID} from '@ohos/common'
 import ScreenLockMar from '@ohos.screenLock';
 import windowManager  from '@ohos.window'
 import Constants from '../common/constants'

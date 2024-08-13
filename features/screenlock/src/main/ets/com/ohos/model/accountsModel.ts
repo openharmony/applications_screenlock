@@ -18,12 +18,12 @@ import osAccount from '@ohos.account.osAccount'
 import commonEvent from '@ohos.commonEvent';
 import util from '@ohos.util';
 import {Callback} from '@ohos.base';
-import Trace from '../../../../../../../../common/src/main/ets/default/Trace';
-import {SysFaultLogger, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger';
-import Log from '../../../../../../../../common/src/main/ets/default/Log';
-import { CommonEventManager, getCommonEventManager } from "../../../../../../../../common/src/main/ets/default/commonEvent/CommonEventManager";
+import {Trace} from '@ohos/common'
+import {SysFaultLogger, FaultID} from '@ohos/common'
+import {Log} from '@ohos/common'
+import { CommonEventManager, getCommonEventManager } from '@ohos/common'
 import EventManager from "../../../../../../../../common/src/main/ets/default/event/EventManager";
-import { obtainLocalEvent } from "../../../../../../../../common/src/main/ets/default/event/EventUtil";
+import {obtainLocalEvent} from '@ohos/common'
 import {UserData} from '../data/userData';
 
 const TAG = "ScreenLock-AccountsModel"

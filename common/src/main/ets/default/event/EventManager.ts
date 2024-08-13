@@ -14,8 +14,8 @@
  */
 
 import ServiceExtensionContext from "application/ServiceExtensionContext";
-import Log from "../Log";
-import createOrGet from "../SingleInstanceHelper";
+import {Log} from "../Log";
+import {createOrGet} from "../SingleInstanceHelper";
 import { EventParser, START_ABILITY_EVENT, Event, LocalEvent } from "./EventUtil";
 import { Callback, createEventBus, EventBus } from "./EventBus";
 
@@ -24,7 +24,7 @@ export type Events = string | string[];
 
 const TAG = "EventManagerSc";
 
-class EventManager {
+export class EventManager {
     mEventBus: EventBus<string>;
     eventParser: EventParser;
     mContext: ServiceExtensionContext | undefined;
