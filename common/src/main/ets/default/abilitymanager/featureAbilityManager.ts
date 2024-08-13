@@ -14,7 +14,7 @@
  */
 
 import FeatureAbility from '@ohos.ability.featureAbility';
-import Log from '../Log';
+import {Log} from '../Log';
 
 const TAG = 'FeatureAbilityManager';
 

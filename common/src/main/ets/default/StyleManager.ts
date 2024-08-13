@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Log from './Log';
+import { Log } from './Log';
 
 const TAG = 'Common-StyleManager';
 

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-export default class CheckEmptyUtils {
+export class CheckEmptyUtils {
 
   /**
      * Check obj is empty.

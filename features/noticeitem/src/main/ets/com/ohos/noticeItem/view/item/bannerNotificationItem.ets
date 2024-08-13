@@ -13,9 +13,10 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
-import AbilityManager from '../../../../../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
-import WindowManager, { WindowType } from '../../../../../../../../../../common/src/main/ets/default/WindowManager'
+import {Log} from '@ohos/common'
+import {AbilityManager} from '@ohos/common'
+import WindowManager from '../../../../../../../../../../common/src/main/ets/default/WindowManager'
+import { WindowType } from '@ohos/common'
 import Constants, {NotificationLayout as Layout} from '../../common/constants';
 import ViewModel from '../../viewmodel/ViewModel';
 import CustomItem from './customItem';

@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
-import CheckEmptyUtils from '../../../../../../../../../../common/src/main/ets/default/CheckEmptyUtils';
+import {Log} from '@ohos/common'
+import {CheckEmptyUtils} from '@ohos/common'
 import ViewModel from '../../viewmodel/ViewModel';
 import Constants, {InputActionButtonData, NotificationLayout as Layout} from '../../common/constants';
 

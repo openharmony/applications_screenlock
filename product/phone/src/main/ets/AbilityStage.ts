@@ -14,7 +14,7 @@
  */
 
 import AbilityStage from "@ohos.application.AbilityStage"
-import Log from '../../../../../common/src/main/ets/default/Log'
+import {Log} from '@ohos/common'
 
 const TAG = "ScreenLock-MainAbilityStage"
 

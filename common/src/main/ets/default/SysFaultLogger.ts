@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import Log from "./Log";
+import {Log} from "./Log";
 import hiSysEvent from '@ohos.hiSysEvent'
 
 const TAG = 'SystemFaultLogger';

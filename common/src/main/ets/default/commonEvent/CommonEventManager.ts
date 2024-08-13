@@ -16,7 +16,7 @@
 import commonEvent from "@ohos.commonEvent";
 import { CommonEventData } from "commonEvent/commonEventData";
 import EventManager from "../event/EventManager";
-import Log from "../Log";
+import {Log} from "../Log";
 import { SCREEN_CHANGE_EVENT } from "../ScreenLockManager";
 
 export type CommonEventManager = {

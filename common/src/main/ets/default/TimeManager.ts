@@ -19,10 +19,10 @@ import commonEvent from "@ohos.commonEvent";
 import dataShare from '@ohos.data.dataShare';
 import featureAbility from "@ohos.ability.featureAbility";
 import { DataAbilityHelper } from "ability/dataAbilityHelper";
-import Log from "./Log";
+import {Log} from "./Log";
 import EventManager from "./event/EventManager";
-import createOrGet from "./SingleInstanceHelper";
-import Constants from "./Constants";
+import {createOrGet} from "./SingleInstanceHelper";
+import {Constants} from "./Constants";
 import { obtainLocalEvent } from "./event/EventUtil";
 import { CommonEventManager, getCommonEventManager, POLICY } from "./commonEvent/CommonEventManager";
 
@@ -52,7 +52,7 @@ export function concatTime(h: number, m: number) {
   return `${fill(h)}:${fill(m)}`;
 }
 
-class TimeManager {
+export class TimeManager {
   private mUse24hFormat: boolean = false;
   private mSettingsHelper?: DataAbilityHelper;
   private mManager?: CommonEventManager;

@@ -37,7 +37,7 @@ export function filterKey(target: any, propKey: string, descriptor: PropertyDesc
 /**
  * Basic log class
  */
-export default class Log {
+export class Log {
     /**
      * Outputs debug-level logs.
      *

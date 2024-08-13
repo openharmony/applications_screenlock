@@ -15,7 +15,7 @@
 
 import wifi from '@ohos.wifi';
 import Constants, {WifiState, WifiConnectionState} from './common/constants'
-import Log from "../../../../../../common/src/main/ets/default/Log";
+import {Log} from '@ohos/common'
 
 const TAG = 'WifiComponent-WifiModel';
 

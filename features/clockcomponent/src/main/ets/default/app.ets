@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Log from '../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 
 const TAG = "Clock_Component_APP";
 
