@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import sBatteryInfo from "@ohos.batteryInfo";
+import BatteryInfo from "@ohos.batteryInfo";
 import commonEvent from "@ohos.commonEvent";
 import {createOrGet} from '@ohos/common';
 import Constants from "./common/constants";
