@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import StyleManager from '../../../../../../../common/src/main/ets/default/StyleManager';
+import {styleManager} from '@ohos/common';
 
 const TAG = 'clock-StyleConfiguration';
 
 export default class StyleConfiguration {
   static getClockComponentStyle() {
     const key: string = TAG + "-ClockComponent";
-    return StyleManager.getStyle(key, () => {
+    return styleManager.getStyle(key, () => {
       return {
         statusBarClockMaxWidth: $r('app.float.status_bar_clock_width')
       };

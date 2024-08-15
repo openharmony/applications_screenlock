@@ -13,7 +13,6 @@
  * limitations under the License.
  */
 
-//import { NotificationSubscriber } from './notification/notificationSubscriber';
 import Notification from '@ohos.notification';
 import PluginComponentManager from '@ohos.pluginComponent';
 import Systemparameter from '@ohos.systemparameter';

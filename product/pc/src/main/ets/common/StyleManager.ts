@@ -13,14 +13,11 @@
  * limitations under the License.
  */
 
-import {Log} from '../../../../../../common/src/main/ets/default/Log';
-import {AbilityManager} from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager';
-import {StyleConfiguration} from '../../../../../../common/src/main/ets/default/StyleConfiguration';
+import {Log, AbilityManager, StyleConfiguration} from '@ohos/common'
 import BatteryStyleConfiguration from '../../../../../../features/batterycomponent/src/main/ets/default/common/StyleConfiguration'
 import WifiStyleConfiguration from '../../../../../../features/wificomponent/src/main/ets/default/common/StyleConfiguration'
 import SignalStyleConfiguration from '../../../../../../features/signalcomponent/src/main/ets/default/common/StyleConfiguration'
 import ClockStyleConfiguration from '../../../../../../features/clockcomponent/src/main/ets/default/common/StyleConfiguration';
-import IndexStyleConfiguration from './StyleConfiguration'
 
 const TAG = 'Lock-StatusBar-StyleManager';
 

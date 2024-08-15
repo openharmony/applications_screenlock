@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Log} from '../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 import ScreenLockService from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenLockService'
 import Constants from '../common/constants'
 import {Callback} from '@ohos.base';

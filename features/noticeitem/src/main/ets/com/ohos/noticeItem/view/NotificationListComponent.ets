@@ -14,10 +14,9 @@
  */
 
 import {Log} from '@ohos/common'
-import Constants, {NotificationLayout as Layout} from '../common/constants';
+import {NotificationLayout as Layout} from '../common/constants';
 import NotificationItem from './item/notificationItem'
 import GroupNotificationItem from './item/groupItem'
-import ViewModel from '../viewmodel/ViewModel'
 
 const TAG = 'NoticeItem-NotificationListComponent';
 

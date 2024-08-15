@@ -12,13 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Log} from '@ohos/common'
-import {Trace} from '@ohos/common'
-import {WriteFaultLog, FaultID} from '@ohos/common'
+import {Log, Trace, WriteFaultLog, FaultID, createOrGet, ScreenLockStatus} from '@ohos/common'
 import ScreenLockModel from './screenLockModel';
 import AccountModel, {AuthType, AuthSubType, AuthTurstLevel} from './accountsModel'
-import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon';
-import {createOrGet} from '@ohos/common'
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';
@@ -31,7 +27,6 @@ const TAG = 'ScreenLock-ScreenLockService';
 const URI_DIGITALPASSWORD = 'pages/digitalPassword'
 const URI_MIXEDPASSWORD = 'pages/mixedPassword'
 const URI_CUSTOMPASSWORD = 'pages/customPassword'
-
 
 //Event type name
 const EVENT_BEGIN_WAKEUP: string = 'beginWakeUp'

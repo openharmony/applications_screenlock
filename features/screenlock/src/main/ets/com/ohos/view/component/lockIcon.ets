@@ -13,8 +13,7 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import {ScreenLockStatus} from '@ohos/common'
+import {Log, ScreenLockStatus} from '@ohos/common'
 import ViewModel from '../../vm/lockIconViewModel'
 import Constants from '../../common/constants'
 

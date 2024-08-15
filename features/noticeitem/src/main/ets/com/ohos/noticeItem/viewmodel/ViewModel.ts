@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import {SwitchUserManager} from '@ohos/common'
+import {Log, SwitchUserManager, CheckEmptyUtils, AbilityManager, obtainLocalEvent, sEventManager} from '@ohos/common'
 import media from '@ohos.multimedia.media';
 import SourceType from '@ohos.notification'
 import NotificationService from '../model/NotificationService'
 import NotificationWindowManager from '../model/NotificationWindowManager';
 import NotificationConfig from '../model/NotificationConfig';
-import {CheckEmptyUtils} from '@ohos/common'
-import {AbilityManager} from '@ohos/common'
-import EventManager from "../../../../../../../../../common/src/main/ets/default/event/EventManager"
-import {obtainLocalEvent} from '@ohos/common'
 import CommonUtil from '../common/CommonUtil';
 import Constants from '../common/constants';
 
@@ -346,7 +341,7 @@ export class ViewModel {
     if (itemData.ruleData.isAllowBanner) {
       Log.showDebug(TAG, `banner start `);
       AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_BANNER_NOTICE, 'itemData', itemData);
-      EventManager.publish(obtainLocalEvent('onBannerNoticeShow', { 'itemData': itemData }))
+      sEventManager.publish(obtainLocalEvent('onBannerNoticeShow', { 'itemData': itemData }))
       Log.showDebug(TAG, `banner end `);
     }
     if (itemData.notificationFlags?.soundEnabled != Constants.NOTIFICATION_TYPE_CLOSE) {

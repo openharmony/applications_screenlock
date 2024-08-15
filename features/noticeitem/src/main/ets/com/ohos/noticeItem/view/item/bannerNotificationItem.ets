@@ -13,10 +13,7 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import {AbilityManager} from '@ohos/common'
-import WindowManager from '../../../../../../../../../../common/src/main/ets/default/WindowManager'
-import { WindowType } from '@ohos/common'
+import {Log, AbilityManager, sWindowManager, WindowType} from '@ohos/common'
 import Constants, {NotificationLayout as Layout} from '../../common/constants';
 import ViewModel from '../../viewmodel/ViewModel';
 import CustomItem from './customItem';
@@ -31,7 +28,6 @@ import WantAgent from '@ohos.wantAgent';
 
 const TAG = 'NoticeItem-BannerNotificationItem'
 const INTERVAL = 5 * 1000
-
 
 @Component
 export default struct BannerNotificationItem {
@@ -133,8 +129,8 @@ export default struct BannerNotificationItem {
               width: this.mDefaultBannerRect['width'],
               height: heightWin
             };
-            WindowManager.resetSizeWindow(WindowType.BANNER_NOTICE, bannerRect);
-            WindowManager.showWindow(WindowType.BANNER_NOTICE);
+            sWindowManager.resetSizeWindow(WindowType.BANNER_NOTICE, bannerRect);
+            sWindowManager.showWindow(WindowType.BANNER_NOTICE);
           })
         }
       } else {

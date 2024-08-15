@@ -13,9 +13,8 @@
  * limitations under the License.
  */
 
-import {Trace} from '@ohos/common'
-import {Log} from '@ohos/common'
-import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
+import {Log, Trace} from '@ohos/common'
+import BaseViewModel, {service, AuthSubType} from './baseViewModel'
 import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-MixedPSDViewModel'

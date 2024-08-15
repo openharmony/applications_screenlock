@@ -14,7 +14,6 @@
  */
 
 import {Log} from '@ohos/common'
-import Constants from '../../common/constants'
 
 const TAG = 'ScreenLock-BatterySoc'
 

@@ -13,10 +13,7 @@
  * limitations under the License.
  */
 
-import {Trace} from '@ohos/common'
-import {Log} from '@ohos/common'
-import CommonStyleManager from '../../../../../../common/src/main/ets/default/StyleManager'
-import {AbilityManager} from '@ohos/common'
+import {Log, Trace, styleManager as CommonStyleManager, AbilityManager} from '@ohos/common'
 import StatusBar from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/statusBar'
 import MixedPSD from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/mixedPSD'
 import Constants from '../common/constants'

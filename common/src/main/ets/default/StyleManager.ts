@@ -20,6 +20,13 @@ const TAG = 'Common-StyleManager';
 export class StyleManager {
     mAbilityPageName: string = '';
 
+    static getInstance(): StyleManager {
+        if (globalThis.StyleManager == null) {
+            globalThis.StyleManager = new StyleManager();
+        }
+        return globalThis.StyleManager;
+    }
+
     setAbilityPageName(name: string): void{
         Log.showDebug(TAG, `setAbilityPageName, name: ${name}`);
         this.mAbilityPageName = name;
@@ -36,6 +43,4 @@ export class StyleManager {
     }
 }
 
-let styleManager = new StyleManager();
-
-export default styleManager as StyleManager;
+export let styleManager = StyleManager.getInstance();

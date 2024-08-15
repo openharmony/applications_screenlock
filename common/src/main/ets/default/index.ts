@@ -17,7 +17,7 @@ export  { CheckEmptyUtils } from './CheckEmptyUtils'
 
 export { Constants } from './Constants'
 
-export { DateTimeCommon } from './DateTimeCommon'
+export { dateTimeCommon } from './DateTimeCommon'
 
 export { Log } from './Log'
 
@@ -27,7 +27,7 @@ export { createOrGet } from './SingleInstanceHelper'
 
 export { StyleConfiguration } from './StyleConfiguration'
 
-export { StyleManager } from './StyleManager'
+export { styleManager } from './StyleManager'
 
 export { SwitchUserManager } from './SwitchUserManager'
 
@@ -41,9 +41,9 @@ export { TimeEventArgs } from './TimeManager'
 
 export { TIME_CHANGE_EVENT } from './TimeManager'
 
-export { TimeManager } from './TimeManager'
+export { sTimeManager } from './TimeManager'
 
-export { WindowType } from './WindowManager'
+export { WindowType, sWindowManager } from './WindowManager'
 
 export { FaultID } from './SysFaultLogger'
 
