@@ -16,7 +16,6 @@
 import {Log} from '@ohos/common'
 import ViewModel from '../../vm/dateTimeViewModel'
 import Constants from '../../common/constants'
-// import { ScreenLockStatus } from '../../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
 import deviceInfo from '@ohos.deviceInfo';
 import i18n from '@ohos.i18n';
 

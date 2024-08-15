@@ -13,13 +13,11 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
+import {Log, sEventManager, unsubscribe} from '@ohos/common'
 import ViewModel from '../../vm/accountsViewModel';
 import Constants from '../../common/constants';
 import {UserData} from '../../data/userData';
-import { ACCOUNTS_REFRESH_EVENT } from '../../model/accountsModel'
-import EventManager  from '../../../../../../../../../common/src/main/ets/default/event/EventManager';
-import {unsubscribe} from '@ohos/common'
+import {ACCOUNTS_REFRESH_EVENT} from '../../model/accountsModel'
 
 const TAG = 'ScreenLock-Accounts'
 
@@ -32,7 +30,7 @@ export default struct Accounts {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`);
-    this.unSubscriber = EventManager.subscribe(ACCOUNTS_REFRESH_EVENT, (data) => {
+    this.unSubscriber = sEventManager.subscribe(ACCOUNTS_REFRESH_EVENT, (data) => {
       this.accountList = data;
     });
   }

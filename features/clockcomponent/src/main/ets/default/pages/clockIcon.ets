@@ -13,18 +13,9 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import StyleConfiguration from '../common/StyleConfiguration'
-// import {StyleConfigurationCommon} from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
-import { StatusBarGroupComponentData } from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
+import {StatusBarGroupComponentData} from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
-import TimeManager from '../../../../../../../common/src/main/ets/default/TimeManager'
-import {
-  TimeEventArgs,
-  TIME_CHANGE_EVENT,
-} from '@ohos/common'
-import EventManager from '../../../../../../../common/src/main/ets/default/event/EventManager'
-import {unsubscribe} from '@ohos/common'
+import {Log, TimeEventArgs, TIME_CHANGE_EVENT, sEventManager, unsubscribe, sTimeManager} from '@ohos/common'
 
 const TAG = 'ClockComponent-clockIcon';
 
@@ -41,10 +32,10 @@ export default struct ClockIcon {
   aboutToAppear() {
     Log.showInfo(TAG, 'aboutToAppear');
     this.mStatusBarGroupComponentData = StatusBarVM.getStatusBarGroupComponentData(this.mGroupId)
-    this.unSubscriber = EventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
-      this.mTime = TimeManager.formatTime(args.date);
+    this.unSubscriber = sEventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
+      this.mTime = sTimeManager.formatTime(args.date);
     });
-    this.mTime = TimeManager.formatTime(new Date());
+    this.mTime = sTimeManager.formatTime(new Date());
   }
 
   aboutToDisappear() {

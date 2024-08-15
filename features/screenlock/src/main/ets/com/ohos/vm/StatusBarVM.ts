@@ -13,10 +13,8 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import WindowManager from '../../../../../../../../common/src/main/ets/default/WindowManager';
-import { WindowType } from '@ohos/common'
-import Constants, {StatusBarGroupComponentData} from '../common/constants';
+import {Log, sWindowManager, WindowType} from '@ohos/common'
+import {StatusBarGroupComponentData} from '../common/constants';
 
 const TAG = 'StatusBarVM';
 
@@ -41,7 +39,7 @@ export class StatusBarVM {
       return;
     }
     this.mStatusBarEnable = isEnable;
-    this.mStatusBarEnable ? WindowManager.showWindow(WindowType.STATUS_BAR) : WindowManager.hideWindow(WindowType.STATUS_BAR);
+    this.mStatusBarEnable ? sWindowManager.showWindow(WindowType.STATUS_BAR) : sWindowManager.hideWindow(WindowType.STATUS_BAR);
   }
 
   getStatusBarGroupComponentData(groupId: string): StatusBarGroupComponentData{
