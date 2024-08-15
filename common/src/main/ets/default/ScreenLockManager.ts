@@ -18,8 +18,8 @@ import {CommonEventSubscriber} from "commonEvent/commonEventSubscriber";
 import {createOrGet} from "./SingleInstanceHelper";
 import {sEventManager} from "./event/EventManager";
 import {Log} from "./Log";
-import { obtainLocalEvent } from "./event/EventUtil";
-import { debounce } from "./Decorators";
+import {obtainLocalEvent} from "./event/EventUtil";
+import {debounce} from "./Decorators";
 export const SCREEN_CHANGE_EVENT = "screenChangeEvent";
 
 const TAG = "ScreenLockManager";

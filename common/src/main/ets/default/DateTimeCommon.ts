@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ConvertLunarCalendar } from '../../../../../common/src/main/ets/default/LunarCalendar'
+import {ConvertLunarCalendar} from '../../../../../common/src/main/ets/default/LunarCalendar'
 
 export class DateTimeCommon {
 

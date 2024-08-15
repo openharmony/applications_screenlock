@@ -17,7 +17,7 @@ import {Log, Trace, SysFaultLogger, FaultID} from '@ohos/common'
 import ScreenLockMar from '@ohos.screenLock';
 import windowManager  from '@ohos.window'
 import Constants from '../common/constants'
-import { Callback } from '@ohos.base';
+import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-ScreenLockModel';
 

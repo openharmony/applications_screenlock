@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Constants, {NotificationLayout as Layout} from '../../common/constants';
+import {NotificationLayout as Layout} from '../../common/constants';
 import {Log} from '@ohos/common'
 import SettingDialog from './settingDialog';
 import ConfirmDialog from './confirmDialog'
