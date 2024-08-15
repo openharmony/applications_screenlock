@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-export { EventManager } from './EventManager'
+export { sEventManager } from './EventManager'
 
 export { unsubscribe } from './EventManager'
 

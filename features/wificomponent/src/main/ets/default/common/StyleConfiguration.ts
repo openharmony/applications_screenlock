@@ -13,15 +13,14 @@
  * limitations under the License.
  */
 
-import StyleManager from '../../../../../../../common/src/main/ets/default/StyleManager'
-import Constants from './constants'
+import {styleManager} from '@ohos/common'
 
 const TAG = 'wifi-StyleConfiguration';
 
 export default class StyleConfiguration {
   static getStartsBarWifiComponentStyle() {
     const key: string = TAG + "-startsBarWifi";
-    return StyleManager.getStyle(key, () => {
+    return styleManager.getStyle(key, () => {
       return {
         statusBarWifiWidth: $r('app.float.status_bar_wifi_width'),
         statusBarWifiHeight: $r('app.float.status_bar_wifi_height')

@@ -13,9 +13,7 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import {AbilityManager} from '@ohos/common'
-import IndexStyleConfiguration from './StyleConfiguration'
+import {Log, AbilityManager} from '@ohos/common'
 
 const TAG = 'StatusBar-StyleManager';
 

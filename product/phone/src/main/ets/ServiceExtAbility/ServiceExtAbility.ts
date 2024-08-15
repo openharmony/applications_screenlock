@@ -16,11 +16,9 @@
 import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility'
 import windowManager from '@ohos.window'
 import display from '@ohos.display'
-import {Log} from '@ohos/common'
+import {Log, AbilityManager, sTimeManager} from '@ohos/common'
 import Constants from '../../../../../../features/screenlock/src/main/ets/com/ohos/common/constants'
-import {AbilityManager} from '@ohos/common'
-import sTimeManager from '../../../../../../common/src/main/ets/default/TimeManager'
-import { UIContext } from '@ohos.arkui.UIContext'
+import {UIContext} from '@ohos.arkui.UIContext'
 
 const TAG = "ScreenLock-ServiceExtAbility"
 

@@ -16,10 +16,7 @@
 import Constants from '../common/constants';
 import mSignalModel from '../signalModel';
 import {Log} from '@ohos/common'
-// import {StyleConfigurationCommon} from '../../../../../../../common/src/main/ets/default/StyleConfiguration'
-import StyleConfiguration from '../common/StyleConfiguration'
-import { StatusBarGroupComponentData
-} from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
+import {StatusBarGroupComponentData} from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
 
 const TAG = 'SignalComponent-SignalIcon'

@@ -14,7 +14,6 @@
  */
 
 import Constants, {NotificationItemData, NotificationLayout as Layout} from '../../common/constants';
-import {CheckEmptyUtils} from '@ohos/common'
 
 @Component
 export default struct PictureItem {

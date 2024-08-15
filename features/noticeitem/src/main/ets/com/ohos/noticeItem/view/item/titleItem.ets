@@ -15,7 +15,6 @@
 
 import Constants, {NotificationLayout as Layout} from '../../common/constants';
 import {Log} from '@ohos/common'
-import {CheckEmptyUtils} from '@ohos/common'
 
 const TAG = 'NoticeItem-TitleItem';
 

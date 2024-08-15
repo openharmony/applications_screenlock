@@ -13,10 +13,7 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import {Trace} from '@ohos/common'
-import CommonStyleManager from '../../../../../../common/src/main/ets/default/StyleManager'
-import {AbilityManager} from '@ohos/common'
+import {Log, Trace, styleManager as CommonStyleManager, AbilityManager} from '@ohos/common'
 import {LockStyleMode} from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenlockStyle'
 import ViewModel from '../vm/indexViewModel'
 import SlideScreenLock from './slidescreenlock'

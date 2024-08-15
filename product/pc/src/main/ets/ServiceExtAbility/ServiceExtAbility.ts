@@ -15,12 +15,9 @@
 
 import ServiceExtension from '@ohos.app.ability.ServiceExtensionAbility'
 import windowManager from '@ohos.window'
-import WindowManagers, { WindowType } from "../../../../../../common/src/main/ets/default/WindowManager";
 import display from '@ohos.display'
-import {Log} from '../../../../../../common/src/main/ets/default/Log'
+import {Log, AbilityManager, sTimeManager} from '@ohos/common'
 import Constants from '../../../../../../features/screenlock/src/main/ets/com/ohos/common/constants'
-import {AbilityManager} from '../../../../../../common/src/main/ets/default/abilitymanager/abilityManager'
-import sTimeManager from '../../../../../../common/src/main/ets/default/TimeManager'
 import inputMethod from '@ohos.inputMethod'
 
 const TAG = "ScreenLock-ServiceExtAbility"
