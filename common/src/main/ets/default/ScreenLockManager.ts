@@ -14,7 +14,7 @@
  */
 
 import commonEvent from "@ohos.commonEvent";
-import { CommonEventSubscriber } from "commonEvent/commonEventSubscriber";
+import {CommonEventSubscriber} from "commonEvent/commonEventSubscriber";
 import {createOrGet} from "./SingleInstanceHelper";
 import {sEventManager} from "./event/EventManager";
 import {Log} from "./Log";
