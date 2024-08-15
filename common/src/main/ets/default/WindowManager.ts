@@ -16,10 +16,9 @@
 
 import Window from "@ohos.window";
 import {Log} from "./Log";
-import EventManager from "./event/EventManager";
+import {sEventManager} from "./event/EventManager";
 import {obtainLocalEvent} from "./event/EventUtil";
 import {Rect} from "./Constants";
-import {createOrGet} from "./SingleInstanceHelper";
 
 export type WindowInfo = {
   visibility: boolean;
@@ -94,7 +93,7 @@ class WindowManager {
       Log.showError(TAG, `resetSizeWindow failed. error:${JSON.stringify(err)}`);
     }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), rect });
-    EventManager.publish(
+    sEventManager.publish(
       obtainLocalEvent(WINDOW_RESIZE_EVENT, {
         windowName: name,
         rect,
@@ -113,7 +112,7 @@ class WindowManager {
       Log.showError(TAG, `showWindow failed. error:${JSON.stringify(err)}`);
     }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), visibility: true });
-    EventManager.publish(
+    sEventManager.publish(
       obtainLocalEvent(WINDOW_SHOW_HIDE_EVENT, {
         windowName: name,
         isShow: true,
@@ -132,7 +131,7 @@ class WindowManager {
       Log.showError(TAG, `hideWindow failed. error:${JSON.stringify(err)}`);
     }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), visibility: false });
-    EventManager.publish(
+    sEventManager.publish(
       obtainLocalEvent(WINDOW_SHOW_HIDE_EVENT, {
         windowName: name,
         isShow: false,

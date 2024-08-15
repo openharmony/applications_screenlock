@@ -48,7 +48,6 @@ export {
   POLICY
 } from './src/main/ets/default/commonEvent'
 
-
 export {
   sEventManager,
   unsubscribe,
