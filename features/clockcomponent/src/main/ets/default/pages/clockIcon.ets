@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import { StatusBarGroupComponentData } from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
+import {StatusBarGroupComponentData} from '../../../../../../screenlock/src/main/ets/com/ohos/common/constants'
 import StatusBarVM from '../../../../../../screenlock/src/main/ets/com/ohos/vm/StatusBarVM'
 import {Log, TimeEventArgs, TIME_CHANGE_EVENT, sEventManager, unsubscribe, sTimeManager} from '@ohos/common'
 

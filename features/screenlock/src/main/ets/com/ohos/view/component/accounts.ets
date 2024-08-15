@@ -17,7 +17,7 @@ import {Log, sEventManager, unsubscribe} from '@ohos/common'
 import ViewModel from '../../vm/accountsViewModel';
 import Constants from '../../common/constants';
 import {UserData} from '../../data/userData';
-import { ACCOUNTS_REFRESH_EVENT } from '../../model/accountsModel'
+import {ACCOUNTS_REFRESH_EVENT} from '../../model/accountsModel'
 
 const TAG = 'ScreenLock-Accounts'
 

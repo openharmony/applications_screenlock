@@ -19,9 +19,9 @@ import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';
 import systemParameter from '@ohos.systemparameter';
-import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
+import {CommonEventPublishData} from 'commonEvent/commonEventPublishData';
 import {Callback} from '@ohos.base';
-import { UIContext } from '@ohos.arkui.UIContext';
+import {UIContext} from '@ohos.arkui.UIContext';
 
 const TAG = 'ScreenLock-ScreenLockService';
 const URI_DIGITALPASSWORD = 'pages/digitalPassword'

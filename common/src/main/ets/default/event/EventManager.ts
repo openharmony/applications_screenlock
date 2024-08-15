@@ -15,8 +15,8 @@
 
 import ServiceExtensionContext from "application/ServiceExtensionContext";
 import {Log} from "../Log";
-import { EventParser, START_ABILITY_EVENT, Event, LocalEvent } from "./EventUtil";
-import { Callback, createEventBus, EventBus } from "./EventBus";
+import {EventParser, START_ABILITY_EVENT, Event, LocalEvent} from "./EventUtil";
+import {Callback, createEventBus, EventBus} from "./EventBus";
 
 export type unsubscribe = () => void;
 export type Events = string | string[];

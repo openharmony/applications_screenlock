@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Constants, {NotificationLayout as Layout} from '../../common/constants';
+import {NotificationLayout as Layout} from '../../common/constants';
 import GeneralItem from './generalItem';
 import CustomItem from './customItem';
 import {Log} from '@ohos/common'
