@@ -123,4 +123,4 @@ export class TimeManager {
   }
 }
 
-export let sTimeManager = sTimeManager.getInstance();
+export let sTimeManager = TimeManager.getInstance();
