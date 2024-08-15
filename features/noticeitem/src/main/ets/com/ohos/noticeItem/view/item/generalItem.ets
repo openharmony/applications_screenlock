@@ -19,8 +19,7 @@ import longItem from './longItem';
 import multiItem from './multiItem';
 import pictureItem from './pictureItem';
 import titleItem from './titleItem';
-import {Log} from '@ohos/common'
-import {CheckEmptyUtils} from '@ohos/common'
+import {Log, CheckEmptyUtils} from '@ohos/common'
 import ViewModel from '../../viewmodel/ViewModel';
 import ActionComponent from './actionComponent';
 

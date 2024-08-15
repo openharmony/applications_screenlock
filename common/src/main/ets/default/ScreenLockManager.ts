@@ -16,7 +16,7 @@
 import commonEvent from "@ohos.commonEvent";
 import { CommonEventSubscriber } from "commonEvent/commonEventSubscriber";
 import {createOrGet} from "./SingleInstanceHelper";
-import EventManager from "./event/EventManager";
+import {sEventManager} from "./event/EventManager";
 import {Log} from "./Log";
 import { obtainLocalEvent } from "./event/EventUtil";
 import { debounce } from "./Decorators";
@@ -54,7 +54,7 @@ class ScreenLockManager {
 
   @debounce(debounceTimeout)
   notifyScreenEvent(isScreenOn: boolean) {
-    EventManager.publish(obtainLocalEvent(SCREEN_CHANGE_EVENT, isScreenOn));
+    sEventManager.publish(obtainLocalEvent(SCREEN_CHANGE_EVENT, isScreenOn));
     Log.showDebug(TAG, `publish ${SCREEN_CHANGE_EVENT} screenState: ${isScreenOn}`);
   }
 }

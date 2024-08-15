@@ -13,9 +13,7 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import EventManager from "../../../../../../../../../common/src/main/ets/default/event/EventManager";
-import {obtainLocalEvent} from '@ohos/common'
+import {Log, sEventManager, obtainLocalEvent} from '@ohos/common'
 
 const TAG = `NotificationWindowManager`;
 
@@ -26,7 +24,7 @@ class NotificationWindowManager {
 
   hideNotificationWindow() {
     Log.showDebug(TAG, 'hide Notification window');
-    EventManager.publish(obtainLocalEvent('hideNotificationWindowEvent', ''));
+    sEventManager.publish(obtainLocalEvent('hideNotificationWindowEvent', ''));
   }
 }
 

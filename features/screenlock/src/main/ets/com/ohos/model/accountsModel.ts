@@ -18,12 +18,7 @@ import osAccount from '@ohos.account.osAccount'
 import commonEvent from '@ohos.commonEvent';
 import util from '@ohos.util';
 import {Callback} from '@ohos.base';
-import {Trace} from '@ohos/common'
-import {SysFaultLogger, FaultID} from '@ohos/common'
-import {Log} from '@ohos/common'
-import { CommonEventManager, getCommonEventManager } from '@ohos/common'
-import EventManager from "../../../../../../../../common/src/main/ets/default/event/EventManager";
-import {obtainLocalEvent} from '@ohos/common'
+import {Log, Trace, sEventManager, CommonEventManager, getCommonEventManager, SysFaultLogger, FaultID, obtainLocalEvent} from '@ohos/common'
 import {UserData} from '../data/userData';
 
 const TAG = "ScreenLock-AccountsModel"
@@ -169,7 +164,7 @@ export default class AccountsModel {
                     accountMap.get(user.localId).userIconPath = path;
                 })
             }
-            EventManager.publish(obtainLocalEvent(ACCOUNTS_REFRESH_EVENT, accountList));
+            sEventManager.publish(obtainLocalEvent(ACCOUNTS_REFRESH_EVENT, accountList));
         })
     }
 

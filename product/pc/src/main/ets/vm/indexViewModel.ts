@@ -13,9 +13,8 @@
  * limitations under the License.
  */
 
-import {Log} from '../../../../../../common/src/main/ets/default/Log';
-import ScreenlockStyle, {LockStyleMode
-} from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenlockStyle'
+import {Log} from '@ohos/common'
+import ScreenlockStyle, {LockStyleMode} from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenlockStyle'
 import ScreenLockService from '../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenLockService'
 
 const TAG = 'ScreenLock-IndexViewModel'

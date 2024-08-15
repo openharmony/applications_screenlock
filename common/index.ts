@@ -16,21 +16,22 @@
 export {
   CheckEmptyUtils,
   Constants,
-  DateTimeCommon,
+  dateTimeCommon,
   Log,
   ReadConfigUtil,
   createOrGet,
   StyleConfiguration,
-  StyleManager,
+  styleManager,
   SwitchUserManager,
   WriteFaultLog,
   SysFaultLogger,
   FaultID,
   Trace,
-  TimeManager,
+  sTimeManager,
   TimeEventArgs,
   TIME_CHANGE_EVENT,
   WindowType,
+  sWindowManager,
   ScreenLockStatus,
   ReadConfigFile
 } from './src/main/ets/default'
@@ -49,7 +50,7 @@ export {
 
 
 export {
-  EventManager,
+  sEventManager,
   unsubscribe,
   obtainLocalEvent,
   obtainStartAbility

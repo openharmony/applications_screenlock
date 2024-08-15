@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-import {ReadConfigUtil} from '@ohos/common'
-import {Log} from '@ohos/common'
 
 const TAG = 'NotificationConfig'
 

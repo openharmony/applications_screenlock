@@ -60,6 +60,13 @@ const DEFAULT_WINDOW_INFO: WindowInfo = {
 class WindowManager {
   mWindowInfos: Map<WindowType, WindowInfo> = new Map();
 
+  static getInstance(): WindowManager {
+    if (globalThis.WindowManager == null) {
+      globalThis.WindowManager = new WindowManager();
+    }
+    return globalThis.WindowManager;
+  }
+
   async createWindow(context: any, name: WindowType, rect: Rect, loadContent: string): Promise<WindowHandle> {
     Log.showInfo(TAG, `createWindow name: ${name}, rect: ${JSON.stringify(rect)}, url: ${loadContent}`);
     let winHandle = null;
@@ -150,5 +157,5 @@ class WindowManager {
   }
 }
 
-let sWindowManager = createOrGet(WindowManager, TAG);
-export default sWindowManager as WindowManager;
+export let sWindowManager = WindowManager.getInstance();
+

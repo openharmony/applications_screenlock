@@ -15,7 +15,7 @@
 
 import commonEvent from "@ohos.commonEvent";
 import { CommonEventData } from "commonEvent/commonEventData";
-import EventManager from "../event/EventManager";
+import {sEventManager} from "../event/EventManager";
 import {Log} from "../Log";
 import { SCREEN_CHANGE_EVENT } from "../ScreenLockManager";
 
@@ -91,7 +91,7 @@ export function getCommonEventManager(
 }
 
 function ScreenPolicy(manager: InnerManager): ClearPolicy {
-  return EventManager.subscribe(SCREEN_CHANGE_EVENT, (isScreenOn: boolean) => {
+  return sEventManager.subscribe(SCREEN_CHANGE_EVENT, (isScreenOn: boolean) => {
     isScreenOn ? manager.subscriberCommonEvent() : manager.unSubscriberCommonEvent();
   });
 }

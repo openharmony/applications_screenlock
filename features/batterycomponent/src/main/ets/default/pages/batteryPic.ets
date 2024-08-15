@@ -15,7 +15,6 @@
 
 import Constants from '../common/constants'
 import {Log} from '@ohos/common'
-import StyleConfiguration from '../common/StyleConfiguration'
 
 const TAG = 'BatteryComponent-batteryPic'
 

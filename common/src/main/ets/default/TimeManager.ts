@@ -57,6 +57,13 @@ export class TimeManager {
   private mSettingsHelper?: DataAbilityHelper;
   private mManager?: CommonEventManager;
 
+  static getInstance(): TimeManager {
+    if (globalThis.TimeManager == null) {
+      globalThis.TimeManager = new TimeManager();
+    }
+    return globalThis.TimeManager;
+  }
+
   public init(context: any) {
     this.mManager = getCommonEventManager(
       TAG,
@@ -118,6 +125,4 @@ export class TimeManager {
   }
 }
 
-let sTimeManager = createOrGet(TimeManager, TAG);
-
-export default sTimeManager as TimeManager;
+export let sTimeManager = sTimeManager.getInstance();

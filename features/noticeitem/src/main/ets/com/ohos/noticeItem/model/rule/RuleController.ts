@@ -15,11 +15,8 @@
  */
 
 import {NotificationItemData} from '../../common/constants';
-import {Log} from '@ohos/common'
-import {SlotLevel} from '@ohos.notification';
-import Notification from '@ohos.notification';
-import {CheckEmptyUtils} from '@ohos/common';
-import Bundle from '@ohos.bundle';
+import {Log, CheckEmptyUtils} from '@ohos/common'
+import Notification, {SlotLevel} from '@ohos.notification';
 
 const TAG = 'NotificationRuleController';
 

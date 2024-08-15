@@ -13,8 +13,7 @@
  * limitations under the License.
  */
 
-import {Log} from '@ohos/common'
-import {CheckEmptyUtils} from '@ohos/common'
+import {Log, CheckEmptyUtils} from '@ohos/common'
 import ViewModel from '../../viewmodel/ViewModel';
 import Constants, {InputActionButtonData, NotificationLayout as Layout} from '../../common/constants';
 

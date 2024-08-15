@@ -14,11 +14,7 @@
  */
 
 import Constants,{NotificationItemData} from '../../common/constants';
-import {Log} from '@ohos/common'
-import {CheckEmptyUtils} from '@ohos/common'
-import EventManager from "../../../../../../../../../../common/src/main/ets/default/event/EventManager"
-import {obtainStartAbility} from '@ohos/common'
-import Notification from '@ohos.notification';
+import {Log, CheckEmptyUtils, sEventManager, obtainStartAbility} from '@ohos/common'
 
 const TAG = 'NoticeItem-Setting';
 
@@ -115,7 +111,7 @@ export default struct SettingDialog {
 
   openAbility() {
     Log.showDebug(TAG, ` openAbility:showNotificationManagement`)
-    EventManager.publish(obtainStartAbility('com.ohos.systemui', 'com.ohos.systemui.notificationmanagement.MainAbility',
+    sEventManager.publish(obtainStartAbility('com.ohos.systemui', 'com.ohos.systemui.notificationmanagement.MainAbility',
       { 'migrateUri': 'pages/setEnable', 'migrateBundle': this.itemData.bundleName }))
     this.closeAbility()
   }

@@ -16,7 +16,6 @@
 import {Log} from '@ohos/common'
 import ViewModel from '../../vm/wallpaperViewModel'
 import Constants from '../../common/constants'
-import {Trace} from '@ohos/common'
 
 const TAG = 'ScreenLock-Wallpaper'
 
