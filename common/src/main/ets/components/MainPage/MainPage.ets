@@ -30,3 +30,4 @@ export struct MainPage {
     .height('100%')
   }
 }
+

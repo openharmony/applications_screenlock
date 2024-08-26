@@ -13,8 +13,7 @@
  * limitations under the License.
  */
 
-import StyleManager from '../../../../../../common/src/main/ets/default/StyleManager';
-import Log from '../../../../../../common/src/main/ets/default/Log';
+import {Log, styleManager} from '@ohos/common'
 
 const TAG = 'Lock_StatusBar-StyleConfiguration';
 
@@ -22,7 +21,7 @@ export default class StyleConfiguration {
     static getIndexStyle() {
         Log.showInfo(TAG, `setStyle`)
         const key: string = TAG + "-Index";
-        return StyleManager.getStyle(key, () => {
+        return styleManager.getStyle(key, () => {
             return {};
         });
     }

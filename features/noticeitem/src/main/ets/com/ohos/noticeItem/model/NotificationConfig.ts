@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 
-import ReadConfigUtil from '../../../../../../../../../common/src/main/ets/default/ReadConfigUtil';
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
 
 const TAG = 'NotificationConfig'
 

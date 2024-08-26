@@ -12,9 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ConvertLunarCalendar } from '../../../../../common/src/main/ets/default/LunarCalendar'
+import {ConvertLunarCalendar} from '../../../../../common/src/main/ets/default/LunarCalendar'
 
 export class DateTimeCommon {
+
+  static getInstance(): DateTimeCommon {
+    if (globalThis.DateTimeCommon == null) {
+      globalThis.DateTimeCommon = new DateTimeCommon();
+    }
+    return globalThis.DateTimeCommon;
+  }
+
   getSystemTime(isUsing24hFormat: boolean) {
     let dateTime = new Date();
     let hours = dateTime.getHours();
@@ -90,6 +98,4 @@ export class DateTimeCommon {
   }
 }
 
-let dateTimeCommon = new DateTimeCommon();
-
-export default dateTimeCommon as DateTimeCommon
+export let dateTimeCommon = DateTimeCommon.getInstance();

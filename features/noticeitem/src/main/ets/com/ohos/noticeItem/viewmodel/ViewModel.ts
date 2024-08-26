@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
-import SwitchUserManager from '../../../../../../../../../common/src/main/ets/default/SwitchUserManager';
+import {Log, SwitchUserManager, CheckEmptyUtils, AbilityManager, obtainLocalEvent, sEventManager} from '@ohos/common'
 import media from '@ohos.multimedia.media';
 import SourceType from '@ohos.notification'
 import NotificationService from '../model/NotificationService'
 import NotificationWindowManager from '../model/NotificationWindowManager';
 import NotificationConfig from '../model/NotificationConfig';
-import CheckEmptyUtils from '../../../../../../../../../common/src/main/ets/default/CheckEmptyUtils';
-import AbilityManager from "../../../../../../../../../common/src/main/ets/default/abilitymanager/abilityManager"
-import EventManager from "../../../../../../../../../common/src/main/ets/default/event/EventManager"
-import {obtainLocalEvent} from "../../../../../../../../../common/src/main/ets/default/event/EventUtil"
 import CommonUtil from '../common/CommonUtil';
 import Constants from '../common/constants';
 
@@ -346,7 +341,7 @@ export class ViewModel {
     if (itemData.ruleData.isAllowBanner) {
       Log.showDebug(TAG, `banner start `);
       AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_BANNER_NOTICE, 'itemData', itemData);
-      EventManager.publish(obtainLocalEvent('onBannerNoticeShow', { 'itemData': itemData }))
+      sEventManager.publish(obtainLocalEvent('onBannerNoticeShow', { 'itemData': itemData }))
       Log.showDebug(TAG, `banner end `);
     }
     if (itemData.notificationFlags?.soundEnabled != Constants.NOTIFICATION_TYPE_CLOSE) {

@@ -13,8 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
-import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
+import {Log, ScreenLockStatus} from '@ohos/common'
 import screenLockService from '../model/screenLockService'
 
 const TAG = 'ScreenLock-LockIconViewModel'

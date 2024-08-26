@@ -13,15 +13,14 @@
  * limitations under the License.
  */
 
-import StyleManager from '../../../../../../../common/src/main/ets/default/StyleManager';
-import Constants from './constants'
+import {styleManager} from '@ohos/common';
 
 const TAG = 'signal-StyleConfiguration';
 
 export default class StyleConfiguration {
     static getSignalComponentStyle() {
         const key: string = TAG + "-SignalComponent";
-        return StyleManager.getStyle(key, () => {
+        return styleManager.getStyle(key, () => {
             return {
                 cellularImageWidth: $r('app.float.signal_component_icon_width'),
                 cellularImageHeight: $r('app.float.signal_component_icon_height'),

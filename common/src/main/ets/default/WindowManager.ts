@@ -15,11 +15,10 @@
  */
 
 import Window from "@ohos.window";
-import Log from "./Log";
-import EventManager from "./event/EventManager";
-import { obtainLocalEvent } from "./event/EventUtil";
-import { Rect } from "./Constants";
-import createOrGet from "./SingleInstanceHelper";
+import {Log} from "./Log";
+import {sEventManager} from "./event/EventManager";
+import {obtainLocalEvent} from "./event/EventUtil";
+import {Rect} from "./Constants";
 
 export type WindowInfo = {
   visibility: boolean;
@@ -60,6 +59,13 @@ const DEFAULT_WINDOW_INFO: WindowInfo = {
 class WindowManager {
   mWindowInfos: Map<WindowType, WindowInfo> = new Map();
 
+  static getInstance(): WindowManager {
+    if (globalThis.WindowManager == null) {
+      globalThis.WindowManager = new WindowManager();
+    }
+    return globalThis.WindowManager;
+  }
+
   async createWindow(context: any, name: WindowType, rect: Rect, loadContent: string): Promise<WindowHandle> {
     Log.showInfo(TAG, `createWindow name: ${name}, rect: ${JSON.stringify(rect)}, url: ${loadContent}`);
     let winHandle = null;
@@ -87,7 +93,7 @@ class WindowManager {
       Log.showError(TAG, `resetSizeWindow failed. error:${JSON.stringify(err)}`);
     }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), rect });
-    EventManager.publish(
+    sEventManager.publish(
       obtainLocalEvent(WINDOW_RESIZE_EVENT, {
         windowName: name,
         rect,
@@ -106,7 +112,7 @@ class WindowManager {
       Log.showError(TAG, `showWindow failed. error:${JSON.stringify(err)}`);
     }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), visibility: true });
-    EventManager.publish(
+    sEventManager.publish(
       obtainLocalEvent(WINDOW_SHOW_HIDE_EVENT, {
         windowName: name,
         isShow: true,
@@ -125,7 +131,7 @@ class WindowManager {
       Log.showError(TAG, `hideWindow failed. error:${JSON.stringify(err)}`);
     }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), visibility: false });
-    EventManager.publish(
+    sEventManager.publish(
       obtainLocalEvent(WINDOW_SHOW_HIDE_EVENT, {
         windowName: name,
         isShow: false,
@@ -150,5 +156,5 @@ class WindowManager {
   }
 }
 
-let sWindowManager = createOrGet(WindowManager, TAG);
-export default sWindowManager as WindowManager;
+export let sWindowManager = WindowManager.getInstance();
+

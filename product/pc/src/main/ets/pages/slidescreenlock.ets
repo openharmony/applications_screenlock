@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../common/src/main/ets/default/Log'
+import {Log} from '../../../../../../common/src/main/ets/default/Log'
 import Accounts from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/accounts'
 import DateTime from '../../../../../../features/datetimecomponent/src/main/ets/com/ohos/view/component/dateTime'
 import BatterySoc from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/batterySoc'

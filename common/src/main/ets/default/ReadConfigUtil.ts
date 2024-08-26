@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import Log from './Log';
-import AbilityManager from '../default/abilitymanager/abilityManager'
+import {Log} from './Log';
+import {AbilityManager} from '../default/abilitymanager/abilityManager'
 
 const TAG = 'ReadConfigUtil';
 

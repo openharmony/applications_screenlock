@@ -14,20 +14,26 @@
  */
 
 import ServiceExtensionContext from "application/ServiceExtensionContext";
-import Log from "../Log";
-import createOrGet from "../SingleInstanceHelper";
-import { EventParser, START_ABILITY_EVENT, Event, LocalEvent } from "./EventUtil";
-import { Callback, createEventBus, EventBus } from "./EventBus";
+import {Log} from "../Log";
+import {EventParser, START_ABILITY_EVENT, Event, LocalEvent} from "./EventUtil";
+import {Callback, createEventBus, EventBus} from "./EventBus";
 
 export type unsubscribe = () => void;
 export type Events = string | string[];
 
 const TAG = "EventManagerSc";
 
-class EventManager {
+export class EventManager {
     mEventBus: EventBus<string>;
     eventParser: EventParser;
     mContext: ServiceExtensionContext | undefined;
+
+    static getInstance(): EventManager {
+        if (globalThis.EventManager == null) {
+            globalThis.EventManager = new EventManager();
+        }
+        return globalThis.EventManager;
+    }
 
     constructor() {
         this.mEventBus = createEventBus();
@@ -87,6 +93,4 @@ class EventManager {
     }
 }
 
-let sEventManager = createOrGet(EventManager, TAG);
-
-export default sEventManager as EventManager;
+export let sEventManager = EventManager.getInstance();

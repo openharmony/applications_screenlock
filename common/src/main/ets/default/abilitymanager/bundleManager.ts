@@ -15,12 +15,12 @@
 
 import BundleMgr from "@ohos.bundle";
 import Context from "application/ServiceExtensionContext";
-import Log from "../Log";
-import SwitchUserManager from "../SwitchUserManager";
+import {Log} from "../Log";
+import {SwitchUserManager} from "../SwitchUserManager";
 
 const TAG = "BRManager";
 
-export default class BundleManager {
+export class BundleManager {
     static async getResourceManager(tag: string, context: Context, bundleName: string) {
         Log.showInfo(TAG, `getResourceManager from: ${tag}`);
         let bundleContext = await context.createBundleContext(bundleName)

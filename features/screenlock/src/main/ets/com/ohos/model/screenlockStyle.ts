@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
-import {ReadConfigFile} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon'
+
+import {Log, ReadConfigFile} from '@ohos/common'
 
 const SCREENLOCK_MODE_FILE_NAME = "screenlock.json";
 const TAG = 'ScreenLock-ScreenlockStyle';

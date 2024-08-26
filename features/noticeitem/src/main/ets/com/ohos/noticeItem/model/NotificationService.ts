@@ -13,12 +13,11 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
+import {Log, createOrGet} from '@ohos/common'
 import NotificationManager from './NotificationManager';
 import ParseDataUtil from './ParseDataUtil';
 import RuleController from './rule/RuleController';
 import CommonUtil from '../common/CommonUtil';
-import createOrGet from "../../../../../../../../../common/src/main/ets/default/SingleInstanceHelper";
 import DistributionManager from './NotificationDistributionManager';
 
 const TAG = 'NotificationServiceSc';

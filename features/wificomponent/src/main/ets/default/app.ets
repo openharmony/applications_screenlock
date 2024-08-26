@@ -13,8 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../common/src/main/ets/default/Log';
-
+import {Log} from '@ohos/common'
 const TAG = "Wifi_Component_App";
 
 export default {

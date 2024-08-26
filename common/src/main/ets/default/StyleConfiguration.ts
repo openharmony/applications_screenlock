@@ -13,14 +13,14 @@
  * limitations under the License.
  */
 
-import StyleManager from './StyleManager';
+import {styleManager} from './StyleManager';
 
 const TAG = 'Common-StyleConfiguration';
 
-export default class StyleConfiguration {
+export class StyleConfiguration {
     static getCommonStyle() {
         const key: string = TAG + "-Common";
-        return StyleManager.getStyle(key, () => {
+        return styleManager.getStyle(key, () => {
             return {
                 statusBarFontSize: $r("app.float.signal_fontSize"),
                 statusBarIconWidth: '24vp',

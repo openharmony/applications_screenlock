@@ -13,8 +13,7 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log'
-import Constants from '../../common/constants'
+import {Log} from '@ohos/common'
 
 const TAG = 'ScreenLock-BatterySoc'
 

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Log from "../Log";
+import {Log} from "../Log";
 
 export type Callback = (args: any) => void;
 const TAG = "EventBus";

@@ -13,9 +13,8 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../common/src/main/ets/default/Log'
+import {Log} from '@ohos/common'
 import Accounts from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/accounts'
-import {UserData} from '../../../../../../features/screenlock/src/main/ets/com/ohos/data/userData'
 import DateTime from '../../../../../../features/datetimecomponent/src/main/ets/com/ohos/view/component/dateTime'
 import LockIcon from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/lockIcon'
 import Wallpaper from '../../../../../../features/wallpapercomponent/src/main/ets/com/ohos/view/component/wallpaper'

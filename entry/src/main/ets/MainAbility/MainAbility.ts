@@ -14,7 +14,7 @@
  */
 
 import Ability from '@ohos.app.ability.UIAbility'
-import Log from '../../../../../common/src/main/ets/default/Log';
+import {Log} from '../../../../../common/src/main/ets/default/Log';
 
 const TAG = "Entry_MainAbility";
 

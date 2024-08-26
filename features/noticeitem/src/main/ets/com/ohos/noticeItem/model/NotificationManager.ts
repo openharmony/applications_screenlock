@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 
-//import { NotificationSubscriber } from './notification/notificationSubscriber';
 import Notification from '@ohos.notification';
 import PluginComponentManager from '@ohos.pluginComponent';
 import Systemparameter from '@ohos.systemparameter';
-import Log from '../../../../../../../../../common/src/main/ets/default/Log';
+import {Log} from '@ohos/common'
 
 const TAG = 'NotificationManager';
 // Temporary path
