@@ -13,10 +13,9 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import {Log} from '@ohos/common'
 import Constants from '../../common/constants'
 import ViewModel from '../../vm/shortcutViewModel'
-import power from '@ohos.power'
 
 const TAG = 'ScreenLock-Shortcut'
 

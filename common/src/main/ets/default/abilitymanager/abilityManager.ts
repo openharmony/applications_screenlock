@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-import Log from '../Log';
+import {Log} from '../Log';
 
 const TAG = 'AbilityManager';
 
-export default class AbilityManager {
+export class AbilityManager {
   static ABILITY_NAME_ENTRY = 'SystemUi_Entry';
   static ABILITY_NAME_STATUS_BAR = 'SystemUi_StatusBar';
   static ABILITY_NAME_NAVIGATION_BAR = 'SystemUi_NavigationBar';

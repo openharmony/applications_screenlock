@@ -17,14 +17,12 @@
 import settings from "@ohos.settings";
 import commonEvent from "@ohos.commonEvent";
 import dataShare from '@ohos.data.dataShare';
-import featureAbility from "@ohos.ability.featureAbility";
-import { DataAbilityHelper } from "ability/dataAbilityHelper";
-import Log from "./Log";
-import EventManager from "./event/EventManager";
-import createOrGet from "./SingleInstanceHelper";
-import Constants from "./Constants";
-import { obtainLocalEvent } from "./event/EventUtil";
-import { CommonEventManager, getCommonEventManager, POLICY } from "./commonEvent/CommonEventManager";
+import {DataAbilityHelper} from "ability/dataAbilityHelper";
+import {Log} from "./Log";
+import {sEventManager} from "./event/EventManager";
+import {Constants} from "./Constants";
+import {obtainLocalEvent} from "./event/EventUtil";
+import {CommonEventManager, getCommonEventManager, POLICY } from "./commonEvent/CommonEventManager";
 
 export const TIME_CHANGE_EVENT = "Time_Change_Event";
 
@@ -52,10 +50,17 @@ export function concatTime(h: number, m: number) {
   return `${fill(h)}:${fill(m)}`;
 }
 
-class TimeManager {
+export class TimeManager {
   private mUse24hFormat: boolean = false;
   private mSettingsHelper?: DataAbilityHelper;
   private mManager?: CommonEventManager;
+
+  static getInstance(): TimeManager {
+    if (globalThis.TimeManager == null) {
+      globalThis.TimeManager = new TimeManager();
+    }
+    return globalThis.TimeManager;
+  }
 
   public init(context: any) {
     this.mManager = getCommonEventManager(
@@ -114,10 +119,8 @@ class TimeManager {
       date: new Date(),
       timeFormat: this.mUse24hFormat,
     };
-    EventManager.publish(obtainLocalEvent(TIME_CHANGE_EVENT, args));
+    sEventManager.publish(obtainLocalEvent(TIME_CHANGE_EVENT, args));
   }
 }
 
-let sTimeManager = createOrGet(TimeManager, TAG);
-
-export default sTimeManager as TimeManager;
+export let sTimeManager = TimeManager.getInstance();

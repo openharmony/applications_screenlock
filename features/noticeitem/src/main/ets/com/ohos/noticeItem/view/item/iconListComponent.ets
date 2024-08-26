@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import Constants, {NotificationLayout as Layout} from '../../common/constants';
-import Log from '../../../../../../../../../../common/src/main/ets/default/Log';
+import {NotificationLayout as Layout} from '../../common/constants';
+import {Log} from '@ohos/common'
 import SettingDialog from './settingDialog';
 import ConfirmDialog from './confirmDialog'
 import ViewModel from '../../viewmodel/ViewModel';

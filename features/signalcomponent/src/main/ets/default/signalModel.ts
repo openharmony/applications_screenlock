@@ -17,7 +17,7 @@ import commonEvent from "@ohos.commonEvent";
 import Radio from '@ohos.telephony.radio';
 import Sim from '@ohos.telephony.sim';
 import Observer from '@ohos.telephony.observer';
-import Log from "../../../../../../common/src/main/ets/default/Log";
+import {Log} from '@ohos/common'
 import Constants from './common/constants';
 
 const TAG = 'SignalStatus-SignalModel';

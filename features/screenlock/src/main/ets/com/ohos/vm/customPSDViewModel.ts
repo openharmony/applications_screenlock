@@ -13,10 +13,9 @@
  * limitations under the License.
  */
 
-import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
+import {Log, Trace} from '@ohos/common'
 import Constants from '../common/constants'
-import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
+import BaseViewModel, {service, AuthSubType} from './baseViewModel'
 import {Callback} from '@ohos.base';
 
 const TAG = 'ScreenLock-CustomPSDViewModel'

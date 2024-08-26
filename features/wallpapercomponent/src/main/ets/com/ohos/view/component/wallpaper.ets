@@ -13,10 +13,9 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log'
+import {Log} from '@ohos/common'
 import ViewModel from '../../vm/wallpaperViewModel'
 import Constants from '../../common/constants'
-import Trace from '../../../../../../../../../common/src/main/ets/default/Trace'
 
 const TAG = 'ScreenLock-Wallpaper'
 

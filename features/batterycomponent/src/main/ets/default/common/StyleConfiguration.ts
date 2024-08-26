@@ -13,15 +13,14 @@
  * limitations under the License.
  */
 
-import StyleManager from '../../../../../../../common/src/main/ets/default/StyleManager';
-import Constants from './constants'
+import {styleManager} from '@ohos/common'
 
 const TAG = 'battery-StyleConfiguration';
 
 export default class StyleConfiguration {
     static getBatteryComponentStyle() {
         const key: string = TAG + "-BatteryComponent";
-        return StyleManager.getStyle(key, () => {
+        return styleManager.getStyle(key, () => {
             return {
                 componentGap: $r('app.float.battery_component_gap')
             };
@@ -30,7 +29,7 @@ export default class StyleConfiguration {
 
     static getBatteryPicStyle() {
         const key: string = TAG + "-BatteryPicComponent";
-        return StyleManager.getStyle(key, () => {
+        return styleManager.getStyle(key, () => {
             return {
                 picGap: $r('app.float.battery_component_pic_gap'),
                 picBodyWidth: $r('app.float.battery_component_pic_body_width'),

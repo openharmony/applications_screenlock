@@ -13,12 +13,11 @@
  * limitations under the License.
  */
 
-import Log from '../../../../../../../../../common/src/main/ets/default/Log'
-import ViewModel from '../../vm/StatusBarVM'
+import {Log} from '@ohos/common'
 import Constants from '../../common/constants'
-import BatteryIcon from '../../../../../../../../../features/batterycomponent/src/main/ets/default/pages/batteryIcon.ets'
-import ClockIcon from '../../../../../../../../../features/clockcomponent/src/main/ets/default/pages/clockIcon.ets'
-import WifiIcon from '../../../../../../../../../features/wificomponent/src/main/ets/default/pages/wifiIcon.ets'
+import BatteryIcon from '../../../../../../../../../features/batterycomponent/src/main/ets/default/pages/batteryIcon'
+import ClockIcon from '../../../../../../../../../features/clockcomponent/src/main/ets/default/pages/clockIcon'
+import WifiIcon from '../../../../../../../../../features/wificomponent/src/main/ets/default/pages/wifiIcon'
 import SignalIcon from '../../../../../../../../../features/signalcomponent/src/main/ets/default/pages/signalIcon'
 import deviceInfo from '@ohos.deviceInfo';
 

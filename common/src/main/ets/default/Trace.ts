@@ -14,9 +14,9 @@
  */
 
 import byTrace from "@ohos.bytrace";
-import Log from "./Log";
+import {Log} from "./Log";
 
-export default class Trace {
+export class Trace {
   static readonly CORE_METHOD_UNLOCK_SCREEN = "unlockScreen"
   static readonly CORE_METHOD_CALL_ACCOUNT_SYSTEM = "callAccountSubsystem";
   static readonly CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT = "passingAccountSubsystemResult";

@@ -13,13 +13,8 @@
  * limitations under the License.
  */
 
-import featureAbility from '@ohos.ability.featureAbility'
 import commonEvent from '@ohos.commonEvent';
-import Log from '../../../../../../../../common/src/main/ets/default/Log'
-import DateTimeCommon from '../../../../../../../../common/src/main/ets/default/DateTimeCommon'
-import sTimeManager, {TimeEventArgs, TIME_CHANGE_EVENT,
-}  from '../../../../../../../../common/src/main/ets/default/TimeManager';
-import EventManager, {unsubscribe} from '../../../../../../../../common/src/main/ets/default/event/EventManager'
+import {Log, dateTimeCommon, sTimeManager, TimeEventArgs, TIME_CHANGE_EVENT, sEventManager, unsubscribe} from '@ohos/common'
 
 const TAG = 'ScreenLock-DateTimeViewModel'
 
@@ -48,7 +43,7 @@ export default class DateTimeViewModel {
 
         this.getAndSetDateTime.bind(this)()
         commonEvent.createSubscriber(mCommonEventSubscribeInfo, this.createSubscriberCallBack.bind(this));
-        this.unSubscriber = EventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
+        this.unSubscriber = sEventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
             this.setDateTime(args.date)
         });
         Log.showDebug(TAG, 'ViewModelInit end');
@@ -62,9 +57,9 @@ export default class DateTimeViewModel {
     private setDateTime(date: Date) {
         Log.showDebug(TAG, `setDateTime`)
         this.timeVal = sTimeManager.formatTime(date)
-        this.dateVal = DateTimeCommon.getSystemDate()
-        this.weekVal = DateTimeCommon.getSystemWeek()
-        this.calendarVal = DateTimeCommon.getCalendarDate()
+        this.dateVal = dateTimeCommon.getSystemDate()
+        this.weekVal = dateTimeCommon.getSystemWeek()
+        this.calendarVal = dateTimeCommon.getCalendarDate()
     }
 
     private createSubscriberCallBack(err, data) {

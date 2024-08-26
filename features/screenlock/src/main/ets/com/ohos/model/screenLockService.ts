@@ -12,26 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Log from '../../../../../../../../common/src/main/ets/default/Log';
-import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
-import {WriteFaultLog, FaultID} from '../../../../../../../../common/src/main/ets/default/SysFaultLogger'
+import {Log, Trace, WriteFaultLog, FaultID, createOrGet, ScreenLockStatus} from '@ohos/common'
 import ScreenLockModel from './screenLockModel';
 import AccountModel, {AuthType, AuthSubType, AuthTurstLevel} from './accountsModel'
-import {ScreenLockStatus} from '../../../../../../../../common/src/main/ets/default/ScreenLockCommon';
-import createOrGet from '../../../../../../../../common/src/main/ets/default/SingleInstanceHelper'
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';
 import systemParameter from '@ohos.systemparameter';
-import { CommonEventPublishData } from 'commonEvent/commonEventPublishData';
+import {CommonEventPublishData} from 'commonEvent/commonEventPublishData';
 import {Callback} from '@ohos.base';
-import { UIContext } from '@ohos.arkui.UIContext';
+import {UIContext} from '@ohos.arkui.UIContext';
 
 const TAG = 'ScreenLock-ScreenLockService';
 const URI_DIGITALPASSWORD = 'pages/digitalPassword'
 const URI_MIXEDPASSWORD = 'pages/mixedPassword'
 const URI_CUSTOMPASSWORD = 'pages/customPassword'
-
 
 //Event type name
 const EVENT_BEGIN_WAKEUP: string = 'beginWakeUp'
@@ -175,12 +170,13 @@ export class ScreenLockService {
     lockScreen() {
         Trace.start(Trace.CORE_METHOD_SHOW_LOCK_SCREEN);
         Log.showDebug(TAG, `lockScreen`);
-        let length = parseInt(Router.getLength())
-        Log.showDebug(TAG, `Router.getLength: ${length}`)
-        for (let index = 1; index < length; index++) {
-            Log.showInfo(TAG, `back to index`);
-            Router.back();
-        }
+        // let length = parseInt(Router.getLength())
+        // Log.showDebug(TAG, `Router.getLength: ${length}`)
+        // for (let index = 1; index < length; index++) {
+        //     Log.showInfo(TAG, `back to index`);
+        //     Router.back();
+        // }
+
         //lock the screen
         this.screenLockModel.showScreenLockWindow(() => {
             Log.showInfo(TAG, `showScreenLockWindow finish`);

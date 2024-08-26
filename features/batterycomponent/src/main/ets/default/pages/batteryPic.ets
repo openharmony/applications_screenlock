@@ -14,8 +14,7 @@
  */
 
 import Constants from '../common/constants'
-import Log from '../../../../../../../common/src/main/ets/default/Log'
-import StyleConfiguration from '../common/StyleConfiguration'
+import {Log} from '@ohos/common'
 
 const TAG = 'BatteryComponent-batteryPic'
 
