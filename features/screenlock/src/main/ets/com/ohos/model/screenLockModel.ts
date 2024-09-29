@@ -64,13 +64,13 @@ export default class ScreenLockModel {
 
     hiddenScreenLockWindow(callback: Callback<void>) {
         Log.showInfo(TAG, `window hide`);
+        AppStorage.SetOrCreate('isWallpaperShow', false);
         Trace.end(Trace.CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT);
         windowManager.find(Constants.WIN_NAME).then((win) => {
             Trace.start(Trace.CORE_METHOD_HIDE_PSD_PAGE);
             win.hide().then(() => {
                 Log.showInfo(TAG, `window hide`);
                 callback();
-                AppStorage.SetOrCreate('isWallpaperShow', false);
             })
         })
     }
