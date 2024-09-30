@@ -50,20 +50,21 @@ export default class DigitalPSDViewModel extends BaseViewModel {
                 this.updateStorage(callback);
             }
             if (this.password.length >= PW_LEN) {
-                Trace.start(Trace.CORE_METHOD_UNLOCK_SCREEN);
-                Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
-                service.authUser(AuthSubType.PIN_SIX, this.password, (result, extraInfo) => {
-                    if (result == 0) {
-                        //unlock the screen
-                        service.unlocking();
-                        service.goBack();
-                    } else {
-                        //Clear the entered password
-                        super.changePrompt(extraInfo.remainTimes, extraInfo.freezingTime, callback)
-                    }
-                })
-                this.clearPassword()
-            }
+                setTimeout(()=>{
+                    Trace.start(Trace.CORE_METHOD_UNLOCK_SCREEN);
+                    Trace.start(Trace.CORE_METHOD_CALL_ACCOUNT_SYSTEM);
+                    service.authUser(AuthSubType.PIN_SIX, this.password, (result, extraInfo) => {
+                        if (result == 0) {
+                            //unlock the screen
+                            service.unlocking();
+                            service.goBack();
+                        } else {
+                            //Clear the entered password
+                            super.changePrompt(extraInfo.remainTimes, extraInfo.freezingTime, callback)
+                        }
+                    })
+                    this.clearPassword()
+                },300)
         } else if (keyValue == Constants.DEL_PWD) {
             this.passwdMaskArr[this.password.length-1] = $r('app.media.ic_hollow_dot');
             this.password.pop()
