@@ -126,6 +126,10 @@ class ServiceExtAbility extends ServiceExtension {
         Log.showInfo(TAG, 'api8New onDestroy');
         sTimeManager.release()
     }
+
+    onMemoryLevel(level): void {
+        Log.showInfo(TAG, 'onMemoryLevel, level:' + JSON.stringify(level))
+    }
 }
 
 export default ServiceExtAbility
