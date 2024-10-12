@@ -80,6 +80,10 @@ class ServiceExtAbility extends ServiceExtension {
         sTimeManager.release()
 
     }
+
+    onMemoryLevel(level): void {
+        Log.showInfo(TAG, 'onMemoryLevel, level:' + JSON.stringify(level))
+    }
 }
 
 export default ServiceExtAbility
