@@ -71,12 +71,13 @@ export class WifiModel {
   onWifiStateChange(data) {
     Log.showInfo(TAG, `onWifiStateChange, data: ${JSON.stringify(data)}`)
 
-    let isWifiInactive = data == WifiState.STATE_OFF;
-    mWifiOpenStatus.set(!isWifiInactive);
-    if (!isWifiInactive) {
-      this.getWifiConnectInfo();
-    } else {
-      this.setDisconnectedStatus();
+    if (data == WifiState.STATE_OFF || data == WifiState.STATE_ON) {
+      let checkState = wifi.isWifiActive();
+      if (checkState) {
+        this.getWifiConnectInfo();
+      } else {
+        this.setDisconnectedStatus();
+      }
     }
   }
 
