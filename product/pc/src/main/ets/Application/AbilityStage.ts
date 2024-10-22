@@ -22,4 +22,8 @@ export default class MainAbilityStage extends AbilityStage {
     onCreate() {
         Log.showInfo(TAG, "onCreate")
     }
+
+    onMemoryLevel(level): void {
+        Log.showInfo(TAG, 'onMemoryLevel, level:' + JSON.stringify(level))
+    }
 }
