@@ -14,9 +14,16 @@
  */
 
 import AbilityStage from "@ohos.app.ability.AbilityStage"
+import {Log} from '@ohos/common'
+
+const TAG = "ScreenLock-MainAbilityStage"
 
 export default class MyAbilityStage extends AbilityStage {
     onCreate() {
         console.log("[Demo] MyAbilityStage onCreate")
+    }
+
+    onMemoryLevel(level): void {
+        Log.showInfo(TAG, 'onMemoryLevel, level:' + JSON.stringify(level))
     }
 }
