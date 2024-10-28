@@ -46,38 +46,47 @@ struct BatteryPic {
   }
 
   build() {
-
-    Row() {
+    Stack({ alignContent: Alignment.Bottom }) {
       Row() {
+        Row() {
+          Row() {
+
+          }
+          .height('100%')
+          .width((this.batterySoc < 100 ? this.batterySoc : 100) + '%')
+          .backgroundColor(this.getBatteryColor(this.batterySoc, this.batteryCharging))
+        }
+        .width(this.picBodyWidth)
+        .height(this.picBodyHeight)
+        .backgroundColor($r('app.color.battery_background'))
+        .border({ width: this.picBodyBorderWidth,
+          color: this.mContentColor,
+          radius: this.picBorderRadius,
+          style: BorderStyle.Solid })
+        .padding(this.picBodyPadding)
+
         Row() {
 
         }
-        .height('100%')
-        .width((this.batterySoc < 100 ? this.batterySoc: 100) + '%')
-        .backgroundColor(this.getBatteryColor(this.batterySoc, this.batteryCharging))
+        .width(this.picGap)
+        .height(1)
+
+        Row() {
+
+        }
+        .width(this.picHeadWidth)
+        .height(this.picHeadHeight)
+        .backgroundColor(this.mContentColor)
+        .borderRadius(this.picHeadBorderRadius)
       }
-      .width(this.picBodyWidth)
-      .height(this.picBodyHeight)
-      .backgroundColor($r('app.color.battery_background'))
-      .border({ width: this.picBodyBorderWidth,
-        color: this.mContentColor,
-        radius: this.picBorderRadius,
-        style: BorderStyle.Solid })
-      .padding(this.picBodyPadding)
 
-      Row() {
-
+      if (this.batteryCharging) {
+        Row() {
+          Image(this.mContentColor.includes('FFFFFF') ? $r('app.media.light') : $r('app.media.deep'))
+            .height(this.picBodyHeight)
+        }
+        .justifyContent(FlexAlign.Center)
       }
-      .width(this.picGap)
-      .height(1)
-
-      Row() {
-
-      }
-      .width(this.picHeadWidth)
-      .height(this.picHeadHeight)
-      .backgroundColor(this.mContentColor)
-      .borderRadius(this.picHeadBorderRadius)
     }
   }
 
