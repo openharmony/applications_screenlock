@@ -82,7 +82,7 @@ struct BatteryPic {
 
       if (this.batteryCharging) {
         Row() {
-          Image(this.mContentColor.includes("FFFFFF") ? $r("app.media.light") : $r("app.media.deep"))
+          Image(this.mContentColor.includes('FFFFFF') ? $r('app.media.light') : $r('app.media.deep'))
             .height(this.picBodyHeight)
         }
         .justifyContent(FlexAlign.Center)
