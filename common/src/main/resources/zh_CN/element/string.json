@@ -31,6 +31,26 @@
     {
       "name": "sunday",
       "value": "星期日"
+    },
+    {
+      "name": "emergency_calls_only",
+      "value": "仅限紧急呼叫"
+    },
+    {
+      "name": "cops_and_robbers",
+      "value": "警匪"
+    },
+    {
+      "name": "medical_first_aid",
+      "value": "医疗急救"
+    },
+    {
+      "name": "fire_alarm",
+      "value": "火警"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
     }
   ]
 }

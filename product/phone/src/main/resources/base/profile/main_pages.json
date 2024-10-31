@@ -3,6 +3,7 @@
     "pages/index",
     "pages/digitalPassword",
     "pages/mixedPassword",
-    "pages/customPassword"
+    "pages/customPassword",
+    "pages/emergencyCall"
   ]
 }
