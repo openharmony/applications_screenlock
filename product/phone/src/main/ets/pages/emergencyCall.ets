@@ -8,9 +8,9 @@ import Log from '../../../../../../common/src/main/ets/default/Log'
 const COPS_AND_ROBBERS = '110';
 const MEDICAL_FIRST_AID = '120';
 const FIRE_ALARM = '119';
-const TAG = 'ScreenLock-EmergencyCall'
+const TAG = 'ScreenLock-EmergencyCall';
 
-@Styles function card(){
+@Styles function card() {
   .width('80%')
   .height(70)
   .padding(10)
