@@ -81,6 +81,9 @@
       },
       {
         "name": "ohos.permission.ACCESS_SERVICE_DM"
+      },
+      {
+        "name": "ohos.permission.VIBRATE"
       }
     ],
     "extensionAbilities": [

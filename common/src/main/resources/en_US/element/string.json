@@ -31,6 +31,26 @@
     {
       "name": "sunday",
       "value": "Sunday"
+    },
+    {
+      "name": "emergency_calls_only",
+      "value": "Emergency Calls Only"
+    },
+    {
+      "name": "cops_and_robbers",
+      "value": "Cops And Robbers"
+    },
+    {
+      "name": "medical_first_aid",
+      "value": "Medical First Aid"
+    },
+    {
+      "name": "fire_alarm",
+      "value": "Fire Alarm"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
     }
   ]
 }

@@ -25,6 +25,7 @@ import {
   getCommonEventManager,
   POLICY,
 } from "../../../../../../common/src/main/ets/default/commonEvent/CommonEventManager";
+import vibrator from '@ohos.vibrator';
 
 const TAG = "BatteryComponent-batteryModelSc";
 const DEFAULT_PROGRESS = 100;
@@ -54,6 +55,8 @@ export class BatteryModel {
   private mManager?: CommonEventManager;
 
   initBatteryModel() {
+    Log.showInfo(TAG, "initBatteryModel chargingStatus: " + JSON.stringify(BatteryInfo.chargingStatus));
+    AppStorage.setOrCreate("preChargeState", BatteryInfo.chargingStatus);
     if (this.mManager) {
       return;
     }
@@ -63,7 +66,6 @@ export class BatteryModel {
       () => this.updateBatteryStatus(),
       (isSubscribe: boolean) => isSubscribe && this.updateBatteryStatus()
     );
-    Log.showDebug(TAG, "initBatteryModel");
     this.mBatterySoc = AppStorage.SetAndLink("batterySoc", 0);
     this.mBatteryCharging = AppStorage.SetAndLink("batteryCharging", false);
     this.mManager.subscriberCommonEvent();
@@ -83,6 +85,16 @@ export class BatteryModel {
     Log.showDebug(TAG, "updateBatteryStatus");
     let batterySoc = BatteryInfo.batterySOC ?? DEFAULT_PROGRESS;
     let batteryCharging = BatteryInfo.chargingStatus;
+    let isNeedVibrate = AppStorage.get("isNeedVibrate");
+    if (isNeedVibrate) {
+      vibrator.startVibration({type: "time", duration: 150}, {id: 0, usage: "alarm"})
+        .then(() => {
+          Log.showInfo(TAG, `startVibration success`);
+        })
+        .catch((err: BusinessError) => {
+          Log.showError(TAG, `startVibration fail, err: ${JSON.stringify(err)}`);
+        })
+    }
     if (batterySoc <= 0) {
       // If the result is a negative number, set it as positive number.
       batterySoc = Math.abs(batterySoc) * Constants.PERCENT_NUMBER;

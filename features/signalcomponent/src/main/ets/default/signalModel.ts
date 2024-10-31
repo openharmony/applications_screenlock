@@ -93,12 +93,21 @@ export class SignalModel {
               mLevelLink.set(Constants.CELLULAR_NO_SIM_CARD);
             } else {
               mTypeLink.set(value.cfgTech);
+              let type = this.updateCellularType(value.cfgTech);
+              Log.showInfo(TAG, `checkCellularStatus checkCellularStatus type: ${JSON.stringify(type)}`);
               Radio.getSignalInformation(slotId, (err, value) => {
                 if (err || !value || !value.length) {
                   mLevelLink.set(Constants.CELLULAR_NO_SIM_CARD);
                 } else {
-                  mLevelLink.set(value[0].signalLevel);
-                }
+                  for (let i = 0; i < value.length; i++) {
+                    let infoType = this.getInfoType(value[i].signalType);
+                    if (type === infoType) {
+                      mLevelLink.set(value[i].signalLevel);
+                      Log.showInfo(TAG, `checkCellularStatus getInfoType current i: ${i}; infoType: ${JSON.stringify(infoType)}`);
+                      return;
+                    }
+                  }
+                  mLevelLink.set(0);                }
               });
             }
           }
@@ -113,6 +122,63 @@ export class SignalModel {
         this.initObserver();
       }
     });
+  }
+
+  private getInfoType(type: number): string {
+    let strType: string = '×';
+    switch (type) {
+      case 0:
+        strType = '×';
+        break;
+      case 1:
+      case 2:
+        strType = '2G';
+        break;
+      case 3:
+      case 4:
+        strType = '3G';
+        break;
+      case 5:
+        strType = '4G';
+        break;
+      case 6:
+        strType = '5G';
+        break;
+    }
+    return strType;
+  }
+
+  private updateCellularType(signalType): string {
+    let typeString;
+    switch (signalType) {
+      case Constants.RADIO_TECHNOLOGY_UNKNOWN:
+        typeString = '没有 SIM 卡';
+        break;
+      case Constants.RADIO_TECHNOLOGY_GSM:
+      case Constants.RADIO_TECHNOLOGY_1XRTT:
+        typeString = '2G';
+        break;
+      case Constants.RADIO_TECHNOLOGY_WCDMA:
+      case Constants.RADIO_TECHNOLOGY_HSPA:
+      case Constants.RADIO_TECHNOLOGY_HSPAP:
+      case Constants.RADIO_TECHNOLOGY_TD_SCDMA:
+      case Constants.RADIO_TECHNOLOGY_EVDO:
+      case Constants.RADIO_TECHNOLOGY_EHRPD:
+        typeString = '3G';
+        break;
+      case Constants.RADIO_TECHNOLOGY_LTE:
+      case Constants.RADIO_TECHNOLOGY_LTE_CA:
+      case Constants.RADIO_TECHNOLOGY_IWLAN:
+        typeString = '4G';
+        break;
+      case Constants.RADIO_TECHNOLOGY_NR:
+        typeString = '5G';
+        break;
+      default:
+        typeString = '×';
+        break;
+    }
+    return typeString;
   }
 
   /**

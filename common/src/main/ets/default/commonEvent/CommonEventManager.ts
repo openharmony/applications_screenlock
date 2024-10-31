@@ -56,6 +56,16 @@ export function getCommonEventManager(
         return;
       }
       Log.showInfo(TAG, `handle common event: ${data.event}`);
+      let preChargeState = AppStorage.get("preChargeState") as number;
+      if (data.event === "usual.event.BATTERY_CHANGED" && preChargeState === 0 && data.parameters?.chargeState !== 0) {
+        Log.showInfo(TAG, `need vibrate`);
+        AppStorage.setOrCreate("isNeedVibrate", true);
+      } else {
+        Log.showInfo(TAG, `not need vibrate`);
+        AppStorage.setOrCreate("isNeedVibrate", false);
+      }
+      Log.showInfo(TAG, `after subscribe preChargeState: ${JSON.stringify(data.parameters?.chargeState)}`);
+      AppStorage.setOrCreate("preChargeState", data.parameters?.chargeState);
       commonEventCallback(data);
     });
     unSubcribers.push(() => commonEvent.unsubscribe(subscriber));
