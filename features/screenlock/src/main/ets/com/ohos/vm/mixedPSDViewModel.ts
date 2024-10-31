@@ -17,6 +17,7 @@ import Trace from '../../../../../../../../common/src/main/ets/default/Trace'
 import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
 import {Callback} from '@ohos.base';
+import router from '@ohos.router'
 
 const TAG = 'ScreenLock-MixedPSDViewModel'
 
@@ -39,6 +40,9 @@ export default class MixedPSDViewModel extends BaseViewModel {
 
   onCallPhone() {
     Log.showInfo(TAG, 'onCallPhone');
+    router.pushUrl({
+      url: 'pages/emergencyCall'
+    })
   }
 
   onAuthPassword(callback: Callback<void>) {
