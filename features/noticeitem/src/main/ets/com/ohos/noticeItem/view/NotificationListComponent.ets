@@ -18,6 +18,8 @@ import Constants, {NotificationLayout as Layout} from '../common/constants';
 import NotificationItem from './item/notificationItem'
 import GroupNotificationItem from './item/groupItem'
 import ViewModel from '../viewmodel/ViewModel'
+import ScreenLockService from
+  '../../../../../../../../../features/screenlock/src/main/ets/com/ohos/model/screenLockService'
 
 const TAG = 'NoticeItem-NotificationListComponent';
 
@@ -54,7 +56,11 @@ export default struct NotificationListComponent {
           } else {
             NotificationItem({ itemData: item[0] })
           }
-        }
+        }.onTouch((event) => {
+          event.stopPropagation();
+          Log.showDebug(TAG,"onClick, navigateTo unlock");
+          ScreenLockService.unlockScreen();
+        })
       }, (list: any) => JSON.stringify(list.map((item) => item.hashcode)))
     }
     .width($r("app.float.notificationList_width"))

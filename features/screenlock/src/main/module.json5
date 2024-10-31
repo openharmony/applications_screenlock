@@ -12,6 +12,11 @@
         "value": "true"
       }
     ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.PLACE_CALL"
+      }
+    ],
     "uiSyntax": "ets"
   }
 }
