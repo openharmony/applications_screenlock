@@ -141,7 +141,7 @@ struct ContentList {
               .lineHeight(Layout.TEXT_LINE_HEIGHT)
             Blank()
               .margin({ left: Layout.ITEM_MARGIN, right: Layout.ITEM_MARGIN })
-          }.width(Constants.NOT_FULL_WIDTH)
+          }.width(Constants.FULL_CONTAINER_WIDTH)
           .margin({ left: Layout.ITEM_MARGIN, right: Layout.ITEM_MARGIN })
 
           Row({ space: 5 }) {
@@ -168,7 +168,7 @@ struct ContentList {
               .visibility((this.remainderNum > 0) ? Visibility.Visible : Visibility.Hidden)
               .margin({ left: Layout.ITEM_MARGIN, right: Layout.ITEM_MARGIN })
           }
-          .width(Constants.NOT_FULL_WIDTH)
+          .width(Constants.FULL_CONTAINER_WIDTH)
           .margin({ left: Layout.ITEM_MARGIN, right: Layout.ITEM_MARGIN })
 
           Blank()
