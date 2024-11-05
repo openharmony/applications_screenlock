@@ -48,7 +48,7 @@ export default class Constants {
   static SUCCESS_CALLBACK: number = 1;
   static KEY_INPUT: string = 'inputAction';
   static FULL_CONTAINER_WIDTH = '100%';
-  static NOT_FULL_WIDTH = '100%';
+  static NOT_FULL_WIDTH = '90%';
 }
 
 export class NotificationLayout {
