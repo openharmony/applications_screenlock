@@ -90,14 +90,6 @@ export default struct MixedPSD {
                   Log.showInfo(TAG, `onClick callback prompt:${this.mViewModel.prompt} inhibitInput:${this.mViewModel.inhibitInput}`)
                 });
               })
-            Text($r('app.string.emergency_call'))
-              .fontSize($r('app.float.mixedpsd_prompt_fontsize'))
-              .fontWeight(FontWeight.Medium)
-              .fontColor(Color.White)
-              .textAlign(TextAlign.Center)
-              .textOverflow({ overflow: TextOverflow.None })
-              .margin({ top: Constants.ACCOUNT_SPACE })
-              .onClick(this.mViewModel.onCallPhone.bind(this.mViewModel));
           }
           .width(Constants.HALF_CONTAINER_WIDTH)
         }.width(Constants.FULL_CONTAINER_WIDTH)
@@ -146,28 +138,6 @@ export default struct MixedPSD {
               });
             })
             .margin({ top:  $r('sys.float.ohos_id_elements_margin_vertical_l'),bottom: $r('app.float.mixedpsd_input_margin_bottom')})
-
-          Text($r('app.string.emergency_call'))
-            .fontSize($r('app.float.mixedpsd_prompt_fontsize'))
-            .fontWeight(FontWeight.Bold)
-            .fontColor(Color.White)
-            .textAlign(TextAlign.Center)
-            .textOverflow({ overflow: TextOverflow.None })
-            .onClick(this.mViewModel.onCallPhone.bind(this.mViewModel));
-
-          /*            Text($r('app.string.done'))
-                        .fontSize($r('app.float.mixedpsd_prompt_fontsize'))
-                        .fontWeight(FontWeight.Bold)
-                        .fontColor(Color.White)
-                        .textAlign(TextAlign.Center)
-                        .textOverflow({ overflow: TextOverflow.None })
-                        .onClick(() => {
-                          Log.showInfo(TAG, `onClick`)
-                          this.mViewModel.onAuthPassword(() => {
-                            Log.showInfo(TAG, `onClick callback prompt:${this.mViewModel.prompt} inhibitInput:${this.mViewModel.inhibitInput}`)
-                          });
-                        })*/
-
         }
         .width(Constants.FULL_CONTAINER_WIDTH)
         .height(Constants.FULL_CONTAINER_HEIGHT)

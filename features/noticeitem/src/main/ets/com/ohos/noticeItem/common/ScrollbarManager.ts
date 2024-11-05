@@ -37,6 +37,10 @@ export default class ScrollbarManager {
 
   static restoreOtherScroll(scroller) {
     Log.showDebug(TAG, `restoreOtherScroll`);
+    if (!scroller || !scroller.currentOffset()) {
+      Log.showError(TAG, `scroller is null`);
+      return;
+    }
     if (scroller.currentOffset().xOffset > 0) {
       ScrollbarManager.NotificationScrollBar.forEach((item) => {
         if (item !== scroller && item.currentOffset().xOffset > 0) {
