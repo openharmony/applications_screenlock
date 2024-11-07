@@ -18,7 +18,6 @@ import Log from '../../../../../../../../common/src/main/ets/default/Log'
 import Constants from '../common/constants'
 import BaseViewModel, {service, AuthType, AuthSubType} from './baseViewModel'
 import {Callback} from '@ohos.base';
-import router from '@ohos.router'
 
 const TAG = 'ScreenLock-CustomPSDViewModel'
 
@@ -56,9 +55,6 @@ export default class CustomPSDViewModel extends BaseViewModel {
             AppStorage.SetOrCreate('slidestatus', false);
             service.goBack();
         } else if (keyValue == Constants.CALL_PHONE) {
-            router.pushUrl({
-                url: 'pages/emergencyCall'
-            })
         }
     }
 
