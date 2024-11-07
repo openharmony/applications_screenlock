@@ -112,7 +112,7 @@ export default class Constants {
                            },
                            {
                                index: 9,
-                               row1: $r('app.string.emergency_call'),
+                               row1: '',
                                row2: '',
                                value: Constants.CALL_PHONE,
                                bkg: false
