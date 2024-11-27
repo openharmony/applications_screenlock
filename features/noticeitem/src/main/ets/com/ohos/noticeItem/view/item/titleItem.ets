@@ -20,15 +20,16 @@ const TAG = 'NoticeItem-TitleItem';
 
 @Component
 export default struct TitleItem {
-  private notificationSmallIcon: PixelMap
-  private notificationName: string
-  private notificationTime: string
+  private notificationSmallIcon: PixelMap | undefined = undefined
+  private notificationName: string | undefined = undefined
+  private notificationTime: string | undefined = undefined
   @Link isExpand: boolean
   @Prop needExpand: boolean
   @State rowSpace: Resource = $r('app.float.titleitem_row_space')
   @Prop distributedDeviceName: string
   private isSubItem: boolean= false;
-  private clickTitleAction: () => void
+  private clickTitleAction: () => void = () => {
+  };
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear Start`);
@@ -88,7 +89,9 @@ export default struct TitleItem {
     }
     .margin({ left: 12, right: 12 })
     .height(Layout.TITLE_HEIGHT)
-    .onClick(this.clickTitleItem.bind(this))
+    .onClick(() => {
+      this.clickTitleItem.bind(this)
+    })
   }
 
   clickTitleItem() {

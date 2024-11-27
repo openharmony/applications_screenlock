@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {NotificationLayout as Layout} from '../../common/constants';
+import { NotificationItemData, NotificationLayout as Layout, ScreenTriggerInfo} from '../../common/constants';
 import GeneralItem from './generalItem';
 import CustomItem from './customItem';
 import {Log} from '@ohos/common'
@@ -22,6 +22,7 @@ import DevicesDialog from './devicesDialog';
 import WantAgent from '@ohos.wantAgent';
 import IconListComponent, {getIconListSize} from './iconListComponent';
 import ScrollbarManager from '../../common/ScrollbarManager';
+import Want from '@ohos.app.ability.Want';
 
 const TAG = 'NoticeItem-NotificationItem';
 
@@ -30,7 +31,7 @@ export default struct NotificationItem {
   @State mIconAlpha: number = 0;
   @State @Watch('scrollEdge') mEdgeEnd: boolean = false;
   @State itemWidth: string = '100%'
-  private itemData: any = {}
+  private itemData: NotificationItemData | undefined = undefined;
   private isSubItem: boolean= false;
   private mScroller: Scroller = new Scroller();
 
@@ -76,12 +77,12 @@ export default struct NotificationItem {
 @Component
 struct FrontItem {
   @Consume isClickFrontItem: boolean
-  private itemData: any = {}
-  private nowWant: any;
+  private itemData: NotificationItemData | undefined = undefined;
+  private nowWant: Want = {};
   private isSubItem: boolean= false;
   private devicesDialogController: CustomDialogController = new CustomDialogController({
     builder: DevicesDialog({
-      action: (deviceID) => this.selectedDevice(deviceID)
+      action: (deviceID?: string | undefined): void => this.selectedDevice(deviceID)
     }),
     autoCancel: false,
     offset: { dx: 0, dy: 200 }
@@ -89,10 +90,14 @@ struct FrontItem {
 
   build() {
     Column() {
-      if (this.itemData.template) {
+      if (this.itemData?.template) {
         CustomItem({ customItemData: this.itemData, isSubItem: this.isSubItem })
       } else {
-        GeneralItem({ itemData: this.itemData, clickAction: () => this.showDevicesDialog(), isSubItem: this.isSubItem })
+        GeneralItem({
+          itemData: this.itemData,
+          clickAction: (): void => this.showDevicesDialog(),
+          isSubItem: this.isSubItem
+        })
       }
     }
     .width('100%')
@@ -107,7 +112,7 @@ struct FrontItem {
       ViewModel.clickItem(this.itemData);
       return;
     }
-    let wantAgent = this.itemData?.want;
+    let wantAgent: object = this.itemData?.want;
     if (!!wantAgent) {
       WantAgent.getWant(wantAgent).then((want) => {
         this.nowWant = want
@@ -123,10 +128,10 @@ struct FrontItem {
     }
   }
 
-  selectedDevice(deviceID) {
+  selectedDevice(deviceID?: string | undefined) {
     Log.showDebug(TAG, `selectedDevice deviceID:${deviceID}`)
     this.nowWant.deviceId = deviceID;
-    let triggerInfo = {
+    let triggerInfo: ScreenTriggerInfo = {
       code: 0,
       want: this.nowWant,
       permission: '',

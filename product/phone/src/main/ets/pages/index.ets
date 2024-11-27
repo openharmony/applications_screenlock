@@ -22,6 +22,7 @@ import JournalScreenLock from './journalscreenlock'
 import Constants from '../common/constants'
 import StyleManager from '../common/StyleManager'
 import Router from '@system.router';
+import { ScreenRect } from '../../../../../../features/noticeitem/src/main/ets/com/ohos/noticeItem/common/constants'
 
 const TAG = 'ScreenLock-Entry';
 
@@ -38,7 +39,7 @@ struct Index {
     this.pageStatus = Constants.STATUS_ABOUT_TO_APPEAR
     try {
       CommonStyleManager.setAbilityPageName(TAG)
-      let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+      let configInfo: ScreenRect = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
       Log.showDebug(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
       this.mHeightPx = configInfo.height
       StyleManager.setStyle()

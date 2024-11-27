@@ -17,21 +17,24 @@
 import {Log} from '@ohos/common'
 import ViewModel from '../../viewmodel/ViewModel';
 import NotificationManager from '../../model/NotificationManager';
+import { NotificationItemData } from '../../common/constants';
 
 const TAG = 'NoticeItem-CustomItem';
 
+type CustomTemplateData = Record<string, Object>
+
 @Component
 export default struct CustomItem {
-  private customItemData: any = {};
-  private template: any = {};
-  private templateData: any = {};
-  private isSubItem: boolean= false;
+  private customItemData: NotificationItemData | null = null;
+  private template: PluginComponentTemplate | null = null;
+  private templateData: CustomTemplateData | null = null;
+  private isSubItem: boolean = false;
   @State isDebugMode: boolean = false;
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear Start`)
-    this.template = ViewModel.getPluginTempLate(this.customItemData.template.name);
-    this.templateData = this.customItemData.template.data;
+    this.template = ViewModel.getPluginTempLate(this.customItemData?.template.name);
+    this.templateData = this.customItemData?.template.data;
     this.isDebugMode = NotificationManager.isDebugMode(TAG);
     Log.showInfo(TAG, `template = ${JSON.stringify(this.template)},`+
       `templateData = ${JSON.stringify(this.templateData)}` +
@@ -46,8 +49,8 @@ export default struct CustomItem {
           data: this.templateData
         }).onComplete(() => {
           Log.showInfo(TAG, `Complete`)
-        }).onError(({errcode, msg}) => {
-          Log.showError(TAG, `Error code:${errcode} message:${msg}`)
+        }).onError((info) => {
+          Log.showError(TAG, `Error code:${info.errcode} message:${info.msg}`)
         })
           .size({ width: 400, height: 130 })
       }

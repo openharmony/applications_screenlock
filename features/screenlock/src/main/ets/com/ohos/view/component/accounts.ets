@@ -30,7 +30,7 @@ export default struct Accounts {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`);
-    this.unSubscriber = sEventManager.subscribe(ACCOUNTS_REFRESH_EVENT, (data) => {
+    this.unSubscriber = sEventManager.subscribe(ACCOUNTS_REFRESH_EVENT, (data: UserData[]) => {
       this.accountList = data;
     });
   }
@@ -45,7 +45,7 @@ export default struct Accounts {
     Row() {
       if (this.accountList.length > 1) {
         List({ space: this.screenlockdirection ==  1 ? Constants.ACCOUNT_SPACE : Constants.ACCOUNT_SPACE_PORTRAIT }) {
-          ForEach(this.accountList, (item: any) => {
+          ForEach(this.accountList, (item: UserData) => {
             ListItem() {
               UserItem({ userItem: item, viewModel: this.mViewModel })
             }
@@ -59,27 +59,27 @@ export default struct Accounts {
 
 @Component
 struct UserItem {
-  @State userItem: UserData = null;
-  private viewModel: ViewModel;
+  @State userItem: UserData | null = null;
+  private viewModel: ViewModel | undefined = undefined;
 
   build() {
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center }) {
-      if (this.userItem.userIconPath.length == 0) {
+      if (this.userItem?.userIconPath.length == 0) {
         Image($r('app.media.ic_user_portrait'))
           .width(Constants.SHORTCUT_CIRCLE_WIDTH)
           .height(Constants.SHORTCUT_CIRCLE_WIDTH)
       } else {
-        Image(this.userItem.userIconPath)
+        Image(this.userItem?.userIconPath)
           .width(Constants.SHORTCUT_CIRCLE_WIDTH)
           .height(Constants.SHORTCUT_CIRCLE_WIDTH)
       }
-      Text(this.userItem.userName)
+      Text(this.userItem?.userName)
         .fontSize(Constants.SHORTCUT_TEXT_SIZE)
         .fontColor($r('app.color.shortcut_text_color'))
         .margin({ top: $r("app.float.accounts_block") })
     }
     .onClick(event => {
-        this.viewModel.onUserClick(this.userItem.userId);
+        this.viewModel?.onUserClick(this.userItem?.userId);
     })
   }
 }

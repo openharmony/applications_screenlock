@@ -15,21 +15,32 @@
 
 import {Log, CheckEmptyUtils} from '@ohos/common'
 import ViewModel from '../../viewmodel/ViewModel';
-import Constants, {InputActionButtonData, NotificationLayout as Layout} from '../../common/constants';
+import Constants, {
+  InputActionButtonData,
+  NotificationItemData,
+  NotificationLayout as Layout
+} from '../../common/constants';
+import { WantAgent } from '@ohos.wantAgent';
+import notificationManager from '@ohos.notificationManager';
 
 const TAG = 'NoticeItem-ActionComponent';
+
+export class InputData {
+  public inputKey?: null | string = null;
+  public wantAgent?: null | WantAgent = null;
+}
 
 @Component
 export default struct ActionComponent {
   @State showInputText: boolean = false;
   @State placeholder: string = '';
-  @State inputData: { inputKey: null, wantAgent: null } = undefined;
+  @State inputData: InputData | undefined = undefined;
   @State inputActionData: InputActionButtonData = new InputActionButtonData();
-  private itemData: any = undefined;
+  private itemData: NotificationItemData | undefined = undefined
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear Start`);
-    let actionData = AppStorage.Get(Constants.KEY_INPUT + this.itemData.id);
+    let actionData: InputActionButtonData | undefined = AppStorage.Get(Constants.KEY_INPUT + this.itemData?.id);
     this.inputActionData = (actionData instanceof InputActionButtonData) ? actionData : this.inputActionData;
   }
 
@@ -40,14 +51,14 @@ export default struct ActionComponent {
   build() {
     Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
       if (!this.inputData) {
-        ForEach(this.itemData.actionButtons, (item: any) => {
+        ForEach(this.itemData?.actionButtons, (item: notificationManager.NotificationActionButton) => {
           ActionButton({
-            content: item.title,
+            content: item?.title,
             clickEvent: () => {
-              if (CheckEmptyUtils.isEmpty(item.userInput)) {
-                ViewModel.clickItem(this.itemData, item.wantAgent);
+              if (CheckEmptyUtils.isEmpty(item?.userInput)) {
+                ViewModel.clickItem(this.itemData, item?.wantAgent);
               } else {
-                this.inputData = { inputKey: item.userInput.inputKey, wantAgent: item.wantAgent };
+                this.inputData = { inputKey: item?.userInput?.inputKey, wantAgent: item?.wantAgent };
               }
             }
           })
@@ -66,12 +77,12 @@ export default struct ActionComponent {
           .width(Layout.INPUT_IMAGE_SIZE)
           .height(Layout.INPUT_IMAGE_SIZE)
           .onClick(() => {
-            ViewModel.clickReply(this.inputData.inputKey, this.placeholder, this.inputData.wantAgent);
+            ViewModel.clickReply(this.inputData?.inputKey, this.placeholder, this.inputData?.wantAgent);
             this.inputActionData = {
               isSending: true,
               content: this.placeholder
             };
-            AppStorage.SetOrCreate(Constants.KEY_INPUT + this.itemData.id, this.inputActionData);
+            AppStorage.SetOrCreate(Constants.KEY_INPUT + this.itemData?.id, this.inputActionData);
           })
       }
     }.height(!this.inputData ? Layout.ACTION_HEIGHT : Layout.INPUT_LAYOUT_HEIGHT)
