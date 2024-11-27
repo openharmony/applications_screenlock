@@ -23,7 +23,7 @@ let distributionManager = null;
 export default class NotificationDistributionManager {
   deviceManager = null
 
-  static getInstance() {
+  static getInstance(): NotificationDistributionManager {
     Log.showInfo(TAG, `getInstance`);
     if (distributionManager == null) {
       Log.showDebug(TAG, `getInstance distributionManager new`);

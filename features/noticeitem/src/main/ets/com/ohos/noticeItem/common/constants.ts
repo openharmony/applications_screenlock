@@ -93,7 +93,7 @@ export interface NotificationItemData {
   want: any;
   actionButtons: any[];
   bundleName: string;
-  smallIcon?: PixelMap | string;
+  smallIcon?: PixelMap;
   largeIcon?: PixelMap | string;
   picture?: PixelMap;
   title?: string;
@@ -119,6 +119,28 @@ export interface NotificationItemData {
   deviceId?: string;
   groupName?: string;
   tapDismissed?: boolean;
+}
+
+export interface NumKeyBoardValue {
+  index?: number,
+  row1?: string | Resource,
+  row2?: string,
+  value?: number,
+  bkg?: boolean
+}
+
+export interface ScreenTriggerInfo {
+  code?: number,
+  want?: Want,
+  permission?: string,
+  extraInfo?: object
+}
+
+export interface ScreenRect {
+  left: number,
+  top: number,
+  width: string,
+  height: number
 }
 
 export interface NotificationServiceListener {

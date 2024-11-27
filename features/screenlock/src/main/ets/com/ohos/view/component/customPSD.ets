@@ -24,7 +24,7 @@ const TAG = 'ScreenLock-CustomPSD'
 @Component
 export default struct CustomPSD {
   @State mViewModel: ViewModel = new ViewModel()
-  @StorageLink('passwordArr') passwordArr: any[]  = this.mViewModel.passwordArr
+  @StorageLink('passwordArr') passwordArr: number[] = this.mViewModel.passwordArr
   @StorageLink('screenlockdirection') screenlockdirection: number = 1
 
   aboutToAppear() {
@@ -69,7 +69,7 @@ export default struct CustomPSD {
             .opacity($r("app.float.custompsd_text_opacity"))
 
           List({ space: Constants.DIGITALPSD_IC_DIAMETER }) {
-            ForEach(this.passwordArr, (item) => {
+            ForEach(this.passwordArr, (item: number) => {
               ListItem() {
                 Image($r("app.media.ic_solid_dot"))
                   .width($r("app.float.custompsd_digitalpsd_ic_diameter"))
@@ -90,8 +90,8 @@ export default struct CustomPSD {
         })
           .width(this.screenlockdirection ==  1 ? $r('app.float.custompsd_input_width'):$r('app.float.custompsd_input_width_portrait'))
           .height($r("app.float.custompsd_button_height"))
-          .enabled(this.passwordArr.length >= 1)
-          .opacity(deviceInfo.deviceType === 'tablet' ? 1 : (this.passwordArr.length >= 1 ? 1 : 0.4))
+          .enabled(this.passwordArr?.length >= 1)
+          .opacity(deviceInfo.deviceType === 'tablet' ? 1 : (this.passwordArr?.length >= 1 ? 1 : 0.4))
           .onClick(() => {
             Log.showInfo(TAG, `onClick`)
             this.mViewModel.onAuthPassword(() => {
@@ -107,7 +107,7 @@ export default struct CustomPSD {
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.End }) {
         NumkeyBoard({
           viewModel: this.mViewModel,
-          onKeypress: (index, callback) => this.mViewModel.onKeyPress(index, callback)
+          onKeypress: (index, callback): void => this.mViewModel.onKeyPress(index, callback)
         })
       }
       .width(Constants.FULL_CONTAINER_WIDTH)

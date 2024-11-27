@@ -16,18 +16,18 @@
 import Constants, {NotificationItemData, NotificationLayout as Layout} from '../../common/constants';
 @Component
 export default struct BasicItem {
-  @State itemData: NotificationItemData = undefined
+  @State itemData: NotificationItemData | undefined = undefined
 
   build() {
     Column() {
-      Text(this.itemData.title)
+      Text(this.itemData?.title)
         .maxLines(Constants.SINGLE_LINE)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
         .fontColor($r("sys.color.ohos_fa_text_primary"))
         .fontSize($r("sys.float.ohos_id_text_size_body2"))
         .fontWeight(FontWeight.Medium)
         .lineHeight(Layout.TEXT_LINE_HEIGHT)
-      Text(this.itemData.text)
+      Text(this.itemData?.text)
         .maxLines(Constants.SINGLE_LINE)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
         .fontColor($r("sys.color.ohos_fa_text_secondary"))

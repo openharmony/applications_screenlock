@@ -80,7 +80,7 @@ struct BatteryPic {
     }
   }
 
-  private getBatteryColor(val, charging) {
+  private getBatteryColor(val: number, charging: boolean) {
     Log.showDebug(TAG, `getBatteryColor, val: ${ val }  charging: ${ charging } `);
     if (charging) {
       return this.picChargingColor;

@@ -17,20 +17,20 @@ import Constants, {NotificationItemData, NotificationLayout as Layout} from '../
 
 @Component
 export default struct PictureItem {
-  @State itemData: NotificationItemData= undefined
+  @State itemData: NotificationItemData | undefined = undefined
   @Prop isExpand: boolean
 
   build() {
 
     Column() {
-      Text(this.isExpand ? this.itemData.expandedTitle : this.itemData.title)
+      Text(this.isExpand ? this.itemData?.expandedTitle : this.itemData?.title)
         .maxLines(Constants.SINGLE_LINE)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
         .fontColor($r("sys.color.ohos_fa_text_primary"))
         .fontSize($r("sys.float.ohos_id_text_size_body2"))
         .fontWeight(FontWeight.Medium)
         .lineHeight(Layout.TEXT_LINE_HEIGHT)
-      Text(this.isExpand ? this.itemData.briefText : this.itemData.text)
+      Text(this.isExpand ? this.itemData?.briefText : this.itemData?.text)
         .maxLines(this.isExpand ? Constants.EXPENDED_MAX_LINES : Constants.SINGLE_LINE)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
         .fontColor($r("sys.color.ohos_fa_text_secondary"))
