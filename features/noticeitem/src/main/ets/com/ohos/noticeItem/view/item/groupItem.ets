@@ -14,7 +14,7 @@
  */
 
 import {Log} from '@ohos/common'
-import Constants, {NotificationLayout as Layout} from '../../common/constants';
+import Constants, { NotificationItemData, NotificationLayout as Layout} from '../../common/constants';
 import NotificationItem from './notificationItem'
 import titleItem from './titleItem';
 import IconListComponent, {getIconListSize} from './iconListComponent';
@@ -27,7 +27,7 @@ export default struct GroupItem {
   @Consume('notificationUpdateSc') updateFlag: number;
   @State distributedDeviceName: string = ''
   @State @Watch('expandChange') toExpand: boolean = false;
-  private groupData: any[] = []
+  private groupData: NotificationItemData[] = []
   private mScroller: Scroller = new Scroller();
   @State mIconAlpha: number = 0;
   @State @Watch('scrollEdge') mEdgeEnd: boolean = false;
@@ -52,9 +52,9 @@ export default struct GroupItem {
           Column() {
             Row() {
               titleItem({
-                notificationSmallIcon: this.groupData[0].smallIcon,
-                notificationName: this.groupData[0].appName,
-                notificationTime: this.groupData[0].time,
+                notificationSmallIcon: this.groupData[0]?.smallIcon,
+                notificationName: this.groupData[0]?.appName,
+                notificationTime: this.groupData[0]?.time,
                 isExpand: $toExpand,
                 needExpand: this.needExpand,
                 distributedDeviceName: this.distributedDeviceName,
@@ -110,13 +110,13 @@ export default struct GroupItem {
 
 @Component
 struct ContentList {
-  @State @Watch('remainderChange') groupData: any[] = []
+  @State @Watch('remainderChange') groupData: NotificationItemData[] = []
   @Prop toExpand: boolean
   @State remainderNum: number= 0
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    this.remainderNum = this.groupData.length - 2;
+    this.remainderNum = this.groupData?.length - 2;
     Log.showInfo(TAG, `aboutToAppear remainderNum:${this.remainderNum}`)
   }
 
@@ -125,14 +125,14 @@ struct ContentList {
       if (!this.toExpand) {
         Column() {
           Row({ space: 5 }) {
-            Text(this.groupData[0].title)
+            Text(this.groupData[0]?.title)
               .maxLines(Constants.SINGLE_LINE)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .fontColor($r("sys.color.ohos_fa_text_primary"))
               .fontSize($r("sys.float.ohos_id_text_size_body2"))
               .fontWeight(FontWeight.Medium)
               .lineHeight(Layout.TEXT_LINE_HEIGHT)
-            Text(this.groupData[0].text)
+            Text(this.groupData[0]?.text)
               .maxLines(Constants.SINGLE_LINE)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .fontColor($r("sys.color.ohos_fa_text_secondary"))
@@ -145,14 +145,14 @@ struct ContentList {
           .margin({ left: Layout.ITEM_MARGIN, right: Layout.ITEM_MARGIN })
 
           Row({ space: 5 }) {
-            Text(this.groupData[1].title)
+            Text(this.groupData[1]?.title)
               .maxLines(Constants.SINGLE_LINE)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .fontColor($r("sys.color.ohos_fa_text_primary"))
               .fontSize($r("sys.float.ohos_id_text_size_body2"))
               .fontWeight(FontWeight.Medium)
               .lineHeight(Layout.TEXT_LINE_HEIGHT)
-            Text(this.groupData[1].text)
+            Text(this.groupData[1]?.text)
               .maxLines(Constants.SINGLE_LINE)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
               .fontColor($r("sys.color.ohos_fa_text_secondary"))
@@ -179,11 +179,11 @@ struct ContentList {
 
       } else {
         List() {
-          ForEach(this.groupData, (item: any) => {
+          ForEach(this.groupData, (item: NotificationItemData) => {
             ListItem() {
               NotificationItem({ itemData: item, isSubItem: true })
             }
-          }, (item: any) => `${item.hashcode}_${item.timestamp}_subitem`)
+          }, (item: NotificationItemData) => `${item.hashcode}_${item.timestamp}_subitem`)
         }
         .divider({
           strokeWidth: 1,
@@ -196,7 +196,7 @@ struct ContentList {
   }
 
   remainderChange() {
-    this.remainderNum = this.groupData.length - 2;
+    this.remainderNum = this.groupData?.length - 2;
     Log.showDebug(TAG, `aboutToAppear remainderNum:${this.remainderNum}`)
   }
 }

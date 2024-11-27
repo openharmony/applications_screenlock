@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import Constants, {NotificationLayout as Layout} from '../../common/constants';
+import Constants, { NotificationItemData, NotificationLayout as Layout} from '../../common/constants';
 import basicItem from './basicItem';
 import longItem from './longItem';
 import multiItem from './multiItem';
@@ -32,8 +32,9 @@ export default struct GeneralItem {
   @State @Watch('expandChange') isExpand: boolean = false
   @State needExpand: boolean = true
   @State distributedDeviceName: string = ''
-  private itemData: any = {}
-  private clickAction: () => void
+  private itemData: NotificationItemData | undefined = undefined
+  private clickAction: () => void = () => {
+  };
   private isSubItem: boolean= false;
 
   expandChange() {
@@ -42,7 +43,7 @@ export default struct GeneralItem {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear Start`)
-    if (CheckEmptyUtils.isEmpty(this.itemData.largeIcon)) {
+    if (CheckEmptyUtils.isEmpty(this.itemData?.largeIcon)) {
       this.hasPicture = false;
     } else {
       this.hasPicture = true;
@@ -54,8 +55,8 @@ export default struct GeneralItem {
   }
 
   checkItemNeedExpand() {
-    if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_BASIC
-    && (!(this.itemData.actionButtons?.length > 0))) {
+    if (this.itemData?.contentType === Constants.NOTIFICATION_TYPE_BASIC
+    && (!(this.itemData?.actionButtons?.length > 0))) {
       return false;
     } else {
       return true;
@@ -69,9 +70,9 @@ export default struct GeneralItem {
   build() {
     Column() {
       titleItem({
-        notificationSmallIcon: this.itemData.smallIcon,
-        notificationName: this.itemData.appName,
-        notificationTime: this.itemData.time,
+        notificationSmallIcon: this.itemData?.smallIcon,
+        notificationName: this.itemData?.appName,
+        notificationTime: this.itemData?.time,
         isExpand: $isExpand,
         needExpand: this.needExpand,
         distributedDeviceName: this.distributedDeviceName,
@@ -83,7 +84,7 @@ export default struct GeneralItem {
         itemData: this.itemData
       });
 
-      if (this.isExpand && this.itemData.actionButtons.length) {
+      if (this.isExpand && this.itemData?.actionButtons.length) {
         ActionComponent({ itemData: this.itemData })
       } else {
         Blank()
@@ -98,7 +99,7 @@ export default struct GeneralItem {
 @Component
 struct ContentComponent {
   @Prop isExpand: boolean;
-  itemData: any;
+  itemData: NotificationItemData | undefined = undefined;
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToDisappear`);
@@ -107,24 +108,24 @@ struct ContentComponent {
   build() {
     Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.Start }) {
       Row() {
-        if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_BASIC) {
+        if (this.itemData?.contentType === Constants.NOTIFICATION_TYPE_BASIC) {
           basicItem({
             itemData: this.itemData
           });
         }
-        if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_LONG) {
+        if (this.itemData?.contentType === Constants.NOTIFICATION_TYPE_LONG) {
           longItem({
             itemData: this.itemData,
             isExpand: this.isExpand
           });
         }
-        if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_MULTILINE) {
+        if (this.itemData?.contentType === Constants.NOTIFICATION_TYPE_MULTILINE) {
           multiItem({
             itemData: this.itemData,
             isExpand: this.isExpand
           });
         }
-        if (this.itemData.contentType === Constants.NOTIFICATION_TYPE_PICTURE) {
+        if (this.itemData?.contentType === Constants.NOTIFICATION_TYPE_PICTURE) {
           pictureItem({
             itemData: this.itemData,
             isExpand: this.isExpand
@@ -132,8 +133,8 @@ struct ContentComponent {
         }
       }.flexGrow(1)
 
-      if (this.itemData.picture) {
-        Image(this.itemData.picture)
+      if (this.itemData?.picture) {
+        Image(this.itemData?.picture)
           .objectFit(ImageFit.Contain)
           .width(Layout.NOTIFICATION_PIC_SIZE)
           .height(Layout.NOTIFICATION_PIC_SIZE)

@@ -17,6 +17,7 @@ import {Log, Trace} from '@ohos/common'
 import Constants from '../common/constants'
 import BaseViewModel, {service, AuthSubType} from './baseViewModel'
 import {Callback} from '@ohos.base';
+import { NumKeyBoardValue } from '../../../../../../../noticeitem/src/main/ets/com/ohos/noticeItem/common/constants'
 
 const TAG = 'ScreenLock-DigitalPSDViewModel'
 
@@ -24,8 +25,8 @@ const PW_LEN = 6
 
 export default class DigitalPSDViewModel extends BaseViewModel {
     password: number[]= []
-    passwdMaskArr: any[];
-    numKeyboard: any[] = Constants.NUMKEY_BOARD;
+    passwdMaskArr: Resource[];
+    numKeyboard: NumKeyBoardValue[] = Constants.NUMKEY_BOARD;
 
     constructor() {
         super();
@@ -37,7 +38,7 @@ export default class DigitalPSDViewModel extends BaseViewModel {
         super.ViewModelInit();
     }
 
-    onKeyPress(index, callback: Callback<void>) {
+    onKeyPress(index: number, callback: Callback<void>): void {
         Log.showInfo(TAG, `onKeyPress start param: ${index}`)
         let keyValue = this.numKeyboard[index].value;
         if (keyValue >= 0 && !this.inhibitInput) {

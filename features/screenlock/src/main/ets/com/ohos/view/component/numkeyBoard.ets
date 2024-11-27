@@ -17,14 +17,17 @@ import {Log} from '@ohos/common'
 import Constants from '../../common/constants'
 import BaseViewModel from '../../vm/baseViewModel'
 import deviceInfo from '@ohos.deviceInfo';
+import {Callback} from '@ohos.base';
+import { NumKeyBoardValue } from '../../../../../../../../noticeitem/src/main/ets/com/ohos/noticeItem/common/constants';
 
 const TAG = 'ScreenLock-NumkeyBoard'
 
 @Component
 export default struct NumkeyBoard {
-  private viewModel: BaseViewModel
-  private onKeypress: (params, callback) => void;
-  @StorageLink('numKeyboard') numKeyboard: any[]  = Constants.NUMKEY_BOARD;
+  @Prop viewModel: BaseViewModel;
+  private onKeypress: (params: number, callback: Callback<void>) => void = () => {
+  };
+  @StorageLink('numKeyboard') numKeyboard: NumKeyBoardValue[] = Constants.NUMKEY_BOARD;
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
@@ -37,7 +40,7 @@ export default struct NumkeyBoard {
   build() {
     Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
       Grid() {
-        ForEach(this.numKeyboard, (item: any) => {
+        ForEach(this.numKeyboard, (item: NumKeyBoardValue) => {
           GridItem() {
             Stack({ alignContent: Alignment.Center }) {
               Column({ space: 0 }) {
@@ -46,10 +49,10 @@ export default struct NumkeyBoard {
                   alignItems: ItemAlign.Center,
                   justifyContent: FlexAlign.Center
                 }) {
-                  if (item.value == Constants.CALL_PHONE ||
-                  item.value == Constants.GO_BACK ||
-                  item.value == Constants.DEL_PWD) {
-                    Text(item.row1)
+                  if (item?.value == Constants.CALL_PHONE ||
+                  item?.value == Constants.GO_BACK ||
+                  item?.value == Constants.DEL_PWD) {
+                    Text(item?.row1)
                       .fontSize($r('app.float.digitalpsd_prompt_fontsize'))
                       .fontWeight(FontWeight.Medium)
                       .fontColor(Color.White)
@@ -58,7 +61,7 @@ export default struct NumkeyBoard {
                       .padding(0)
                       .margin(0)
                   } else {
-                    Text(item.row1)
+                    Text(item?.row1)
                       .fontSize($r('app.float.digitalpsd_row1_fontsize'))
                       .fontWeight(FontWeight.Medium)
                       .fontColor(Color.White)
@@ -67,8 +70,8 @@ export default struct NumkeyBoard {
                       .padding(0)
                       .margin(0)
                   }
-                  if (!!item.row2) {
-                    Text(item.row2)
+                  if (!!item?.row2) {
+                    Text(item?.row2)
                       .fontSize($r('app.float.digitalpsd_row2_fontsize'))
                       .fontWeight(FontWeight.Regular)
                       .fontColor(Color.White)
@@ -84,9 +87,9 @@ export default struct NumkeyBoard {
               }
 
               if (deviceInfo.deviceType === 'tablet') {
-                if (item.value == Constants.CALL_PHONE ||
-                item.value == Constants.GO_BACK ||
-                item.value == Constants.DEL_PWD) {
+                if (item?.value == Constants.CALL_PHONE ||
+                item?.value == Constants.GO_BACK ||
+                item?.value == Constants.DEL_PWD) {
                   Column() {
                     Button({ type: ButtonType.Normal, stateEffect: true })
                       .backgroundColor("#00FFFFFF")
@@ -104,8 +107,10 @@ export default struct NumkeyBoard {
               }
             }
             .onClick(() => {
-              Log.showInfo(TAG, `onClick:${item.index}`)
-              setTimeout(this.onKeypress.bind(this), 0, item.index, () => {
+              Log.showInfo(TAG, `onClick:${item?.index}`)
+              setTimeout(
+                this.onKeypress.bind(this)
+                , 0, item?.index, () => {
                 Log.showInfo(TAG, `onClick callback is called`)
               });
             })

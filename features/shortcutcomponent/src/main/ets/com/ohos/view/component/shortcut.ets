@@ -37,14 +37,14 @@ export default struct Shortcut {
         mTag: 'ScreenLock-Shutdown',
         mIcon: this.shutdownIcon,
         mLabel: this.shutdownLabel,
-        mClickEvent: () => this.viewModel.onShortcutClick(Constants.CLICK_TYPE_SHUTDOWN)
+        mClickEvent: (): void => this.viewModel.onShortcutClick(Constants.CLICK_TYPE_SHUTDOWN)
       })
 
       ShortcutComponent({
         mTag: 'ScreenLock-Reboot',
         mIcon: this.rebootIcon,
         mLabel: this.rebootLabel,
-        mClickEvent: () => this.viewModel.onShortcutClick(Constants.CLICK_TYPE_REBOOT)
+        mClickEvent: (): void => this.viewModel.onShortcutClick(Constants.CLICK_TYPE_REBOOT)
       })
     }
     .margin({ left: '50px' })
@@ -53,10 +53,10 @@ export default struct Shortcut {
 
 @Component
 struct ShortcutComponent {
-  private mTag: string
-  private mIcon: Resource
-  private mLabel: Resource
-  private mClickEvent: Function
+  private mTag: string | undefined = undefined;
+  private mIcon: Resource | undefined = undefined;
+  private mLabel: Resource | undefined = undefined;
+  private mClickEvent: Function | undefined = undefined;
 
   aboutToAppear() {
     Log.showInfo(this.mTag, `aboutToAppear Start`)

@@ -97,7 +97,9 @@ export default struct MixedPSD {
               .textAlign(TextAlign.Center)
               .textOverflow({ overflow: TextOverflow.None })
               .margin({ top: Constants.ACCOUNT_SPACE })
-              .onClick(this.mViewModel.onCallPhone.bind(this.mViewModel));
+              .onClick(() => {
+                this.mViewModel.onCallPhone.bind(this.mViewModel)
+              });
           }
           .width(Constants.HALF_CONTAINER_WIDTH)
         }.width(Constants.FULL_CONTAINER_WIDTH)
@@ -153,7 +155,9 @@ export default struct MixedPSD {
             .fontColor(Color.White)
             .textAlign(TextAlign.Center)
             .textOverflow({ overflow: TextOverflow.None })
-            .onClick(this.mViewModel.onCallPhone.bind(this.mViewModel));
+            .onClick(() => {
+              this.mViewModel.onCallPhone.bind(this.mViewModel)
+            });
 
           /*            Text($r('app.string.done'))
                         .fontSize($r('app.float.mixedpsd_prompt_fontsize'))

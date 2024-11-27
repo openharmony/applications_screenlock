@@ -17,12 +17,12 @@ import Constants, {NotificationItemData, NotificationLayout as Layout} from '../
 
 @Component
 export default struct MultiItem {
-  @State itemData: NotificationItemData= undefined
+  @State itemData: NotificationItemData | undefined = undefined
   @Prop isExpand: boolean
 
   build() {
     Column() {
-      Text(this.isExpand ? this.itemData.longTitle : this.itemData.title)
+      Text(this.isExpand ? this.itemData?.longTitle : this.itemData?.title)
         .maxLines(Constants.SINGLE_LINE)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
         .fontColor($r("sys.color.ohos_fa_text_primary"))
@@ -30,7 +30,7 @@ export default struct MultiItem {
         .fontWeight(FontWeight.Medium)
         .lineHeight(Layout.TEXT_LINE_HEIGHT)
       if (this.isExpand) {
-        ForEach(this.itemData.lines,
+        ForEach(this.itemData?.lines,
           (item: string) => {
             Text(item)
               .maxLines(Constants.SINGLE_LINE)
@@ -42,7 +42,7 @@ export default struct MultiItem {
           }, (item: string) => item.toString()
         )
       } else {
-        Text(this.itemData.text)
+        Text(this.itemData?.text)
           .maxLines(Constants.SINGLE_LINE)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
           .fontColor($r("sys.color.ohos_fa_text_secondary"))

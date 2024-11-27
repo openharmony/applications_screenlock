@@ -16,6 +16,7 @@
 import Constants from '../../common/constants';
 import {Log} from '@ohos/common'
 import DistributionManager from '../../model/NotificationDistributionManager';
+import DeviceManager from '@ohos.distributedDeviceManager';
 
 const TAG = 'NoticeItem-DevicesDialog';
 
@@ -25,9 +26,10 @@ const TAG = 'NoticeItem-DevicesDialog';
  */
 @CustomDialog
 export default struct DevicesDialog {
-  private deviceInfoList: Array<any>;
+  private deviceInfoList: Array<DeviceManager.DeviceBasicInfo> | null = null;
   public controller: CustomDialogController
-  public action: (deviceID) => void
+  public action: (deviceID: string | undefined) => void = () => {
+  };
 
   build() {
     Column({ space: 30 }) {
@@ -40,11 +42,11 @@ export default struct DevicesDialog {
 
       Column() {
         List() {
-          ForEach(this.deviceInfoList, (item) => {
+          ForEach(this.deviceInfoList, (item: DeviceManager.DeviceBasicInfo) => {
             ListItem() {
               Row() {
                 Column() {
-                  Text(item.deviceName)
+                  Text(item?.deviceName)
                     .fontSize($r('app.float.setting_cont_fontsize'))
                     .fontColor($r('app.color.dialog_font_color'))
                     .height(Constants.SETTING_CONT_HEIGHT)
@@ -59,7 +61,7 @@ export default struct DevicesDialog {
                 radius: $r('app.float.setting_border_radius') })
               .backgroundColor($r('app.color.dialog_font_back_color'))
               .onClick(() => {
-                this.action(item.deviceId);
+                this.action(item?.deviceId);
                 this.controller.close();
               })
             }
@@ -85,7 +87,7 @@ export default struct DevicesDialog {
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)
-    this.deviceInfoList = DistributionManager.getInstance().getTrustedDeviceListSync();
-    Log.showDebug(TAG, `aboutToAppear deviceInfoList size: ${this.deviceInfoList.length}`)
+    this.deviceInfoList = DistributionManager.getInstance()?.getTrustedDeviceListSync();
+    Log.showDebug(TAG, `aboutToAppear deviceInfoList size: ${this.deviceInfoList?.length}`)
   }
 }
