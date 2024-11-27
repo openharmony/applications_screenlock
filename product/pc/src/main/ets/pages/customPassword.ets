@@ -18,8 +18,9 @@ import StatusBar from '../../../../../../features/screenlock/src/main/ets/com/oh
 import CustomPSD from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/customPSD'
 import Constants from '../common/constants'
 import StyleManager from '../common/StyleManager'
+import { ScreenRect } from '../../../../../../features/noticeitem/src/main/ets/com/ohos/noticeItem/common/constants'
 
-const TAG = 'ScreenLock-CustomPassword'
+const TAG:string = 'ScreenLock-CustomPassword'
 
 @Entry
 @Component
@@ -31,7 +32,7 @@ export default struct CustomPassword {
     Log.showInfo(TAG, `aboutToAppear`)
     CommonStyleManager.setAbilityPageName(TAG)
     try {
-      let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+      let configInfo: ScreenRect = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
       this.mHeightPx = configInfo.height
       StyleManager.setStyle()
     } catch (error) {

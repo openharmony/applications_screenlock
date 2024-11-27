@@ -14,20 +14,20 @@
  */
 
 import {Log} from '@ohos/common'
-import {NotificationLayout as Layout} from '../common/constants';
+import { NotificationItemData, NotificationLayout as Layout } from '../common/constants';
 import NotificationItem from './item/notificationItem'
 import GroupNotificationItem from './item/groupItem'
 
 const TAG = 'NoticeItem-NotificationListComponent';
 
-type NotificationLayoutConfig = {
-  itemMargin: number;
+export class NotificationLayoutConfig {
+  public itemMargin?: number;
 }
 
 @Component
 export default struct NotificationListComponent {
-  @Provide('notificationUpdateSc') update: number = 0;
-  @StorageLink('notificationListSc') notificationList: any[] = []
+  @Provide('notificationUpdateSc') private update: number = 0;
+  @StorageLink('notificationListSc') notificationList: NotificationItemData[] = []
   private config: NotificationLayoutConfig = {
     itemMargin: Layout.ITEM_MARGIN
   }
@@ -46,7 +46,7 @@ export default struct NotificationListComponent {
         ListItem() {
         }
       }
-      ForEach(this.notificationList, (item: any) => {
+      ForEach(this.notificationList, (item: NotificationItemData[]) => {
         ListItem() {
           if (item.length > 1) {
             GroupNotificationItem({ groupData: item })
@@ -54,7 +54,7 @@ export default struct NotificationListComponent {
             NotificationItem({ itemData: item[0] })
           }
         }
-      }, (list: any) => JSON.stringify(list.map((item) => item.hashcode)))
+      }, (list: NotificationItemData[]) => JSON.stringify(list.map((item) => item?.hashcode)))
     }
     .width($r("app.float.notificationList_width"))
   }

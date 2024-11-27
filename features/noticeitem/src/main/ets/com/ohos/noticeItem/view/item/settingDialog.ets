@@ -23,21 +23,22 @@ const TAG = 'NoticeItem-Setting';
  */
 @CustomDialog
 export default struct SettingDialog {
-  private itemData: NotificationItemData
+  private itemData: NotificationItemData | undefined = undefined;
   public controller: CustomDialogController
-  public action: () => void
+  public action: () => void = () => {
+  };
 
   build() {
     Column({ space: 4 }) {
       Row({ space: 4 }) {
-        if (!CheckEmptyUtils.isEmpty(this.itemData.smallIcon)) {
-          Image(this.itemData.smallIcon)
+        if (!CheckEmptyUtils.isEmpty(this.itemData?.smallIcon)) {
+          Image(this.itemData?.smallIcon)
             .objectFit(ImageFit.Contain)
             .width($r('app.float.title_image_width'))
             .height($r('app.float.title_image_height'))
             .margin({ left: $r("app.float.title_image_left_margin"), right: $r("app.float.title_image_right_margin") })
         }
-        Text(this.itemData.appName)
+        Text(this.itemData?.appName)
           .fontSize($r('app.float.setting_title_fontsize'))
           .fontWeight(500)
       }.width(Constants.SETTING_DIALOG_WITH)
@@ -60,7 +61,9 @@ export default struct SettingDialog {
       .border({ width: $r('app.float.setting_border_width'), color: Color.White,
         radius: $r('app.float.setting_border_radius') })
       .backgroundColor($r('app.color.dialog_font_back_color'))
-      .onClick(this.closeNotification.bind(this))
+      .onClick(() => {
+        this.closeNotification.bind(this)
+      })
 
       Row() {
         Column() {
@@ -77,7 +80,9 @@ export default struct SettingDialog {
       .border({ width: $r('app.float.setting_border_width'), color: Color.White,
         radius: $r('app.float.setting_border_radius') })
       .backgroundColor($r('app.color.action_button_click_color'))
-      .onClick(this.openAbility.bind(this))
+      .onClick(() => {
+        this.openAbility.bind(this)
+      })
 
       Row() {
         Column() {
@@ -96,7 +101,9 @@ export default struct SettingDialog {
       .border({ width: $r('app.float.setting_border_width'), color: Color.White,
         radius: $r('app.float.setting_border_radius') })
       .backgroundColor($r('app.color.dialog_font_color'))
-      .onClick(this.closeAbility.bind(this))
+      .onClick(() => {
+        this.closeAbility.bind(this)
+      })
     }.height(Constants.SETTING_DIALOG_HEIGHT)
     .width($r("app.float.setting_dialog_Width"))
     .backgroundColor('#FFFFFFFF')
@@ -112,7 +119,7 @@ export default struct SettingDialog {
   openAbility() {
     Log.showDebug(TAG, ` openAbility:showNotificationManagement`)
     sEventManager.publish(obtainStartAbility('com.ohos.systemui', 'com.ohos.systemui.notificationmanagement.MainAbility',
-      { 'migrateUri': 'pages/setEnable', 'migrateBundle': this.itemData.bundleName }))
+      { 'migrateUri': 'pages/setEnable', 'migrateBundle': this.itemData?.bundleName }))
     this.closeAbility()
   }
 

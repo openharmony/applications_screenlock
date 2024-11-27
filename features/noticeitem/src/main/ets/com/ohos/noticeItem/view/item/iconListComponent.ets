@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {NotificationLayout as Layout} from '../../common/constants';
+import { NotificationItemData, NotificationLayout as Layout} from '../../common/constants';
 import {Log} from '@ohos/common'
 import SettingDialog from './settingDialog';
 import ConfirmDialog from './confirmDialog'
@@ -22,13 +22,13 @@ import ViewModel from '../../viewmodel/ViewModel';
 const TAG = 'NoticeItem-IconListComponent';
 let iconSize: number = 0;
 
-type IconData = {
-  src?: Resource;
-  callback?: () => void
+export class IconData {
+  public src?: Resource;
+  public callback?: () => void
 }
 
-export type NotificationUiConfig = {
-  iconSize: number;
+export class NotificationUiConfig {
+  public iconSize: number = 0
 }
 
 export function getIconListSize(list?: IconData[]) {
@@ -38,13 +38,13 @@ export function getIconListSize(list?: IconData[]) {
 
 @Component
 export default struct IconListComponent {
-  private itemData: any = {}
+  private itemData: NotificationItemData | undefined = undefined;
   private isGroup: boolean= false;
   @Prop iconAlpha: number
   private settingDialogController: CustomDialogController = new CustomDialogController({
     builder: SettingDialog({
       itemData: this.itemData,
-      action: () => this.confirmDialogController.open()
+      action: (): void => this.confirmDialogController?.open()
     }),
     autoCancel: false,
     offset: { dx: 0, dy: $r('app.float.setting_dialog_dy') },
@@ -53,8 +53,8 @@ export default struct IconListComponent {
   private confirmDialogController: CustomDialogController = new CustomDialogController({
     builder: ConfirmDialog({
       title: $r('app.string.closeNovice'),
-      bundleName: this.itemData.name,
-      action: () => ViewModel.enableNotification(this.itemData, false)
+      bundleName: this.itemData?.appName,
+      action: (): void => ViewModel?.enableNotification(this.itemData, false)
     }),
     autoCancel: false,
     offset: { dx: 0, dy: $r('app.float.confirm_dialog_dy') },
@@ -88,7 +88,7 @@ export default struct IconListComponent {
 
   build() {
     Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.End, justifyContent: FlexAlign.End }) {
-      ForEach(this.iconConfigs, (item) => {
+      ForEach(this.iconConfigs, (item: IconData) => {
         Button({ type: ButtonType.Circle, stateEffect: true }) {
           if (item.src) {
             Image(item.src)

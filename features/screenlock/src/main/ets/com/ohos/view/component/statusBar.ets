@@ -26,7 +26,7 @@ const TAG = 'ScreenLock-StatusBar'
 
 @Component
 export default struct statusBar {
-  private isShow: boolean
+  private isShow: boolean = false;
 
   aboutToAppear() {
     Log.showInfo(TAG, `aboutToAppear`)

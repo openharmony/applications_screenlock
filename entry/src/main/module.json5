@@ -21,6 +21,7 @@
     "uiSyntax": "ets",
     "abilities": [
       {
+        "srcEntry": "./ets/MainAbility/MainAbility.ts",
         "name": "MainAbility",
         "srcEntrance": "./ets/MainAbility/MainAbility.ts",
         "description": "$string:MainAbility_desc",

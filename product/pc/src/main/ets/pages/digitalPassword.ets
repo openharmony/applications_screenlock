@@ -18,6 +18,7 @@ import StatusBar from '../../../../../../features/screenlock/src/main/ets/com/oh
 import DigitalPSD from '../../../../../../features/screenlock/src/main/ets/com/ohos/view/component/digitalPSD'
 import Constants from '../common/constants'
 import StyleManager from '../common/StyleManager'
+import { ScreenRect } from '../../../../../../features/noticeitem/src/main/ets/com/ohos/noticeItem/common/constants'
 
 const TAG = 'ScreenLock-DigitalPassword'
 
@@ -31,7 +32,7 @@ export default struct DigitalPassword {
     Log.showInfo(TAG, `aboutToAppear`)
     CommonStyleManager.setAbilityPageName(TAG)
     try {
-      let configInfo = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
+      let configInfo: ScreenRect = AbilityManager.getAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect')
       Log.showInfo(TAG, `configMaxWidth${JSON.stringify(configInfo.height)}`)
       StyleManager.setStyle()
     } catch (error) {

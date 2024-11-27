@@ -23,7 +23,7 @@ const TAG = 'ScreenLock-DigitalPSD'
 @Component
 export default struct DigitalPSD {
   @State mViewModel: ViewModel = new ViewModel()
-  @StorageLink('passwdMaskArr') passwdMaskArr: any[]  = this.mViewModel.passwdMaskArr
+  @StorageLink('passwdMaskArr') passwdMaskArr: Resource[] = this.mViewModel.passwdMaskArr
   @StorageLink('screenlockdirection') screenlockdirection: number = 1
 
   aboutToAppear() {
@@ -60,7 +60,7 @@ export default struct DigitalPSD {
           .height($r('app.float.digitalpsd_prompt_height'))
 
         Grid() {
-          ForEach(this.passwdMaskArr, (item) => {
+          ForEach(this.passwdMaskArr, (item: PixelMap | ResourceStr | DrawableDescriptor) => {
             GridItem() {
               Image(item)
                 .width(Constants.DIGITALPSD_IC_DIAMETER)
