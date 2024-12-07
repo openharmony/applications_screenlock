@@ -122,6 +122,7 @@ export default struct MixedPSD {
             .type(InputType.Password)
             .maxLength(Constants.PASSWORD_MAX_LEN)
             .fontSize($r('app.float.mixedpsd_prompt_text_fontsize'))
+            .textAlign(TextAlign.Center)
             .width($r('app.float.mixedpsd_input_width'))
             .height($r('app.float.mixedpsd_input_height'))
             .backgroundColor(Color.Gray)
