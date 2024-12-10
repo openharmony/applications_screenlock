@@ -53,6 +53,7 @@ export default class MixedPSDViewModel extends BaseViewModel {
       if (result == 0) {
         //unlock the screen
         service.unlocking();
+        service.goBack();
       } else {
         //Clear the entered password
         super.changePrompt(extraInfo.remainTimes, extraInfo.freezingTime, callback);

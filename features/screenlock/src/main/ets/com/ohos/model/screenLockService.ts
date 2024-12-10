@@ -120,6 +120,7 @@ export class ScreenLockService {
                 case EVENT_BEGIN_SLEEP:
                     Trace.start(Trace.CORE_METHOD_SLEEP_TO_LOCK_SCREEN);
                     Log.showInfo(TAG, `EVENT_BEGIN_SLEEP event`);
+                    this.backPage();
                     this.lockScreen();
                     this.accountModel.updateAllUsers()
                     AppStorage.SetOrCreate('deviceStatus', EVENT_BEGIN_SLEEP);
@@ -351,6 +352,12 @@ export class ScreenLockService {
         Router.back();
         this.notifyUnlockScreenResult(UnlockResult.Cancel)
         this.accountModel.unregisterInputer();
+    }
+
+    backPage(): void {
+        if (mRouterPath != "" && this.currentLockStatus !== ScreenLockStatus.Unlock) {
+            this.goBack();
+        }
     }
 
     destroy() {
