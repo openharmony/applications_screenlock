@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import byTrace from "@ohos.bytrace";
+import hiTraceMeter from '@ohos.hiTraceMeter';
 import {Log} from "./Log";
 
 export class Trace {
@@ -53,7 +53,7 @@ export class Trace {
       globalThis.taskIdMap.set(methodName, taskId);
     }
     Log.showInfo(this.TRACE_TAG, `start trace ${taskId} for ${methodName}`);
-    byTrace.startTrace(this.TRACE_TAG + methodName, taskId, Trace.TRACE_LIMIT);
+    hiTraceMeter.startTrace(this.TRACE_TAG + methodName, taskId);
   }
 
   /**
@@ -72,6 +72,6 @@ export class Trace {
       return;
     }
     Log.showInfo(this.TRACE_TAG, `end trace ${taskId} for ${methodName}`);
-    byTrace.finishTrace(this.TRACE_TAG + methodName, taskId);
+    hiTraceMeter.finishTrace(this.TRACE_TAG + methodName, taskId);
   }
 }
