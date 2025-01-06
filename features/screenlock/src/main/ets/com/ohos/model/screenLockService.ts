@@ -147,11 +147,11 @@ export class ScreenLockService {
 
         this.accountModel.eventListener(ACTIVATING_TYPE, ACTIVATING_EVENT, () => {
             Log.showInfo(TAG, `ACTIVATING_TYPE event`);
+            this.lockScreen();
         })
 
         this.accountModel.eventListener(ACTIVATE_TYPE, ACTIVATE_EVENT, () => {
             Log.showInfo(TAG, `ACTIVATE_TYPE event`);
-            this.lockScreen();
             this.accountModel.updateAllUsers()
             this.checkPinAuthProperty(() => {
                 Log.showInfo(TAG, `checkPinAuthProperty back`)
