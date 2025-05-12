@@ -3,7 +3,7 @@
     "name": "wallpapercomponent",
     "type": "har",
     "deviceTypes": [
-      "default",
+      "phone",
       "tablet"
     ],
     "metadata": [
