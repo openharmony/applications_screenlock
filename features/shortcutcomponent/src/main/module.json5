@@ -3,7 +3,7 @@
     "name": "shortcutcomponent",
     "type": "har",
     "deviceTypes": [
-      "default",
+      "phone",
       "tablet"
     ],
     "metadata": [
