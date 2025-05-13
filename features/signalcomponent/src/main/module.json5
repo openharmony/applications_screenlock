@@ -3,7 +3,7 @@
     "name": "signalcomponent",
     "type": "har",
     "deviceTypes": [
-      "default",
+      "phone",
       "tablet"
     ],
     "metadata": [
