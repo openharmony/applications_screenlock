@@ -3,7 +3,7 @@
     "name": "clockcomponent",
     "type": "har",
     "deviceTypes": [
-      "default",
+      "phone",
       "tablet"
     ],
     "metadata": [
