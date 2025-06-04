@@ -121,15 +121,19 @@ export class SignalModel {
   initObserver() {
     Log.showInfo(TAG, 'initObserver');
     isInitObserver = true;
-    Observer.on('signalInfoChange', (signalInfoChange) => {
-      this.checkCellularStatus();
-    });
-    Observer.on('networkStateChange', (networkState) => {
-      this.checkCellularStatus();
-    });
-    Observer.on('simStateChange', (simStateInfo) => {
-      this.checkCellularStatus();
-    });
+    try {
+      Observer.on('signalInfoChange', (signalInfoChange) => {
+        this.checkCellularStatus();
+      });
+      Observer.on('networkStateChange', (networkState) => {
+        this.checkCellularStatus();
+      });
+      Observer.on('simStateChange', (simStateInfo) => {
+        this.checkCellularStatus();
+      });
+    } catch(e) {
+      Log.showError(TAG, `systemui Error.`);
+    }
   }
 
   /**
