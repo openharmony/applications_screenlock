@@ -27,6 +27,7 @@ const TAG = 'ScreenLock-ScreenLockService';
 const URI_DIGITALPASSWORD = 'pages/digitalPassword'
 const URI_MIXEDPASSWORD = 'pages/mixedPassword'
 const URI_CUSTOMPASSWORD = 'pages/customPassword'
+const URI_HOME = 'pages/index'
 
 //Event type name
 const EVENT_BEGIN_WAKEUP: string = 'beginWakeUp'
@@ -343,7 +344,8 @@ export class ScreenLockService {
 
     goBack() {
         Log.showInfo(TAG, `screen lock service goBack`);
-        Router.back();
+        const UIContext: UIContext = AppStorage.get('UIContext');
+        UIContext.getRouter().back({ url: URI_HOME });
         this.notifyUnlockScreenResult(UnlockResult.Cancel)
         this.accountModel.unregisterInputer();
     }
