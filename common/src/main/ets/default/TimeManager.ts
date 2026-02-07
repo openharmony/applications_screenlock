@@ -23,6 +23,7 @@ import {sEventManager} from "./event/EventManager";
 import {Constants} from "./Constants";
 import {obtainLocalEvent} from "./event/EventUtil";
 import {CommonEventManager, getCommonEventManager, POLICY } from "./commonEvent/CommonEventManager";
+import i18n from '@ohos.i18n';
 
 export const TIME_CHANGE_EVENT = "Time_Change_Event";
 
@@ -81,6 +82,7 @@ export class TimeManager {
   }
 
   public formatTime(date: Date) {
+    this.mUse24hFormat = i18n.System.is24HourClock();
     return concatTime(date.getHours() % (this.mUse24hFormat ? 24 : 12), date.getMinutes());
   }
 
