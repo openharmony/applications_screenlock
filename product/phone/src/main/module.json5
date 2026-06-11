@@ -6,7 +6,7 @@
     "description": "$string:phone_desc",
     "mainElement": "com.ohos.systemui.screenlock.ServiceExtAbility",
     "deviceTypes": [
-      "default"
+      "phone"
     ],
     "metadata": [
       {
