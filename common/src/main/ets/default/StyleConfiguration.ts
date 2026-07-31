@@ -19,13 +19,13 @@ const TAG = 'Common-StyleConfiguration';
 
 export class StyleConfiguration {
     static getCommonStyle() {
-        const key: string = TAG + "-Common";
+        const key: string = TAG + '-Common';
         return styleManager.getStyle(key, () => {
             return {
-                statusBarFontSize: $r("app.float.signal_fontSize"),
+                statusBarFontSize: $r('app.float.signal_fontSize'),
                 statusBarIconWidth: '24vp',
                 statusBarIconHeight: '24vp',
-                statusBarMarginLeftRight: $r("app.float.signal_status_margin_Left_right"),
+                statusBarMarginLeftRight: $r('app.float.signal_status_margin_Left_right'),
             };
         });
     }
