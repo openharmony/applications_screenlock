@@ -21,7 +21,7 @@ const TAG = 'ReadConfigUtil';
 export class ReadConfigUtil {
   ReadConfigFile(fileName, callBack:(data)=>void) {
     Log.showInfo(TAG, `readConfigFile fileName:${fileName}`);
-    let jsonCfg : string = "";
+    let jsonCfg : string = '';
     let resManager = AbilityManager.getContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK)?.resourceManager;
     resManager.getRawFile(fileName).then((data)=>{
         let content : string = String.fromCharCode.apply(null, data);
