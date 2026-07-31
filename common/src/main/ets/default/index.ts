@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-export  { CheckEmptyUtils } from './CheckEmptyUtils'
+export { CheckEmptyUtils } from './CheckEmptyUtils'
 
 export { Constants } from './Constants'
 
