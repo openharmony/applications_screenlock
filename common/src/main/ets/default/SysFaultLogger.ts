@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import {Log} from "./Log";
-import hiSysEvent from '@ohos.hiSysEvent'
+import {Log} from './Log';
+import hiSysEvent from '@ohos.hiSysEvent';
 
 const TAG = 'SystemFaultLogger';
-const APP_DOMAIN: string = "SYSTEMUI_APP";
-const APP_LOG_NAME: string = "SCREENLOCK_FAULT";
+const APP_DOMAIN: string = 'SYSTEMUI_APP';
+const APP_LOG_NAME: string = 'SCREENLOCK_FAULT';
 
 interface LogParam {
   FAULT_ID: string,
@@ -27,9 +27,9 @@ interface LogParam {
 }
 
 export enum FaultID {
-  MEMORY = "MEMORY_MONITOR",
-  SCREEN_LOCK_MANAGER = "CONNECT_SCREENLOCKMANAGERSERVICE_ABNORMAL",
-  ACCOUNT_SYSTEM = "ACCOUNTSYSTEM_CALL_ABNORMAL"
+  MEMORY = 'MEMORY_MONITOR',
+  SCREEN_LOCK_MANAGER = 'CONNECT_SCREENLOCKMANAGERSERVICE_ABNORMAL',
+  ACCOUNT_SYSTEM = 'ACCOUNTSYSTEM_CALL_ABNORMAL'
 }
 
 export function WriteFaultLog(logParam: LogParam) {
@@ -38,11 +38,11 @@ export function WriteFaultLog(logParam: LogParam) {
     name: APP_LOG_NAME,
     eventType: hiSysEvent.EventType.FAULT,
     params: logParam
-  }
+  };
   hiSysEvent.write(sysEventInfo, (err, val) => {
-    Log.showInfo(TAG, "fault log params is : " + JSON.stringify(sysEventInfo))
-    Log.showInfo(TAG, `write fault log result: ${val}`)
-  })
+    Log.showInfo(TAG, "fault log params is : " + JSON.stringify(sysEventInfo));
+    Log.showInfo(TAG, `write fault log result: ${val}`);
+  });
 }
 
 export function SysFaultLogger(logParam: LogParam) {
@@ -52,7 +52,7 @@ export function SysFaultLogger(logParam: LogParam) {
       try {
         originalFunc.apply(this, args);
       }  catch (err: any) {
-        Log.showInfo(TAG, "catch error in execute: " + propertyKey);
+        Log.showInfo(TAG, 'catch error in execute: ' + propertyKey);
         WriteFaultLog(logParam);
       }
     };
