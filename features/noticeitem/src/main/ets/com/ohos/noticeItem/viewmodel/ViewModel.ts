@@ -227,7 +227,7 @@ export class ViewModel {
     Log.showDebug(TAG, `removeGroupNotification, groupName: ${itemData.groupName}`);
     let groupName = itemData.groupName
     for (let i = 0, len = this.mNotificationList.length; i < len; i++) {
-      if (this.mNotificationList[i]?.groupName == groupName) {
+      if (this.mNotificationList[i]?.groupName === groupName) {
         Log.showDebug(TAG, `removeGroupNotification i = ${i}`);
         let id = this.mNotificationList[i].id
         let hashcode = this.mNotificationList[i].hashcode
