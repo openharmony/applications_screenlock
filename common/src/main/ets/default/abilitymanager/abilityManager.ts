@@ -63,6 +63,6 @@ export class AbilityManager {
     }).catch((error) => {
       Log.showError(TAG, `startAbility, error: ${JSON.stringify(error)}`);
       callback(error);
-    })
+    });
   }
 }
