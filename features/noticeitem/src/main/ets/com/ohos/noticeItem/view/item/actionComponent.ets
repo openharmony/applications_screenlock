@@ -72,7 +72,7 @@ export default struct ActionComponent {
           .enabled(this.inputActionData.isSending ? false : true)
           .flexGrow(1)
           .margin({ right: Layout.ACTION_MARGIN })
-        Image($r("app.media.send"))
+        Image($r('app.media.send'))
           .objectFit(ImageFit.Contain)
           .width(Layout.INPUT_IMAGE_SIZE)
           .height(Layout.INPUT_IMAGE_SIZE)
@@ -99,12 +99,12 @@ struct ActionButton {
 
   build() {
     Text(this.content)
-      .fontSize($r("sys.float.ohos_id_text_size_button2"))
-      .fontColor($r("sys.color.ohos_id_color_text_primary_activated"))
-      .borderRadius($r("sys.float.ohos_fa_corner_radius_default_s"))
+      .fontSize($r('sys.float.ohos_id_text_size_button2'))
+      .fontColor($r('sys.color.ohos_id_color_text_primary_activated'))
+      .borderRadius($r('sys.float.ohos_fa_corner_radius_default_s'))
       .height(Layout.ACTION_HEIGHT)
       .padding({ left: Layout.ACTION_MARGIN, right: Layout.ACTION_MARGIN })
-      .backgroundColor(this.isTouched ? $r("sys.color.ohos_fa_click_effect") : $r("app.color.transparent"))
+      .backgroundColor(this.isTouched ? $r('sys.color.ohos_fa_click_effect') : $r('app.color.transparent'))
       .onTouch((event: TouchEvent) => {
         if (!this.clickable) {
           return;
