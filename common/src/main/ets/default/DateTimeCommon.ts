@@ -61,7 +61,7 @@ export class DateTimeCommon {
     return week
   }
 
-  concatTime(hours, minutes): string{
+  concatTime(hours, minutes): string {
     return `${this.fill(hours)}:${this.fill(minutes)}`;
   };
 
