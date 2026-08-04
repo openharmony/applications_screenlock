@@ -124,7 +124,7 @@ export default class AccountsModel {
     }
 
     commonEventCancelListener() {
-        Log.showInfo(TAG, "cancel commonEvent");
+        Log.showInfo(TAG, 'cancel commonEvent');
         this.mManager?.release();
         this.mManager = undefined;
     }
