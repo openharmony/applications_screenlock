@@ -57,8 +57,8 @@ export class DateTimeCommon {
   getSystemWeek() {
     let dateTime = new Date();
     let days = dateTime.getDay();
-    let week = this.convert(days)
-    return week
+    let week = this.convert(days);
+    return week;
   }
 
   concatTime(hours, minutes): string {
