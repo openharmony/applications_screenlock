@@ -21,7 +21,7 @@ import CommonUtil from '../common/CommonUtil';
 import DistributionManager from './NotificationDistributionManager';
 
 const TAG = 'NotificationServiceSc';
-const PLUGIN_TEMPLATE = {'source':'/system/etc/notification_template/assets/js/downloadTemplate.js','ability':'' } ;
+const PLUGIN_TEMPLATE = { 'source': '/system/etc/notification_template/assets/js/downloadTemplate.js', 'ability': '' };
 
 interface NotificationListener {
   userId: number;
