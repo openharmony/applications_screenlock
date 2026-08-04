@@ -314,10 +314,10 @@ export class ScreenLockService {
                 Log.showDebug(TAG, `authUser  callback:${result} extraInfo:${JSON.stringify(extraInfo)}`);
                 this.accountModel.unregisterInputer();
                 callback(result, extraInfo);
-            })
+            });
         }).catch(() => {
             Log.showError(TAG, `registerPWDInputer fails`);
-        })
+        });
     }
 
     authUserByFace() {
