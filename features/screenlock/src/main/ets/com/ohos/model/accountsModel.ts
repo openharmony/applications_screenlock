@@ -267,15 +267,15 @@ export default class AccountsModel {
     }
 
     modelFinish() {
-        Log.showDebug(TAG, 'start modelFinish')
+        Log.showDebug(TAG, 'start modelFinish');
     }
 
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func isOsAccountActived failed"})
     isActivateAccount(callback: Callback<boolean>) {
-        Log.showDebug(TAG, `isActivateAccount userId:${this.mCurrentUserId}`)
+        Log.showDebug(TAG, `isActivateAccount userId:${this.mCurrentUserId}`);
         osAccount.getAccountManager().isOsAccountActived(this.mCurrentUserId).then((isActivate) => {
-            Log.showInfo(TAG, `isActivateAccount userId:${this.mCurrentUserId} result: ${isActivate}`)
-            callback(isActivate)
+            Log.showInfo(TAG, `isActivateAccount userId:${this.mCurrentUserId} result: ${isActivate}`);
+            callback(isActivate);
         })
     }
     getCurrentUserId() {
