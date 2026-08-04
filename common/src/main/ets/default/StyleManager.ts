@@ -27,7 +27,7 @@ export class StyleManager {
         return globalThis.StyleManager;
     }
 
-    setAbilityPageName(name: string): void{
+    setAbilityPageName(name: string): void {
         Log.showDebug(TAG, `setAbilityPageName, name: ${name}`);
         this.mAbilityPageName = name;
     }
