@@ -251,7 +251,6 @@ export class ViewModel {
 
   clickItem(itemData, want?: any) {
     Log.showInfo(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}, tapDismissed: ${itemData.tapDismissed}`);
-    //    Log.showDebug(TAG, `clickItem itemId: ${itemData.id}, want: ${JSON.stringify(want)}`);
     NotificationWindowManager.hideNotificationWindow();
     CommonUtil.startWant((want) ? want : itemData.want);
     if (itemData.tapDismissed) {
@@ -358,17 +357,7 @@ export class ViewModel {
     }
     if (itemData.notificationFlags?.vibrationEnabled != Constants.NOTIFICATION_TYPE_CLOSE) {
       if (itemData.ruleData.isAllowVibrationValues) {
-        //      Log.showInfo(TAG, `vibrate start`);
-        //      for (let i = 0, len = itemData.vibrationValues.length; i < len; i++) {
-        //        vibrator.vibrate(itemData.vibrationValues[i], function(error){
-        //          Log.showInfo(TAG, `vibrate id：${i}`);
-        //          if (error) {
-        //            Log.showInfo(TAG, "error.code" + error.code + "error.message" + error.message);
-        //          } else {
-        //            Log.showInfo(TAG, "Callback returned to indicate a successful vibration.");
-        //          }
-        //        })
-        //      }
+        Log.showInfo(TAG, `vibrate start`);
       }
     }
   }
