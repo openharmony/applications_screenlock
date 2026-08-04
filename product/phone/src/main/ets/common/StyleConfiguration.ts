@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Log, styleManager} from '@ohos/common'
+import {Log, styleManager} from '@ohos/common';
 
 const TAG = 'Lock_StatusBar-StyleConfiguration';
 
