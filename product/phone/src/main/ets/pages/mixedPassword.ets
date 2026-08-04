@@ -52,7 +52,7 @@ export default struct MixedPassword {
 
   build() {
     Stack(){
-      Image($r("app.media.bg"))
+      Image($r('app.media.bg'))
         .width(Constants.FULL_CONTAINER_WIDTH)
         .height(Constants.FULL_CONTAINER_HEIGHT)
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
