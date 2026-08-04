@@ -31,8 +31,8 @@ const TAG = 'ScreenLock-SlideScreenlock'
 export default struct SlideScreenlock {
   @State mViewModel: ViewModel = new ViewModel()
   @StorageLink('batteryCharging') @Watch('onCharging') batteryCharging: boolean = false
-  @Prop @Watch("onStatusChange") pageStatus: number
-  @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ""
+  @Prop @Watch('onStatusChange') pageStatus: number
+  @StorageLink('deviceStatus') @Watch('onDeviceStatusChange') deviceStatus: string = ''
   @StorageLink('isWallpaperShow') isWallpaperShow: boolean = true
   @StorageLink('screenlockdirection') screenlockdirection: number = 1
   private mHeightPx : number =  44
