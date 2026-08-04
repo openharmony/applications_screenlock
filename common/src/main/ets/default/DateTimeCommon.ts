@@ -50,8 +50,8 @@ export class DateTimeCommon {
       'calendarYear': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarYear,
       'calendarMonth': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarMonth,
       'calendarDay': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarDay
-    }
-    return res
+    };
+    return res;
   }
 
   getSystemWeek() {
