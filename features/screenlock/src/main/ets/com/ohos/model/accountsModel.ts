@@ -203,7 +203,7 @@ export default class AccountsModel {
                     Log.showInfo(TAG, `authUser UserAuthManager.authUser onAcquireInfo`);
                 }
             }
-            )
+            );
         } catch (error) {
             console.error(`authUser failed, code is ${error.code}, message is ${error.message}`);
         }
