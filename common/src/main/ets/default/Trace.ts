@@ -14,15 +14,15 @@
  */
 
 import hiTraceMeter from '@ohos.hiTraceMeter';
-import {Log} from "./Log";
+import {Log} from './Log';
 
 export class Trace {
-  static readonly CORE_METHOD_UNLOCK_SCREEN = "unlockScreen"
-  static readonly CORE_METHOD_CALL_ACCOUNT_SYSTEM = "callAccountSubsystem";
-  static readonly CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT = "passingAccountSubsystemResult";
-  static readonly CORE_METHOD_HIDE_PSD_PAGE = "hidePsdPage";
-  static readonly CORE_METHOD_SHOW_LOCK_SCREEN = "showLockScreen";
-  static readonly CORE_METHOD_SLEEP_TO_LOCK_SCREEN = "sleepToLockScreen"
+  static readonly CORE_METHOD_UNLOCK_SCREEN = 'unlockScreen';
+  static readonly CORE_METHOD_CALL_ACCOUNT_SYSTEM = 'callAccountSubsystem';
+  static readonly CORE_METHOD_PASS_ACCOUNT_SYSTEM_RESULT = 'passingAccountSubsystemResult';
+  static readonly CORE_METHOD_HIDE_PSD_PAGE = 'hidePsdPage';
+  static readonly CORE_METHOD_SHOW_LOCK_SCREEN = 'showLockScreen';
+  static readonly CORE_METHOD_SLEEP_TO_LOCK_SCREEN = 'sleepToLockScreen';
 
   private static readonly TRACE_TAG = 'ScreenLock:Trace';
   private static readonly RECORD_TRACE = true;
@@ -42,12 +42,14 @@ export class Trace {
     * @param {string} methodName - methodName for tracing
     */
   static start(methodName: string) {
-    if (!Trace.RECORD_TRACE) return;
+    if (!Trace.RECORD_TRACE) {
+      return;
+    }
     if (typeof globalThis.taskIdMap === 'undefined' || typeof globalThis.traceIndex === 'undefined') {
       Trace.init();
     }
     let taskId = globalThis.taskIdMap.get(methodName);
-    if (taskId == undefined) {
+    if (taskId === undefined) {
       taskId = globalThis.traceIndex;
       globalThis.traceIndex++;
       globalThis.taskIdMap.set(methodName, taskId);
@@ -62,7 +64,9 @@ export class Trace {
     * @param {string} methodName - methodName for tracing
     */
   static end(methodName: string) {
-    if (!Trace.RECORD_TRACE) return;
+    if (!Trace.RECORD_TRACE) {
+      return;
+    }
     if (typeof globalThis.taskIdMap === 'undefined') {
       return;
     }
