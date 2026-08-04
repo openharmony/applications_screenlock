@@ -53,7 +53,7 @@ export default class SlideScreenLockViewModel {
     }
 
     unlockScreen(): void {
-        ScreenLockService.unlockScreen()
+        ScreenLockService.unlockScreen();
     }
 
     touchEvent(event: TouchEvent) {
