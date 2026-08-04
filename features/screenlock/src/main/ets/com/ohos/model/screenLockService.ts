@@ -252,7 +252,7 @@ export class ScreenLockService {
                     this.unlocking();
                 } else {
                     let slidestatus = AppStorage.Get('slidestatus')
-                    if(!slidestatus){
+                    if (!slidestatus) {
                         AppStorage.SetOrCreate('slidestatus', true);
                         const UIContext: UIContext = AppStorage.get('UIContext');
                         Log.showInfo(TAG, `this.UIContext is ${UIContext}`)
@@ -303,7 +303,7 @@ export class ScreenLockService {
     authUser(authSubType: AuthSubType, passwordData: number[] | string, callback): void {
         Log.showInfo(TAG, `authUser authSubType:${authSubType}`);
         let password: string = '';
-        if (typeof passwordData == 'string') {
+        if (typeof passwordData === 'string') {
             password = passwordData;
         } else {
             password = passwordData.join('');
