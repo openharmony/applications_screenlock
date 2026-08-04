@@ -141,7 +141,7 @@ export default struct BannerNotificationItem {
     }
     .width('100%')
     .height('100%')
-    .borderRadius($r("sys.float.ohos_id_corner_radius_default_l"))
+    .borderRadius($r('sys.float.ohos_id_corner_radius_default_l'))
     .backgroundColor($r('app.color.notificationitem_background'))
     .clip(true)
     .onHover((isHover) => {
