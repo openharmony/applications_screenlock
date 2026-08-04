@@ -115,8 +115,8 @@ class ServiceExtAbility extends ServiceExtension {
             this.direction =2
         };
         AppStorage.SetOrCreate('screenlockdirection', this.direction);
-        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, "rect", rect);
-        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, "dis", {
+        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect', rect);
+        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'dis', {
             width: dis.width,
             height: dis.height,
         });
