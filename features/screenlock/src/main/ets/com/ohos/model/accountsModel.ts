@@ -204,23 +204,23 @@ export default class AccountsModel {
                 }
             }
             )
-        } catch(error) {
+        } catch (error) {
             console.error(`authUser failed, code is ${error.code}, message is ${error.message}`);
         }
     }
 
     getAuthProperty(authType, callback) {
         Log.showDebug(TAG, `getAuthProperty param: authType ${authType}`);
-        let keyArray = [GetPropertyType.AUTH_SUB_TYPE, GetPropertyType.REMAIN_TIMES, GetPropertyType.FREEZING_TIME]
+        let keyArray = [GetPropertyType.AUTH_SUB_TYPE, GetPropertyType.REMAIN_TIMES, GetPropertyType.FREEZING_TIME];
         let request = {
             'authType': authType,
             'keys': keyArray
-        }
+        };
         try {
             this.userAuthManager.getProperty(request).then((properties) => {
                 Log.showInfo(TAG, `getAuthProperty properties ${JSON.stringify(properties)}`);
-                callback(properties)
-            })
+                callback(properties);
+            });
         } catch (error) {
             console.error(`getProperty failed, code is ${error.code}, message is ${error.message}`);
         };
@@ -267,7 +267,7 @@ export default class AccountsModel {
     }
 
     modelFinish() {
-        Log.showDebug(TAG, "start modelFinish")
+        Log.showDebug(TAG, 'start modelFinish')
     }
 
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func isOsAccountActived failed"})
