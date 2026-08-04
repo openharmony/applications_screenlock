@@ -88,10 +88,7 @@ export class TimeManager {
 
   private async initTimeFormat(context: any) {
     Log.showDebug(TAG, "initTimeFormat");
-    //this.mSettingsHelper = featureAbility.acquireDataAbilityHelper(context, URI_VAR);
     this.mSettingsHelper = await dataShare.createDataShareHelper(context, Constants.getUriSync(TIME_FORMAT_KEY));
-    //Log.showDebug(TAG, "url:"+Constants.getUriSync(TIME_FORMAT_KEY));
-    //Log.showDebug(TAG, "mSettingsHelper:"+JSON.stringify(this.mSettingsHelper));
     try {
       this.mSettingsHelper.on("dataChange", Constants.getUriSync(TIME_FORMAT_KEY), () => {
         Log.showDebug(TAG, "mSettingsHelper on");
