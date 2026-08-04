@@ -28,7 +28,7 @@ export default class StyleConfiguration {
     }
 
     static getBatteryPicStyle() {
-        const key: string = TAG + "-BatteryPicComponent";
+        const key: string = TAG + '-BatteryPicComponent';
         return styleManager.getStyle(key, () => {
             return {
                 picGap: $r('app.float.battery_component_pic_gap'),
