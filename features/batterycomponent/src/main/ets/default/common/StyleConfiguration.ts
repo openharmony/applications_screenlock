@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {styleManager} from '@ohos/common'
+import {styleManager} from '@ohos/common';
 
 const TAG = 'battery-StyleConfiguration';
 
