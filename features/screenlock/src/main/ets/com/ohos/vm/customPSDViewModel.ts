@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-import {Log, Trace} from '@ohos/common'
-import Constants from '../common/constants'
-import BaseViewModel, {service, AuthSubType} from './baseViewModel'
+import {Log, Trace} from '@ohos/common';
+import Constants from '../common/constants';
+import BaseViewModel, {service, AuthSubType} from './baseViewModel';
 import {Callback} from '@ohos.base';
 import { NumKeyBoardValue } from '../../../../../../../noticeitem/src/main/ets/com/ohos/noticeItem/common/constants';
 
-const TAG = 'ScreenLock-CustomPSDViewModel'
+const TAG = 'ScreenLock-CustomPSDViewModel';
 
 export default class CustomPSDViewModel extends BaseViewModel {
     passwordArr: number[] = [];
@@ -35,7 +35,7 @@ export default class CustomPSDViewModel extends BaseViewModel {
     }
 
     onKeyPress(index: number, callback: Callback<void>) {
-        Log.showInfo(TAG, `onKeyPress start param: ${index}`)
+        Log.showInfo(TAG, `onKeyPress start param: ${index}`);
         let keyValue = this.numKeyboard[index].value;
         if (keyValue >= 0 && !this.inhibitInput) {
             if (this.passwordArr.length < Constants.PASSWORD_MAX_LEN) {
@@ -45,7 +45,7 @@ export default class CustomPSDViewModel extends BaseViewModel {
                 this.updateStorage(callback);
             }
         } else if (keyValue == Constants.DEL_PWD) {
-            this.passwordArr.pop()
+            this.passwordArr.pop();
             if (this.passwordArr.length == 0) {
                 this.numKeyboard[11].row1 = $r('app.string.back');
                 this.numKeyboard[11].value = Constants.GO_BACK;
