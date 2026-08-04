@@ -14,8 +14,8 @@
  */
 
 import wifi from '@ohos.wifi';
-import Constants, {WifiState, WifiConnectionState} from './common/constants'
-import {Log} from '@ohos/common'
+import Constants, {WifiState, WifiConnectionState} from './common/constants';
+import {Log} from '@ohos/common';
 
 const TAG = 'WifiComponent-WifiModel';
 
@@ -91,7 +91,7 @@ export class WifiModel {
   }
 
   onWifiRssiChange(data) {
-    Log.showInfo(TAG, 'onWifiRssiChange')
+    Log.showInfo(TAG, 'onWifiRssiChange');
     this.getLinkedInfo();
   }
 
