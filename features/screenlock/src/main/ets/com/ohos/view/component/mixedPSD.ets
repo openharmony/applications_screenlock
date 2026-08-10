@@ -47,7 +47,7 @@ export default struct MixedPSD {
             .fontColor(Color.White)
             .margin({
               bottom: $r('app.float.mixedpsd_prompt_margin_bottom'),
-              top: $r("app.float.mixedpsd_prompt_margin_top")
+              top: $r('app.float.mixedpsd_prompt_margin_top')
             })
             .textAlign(TextAlign.Center)
             .textOverflow({ overflow: TextOverflow.None })
@@ -62,7 +62,7 @@ export default struct MixedPSD {
             .fontSize($r('app.float.mixedpsd_prompt_text_fontsize'))
             .width($r('app.float.mixedpsd_input_width'))
             .height($r('app.float.mixedpsd_input_height'))
-            .backgroundColor("rgba(255,255,255,0.2)")
+            .backgroundColor('rgba(255,255,255,0.2)')
             .fontColor(Color.White)
             .enterKeyType(EnterKeyType.Done)
             .enabled(!this.mViewModel.inhibitInput)

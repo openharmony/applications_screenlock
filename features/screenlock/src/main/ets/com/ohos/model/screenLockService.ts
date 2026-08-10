@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Log, Trace, WriteFaultLog, FaultID, createOrGet, ScreenLockStatus} from '@ohos/common'
+import {Log, Trace, WriteFaultLog, FaultID, createOrGet, ScreenLockStatus} from '@ohos/common';
 import ScreenLockModel from './screenLockModel';
-import AccountModel, {AuthType, AuthSubType, AuthTurstLevel} from './accountsModel'
+import AccountModel, {AuthType, AuthSubType, AuthTurstLevel} from './accountsModel';
 import Router from '@system.router';
 import commonEvent from '@ohos.commonEvent';
 import hiDebug from '@ohos.hidebug';
@@ -24,44 +24,44 @@ import {Callback} from '@ohos.base';
 import {UIContext} from '@ohos.arkui.UIContext';
 
 const TAG = 'ScreenLock-ScreenLockService';
-const URI_DIGITALPASSWORD = 'pages/digitalPassword'
-const URI_MIXEDPASSWORD = 'pages/mixedPassword'
-const URI_CUSTOMPASSWORD = 'pages/customPassword'
-const URI_HOME = 'pages/index'
+const URI_DIGITALPASSWORD = 'pages/digitalPassword';
+const URI_MIXEDPASSWORD = 'pages/mixedPassword';
+const URI_CUSTOMPASSWORD = 'pages/customPassword';
+const URI_HOME = 'pages/index';
 
 //Event type name
-const EVENT_BEGIN_WAKEUP: string = 'beginWakeUp'
-const EVENT_END_WAKEUP: string = 'endWakeUp'
-const EVENT_BEGIN_SCREENON: string = 'beginScreenOn'
-const EVENT_END_SCREEN_ON: string = 'endScreenOn'
-const EVENT_BEGIN_SCREENOFF: string = 'beginScreenOff'
-const EVENT_END_SCREENOFF: string = 'endScreenOff'
-const EVENT_UNLOCK_SCREEN: string = 'unlockScreen'
-const EVENT_LOCK_SCREEN: string = 'lockScreen'
-const EVENT_BEGIN_EXITANIMATION: string = 'beginExitAnimation'
-const EVENT_BEGIN_SLEEP: string = 'beginSleep'
-const EVENT_END_SLEEP: string = 'endSleep'
-const EVENT_CHANGE_USER: string = 'changeUser'
-const EVENT_SCREENLOCK_ENABLE: string = 'screenlockEnabled'
-const EVENT_SYSTEM_READY: string = 'systemReady'
+const EVENT_BEGIN_WAKEUP: string = 'beginWakeUp';
+const EVENT_END_WAKEUP: string = 'endWakeUp';
+const EVENT_BEGIN_SCREENON: string = 'beginScreenOn';
+const EVENT_END_SCREEN_ON: string = 'endScreenOn';
+const EVENT_BEGIN_SCREENOFF: string = 'beginScreenOff';
+const EVENT_END_SCREENOFF: string = 'endScreenOff';
+const EVENT_UNLOCK_SCREEN: string = 'unlockScreen';
+const EVENT_LOCK_SCREEN: string = 'lockScreen';
+const EVENT_BEGIN_EXITANIMATION: string = 'beginExitAnimation';
+const EVENT_BEGIN_SLEEP: string = 'beginSleep';
+const EVENT_END_SLEEP: string = 'endSleep';
+const EVENT_CHANGE_USER: string = 'changeUser';
+const EVENT_SCREENLOCK_ENABLE: string = 'screenlockEnabled';
+const EVENT_SYSTEM_READY: string = 'systemReady';
 
-const SERVICE_RESTART: string = 'serviceRestart'
+const SERVICE_RESTART: string = 'serviceRestart';
 
-const LOCK_SCREEN_RESULT: string = 'lockScreenResult'
-const UNLOCK_SCREEN_RESULT: string = 'unlockScreenResult'
-const SCREENLOCK_DRAW_DONE: string = 'screenDrawDone'
+const LOCK_SCREEN_RESULT: string = 'lockScreenResult';
+const UNLOCK_SCREEN_RESULT: string = 'unlockScreenResult';
+const SCREENLOCK_DRAW_DONE: string = 'screenDrawDone';
 
-const ACTIVATING_TYPE = "activating"
-const ACTIVATE_TYPE = "activate"
-const ACTIVATING_EVENT = "activatingEvent"
-const ACTIVATE_EVENT = "activateEvent"
+const ACTIVATING_TYPE = 'activating';
+const ACTIVATE_TYPE = 'activate';
+const ACTIVATING_EVENT = 'activatingEvent';
+const ACTIVATE_EVENT = 'activateEvent';
 
-const CHALLENGE_INT = 0
+const CHALLENGE_INT = 0;
 
-const MAIN_USER = 100
+const MAIN_USER = 100;
 
-const MEMORY_MONITOR_PERIOD_MS = 600000
-const MEMORY_MONITOR_LIMIT_KB = 120 * 1024
+const MEMORY_MONITOR_PERIOD_MS = 600000;
+const MEMORY_MONITOR_LIMIT_KB = 120 * 1024;
 
 export {AuthType, AuthSubType};
 
@@ -77,17 +77,17 @@ export enum LockResult {
     Cancel = 2
 }
 
-let mRouterPath: string = ""
+let mRouterPath: string = '';
 
-let mWillRecognizeFace: boolean = false
+let mWillRecognizeFace: boolean = false;
 
 let mUnLockBeginAnimation: Callback<Callback<void>> = (callback: Callback<void>) => {
-    callback()
+    callback();
 }
 
 export class ScreenLockService {
-    accountModel: AccountModel = new AccountModel()
-    screenLockModel: ScreenLockModel = new ScreenLockModel()
+    accountModel: AccountModel = new AccountModel();
+    screenLockModel: ScreenLockModel = new ScreenLockModel();
     currentLockStatus : ScreenLockStatus;
     memoryMonitor: number = -1;
     init() {
@@ -95,10 +95,10 @@ export class ScreenLockService {
         this.startMonitorMemory();
         this.accountModel.modelInit();
         this.monitorEvents();
-        this.accountModel.updateAllUsers()
+        this.accountModel.updateAllUsers();
         this.checkPinAuthProperty(() => {
-            Log.showInfo(TAG, `checkPinAuthProperty back`)
-            this.authUserByFace()
+            Log.showInfo(TAG, `checkPinAuthProperty back`);
+            this.authUserByFace();
         })
     }
 
@@ -156,8 +156,8 @@ export class ScreenLockService {
             this.lockScreen();
             this.accountModel.updateAllUsers()
             this.checkPinAuthProperty(() => {
-                Log.showInfo(TAG, `checkPinAuthProperty back`)
-                this.authUserByFace()
+                Log.showInfo(TAG, `checkPinAuthProperty back`);
+                this.authUserByFace();
             })
         })
 
@@ -182,15 +182,15 @@ export class ScreenLockService {
             if (this.currentLockStatus == ScreenLockStatus.Locking) {
                 Log.showInfo(TAG, `had locked, no need to publish lock_screen`);
             } else {
-                this.notifyLockScreenResult(LockResult.Success)
-                systemParameter.set('bootevent.lockscreen.ready','true')
+                this.notifyLockScreenResult(LockResult.Success);
+                systemParameter.set('bootevent.lockscreen.ready','true');
                 this.currentLockStatus = ScreenLockStatus.Locking;
             }
         });
     }
 
     private checkPinAuthProperty(callback: Callback<void>) {
-        Log.showDebug(TAG, "checkPinAuthProperty")
+        Log.showDebug(TAG, "checkPinAuthProperty");
         this.accountModel.getAuthProperty(AuthType.PIN, (properties) => {
             Log.showInfo(TAG, `checkPinAuthProperty: AUTH_SUB_TYPE:${properties.authSubType}`);
             switch (properties.authSubType) {
@@ -198,42 +198,42 @@ export class ScreenLockService {
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Locking);
                     mRouterPath = URI_DIGITALPASSWORD;
                     this.checkFaceAuthProperty(() => {
-                        callback()
+                        callback();
                     })
                     break;
                 case AuthSubType.PIN_MIXED:
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Locking);
                     mRouterPath = URI_MIXEDPASSWORD;
                     this.checkFaceAuthProperty(() => {
-                        callback()
+                        callback();
                     })
                     break;
                 case AuthSubType.PIN_NUMBER:
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Locking);
                     mRouterPath = URI_CUSTOMPASSWORD;
                     this.checkFaceAuthProperty(() => {
-                        callback()
+                        callback();
                     })
                     break;
                 default:
                     AppStorage.SetOrCreate('lockStatus', ScreenLockStatus.Unlock);
-                    mWillRecognizeFace = false
+                    mWillRecognizeFace = false;
             }
         })
     }
 
     private checkFaceAuthProperty(callback: Callback<void>) {
-        Log.showDebug(TAG, "checkFaceAuthProperty")
+        Log.showDebug(TAG, "checkFaceAuthProperty");
         this.accountModel.getAuthProperty(AuthType.FACE, (properties) => {
             Log.showInfo(TAG, `checkFaceAuthProperty：AUTH_SUB_TYPE:${properties.authSubType}`);
             switch (properties.authSubType) {
                 case AuthSubType.FACE_2D:
                 case AuthSubType.FACE_3D:
-                    mWillRecognizeFace = true
-                    callback()
+                    mWillRecognizeFace = true;
+                    callback();
                     break;
                 default:
-                    mWillRecognizeFace = false
+                    mWillRecognizeFace = false;
             }
         })
     }
@@ -242,22 +242,22 @@ export class ScreenLockService {
         Log.showInfo(TAG, `unlockScreen`);
         this.accountModel.isActivateAccount((isActivate: boolean) => {
             if (!isActivate) {
-                return
+                return;
             }
             mUnLockBeginAnimation(() => {
-                let status = AppStorage.Link('lockStatus')
+                let status = AppStorage.Link('lockStatus');
                 Log.showDebug(TAG, `unlocking lockStatus:${JSON.stringify(status?.get())}`);
                 if (status?.get() == ScreenLockStatus.Unlock) {
                     Log.showInfo(TAG, `unlock the screen`);
                     this.unlocking();
                 } else {
-                    let slidestatus = AppStorage.Get('slidestatus')
-                    if(!slidestatus){
+                    let slidestatus = AppStorage.Get('slidestatus');
+                    if (!slidestatus) {
                         AppStorage.SetOrCreate('slidestatus', true);
                         const UIContext: UIContext = AppStorage.get('UIContext');
-                        Log.showInfo(TAG, `this.UIContext is ${UIContext}`)
+                        Log.showInfo(TAG, `this.UIContext is ${UIContext}`);
                         Log.showInfo(TAG, `unlockScreen Router.push`);
-                        UIContext.getRouter().pushUrl({ url: mRouterPath })
+                        UIContext.getRouter().pushUrl({ url: mRouterPath });
                     }
                 }
             })
@@ -303,7 +303,7 @@ export class ScreenLockService {
     authUser(authSubType: AuthSubType, passwordData: number[] | string, callback): void {
         Log.showInfo(TAG, `authUser authSubType:${authSubType}`);
         let password: string = '';
-        if (typeof passwordData == 'string') {
+        if (typeof passwordData === 'string') {
             password = passwordData;
         } else {
             password = passwordData.join('');
@@ -314,10 +314,10 @@ export class ScreenLockService {
                 Log.showDebug(TAG, `authUser  callback:${result} extraInfo:${JSON.stringify(extraInfo)}`);
                 this.accountModel.unregisterInputer();
                 callback(result, extraInfo);
-            })
+            });
         }).catch(() => {
             Log.showError(TAG, `registerPWDInputer fails`);
-        })
+        });
     }
 
     authUserByFace() {

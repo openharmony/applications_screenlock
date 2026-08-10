@@ -155,11 +155,11 @@ export default class NotificationManager {
     });
   }
 
-  static isDebugMode(tag): boolean{
+  static isDebugMode(tag): boolean {
     Log.showDebug(TAG, `isDebugMode from: ${tag}`);
     let debug = Systemparameter.getSync(DEBUG_SETTING_KEY, "")
     Log.showInfo(TAG, `Systemparameter DEBUG_SETTING: ${debug}`);
-    return!!debug;
+    return !!debug;
   }
 
 }

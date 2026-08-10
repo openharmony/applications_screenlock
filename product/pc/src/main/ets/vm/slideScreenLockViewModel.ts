@@ -33,10 +33,10 @@ export default class SlideScreenLockViewModel {
     elementAlpha: number = 1
     elementScale: number = 1
     backgroundScale: number = 1.1
-    duration: number= 250
+    duration: number = 250
     toggleShow: boolean = false
 
-    ViewModelInit(): void{
+    ViewModelInit(): void {
         Log.showDebug(TAG, `ViewModelInit`);
         ScreenLockService.setUnlockAnimation((callback: Callback<void>) => {
             this.elementAlpha = 0
@@ -52,8 +52,8 @@ export default class SlideScreenLockViewModel {
         this.slidingLength = SLIDING_LENGTH
     }
 
-    unlockScreen(): void{
-        ScreenLockService.unlockScreen()
+    unlockScreen(): void {
+        ScreenLockService.unlockScreen();
     }
 
     touchEvent(event: TouchEvent) {

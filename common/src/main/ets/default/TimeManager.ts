@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-import settings from "@ohos.settings";
-import commonEvent from "@ohos.commonEvent";
+import settings from '@ohos.settings';
+import commonEvent from '@ohos.commonEvent';
 import dataShare from '@ohos.data.dataShare';
-import {DataAbilityHelper} from "ability/dataAbilityHelper";
-import {Log} from "./Log";
-import {sEventManager} from "./event/EventManager";
-import {Constants} from "./Constants";
-import {obtainLocalEvent} from "./event/EventUtil";
-import {CommonEventManager, getCommonEventManager, POLICY } from "./commonEvent/CommonEventManager";
+import {DataAbilityHelper} from 'ability/dataAbilityHelper';
+import {Log} from './Log';
+import {sEventManager} from './event/EventManager';
+import {Constants} from './Constants';
+import {obtainLocalEvent} from './event/EventUtil';
+import {CommonEventManager, getCommonEventManager, POLICY } from './commonEvent/CommonEventManager';
 import i18n from '@ohos.i18n';
 
-export const TIME_CHANGE_EVENT = "Time_Change_Event";
+export const TIME_CHANGE_EVENT = 'Time_Change_Event';
 
 export type TimeEventArgs = {
   date: Date;
   timeFormat: boolean;
 };
 
-const TAG = "TimeManagerSc";
+const TAG = 'TimeManagerSc';
 //const URI_VAR = "dataability:///com.ohos.settingsdata.DataAbility";
 const TIME_FORMAT_KEY = settings.date.TIME_FORMAT;
 const TIME_SUBSCRIBE_INFO = {
@@ -44,7 +44,7 @@ const TIME_SUBSCRIBE_INFO = {
 };
 
 function fill(value: number) {
-  return (value > 9 ? "" : "0") + value;
+  return (value > 9 ? '' : '0') + value;
 }
 
 export function concatTime(h: number, m: number) {
@@ -88,10 +88,7 @@ export class TimeManager {
 
   private async initTimeFormat(context: any) {
     Log.showDebug(TAG, "initTimeFormat");
-    //this.mSettingsHelper = featureAbility.acquireDataAbilityHelper(context, URI_VAR);
     this.mSettingsHelper = await dataShare.createDataShareHelper(context, Constants.getUriSync(TIME_FORMAT_KEY));
-    //Log.showDebug(TAG, "url:"+Constants.getUriSync(TIME_FORMAT_KEY));
-    //Log.showDebug(TAG, "mSettingsHelper:"+JSON.stringify(this.mSettingsHelper));
     try {
       this.mSettingsHelper.on("dataChange", Constants.getUriSync(TIME_FORMAT_KEY), () => {
         Log.showDebug(TAG, "mSettingsHelper on");
@@ -104,14 +101,14 @@ export class TimeManager {
   }
 
   private handleTimeFormatChange(context: any) {
-    Log.showDebug(TAG, "handleTimeFormatChange")
+    Log.showDebug(TAG, 'handleTimeFormatChange');
     if (!this.mSettingsHelper) {
       Log.showError(TAG, `Can't get dataAbility helper.`);
       return;
     }
-    let timeString = settings.getValueSync(context, TIME_FORMAT_KEY, "24");
+    let timeString = settings.getValueSync(context, TIME_FORMAT_KEY, '24');
     Log.showDebug(TAG, `timeFormat change: ${timeString}`);
-    this.mUse24hFormat = timeString == "24";
+    this.mUse24hFormat = timeString === '24';
     this.notifyTimeChange();
   };
 

@@ -69,7 +69,7 @@ class WindowManager {
   async createWindow(context: any, name: WindowType, rect: Rect, loadContent: string): Promise<WindowHandle> {
     Log.showInfo(TAG, `createWindow name: ${name}, rect: ${JSON.stringify(rect)}, url: ${loadContent}`);
     let winHandle = null;
-    try{
+    try {
       winHandle = await Window.create(context, name, SYSTEM_WINDOW_TYPE_MAP[name]);
       await winHandle.moveTo(rect.left, rect.top);
       await winHandle.resetSize(rect.width, rect.height);
@@ -89,7 +89,7 @@ class WindowManager {
       window = await Window.find(name);
       await window.moveTo(rect.left, rect.top);
       await window.resetSize(rect.width, rect.height);
-    } catch(err) {
+    } catch (err) {
       Log.showError(TAG, `resetSizeWindow failed. error:${JSON.stringify(err)}`);
     }
     this.mWindowInfos.set(name, { ...(this.mWindowInfos.get(name) ?? DEFAULT_WINDOW_INFO), rect });

@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-import {Log, createOrGet} from '@ohos/common'
+import {Log, createOrGet} from '@ohos/common';
 import NotificationManager from './NotificationManager';
 import ParseDataUtil from './ParseDataUtil';
 import RuleController from './rule/RuleController';
@@ -21,7 +21,7 @@ import CommonUtil from '../common/CommonUtil';
 import DistributionManager from './NotificationDistributionManager';
 
 const TAG = 'NotificationServiceSc';
-const PLUGIN_TEMPLATE = {"source":"/system/etc/notification_template/assets/js/downloadTemplate.js","ability":"" } ;
+const PLUGIN_TEMPLATE = { 'source': '/system/etc/notification_template/assets/js/downloadTemplate.js', 'ability': '' };
 
 interface NotificationListener {
   userId: number;
@@ -39,7 +39,7 @@ export class NotificationService {
 
   constructor() {
     this.subscribeNotification(this.getSubscriber());
-    this.loadNotificationTemplate()
+    this.loadNotificationTemplate();
   }
 
   public register(listener: NotificationListener) {
@@ -81,7 +81,7 @@ export class NotificationService {
       this.mSubscriber = {
         onConsume: this.handleNotificationAddAndSortMap.bind(this),
         onCancel: this.handleNotificationCancel.bind(this),
-      }
+      };
     }
     return this.mSubscriber;
   }
@@ -135,7 +135,7 @@ export class NotificationService {
     if (NotificationManager.NotificationTemplateMap !== null) {
       pluginTempLate = NotificationManager.NotificationTemplateMap.get(templateName);
     }
-    if (pluginTempLate == undefined || pluginTempLate == null) {
+    if (pluginTempLate === undefined || pluginTempLate === null) {
       pluginTempLate = PLUGIN_TEMPLATE;
     }
     Log.showInfo(TAG, `getPluginTempLate pluginTempLate:${JSON.stringify(pluginTempLate)}`);

@@ -52,11 +52,11 @@ export default struct DateTime {
         .fontColor($r('app.color.date_time_color'))
         .margin({ top: $r('app.float.time_top_margin'), bottom: $r('app.float.time_bottom_margin') })
         .fontWeight(300)
-        .fontFamily("Digit")
+        .fontFamily('Digit')
       if (this.isShowDate) {
         Row() {
           if (this.isPhone) {
-            Text($r("app.string.mm_dd", this.mViewModel.dateVal.month, this.mViewModel.dateVal.day))
+            Text($r('app.string.mm_dd', this.mViewModel.dateVal.month, this.mViewModel.dateVal.day))
               .fontSize($r('app.float.date_fontsize'))
               .fontColor($r('app.color.date_time_color'))
           } else {
@@ -71,9 +71,9 @@ export default struct DateTime {
 
         Row() {
           Text(this.mViewModel.calendarVal.calendarYear + '年' + this.mViewModel.calendarVal.calendarMonth + '月' + this.mViewModel.calendarVal.calendarDay)
-            .height($r("app.float.date_lunar_calendar_height"))
+            .height($r('app.float.date_lunar_calendar_height'))
             .fontColor(Color.White)
-            .fontSize($r("app.float.date_lunar_calendar_fontSize"))
+            .fontSize($r('app.float.date_lunar_calendar_fontSize'))
             .margin({ top: 6 })
         }
         .visibility(this.currentLanguage === DEFAULTLANG ? Visibility.Visible : Visibility.None)

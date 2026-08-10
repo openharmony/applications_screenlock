@@ -16,7 +16,7 @@
 import {Log} from './Log';
 import audio from '@ohos.multimedia.audio';
 
-const TAG = "SingleInstanceHelper";
+const TAG = 'SingleInstanceHelper';
 const AUDIO_MANAGER_KEY = 'MultiMediaAudioManager';
 
 export function createOrGet<T>(objectClass: { new(): T }, storageKey: string): T {

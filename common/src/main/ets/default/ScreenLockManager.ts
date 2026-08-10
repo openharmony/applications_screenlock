@@ -13,16 +13,16 @@
  * limitations under the License.
  */
 
-import commonEvent from "@ohos.commonEvent";
-import {CommonEventSubscriber} from "commonEvent/commonEventSubscriber";
-import {createOrGet} from "./SingleInstanceHelper";
-import {sEventManager} from "./event/EventManager";
-import {Log} from "./Log";
-import {obtainLocalEvent} from "./event/EventUtil";
-import {debounce} from "./Decorators";
-export const SCREEN_CHANGE_EVENT = "screenChangeEvent";
+import commonEvent from '@ohos.commonEvent';
+import {CommonEventSubscriber} from 'commonEvent/commonEventSubscriber';
+import {createOrGet} from './SingleInstanceHelper';
+import {sEventManager} from './event/EventManager';
+import {Log} from './Log';
+import {obtainLocalEvent} from './event/EventUtil';
+import {debounce} from './Decorators';
+export const SCREEN_CHANGE_EVENT = 'screenChangeEvent';
 
-const TAG = "ScreenLockManager";
+const TAG = 'ScreenLockManager';
 const SCREEN_COMMON_EVENT_INFO = {
   events: [commonEvent.Support.COMMON_EVENT_SCREEN_OFF, commonEvent.Support.COMMON_EVENT_SCREEN_ON],
 };
@@ -34,7 +34,7 @@ class ScreenLockManager {
   async init() {
     this.mSubscriber = await commonEvent.createSubscriber(SCREEN_COMMON_EVENT_INFO);
     commonEvent.subscribe(this.mSubscriber, (err, data) => {
-      if (err.code != 0) {
+      if (err.code !== 0) {
         Log.showError(TAG, `Can't handle screen change, err: ${JSON.stringify(err)}`);
         return;
       }

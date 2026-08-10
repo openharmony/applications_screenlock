@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {ConvertLunarCalendar} from '../../../../../common/src/main/ets/default/LunarCalendar'
+import {ConvertLunarCalendar} from '../../../../../common/src/main/ets/default/LunarCalendar';
 
 export class DateTimeCommon {
 
@@ -50,18 +50,18 @@ export class DateTimeCommon {
       'calendarYear': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarYear,
       'calendarMonth': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarMonth,
       'calendarDay': ConvertLunarCalendar( dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDate()).lunarDay
-    }
-    return res
+    };
+    return res;
   }
 
   getSystemWeek() {
     let dateTime = new Date();
     let days = dateTime.getDay();
-    let week = this.convert(days)
-    return week
+    let week = this.convert(days);
+    return week;
   }
 
-  concatTime(hours, minutes): string{
+  concatTime(hours, minutes): string {
     return `${this.fill(hours)}:${this.fill(minutes)}`;
   };
 

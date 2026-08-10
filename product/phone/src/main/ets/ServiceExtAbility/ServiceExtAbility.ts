@@ -67,8 +67,8 @@ class ServiceExtAbility extends ServiceExtension {
                 height: (48 * dis.width) / 720
             }
         }
-        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, "rect", rect);
-        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, "dis", {
+        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'rect', rect);
+        AbilityManager.setAbilityData(AbilityManager.ABILITY_NAME_STATUS_BAR, 'dis', {
             width: dis.width,
             height: dis.height,
         });

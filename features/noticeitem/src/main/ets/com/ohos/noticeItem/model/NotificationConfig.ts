@@ -14,7 +14,7 @@
  */
 
 
-const TAG = 'NotificationConfig'
+const TAG = 'NotificationConfig';
 
 /**
  * Notification Flow Config：
@@ -39,7 +39,7 @@ export class NotificationConfig {
     static USE_NOTIFICATION_ICON = true;
 
     readNotificationConfig(deviceType?: string): any{
-        return Config
+        return Config;
     }
 }
 

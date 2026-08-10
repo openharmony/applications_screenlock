@@ -57,7 +57,7 @@ export default class NotificationDistributionManager {
     Log.showDebug(TAG, `getTrustedDeviceDeviceName deviceArr:${deviceArr.length}`);
     if (deviceArr && deviceArr.length > 0) {
       for (let item of deviceArr) {
-        if (item.deviceId == deviceId) {
+        if (item.deviceId === deviceId) {
           deviceName = item.deviceName;
           break;
         }

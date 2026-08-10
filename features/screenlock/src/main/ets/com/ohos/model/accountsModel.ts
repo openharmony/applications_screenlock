@@ -21,12 +21,12 @@ import {Callback} from '@ohos.base';
 import {Log, Trace, sEventManager, CommonEventManager, getCommonEventManager, SysFaultLogger, FaultID, obtainLocalEvent} from '@ohos/common'
 import {UserData} from '../data/userData';
 
-const TAG = "ScreenLock-AccountsModel"
+const TAG = 'ScreenLock-AccountsModel'
 const TYPE_ADMIN = 0;
 const TYPE_NORMAL = 1;
 const TYPE_GUEST = 2;
 
-export const ACCOUNTS_REFRESH_EVENT = "Accounts_Refresh_Event";
+export const ACCOUNTS_REFRESH_EVENT = 'Accounts_Refresh_Event';
 
 export enum AuthType {
     //Authentication type pin.
@@ -86,7 +86,7 @@ export default class AccountsModel {
     mCurrentUserId: number = 100
     private mManager?: CommonEventManager;
     modelInit() {
-        Log.showDebug(TAG, "start ModelInit")
+        Log.showDebug(TAG, 'start ModelInit');
     }
 
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func on failed"})
@@ -94,7 +94,7 @@ export default class AccountsModel {
         Log.showInfo(TAG, `eventListener:typeName ${typeName}`);
         osAccount.getAccountManager().on(typeName, name, (userId: number) => {
             Log.showInfo(TAG, `on ${typeName} callback userId = ${userId}`)
-            if (typeName == "activate"){
+            if (typeName === "activate"){
                 this.mCurrentUserId = userId
             }
             callback()
@@ -124,13 +124,13 @@ export default class AccountsModel {
     }
 
     commonEventCancelListener() {
-        Log.showInfo(TAG, "cancel commonEvent");
+        Log.showInfo(TAG, 'cancel commonEvent');
         this.mManager?.release();
         this.mManager = undefined;
     }
 
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func off failed"})
-    eventCancelListener(typeName: "activate" | "activating", name: string) {
+    eventCancelListener(typeName: 'activate' | 'activating', name: string) {
         Log.showInfo(TAG, `eventCancleListener:typeName ${typeName}`);
         osAccount.getAccountManager().off(typeName, name);
     }
@@ -150,31 +150,31 @@ export default class AccountsModel {
             for (const user of list) {
                 Log.showDebug(TAG, `start get user, localId=${user.localId}, localName=${user.localName}`);
                 if (user.isActived) {
-                    this.mCurrentUserId = user.localId
+                    this.mCurrentUserId = user.localId;
                 }
                 let userData: UserData = {
                     userId: user.localId,
                     userName: user.localName,
                     userIconPath: ""
-                }
-                accountList.push(userData)
-                accountMap.set(user.localId, userData)
+                };
+                accountList.push(userData);
+                accountMap.set(user.localId, userData);
                 osAccount.getAccountManager().getOsAccountProfilePhoto(user.localId).then((path) => {
                     Log.showDebug(TAG, "start get photo:" + path);
                     accountMap.get(user.localId).userIconPath = path;
-                })
+                });
             }
             sEventManager.publish(obtainLocalEvent(ACCOUNTS_REFRESH_EVENT, accountList));
-        })
+        });
     }
 
     private sortAccount(info1, info2): number {
         if (info1.isActived || info2.isActived) {
             return info1.isActived ? -1 : 1;
-        } else if (info1.type.ADMIN == TYPE_ADMIN || info2.type.ADMIN == TYPE_ADMIN) {
-            return info1.type.ADMIN == TYPE_ADMIN ? -1 : 1;
-        } else if (info1.type.GUEST == TYPE_GUEST || info2.type.GUEST == TYPE_GUEST) {
-            return info1.type.GUEST == TYPE_GUEST ? 1 : -1;
+        } else if (info1.type.ADMIN === TYPE_ADMIN || info2.type.ADMIN === TYPE_ADMIN) {
+            return info1.type.ADMIN === TYPE_ADMIN ? -1 : 1;
+        } else if (info1.type.GUEST === TYPE_GUEST || info2.type.GUEST === TYPE_GUEST) {
+            return info1.type.GUEST === TYPE_GUEST ? 1 : -1;
         } else {
             return info2.localId - info1.localId;
         }
@@ -182,10 +182,10 @@ export default class AccountsModel {
 
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func activateOsAccount failed"})
     onUserSwitch(userId: number) {
-        Log.showDebug(TAG, "onUserSwitch:" + userId)
+        Log.showDebug(TAG, "onUserSwitch:" + userId);
         osAccount.getAccountManager().activateOsAccount(userId).then(() => {
             Log.showInfo(TAG, "activateOsAccount : " + userId);
-        })
+        });
     }
 
     authUser(challenge, authType: AuthType, authLevel: number, callback) {
@@ -203,24 +203,24 @@ export default class AccountsModel {
                     Log.showInfo(TAG, `authUser UserAuthManager.authUser onAcquireInfo`);
                 }
             }
-            )
-        } catch(error) {
+            );
+        } catch (error) {
             console.error(`authUser failed, code is ${error.code}, message is ${error.message}`);
         }
     }
 
     getAuthProperty(authType, callback) {
         Log.showDebug(TAG, `getAuthProperty param: authType ${authType}`);
-        let keyArray = [GetPropertyType.AUTH_SUB_TYPE, GetPropertyType.REMAIN_TIMES, GetPropertyType.FREEZING_TIME]
+        let keyArray = [GetPropertyType.AUTH_SUB_TYPE, GetPropertyType.REMAIN_TIMES, GetPropertyType.FREEZING_TIME];
         let request = {
             'authType': authType,
             'keys': keyArray
-        }
+        };
         try {
             this.userAuthManager.getProperty(request).then((properties) => {
                 Log.showInfo(TAG, `getAuthProperty properties ${JSON.stringify(properties)}`);
-                callback(properties)
-            })
+                callback(properties);
+            });
         } catch (error) {
             console.error(`getProperty failed, code is ${error.code}, message is ${error.message}`);
         };
@@ -267,15 +267,15 @@ export default class AccountsModel {
     }
 
     modelFinish() {
-        Log.showDebug(TAG, "start modelFinish")
+        Log.showDebug(TAG, 'start modelFinish');
     }
 
     @SysFaultLogger({FAULT_ID: FaultID.ACCOUNT_SYSTEM, MSG: "call func isOsAccountActived failed"})
     isActivateAccount(callback: Callback<boolean>) {
-        Log.showDebug(TAG, `isActivateAccount userId:${this.mCurrentUserId}`)
+        Log.showDebug(TAG, `isActivateAccount userId:${this.mCurrentUserId}`);
         osAccount.getAccountManager().isOsAccountActived(this.mCurrentUserId).then((isActivate) => {
-            Log.showInfo(TAG, `isActivateAccount userId:${this.mCurrentUserId} result: ${isActivate}`)
-            callback(isActivate)
+            Log.showInfo(TAG, `isActivateAccount userId:${this.mCurrentUserId} result: ${isActivate}`);
+            callback(isActivate);
         })
     }
     getCurrentUserId() {

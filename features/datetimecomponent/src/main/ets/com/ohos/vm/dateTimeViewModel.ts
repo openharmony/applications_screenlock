@@ -41,10 +41,10 @@ export default class DateTimeViewModel {
     ViewModelInit(): void{
         Log.showDebug(TAG, 'ViewModelInit');
 
-        this.getAndSetDateTime.bind(this)()
+        this.getAndSetDateTime.bind(this)();
         commonEvent.createSubscriber(mCommonEventSubscribeInfo, this.createSubscriberCallBack.bind(this));
         this.unSubscriber = sEventManager.subscribe(TIME_CHANGE_EVENT, (args: TimeEventArgs) => {
-            this.setDateTime(args.date)
+            this.setDateTime(args.date);
         });
         Log.showDebug(TAG, 'ViewModelInit end');
     }
@@ -63,10 +63,10 @@ export default class DateTimeViewModel {
     }
 
     private createSubscriberCallBack(err, data) {
-        Log.showDebug(TAG, "start createSubscriberCallBack " + JSON.stringify(data))
+        Log.showDebug(TAG, 'start createSubscriberCallBack ' + JSON.stringify(data))
         mEventSubscriber = data
         commonEvent.subscribe(data, this.getAndSetDateTime.bind(this));
-        Log.showDebug(TAG, "start createSubscriberCallBack finish")
+        Log.showDebug(TAG, 'start createSubscriberCallBack finish')
     }
 
     stopPolling() {

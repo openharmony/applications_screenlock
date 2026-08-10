@@ -14,17 +14,17 @@
  */
 
 import image from '@ohos.multimedia.image';
-import WallpaperMar from '@ohos.wallpaper'
-import {Log} from '@ohos/common'
+import WallpaperMar from '@ohos.wallpaper';
+import {Log} from '@ohos/common';
 
-const TAG = 'ScreenLock-WallpaperViewModel'
+const TAG = 'ScreenLock-WallpaperViewModel';
 
 export default class WallpaperViewModel {
-    private wallpaperData: image.PixelMap = undefined
+    private wallpaperData: image.PixelMap = undefined;
 
     ViewModelInit(): void {
         Log.showDebug(TAG, "ViewModelInit");
-        this.getScreenLockWallpaper()
+        this.getScreenLockWallpaper();
     }
 
     ViewModelDestroy(): void {
@@ -41,12 +41,12 @@ export default class WallpaperViewModel {
         WallpaperMar.getPixelMap(WallpaperMar.WallpaperType.WALLPAPER_LOCKSCREEN, (error, data) => {
             if (error != undefined && error != null) {
                 Log.showError(TAG, 'getScreenLockWallpaper error:' + JSON.stringify(error));
-                this.getScreenLockWallpaper()
+                this.getScreenLockWallpaper();
             } else {
                 Log.showDebug(TAG, 'getScreenLockWallpaper data:' + JSON.stringify(data));
-                this.wallpaperData = data
+                this.wallpaperData = data;
             }
-        })
+        });
     }
 
     private freeScreenLockWallpaper() {

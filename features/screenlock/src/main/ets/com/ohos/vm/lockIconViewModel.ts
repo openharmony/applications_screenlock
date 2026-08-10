@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import {Log, ScreenLockStatus} from '@ohos/common'
-import screenLockService from '../model/screenLockService'
+import {Log, ScreenLockStatus} from '@ohos/common';
+import screenLockService from '../model/screenLockService';
 
-const TAG = 'ScreenLock-LockIconViewModel'
+const TAG = 'ScreenLock-LockIconViewModel';
 
 export default class LockIconViewModel {
     cutMessage: any= {}
@@ -25,7 +25,7 @@ export default class LockIconViewModel {
     ViewModelInit(): void{
         Log.showDebug(TAG, `ViewModelInit`);
         this.iconPath = $r('app.media.ic_public_lock_filled');
-        this.cutMessage = $r('app.string.lock_prompt')
+        this.cutMessage = $r('app.string.lock_prompt');
     }
 
     onStatusChange(lockStatus: ScreenLockStatus): void {
@@ -33,23 +33,23 @@ export default class LockIconViewModel {
         switch (lockStatus) {
             case ScreenLockStatus.Locking:
                 this.iconPath = $r('app.media.ic_public_lock_filled');
-                this.cutMessage = $r('app.string.lock_prompt')
+                this.cutMessage = $r('app.string.lock_prompt');
                 break;
             case ScreenLockStatus.Unlock:
                 this.iconPath = $r('app.media.ic_public_unlock_filled');
-                this.cutMessage = $r('app.string.unlock_prompt')
+                this.cutMessage = $r('app.string.unlock_prompt');
                 break;
             case ScreenLockStatus.RecognizingFace:
                 this.iconPath = $r('app.media.ic_public_unlock_filled');
-                this.cutMessage = $r('app.string.recognizing_face')
+                this.cutMessage = $r('app.string.recognizing_face');
                 break;
             case ScreenLockStatus.FaceNotRecognized:
                 this.iconPath = $r('app.media.ic_public_unlock_filled');
-                this.cutMessage = $r('app.string.face_not_recognized')
+                this.cutMessage = $r('app.string.face_not_recognized');
                 break;
             default:
                 this.iconPath = $r('app.media.ic_public_lock_filled');
-                this.cutMessage = $r('app.string.lock_prompt')
+                this.cutMessage = $r('app.string.lock_prompt');
                 break;
         }
     }
@@ -57,7 +57,7 @@ export default class LockIconViewModel {
     onRecognizeFace(lockStatus: ScreenLockStatus) {
         Log.showInfo(TAG, `onRecognizeFace lockStatus: ${lockStatus}`);
         if (lockStatus == ScreenLockStatus.FaceNotRecognized) {
-            screenLockService.authUserByFace()
+            screenLockService.authUserByFace();
         }
     }
 }

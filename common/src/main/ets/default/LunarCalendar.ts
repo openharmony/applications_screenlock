@@ -13,24 +13,24 @@
  * limitations under the License.
  */
 export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMonth, gregorianCalendarDay) {
-    let lunarIndex1 = 2,
-        lunarIndex2 = 9,
-        lunarIndex3 = 10,
-        lunarIndex4 = 11,
-        lunarDay1 = 20,
-        lunarDay2 = 21,
-        hour = 24,
-        minutes = 60,
-        multiple = 1000,
-        initialLunarTime = 1949
+    let lunarIndex1 = 2;
+    let lunarIndex2 = 9;
+    let lunarIndex3 = 10;
+    let lunarIndex4 = 11;
+    let lunarDay1 = 20;
+    let lunarDay2 = 21;
+    let hour = 24;
+    let minutes = 60;
+    let multiple = 1000;
+    let initialLunarTime = 1949;
 
-    let lunarMonth = ['正', '二', '三', '四', '五', '六', '七', '八', '九', '十', '冬', '腊'],
-        lunarDay = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '初', '廿'],
-        heavenlyStemsAnd = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'],
-        earthlyBranches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+    let lunarMonth = ['正', '二', '三', '四', '五', '六', '七', '八', '九', '十', '冬', '腊'];
+    let lunarDay = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '初', '廿'];
+    let heavenlyStemsAnd = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+    let earthlyBranches = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
 
-    let LUNAR_MON_START_INDEX = 0
-    let LUNAR_MON_END_INDEX = 11
+    let LUNAR_MON_START_INDEX = 0;
+    let LUNAR_MON_END_INDEX = 11;
 
     let lunarCalendar = [
         0x0b557,
@@ -50,21 +50,23 @@ export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMon
         0x0b273, 0x06930, 0x07337, 0x06aa0, 0x0ad50, 0x14b55, 0x04b60, 0x0a570, 0x054e4, 0x0d160,
         0x0e968, 0x0d520, 0x0daa0, 0x16aa6, 0x056d0, 0x04ae0, 0x0a9d4, 0x0a2d0, 0x0d150, 0x0f252,
         0x0d520
-    ]
+    ];
 
     function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMonth, gregorianCalendarDay) {
         gregorianCalendarMonth -= 1;
         let daySpan = (Date.UTC(gregorianCalendarYear, gregorianCalendarMonth, gregorianCalendarDay) - Date.UTC(initialLunarTime, 0, leapFebruarySmallDay)) / (hour * minutes * minutes * multiple) + 1;
-        let outputLunarYear, outputLunarMonth, outputLunarDay;
+        let outputLunarYear;
+        let outputLunarMonth;
+        let outputLunarDay;
         for (let j = 0; j < lunarCalendar.length; j++) {
             daySpan -= lunarYearDays(lunarCalendar[j]);
             if (daySpan <= 0) {
                 outputLunarYear = initialLunarTime + j;
                 daySpan += lunarYearDays(lunarCalendar[j]);
-                break
+                break;
             }
         }
-        let k = 0
+        let k = 0;
         for (; k < lunarYearMonths(lunarCalendar[outputLunarYear - initialLunarTime]).length; k++) {
             daySpan -= lunarYearMonths(lunarCalendar[outputLunarYear - initialLunarTime])[k];
             if (daySpan <= 0) {
@@ -80,66 +82,66 @@ export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMon
                     outputLunarMonth = k + 1;
                 }
                 daySpan += lunarYearMonths(lunarCalendar[outputLunarYear - initialLunarTime])[k];
-                break
+                break;
             }
         }
-        if (outputLunarMonth == undefined) {
+        if (outputLunarMonth === undefined) {
             outputLunarMonth = (k > LUNAR_MON_END_INDEX) ? LUNAR_MON_END_INDEX + 1 : k;
-            outputLunarMonth = (k == LUNAR_MON_START_INDEX) ? LUNAR_MON_START_INDEX + 1 : k;
+            outputLunarMonth = (k === LUNAR_MON_START_INDEX) ? LUNAR_MON_START_INDEX + 1 : k;
         } else {
             outputLunarMonth = (outputLunarMonth > LUNAR_MON_END_INDEX) ? LUNAR_MON_END_INDEX + 1 : outputLunarMonth;
-            outputLunarMonth = (outputLunarMonth == LUNAR_MON_START_INDEX) ? LUNAR_MON_START_INDEX + 1 : outputLunarMonth;
+            outputLunarMonth = (outputLunarMonth === LUNAR_MON_START_INDEX) ? LUNAR_MON_START_INDEX + 1 : outputLunarMonth;
         }
 
         outputLunarDay = daySpan;
         if (hasLeapMonth(lunarCalendar[outputLunarYear - initialLunarTime]) > -1 && (typeof (outputLunarMonth) === 'string' && outputLunarMonth.indexOf('闰') > -1)) {
-            let reg = /\d/.exec(outputLunarMonth)
-            outputLunarMonth = `闰${lunarMonth[Number(reg)- 1]}`
+            let reg = /\d/.exec(outputLunarMonth);
+            outputLunarMonth = `闰${lunarMonth[Number(reg)- 1]}`;
         } else {
             outputLunarMonth = lunarMonth[outputLunarMonth - 1];
         }
         outputLunarYear = getHeavenlyStemsAnd(outputLunarYear) + getEarthlyBranches(outputLunarYear);
         if (outputLunarDay < lunarIndex4) {
-            outputLunarDay = `${lunarDay[lunarIndex3]}${lunarDay[outputLunarDay-1]}`
+            outputLunarDay = `${lunarDay[lunarIndex3]}${lunarDay[outputLunarDay-1]}`;
         } else if (outputLunarDay > lunarIndex3 && outputLunarDay < lunarDay1) {
-            outputLunarDay = `${lunarDay[lunarIndex2]}${lunarDay[outputLunarDay-lunarIndex4]}`
+            outputLunarDay = `${lunarDay[lunarIndex2]}${lunarDay[outputLunarDay-lunarIndex4]}`;
         } else if (outputLunarDay === lunarDay1) {
-            outputLunarDay = `${lunarDay[1]}${lunarDay[lunarIndex2]}`
+            outputLunarDay = `${lunarDay[1]}${lunarDay[lunarIndex2]}`;
         } else if (outputLunarDay > lunarDay1 && outputLunarDay < leapFebruaryBigDay) {
-            outputLunarDay = `${lunarDay[lunarIndex4]}${lunarDay[outputLunarDay-lunarDay2]}`
+            outputLunarDay = `${lunarDay[lunarIndex4]}${lunarDay[outputLunarDay-lunarDay2]}`;
         } else if (outputLunarDay === leapFebruaryBigDay) {
-            outputLunarDay = `${lunarDay[lunarIndex1]}${lunarDay[lunarIndex2]}`
+            outputLunarDay = `${lunarDay[lunarIndex1]}${lunarDay[lunarIndex2]}`;
         }
         return {
             lunarYear: outputLunarYear,
             lunarMonth: outputLunarMonth,
             lunarDay: outputLunarDay,
-        }
+        };
     }
 
     function hasLeapMonth(outputLunarYear) {
-        let lastHexadecimalDigit = 0xf
+        let lastHexadecimalDigit = 0xf;
         if (outputLunarYear & lastHexadecimalDigit) {
-            return outputLunarYear & lastHexadecimalDigit
+            return outputLunarYear & lastHexadecimalDigit;
         } else {
-            return -1
+            return -1;
         }
     }
 
-    let leapFebruarySmallDay = 29,
-        leapFebruaryBigDay = 30
+    let leapFebruarySmallDay = 29;
+    let leapFebruaryBigDay = 30;
 
     function leapMonthDays(outputLunarYear) {
-        let hexadecimalFirstDigit = 0xf0000
+        let hexadecimalFirstDigit = 0xf0000;
         if (hasLeapMonth(outputLunarYear) > -1) {
-            return (outputLunarYear & hexadecimalFirstDigit) ? leapFebruaryBigDay : leapFebruarySmallDay
+            return (outputLunarYear & hexadecimalFirstDigit) ? leapFebruaryBigDay : leapFebruarySmallDay;
         } else {
-            return 0
+            return 0;
         }
     }
 
-    let convertToHexDigit = 0x8000,
-        convertToHex = 0x8
+    let convertToHexDigit = 0x8000;
+    let convertToHex = 0x8;
 
     function lunarYearDays(outputLunarYear) {
         let totalDays = 0;
@@ -150,7 +152,7 @@ export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMon
         if (hasLeapMonth(outputLunarYear) > -1) {
             totalDays += leapMonthDays(outputLunarYear);
         }
-        return totalDays
+        return totalDays;
     }
 
     function lunarYearMonths(outputLunarYear) {
@@ -161,23 +163,27 @@ export function ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMon
         if (hasLeapMonth(outputLunarYear)) {
             monthArr.splice(hasLeapMonth(outputLunarYear), 0, leapMonthDays(outputLunarYear));
         }
-        return monthArr
+        return monthArr;
     }
 
-    let Day3 = 3
+    let Day3 = 3;
 
     function getHeavenlyStemsAnd(outputLunarYear) {
         let heavenlyStemsAndKey = (outputLunarYear - Day3) % lunarIndex3;
-        if (heavenlyStemsAndKey === 0) heavenlyStemsAndKey = lunarIndex3;
-        return heavenlyStemsAnd[heavenlyStemsAndKey - 1]
+        if (heavenlyStemsAndKey === 0) {
+            heavenlyStemsAndKey = lunarIndex3;
+        }
+        return heavenlyStemsAnd[heavenlyStemsAndKey - 1];
     }
 
     function getEarthlyBranches(outputLunarYear) {
-        let monthMultiple = 12
+        let monthMultiple = 12;
         let EarthlyBranchesKey = (outputLunarYear - Day3) % monthMultiple;
-        if (EarthlyBranchesKey === 0) EarthlyBranchesKey = monthMultiple;
-        return earthlyBranches[EarthlyBranchesKey - 1]
+        if (EarthlyBranchesKey === 0) {
+            EarthlyBranchesKey = monthMultiple;
+        }
+        return earthlyBranches[EarthlyBranchesKey - 1];
     }
 
-    return ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMonth, gregorianCalendarDay)
+    return ConvertLunarCalendar(gregorianCalendarYear, gregorianCalendarMonth, gregorianCalendarDay);
 }
