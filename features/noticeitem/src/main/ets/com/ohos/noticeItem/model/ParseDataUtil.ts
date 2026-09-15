@@ -93,6 +93,18 @@ export default class ParseDataUtil {
    * @param {string} bundleName - BundleName of the target app.
    * @return {object} appData
    */
+
+  private static parseResourceIdWholeToken(value: Object | number | string | undefined | null): number {
+    if (typeof value === 'number' && Number.isFinite(value)) {
+      return value;
+    }
+    const valueText: string = String(value ?? '');
+    if (/^\d+$/.test(valueText)) {
+      return Number.parseInt(valueText, 10);
+    }
+    return 0;
+  }
+
   static async getAppData(bundleName, userId) {
     Log.showDebug(TAG, `getAppName start by ${bundleName}`);
     if (appDataMap.has(bundleName)) {
@@ -104,9 +116,11 @@ export default class ParseDataUtil {
     let iconId = data?.appInfo?.iconId;
     let context = AbilityManager.getContext()??AbilityManager.getContext(AbilityManager.ABILITY_NAME_SCREEN_LOCK);
     let item = await BundleManager.getResourceManager(TAG, context, bundleName);
+    const labelResId: number = ParseDataUtil.parseResourceIdWholeToken(labelId);
+    const iconResId: number = ParseDataUtil.parseResourceIdWholeToken(iconId);
     let appMessage = {
-      appName: parseInt(labelId) > 0 ? await item.getString(parseInt(labelId)) : '',
-      icon: parseInt(iconId) > 0 ? await item.getMediaBase64(parseInt(iconId)) : null
+      appName: labelResId > 0 ? await item.getString(labelResId) : '',
+      icon: iconResId > 0 ? await item.getMediaBase64(iconResId) : null
     };
     if (appMessage.icon != null && appMessage.appName) {
       appDataMap.set(bundleName, appMessage);
